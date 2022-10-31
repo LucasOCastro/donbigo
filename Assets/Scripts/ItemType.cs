@@ -2,6 +2,7 @@
 
 namespace DonBigo
 {
+    [ScriptableObjectIcon("prefab")]
     [CreateAssetMenu(fileName = "NewItem", menuName = "New Item")]
     public class ItemType : ScriptableObject
     {

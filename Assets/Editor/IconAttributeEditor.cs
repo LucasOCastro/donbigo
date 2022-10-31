@@ -9,6 +9,8 @@ using Object = UnityEngine.Object;
 [CanEditMultipleObjects]
 public class IconAttributeEditor : Editor
 {
+    private static BindingFlags memberBinding = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+    
     public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height)
     {
         Texture2D tex = GetTexFor(target);
@@ -27,34 +29,39 @@ public class IconAttributeEditor : Editor
         var attribute = type.GetCustomAttribute<ScriptableObjectIconAttribute>();
         if (attribute == null) return null;
 
-        var prop = FindProperty(type, attribute.PropName);
+        var prop = type.FindMemberInParentTypes(attribute.PropName, memberBinding);
+        if (prop == null)
+        {
+            Debug.LogError("Property de icone nao foi encontrada");
+            return null;
+        }
+        
         var value = prop.GetValue(obj);
-        if (prop.PropertyType == typeof(Texture2D))
+        if (value == null) return null;
+        
+        if (value is Texture2D tex)
         {
-            return value as Texture2D;;
+            return tex;
         }
 
-        if (prop.PropertyType == typeof(Sprite))
+        if (value is Sprite sprite)
         {
-            return (value is Sprite sprite) ? sprite.texture : null;
+            return sprite.texture;
         }
 
-        Debug.LogError("Tipo inadequado pra variavel de icone! Deve ser Sprite ou Texture2D.");
+        if (value is MonoBehaviour mb)
+        {
+            value = mb.gameObject;
+        }
+        if (value is GameObject go)
+        {
+            if (!go.TryGetComponent<SpriteRenderer>(out var renderer)) return null;
+            return (renderer.sprite != null) ? renderer.sprite.texture : null;
+        }
+
+        Debug.LogError("Tipo inadequado pra variavel de icone! Deve ser Sprite, Texture2D ou um prefab com um sprite.");
         return null;
     }
 
-    private PropertyInfo FindProperty(Type type, string propName)
-    {
-        while (type != null && type != typeof(Object))
-        {
-            var prop = type.GetProperty(propName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            if (prop != null)
-            {
-                return prop;
-            }
-            type = type.BaseType;
-        }
-
-        return null;
-    }
+    
 }
