@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using DonBigo;
 using UnityEditor;
 using UnityEngine;
@@ -13,7 +12,7 @@ public class IconAttributeEditor : Editor
     
     public override Texture2D RenderStaticPreview(string assetPath, Object[] subAssets, int width, int height)
     {
-        Texture2D tex = GetTexFor(target);
+        Texture2D tex = GetIconFor(target);
         if (tex == null) return base.RenderStaticPreview(assetPath, subAssets, width, height);
         
         Texture2D texCopy = new Texture2D(width, height);
@@ -21,7 +20,7 @@ public class IconAttributeEditor : Editor
         return texCopy;
     }
 
-    Texture2D GetTexFor(Object obj)
+    Texture2D GetIconFor(Object obj)
     {
         if (obj == null) return null;
         
@@ -37,31 +36,27 @@ public class IconAttributeEditor : Editor
         }
         
         var value = prop.GetValue(obj);
-        if (value == null) return null;
+        return ExtractTexFromObj(value);
+    }
+
+    private Texture2D ExtractTexFromObj(object obj)
+    {
+        if (obj is MonoBehaviour mb) obj = mb.gameObject;
         
-        if (value is Texture2D tex)
+        switch (obj)
         {
-            return tex;
+            case null:
+                return null;
+            case Texture2D tex:
+                return tex;
+            case Sprite sprite:
+                return sprite.texture;
+            case GameObject go:
+                if (!go.TryGetComponent<SpriteRenderer>(out var renderer)) return null;
+                return (renderer.sprite != null) ? renderer.sprite.texture : null;
         }
-
-        if (value is Sprite sprite)
-        {
-            return sprite.texture;
-        }
-
-        if (value is MonoBehaviour mb)
-        {
-            value = mb.gameObject;
-        }
-        if (value is GameObject go)
-        {
-            if (!go.TryGetComponent<SpriteRenderer>(out var renderer)) return null;
-            return (renderer.sprite != null) ? renderer.sprite.texture : null;
-        }
-
         Debug.LogError("Tipo inadequado pra variavel de icone! Deve ser Sprite, Texture2D ou um prefab com um sprite.");
         return null;
     }
-
     
 }
