@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace DonBigo
 {
@@ -48,8 +47,6 @@ namespace DonBigo
 
         public GameGrid(int size, Grid unityGrid)
         {
-            Tilemap tm;
-            tm.get
             Size = size;
             _unityGrid = unityGrid;
             _tiles = new Tile[size, size];
