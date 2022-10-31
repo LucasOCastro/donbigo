@@ -4,6 +4,7 @@ using UnityEngine.Tilemaps;
 
 namespace DonBigo
 {
+    [ScriptableObjectIcon("sprite")]
     [CreateAssetMenu(fileName = "NewTile", menuName = "New Tile")]
     public class TileType : UnityEngine.Tilemaps.Tile
     {
