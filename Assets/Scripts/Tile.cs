@@ -9,9 +9,10 @@ namespace DonBigo
         public GameGrid ParentGrid { get; }
     
         //TODO ainda não temos um modo de settar o TileType na geração de comodos
-        public Tile(Vector2Int pos, GameGrid grid)
+        public Tile(Vector2Int pos, TileType tileType, GameGrid grid)
         {
             Pos = pos;
+            Type = tileType;
             ParentGrid = grid;
         }
 

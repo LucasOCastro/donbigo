@@ -1,4 +1,6 @@
 using UnityEngine;
+using DonBigo.Rooms;
+using UnityEngine.Tilemaps;
 
 namespace DonBigo
 {
@@ -39,26 +41,36 @@ namespace DonBigo
         public Vector3 TileToWorld(Vector2Int tile) => _unityGrid.CellToWorld((Vector3Int)tile);
         public Vector3 TileToWorld(Tile tile) => TileToWorld(tile.Pos);
 
+        public Vector2Int WorldToTilePos(Vector2 pos) => (Vector2Int)_unityGrid.WorldToCell(pos);
         public Tile WorldToTile(Vector2 pos)
         {
-            Vector2Int tilePos = (Vector2Int)_unityGrid.WorldToCell(pos);
+            Vector2Int tilePos = WorldToTilePos(pos);
             return InBounds(tilePos) ? this[tilePos] : null;
         }
 
-        public GameGrid(int size, Grid unityGrid)
+        public GameGrid(int size, Grid unityGrid, Room DEBUG_testRoom)
         {
             Size = size;
             _unityGrid = unityGrid;
             _tiles = new Tile[size, size];
-            for (int x = 0; x < size; x++)
-            {
-                for (int y = 0; y < size; y++)
-                {
-                    _tiles[x, y] = new Tile(new Vector2Int(x, y), this);
-                }
-            }
+            
+            //Temp
+            DEBUG_PlaceRoom(DEBUG_testRoom, Vector2Int.zero);
             
             //TODO preencher o mapa com base nos comodos
+        }
+
+        public void DEBUG_PlaceRoom(Room room, Vector2Int pos)
+        {
+            room.FillTilemap(_unityGrid.GetComponentInChildren<Tilemap>(), pos);
+            var tiles = room.Tiles;
+            for (int x = 0; x < tiles.GetLength(0); x++)
+            {
+                for (int y = 0; y < tiles.GetLength(1); y++)
+                {
+                    _tiles[x, y] = new Tile(new Vector2Int(x, y) + pos, tiles[x, y], this);
+                }
+            }
         }
     }
 }

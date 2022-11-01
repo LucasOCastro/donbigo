@@ -13,6 +13,7 @@ namespace DonBigo
         [SerializeField] private int mapSize = 50;
 
         [SerializeField] private ItemType DEBUG_testItem;
+        [SerializeField] private DonBigo.Rooms.Room DEBUG_testRoom;
         private void Awake()
         {
             if (Instance != null)
@@ -22,7 +23,7 @@ namespace DonBigo
             }
             Instance = this;
             
-            Grid = new GameGrid(mapSize, GetComponent<Grid>());
+            Grid = new GameGrid(mapSize, GetComponent<Grid>(), DEBUG_testRoom);
             DEBUG_testItem.Instantiate(Grid[5, 5]);
             DEBUG_testItem.Instantiate(Grid[0, 0]);
         }
@@ -35,11 +36,23 @@ namespace DonBigo
                 Vector2 mousePos = Input.mousePosition;
                 Vector2 mouseScreenPos = Camera.main.ScreenToWorldPoint(mousePos);
                 Tile tile = Grid.WorldToTile(mouseScreenPos);
-                Debug.Log(tile?.Pos.ToString() ?? "NULL");
+                if (tile == null) {
+                    Debug.Log("NULL");
+                }
+                else {
+                    Debug.Log($"{tile.Pos} ({tile.Type})");
+                }
                 if (tile != null && tile.Item == null)
                 {
                     DEBUG_testItem.Instantiate(tile);
                 }
+            }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                Vector2 mousePos = Input.mousePosition;
+                Vector2 mouseScreenPos = Camera.main.ScreenToWorldPoint(mousePos);
+                Vector2Int tilePos = Grid.WorldToTilePos(mouseScreenPos);
+                Grid.DEBUG_PlaceRoom(DEBUG_testRoom, tilePos);
             }
         }
     }
