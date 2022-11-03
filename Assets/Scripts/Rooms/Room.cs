@@ -7,12 +7,14 @@ namespace DonBigo.Rooms
     public class Room : ScriptableObject
     {
         [SerializeField] private string roomName;
-        [SerializeField] private Vector3Int bounds;
+        [SerializeField] private Vector3Int size;
         [SerializeField] private TileBase[] tilesBlock;
         [SerializeField] private TileType[] tileTypes;
+        [SerializeField] private RoomExit[] doors;
 
         public string RoomName => roomName;
-        public Vector3Int Bounds => bounds;
+        public Vector3Int Size => size;
+        public RoomExit[] Doors => doors;
 
         // A Unity não suporta a serialização de arrays multidimensionais. Então eu serializo numa array normal,
         // transformo em uma array multidimensional quando necessário e guardo num cache.
@@ -23,11 +25,11 @@ namespace DonBigo.Rooms
             {
                 if (_tiles != null) return _tiles;
                 
-                _tiles = new TileType[bounds.x, bounds.y];
+                _tiles = new TileType[size.x, size.y];
                 for (int i = 0; i < tileTypes.Length; i++)
                 {
-                    int y = i / bounds.x;
-                    int x = i - (y * bounds.x);
+                    int y = i / size.x;
+                    int x = i - (y * size.x);
                     _tiles[x, y] = tileTypes[i];
                 }
 
@@ -37,7 +39,7 @@ namespace DonBigo.Rooms
 
         public void FillTilemap(Tilemap tilemap, Vector2Int start)
         {
-            BoundsInt fillBounds = new BoundsInt((Vector3Int)start, bounds);
+            BoundsInt fillBounds = new BoundsInt((Vector3Int)start, size);
             tilemap.SetTilesBlock(fillBounds, tilesBlock);
         }
     }
