@@ -1,5 +1,5 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace DonBigo
 {
@@ -11,9 +11,9 @@ namespace DonBigo
         public GameGrid Grid { get; private set; }
         
         [SerializeField] private int mapSize = 50;
-
+        [SerializeField] private Tilemap tilemap;
+        
         [SerializeField] private ItemType DEBUG_testItem;
-        [SerializeField] private DonBigo.Rooms.Room DEBUG_testRoom;
         private void Awake()
         {
             if (Instance != null)
@@ -23,7 +23,7 @@ namespace DonBigo
             }
             Instance = this;
             
-            Grid = new GameGrid(mapSize, GetComponent<Grid>(), DEBUG_testRoom);
+            Grid = new GameGrid(mapSize, tilemap);
             DEBUG_testItem.Instantiate(Grid[5, 5]);
             DEBUG_testItem.Instantiate(Grid[0, 0]);
         }
@@ -46,13 +46,6 @@ namespace DonBigo
                 {
                     DEBUG_testItem.Instantiate(tile);
                 }
-            }
-            else if (Input.GetMouseButtonDown(1))
-            {
-                Vector2 mousePos = Input.mousePosition;
-                Vector2 mouseScreenPos = Camera.main.ScreenToWorldPoint(mousePos);
-                Vector2Int tilePos = Grid.WorldToTilePos(mouseScreenPos);
-                Grid.DEBUG_PlaceRoom(DEBUG_testRoom, tilePos);
             }
         }
     }

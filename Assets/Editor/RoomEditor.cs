@@ -84,12 +84,13 @@ public class RoomEditor : Editor
         var tileTypesProp = serializedObject.FindProperty(TileTypesName);
         var doorsProp = serializedObject.FindProperty(DoorsName);
         tileTypesProp.arraySize = bounds.size.x * bounds.size.y;
+        doorsProp.arraySize = 0;
         //Percorrendo as tiles de baixo pra cima, garantimos que a parede será armazenada na lista ao invés do chão abaixo dela.
-        for (int z = bounds.zMin; z <= bounds.zMax; z++)
+        for (int z = bounds.zMin; z < bounds.zMax; z++)
         {
-            for (int x = bounds.xMin; x <= bounds.xMax; x++)
+            for (int x = bounds.xMin; x < bounds.xMax; x++)
             {
-                for (int y = bounds.yMin; y <= bounds.yMax; y++)
+                for (int y = bounds.yMin; y < bounds.yMax; y++)
                 {
                     TileType tile = tm.GetTile<TileType>(new Vector3Int(x, y, z));
                     if (tile == null) continue;
@@ -103,7 +104,7 @@ public class RoomEditor : Editor
                         doorsProp.arraySize++;
                         var arrayItem = doorsProp.GetArrayElementAtIndex(doorsProp.arraySize - 1);
                         arrayItem.FindPropertyRelative(DoorPosName).vector2IntValue = new Vector2Int(x, y);
-                        arrayItem.FindPropertyRelative(DoorDirectionName).enumValueIndex = (int)dir.Value;
+                        arrayItem.FindPropertyRelative(DoorDirectionName).enumValueFlag = (int)dir.Value;
                     }
                 }
             }    
@@ -114,9 +115,9 @@ public class RoomEditor : Editor
     private static RoomExit.Direction? GetExitDirectionAt(int x, int y, BoundsInt bounds)
     {
         if (y == bounds.yMin) return RoomExit.Direction.Down;
-        if (y == bounds.yMax) return RoomExit.Direction.Up;
+        if (y == bounds.yMax - 1) return RoomExit.Direction.Up;
         if (x == bounds.xMin) return RoomExit.Direction.Left;
-        if (x == bounds.xMax) return RoomExit.Direction.Right;
+        if (x == bounds.xMax - 1) return RoomExit.Direction.Right;
         return null;
     }
 }

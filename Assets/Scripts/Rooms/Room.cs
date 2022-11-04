@@ -14,6 +14,9 @@ namespace DonBigo.Rooms
 
         public string RoomName => roomName;
         public Vector3Int Size => size;
+        /// <summary>
+        /// Lista de portas em espaço local na sala.
+        /// </summary>
         public RoomExit[] Doors => doors;
 
         // A Unity não suporta a serialização de arrays multidimensionais. Então eu serializo numa array normal,
