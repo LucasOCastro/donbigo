@@ -32,8 +32,7 @@ namespace DonBigo.Rooms
             RoomInstance roomInstance = new RoomInstance(randRoom, Vector2Int.zero);
             PlaceRoom(grid, tilemap, roomInstance);
             rooms.Add(roomInstance);
-            foreach (var door in roomInstance.Doors)
-            {
+            foreach (var door in roomInstance.Doors) {
                 possibleDoors.Enqueue(door);
             }
 
@@ -41,8 +40,12 @@ namespace DonBigo.Rooms
             {
                 RoomExit possibleDoor = possibleDoors.Dequeue();
                 randRoom = RoomDatabase.RandomRoomThatFits(grid, possibleDoor, out RoomExit chosenDoor);
-                if (randRoom == null) {
+                if (randRoom == null) 
+                {
                     //Se não cabe nenhuma sala nessa porta, então essa porta não será conectada a nada.
+                    if (grid[possibleDoor.Position].Type is DoorTileType doorTile) {
+                        doorTile.SetInactiveDoor(grid, tilemap, possibleDoor.Position);
+                    }
                     continue;
                 }
                 //Ajustamos a posição em que a sala será colocada com base na posiçãon da porta que será conectada.
