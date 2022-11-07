@@ -55,6 +55,9 @@ namespace DonBigo
             Vector2Int tilePos = WorldToTilePos(pos);
             return InBounds(tilePos) ? this[tilePos] : null;
         }
+        
+        //Não é muito otimizado
+        public RoomInstance RoomAt(Vector2Int pos) => _rooms.Find(r => r.Bounds.Contains(pos));
 
         public GameGrid(int size, Tilemap tilemap)
         {
