@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1518f60367f04d87822a2f98c422d95a, type: 3}
-  m_Name: porta
+  m_Script: {fileID: 11500000, guid: 338132a86255415496b5007157d82ee6, type: 3}
+  m_Name: paredemadeira2
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 9dc62ff73effb5448a19bfb846655e9e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a512b7be30b175843b19b03ef8b5d274, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -34,4 +34,3 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  inactiveSubstitute: {fileID: 11400000, guid: 21c98e89cad4ec148bba78109757e827, type: 2}
