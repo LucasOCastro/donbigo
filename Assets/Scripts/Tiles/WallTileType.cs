@@ -7,11 +7,9 @@ namespace DonBigo
     {
         private const float TransparencyMultiplier = 0.1f;
 
-        private bool ShouldBeTransparent(Vector2Int pos)
+        protected virtual bool ShouldBeTransparent(Vector2Int pos)
         {
             Vector2Int referenceTile = FieldOfViewRenderer.Instance.OriginTile;
-            //Apenas no eixo y do tilemap
-            //return pos.y < referenceTile.y;
             
             //Apenas paredes minimas do comado
             var room = GridManager.Instance.Grid.RoomAt(referenceTile);
