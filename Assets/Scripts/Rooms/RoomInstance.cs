@@ -8,7 +8,7 @@ namespace DonBigo.Rooms
         public Room Room { get; }
         public RectInt Bounds { get; }
         /// <summary>
-        /// Lista de portas em espaço global no mapa.
+        /// Array de portas em espaço global no mapa.
         /// </summary>
         public List<RoomExit> Doors { get; }
 

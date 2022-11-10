@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 731131a83a364ae885c5b64668159444, type: 3}
   m_Name: Room4
   m_EditorClassIdentifier: 
-  roomName: 
+  roomName: Room4
   size: {x: 5, y: 5, z: 3}
   tilesBlock:
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
@@ -125,3 +125,4 @@ MonoBehaviour:
     localPos: {x: 2, y: 4}
   - direction: 2
     localPos: {x: 4, y: 2}
+  transformOverrides: []

@@ -6,7 +6,7 @@ using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TileCreator
+public static class TileCreator
 {
     private static string ProcessTileTypeName(Type type)
     {
@@ -31,22 +31,46 @@ public class TileCreator
             title,
             descr,
             ProcessTileTypeName(types[i]),
-            ProcessTileTypeName(types[i + 1]),
-            (i == types.Length - 2) ? "Cancel" : "Next"
+            (i == types.Length - 2) ? "Cancel" : "Next",
+            ProcessTileTypeName(types[i + 1])
         );
-        switch (choice)
+        return choice switch
         {
-            case 0: return types[i];
-            case 1: return types[i + 1];
-            default: return GetTypeDialog(types, i + 2, sprite);
-        }
+            0 => types[i],
+            1 => GetTypeDialog(types, i + 2, sprite),
+            2 => types[i + 1],
+            _ => null
+        };
+    }
+
+    private static Type GetTileBaseType()
+    {
+        int choice = EditorUtility.DisplayDialogComplex(
+            "Tipo de Tile",
+            "Escolha o tipo base de tile",
+            "BaseTile",
+            "Cancel",
+            "StructureTile"
+        );
+        return choice switch
+        {
+            0 => typeof(TileType),
+            1 => null,
+            2 => typeof(StructureTileType),
+            _ => null
+        };
     }
     
     [CreateTileFromPalette]
     private static TileBase CreateTile(Sprite sprite)
     {
-        Type[] tileTypes = ReflectionUtility.TypesThatInherit(typeof(TileType), true).Where(t => !t.IsAbstract).ToArray();
+        Type baseType = GetTileBaseType();
+        if (baseType == null) return null;
+        
+        Type[] tileTypes = ReflectionUtility.TypesThatInherit(baseType, true).Where(t => !t.IsAbstract).ToArray();
 
+        
+        
         Type type = GetTypeDialog(tileTypes, 0, sprite);
         if (type == null) return null;
 

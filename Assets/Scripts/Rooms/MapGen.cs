@@ -19,6 +19,11 @@ namespace DonBigo.Rooms
                     grid[worldPos] = new Tile(worldPos, room.Tiles[x, y], grid);
                 }
             }
+
+            foreach (var structurePos in room.Structures)
+            {
+                grid[structurePos.pos].Structures.Add(structurePos.structure);
+            }
         }
 
         

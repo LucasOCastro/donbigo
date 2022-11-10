@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace DonBigo
 {
@@ -33,6 +35,15 @@ namespace DonBigo
                     _item.Tile = this;
                 }
             }
+        }
+
+        private List<StructureTileType> _structure;
+        public List<StructureTileType> Structures
+        {
+            //Isso ainda não tem nenhum suporte a mudar a estrutura duma tile durante o jogo
+            //Possivelmente vamos precisar de uma StructureInstance que carrega informaçao de dano, etc
+            get => _structure;
+            set => _structure = value;
         }
         
         public Entity Entity { get; set; }

@@ -8,6 +8,12 @@ namespace DonBigo.Rooms
     public class Room : ScriptableObject
     {
         [Serializable]
+        public struct StructurePosition
+        {
+            public Vector2Int pos;
+            public StructureTileType structure;
+        }
+        [Serializable]
         private struct TransformOverride
         {
             public Vector3Int pos;
@@ -18,20 +24,25 @@ namespace DonBigo.Rooms
                 tm.SetTransformMatrix((Vector3Int)start + pos, matrix);
             }
         }
-        
+
         [SerializeField] private string roomName;
         [SerializeField] private Vector3Int size;
         [SerializeField] private TileBase[] tilesBlock;
         [SerializeField] private TileType[] tileTypes;
         [SerializeField] private RoomExit[] doors;
+        [SerializeField] StructurePosition[] structureTiles;
         [SerializeField] private TransformOverride[] transformOverrides;
 
         public string RoomName => roomName;
         public Vector3Int Size => size;
         /// <summary>
-        /// Lista de portas em espaço local na sala.
+        /// Array de portas em espaço local na sala.
         /// </summary>
         public RoomExit[] Doors => doors;
+        /// <summary>
+        /// Array de estruturas em espaço local na sala.
+        /// </summary>
+        public StructurePosition[] Structures => structureTiles;
 
         // A Unity não suporta a serialização de arrays multidimensionais. Então eu serializo numa array normal,
         // transformo em uma array multidimensional quando necessário e guardo num cache.
@@ -53,6 +64,7 @@ namespace DonBigo.Rooms
                 return _tiles;
             }
         }
+
 
         public void FillTilemap(Tilemap tilemap, Vector2Int start)
         {

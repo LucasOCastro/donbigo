@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Reflection;
-using DonBigo;
+﻿using DonBigo;
 using DonBigo.Rooms;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -10,6 +8,8 @@ using UnityEngine.Tilemaps;
 [CustomEditor(typeof(Room))]
 public class RoomEditor : Editor
 {
+    private const string RoomNameName = "roomName";
+    
     private const string BoundsName = "size";
     private const string TilesBlockName = "tilesBlock";
     private const string TileTypesName = "tileTypes";
@@ -18,12 +18,27 @@ public class RoomEditor : Editor
     private const string DoorPosName = "localPos";
     private const string DoorDirectionName = "direction";
 
+    private const string StructuresName = "structureTiles";
+    private const string StructurePosName = "pos";
+    private const string StructureTileName = "structure";
+
     private const string TransformOverridesName = "transformOverrides";
     private const string OverridePosName = "pos";
     private const string OverrideMatrixName = "matrix";
 
     public override void OnInspectorGUI()
     {
+        var nameProp = serializedObject.FindProperty(RoomNameName);
+        string newName = nameProp.stringValue;
+        if (nameProp.stringValue.NullIfEmpty() == null && target != null) {
+            newName = target.name;
+        }
+        newName = EditorGUILayout.TextField(newName);
+        if (newName != nameProp.stringValue) {
+            nameProp.stringValue  =newName;
+            serializedObject.ApplyModifiedProperties();
+        }
+        
         bool alreadyFilled = serializedObject.FindProperty(TilesBlockName).arraySize > 0;
         
         Tilemap tm = EditorGUILayout.ObjectField(null, typeof(Tilemap), allowSceneObjects: true) as Tilemap;
@@ -88,9 +103,11 @@ public class RoomEditor : Editor
         var tileTypesProp = serializedObject.FindProperty(TileTypesName);
         var doorsProp = serializedObject.FindProperty(DoorsName);
         var transformsProp = serializedObject.FindProperty(TransformOverridesName);
+        var structuresProp = serializedObject.FindProperty(StructuresName);
         tileTypesProp.arraySize = bounds.size.x * bounds.size.y;
         doorsProp.arraySize = 0;
         transformsProp.arraySize = 0;
+        structuresProp.arraySize = 0;
         //Percorrendo as tiles de baixo pra cima, garantimos que a parede será armazenada na lista ao invés do chão abaixo dela.
         for (int z = bounds.zMin; z < bounds.zMax; z++)
         {
@@ -99,7 +116,7 @@ public class RoomEditor : Editor
                 for (int y = bounds.yMin; y < bounds.yMax; y++)
                 {
                     Vector3Int tilePos = new Vector3Int(x, y, z);
-                    TileType tile = tm.GetTile<TileType>(tilePos);
+                    var tile = tm.GetTile<UnityEngine.Tilemaps.Tile>(tilePos);
                     if (tile == null) continue;
                     
                     int xyToI = (bounds.size.x * (y - bounds.yMin)) + (x - bounds.xMin);
@@ -117,11 +134,18 @@ public class RoomEditor : Editor
                     var tileMatrix = tm.GetTransformMatrix(tilePos); 
                     if (tileMatrix != tile.transform)
                     {
-                        Debug.Log($"overrida matrix em {tilePos} de {tile.transform.rotation.eulerAngles} para {tileMatrix.rotation.eulerAngles}");
                         transformsProp.arraySize++;
                         var arrayItem = transformsProp.GetArrayElementAtIndex(transformsProp.arraySize - 1);
                         arrayItem.FindPropertyRelative(OverridePosName).vector3IntValue = tilePos;
                         arrayItem.FindPropertyRelative(OverrideMatrixName).SetMatrixValue(tileMatrix);
+                    }
+
+                    if (tile is StructureTileType structure)
+                    {
+                        structuresProp.arraySize++;
+                        var arrayItem = structuresProp.GetArrayElementAtIndex(structuresProp.arraySize - 1);
+                        arrayItem.FindPropertyRelative(StructurePosName).vector2IntValue = new Vector2Int(x, y);
+                        arrayItem.FindPropertyRelative(StructureTileName).objectReferenceValue = structure;
                     }
                 }
             }    
