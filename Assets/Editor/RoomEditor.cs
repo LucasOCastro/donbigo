@@ -18,6 +18,10 @@ public class RoomEditor : Editor
     private const string DoorPosName = "localPos";
     private const string DoorDirectionName = "direction";
 
+    private const string TransformOverridesName = "transformOverrides";
+    private const string OverridePosName = "pos";
+    private const string OverrideMatrixName = "matrix";
+
     public override void OnInspectorGUI()
     {
         bool alreadyFilled = serializedObject.FindProperty(TilesBlockName).arraySize > 0;
@@ -83,8 +87,10 @@ public class RoomEditor : Editor
 
         var tileTypesProp = serializedObject.FindProperty(TileTypesName);
         var doorsProp = serializedObject.FindProperty(DoorsName);
+        var transformsProp = serializedObject.FindProperty(TransformOverridesName);
         tileTypesProp.arraySize = bounds.size.x * bounds.size.y;
         doorsProp.arraySize = 0;
+        transformsProp.arraySize = 0;
         //Percorrendo as tiles de baixo pra cima, garantimos que a parede será armazenada na lista ao invés do chão abaixo dela.
         for (int z = bounds.zMin; z < bounds.zMax; z++)
         {
@@ -92,7 +98,8 @@ public class RoomEditor : Editor
             {
                 for (int y = bounds.yMin; y < bounds.yMax; y++)
                 {
-                    TileType tile = tm.GetTile<TileType>(new Vector3Int(x, y, z));
+                    Vector3Int tilePos = new Vector3Int(x, y, z);
+                    TileType tile = tm.GetTile<TileType>(tilePos);
                     if (tile == null) continue;
                     
                     int xyToI = (bounds.size.x * (y - bounds.yMin)) + (x - bounds.xMin);
@@ -105,6 +112,16 @@ public class RoomEditor : Editor
                         var arrayItem = doorsProp.GetArrayElementAtIndex(doorsProp.arraySize - 1);
                         arrayItem.FindPropertyRelative(DoorPosName).vector2IntValue = new Vector2Int(x, y);
                         arrayItem.FindPropertyRelative(DoorDirectionName).enumValueFlag = (int)dir.Value;
+                    }
+
+                    var tileMatrix = tm.GetTransformMatrix(tilePos); 
+                    if (tileMatrix != tile.transform)
+                    {
+                        Debug.Log($"overrida matrix em {tilePos} de {tile.transform.rotation.eulerAngles} para {tileMatrix.rotation.eulerAngles}");
+                        transformsProp.arraySize++;
+                        var arrayItem = transformsProp.GetArrayElementAtIndex(transformsProp.arraySize - 1);
+                        arrayItem.FindPropertyRelative(OverridePosName).vector3IntValue = tilePos;
+                        arrayItem.FindPropertyRelative(OverrideMatrixName).SetMatrixValue(tileMatrix);
                     }
                 }
             }    

@@ -41,6 +41,17 @@ public static class SerializedObjectUtility
         }
     }
 
+    public static void SetMatrixValue(this SerializedProperty prop, Matrix4x4 matrix)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                prop.FindPropertyRelative("e" + i + j).floatValue = matrix[i, j];
+            }
+        }
+    }
+
     public static string CurrentOpenDir()
     {
         MethodInfo getActiveFolderPath = typeof(ProjectWindowUtil).GetMethod("GetActiveFolderPath", BindingFlags.Static | BindingFlags.NonPublic);

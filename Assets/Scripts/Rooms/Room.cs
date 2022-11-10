@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace DonBigo.Rooms
@@ -6,11 +7,24 @@ namespace DonBigo.Rooms
     [CreateAssetMenu(fileName = "NewRoom", menuName = "New Room")]
     public class Room : ScriptableObject
     {
+        [Serializable]
+        private struct TransformOverride
+        {
+            public Vector3Int pos;
+            public Matrix4x4 matrix;
+
+            public void Override(Tilemap tm, Vector2Int start)
+            {
+                tm.SetTransformMatrix((Vector3Int)start + pos, matrix);
+            }
+        }
+        
         [SerializeField] private string roomName;
         [SerializeField] private Vector3Int size;
         [SerializeField] private TileBase[] tilesBlock;
         [SerializeField] private TileType[] tileTypes;
         [SerializeField] private RoomExit[] doors;
+        [SerializeField] private TransformOverride[] transformOverrides;
 
         public string RoomName => roomName;
         public Vector3Int Size => size;
@@ -44,6 +58,10 @@ namespace DonBigo.Rooms
         {
             BoundsInt fillBounds = new BoundsInt((Vector3Int)start, size);
             tilemap.SetTilesBlock(fillBounds, tilesBlock);
+            foreach (var transformOverride in transformOverrides)
+            {
+                transformOverride.Override(tilemap, start);
+            }
         }
     }
 }
