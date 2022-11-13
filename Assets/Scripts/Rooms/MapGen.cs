@@ -22,7 +22,7 @@ namespace DonBigo.Rooms
 
             foreach (var structurePos in room.Structures)
             {
-                grid[structurePos.pos].Structures.Add(structurePos.structure);
+                grid[structurePos.pos + min].Structures.Add(structurePos.structure);
             }
         }
 
@@ -48,12 +48,10 @@ namespace DonBigo.Rooms
                 if (randRoom == null) 
                 {
                     //Se não cabe nenhuma sala nessa porta, então essa porta não será conectada a nada.
-                    if (grid[possibleDoor.Position].Type is DoorTileType doorTile) {
-                        doorTile.SetInactiveDoor(grid, tilemap, possibleDoor.Position);
-                    }
+                    possibleDoor.Marker.SetInactive(grid, tilemap, possibleDoor.Position);
                     continue;
                 }
-                //Ajustamos a posição em que a sala será colocada com base na posiçãon da porta que será conectada.
+                //Ajustamos a posição em que a sala será colocada com base na posição da porta que será conectada.
                 Vector2Int newRoomMin = (possibleDoor.Position + possibleDoor.DirectionVector) - chosenDoor.Position;
                 roomInstance = new RoomInstance(randRoom, newRoomMin);
                 PlaceRoom(grid, tilemap, roomInstance);
@@ -62,11 +60,11 @@ namespace DonBigo.Rooms
                 foreach (var exit in roomInstance.Doors)
                 {
                     //Não adicionamos a porta que já foi conectada na queue
-                    if (exit.Position == chosenDoor.Position) continue;
+                    if (exit.Position == chosenDoor.Position + roomInstance.Bounds.min) continue;
                     possibleDoors.Enqueue(exit);
                 }
             }
-
+            tilemap.CompressBounds();
             return rooms;
         }
     }

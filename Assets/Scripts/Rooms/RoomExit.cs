@@ -16,8 +16,13 @@ namespace DonBigo.Rooms
 
         [SerializeField] private Direction direction;
         [SerializeField] private Vector2Int localPos;
+        // Unity não serializa interfaces, então armazeno como um unity object
+        // Eu ODEIO isso vtnc unity por alguma razao SerializeReference nao suporta interface ????
+        [SerializeField] private UnityEngine.Object marker;
+        
         public Direction ExitDirection => direction;
         public Vector2Int Position => localPos;
+        public IRoomEntranceMarker Marker => marker as IRoomEntranceMarker;
 
         public Vector2Int DirectionVector => ExitDirection switch {
                 Direction.Up => Vector2Int.up,
@@ -27,10 +32,11 @@ namespace DonBigo.Rooms
                 _ => throw new IndexOutOfRangeException()
             };
 
-        public RoomExit(Vector2Int localPosition, Direction dir)
+        public RoomExit(Vector2Int localPosition, Direction dir, IRoomEntranceMarker entranceMarker)
         {
             localPos = localPosition;
             direction = dir;
+            marker = entranceMarker as UnityEngine.Object;
         }
 
         public bool IsOpposed(Direction other)

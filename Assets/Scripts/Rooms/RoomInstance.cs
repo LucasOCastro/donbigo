@@ -20,7 +20,7 @@ namespace DonBigo.Rooms
             foreach (var door in room.Doors)
             {
                 Vector2Int realPos = pos + door.Position;
-                Doors.Add(new RoomExit(realPos, door.ExitDirection));
+                Doors.Add(new RoomExit(realPos, door.ExitDirection, door.Marker));
             }
         }
     }

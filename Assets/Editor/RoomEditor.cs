@@ -17,6 +17,7 @@ public class RoomEditor : Editor
     private const string DoorsName = "doors";
     private const string DoorPosName = "localPos";
     private const string DoorDirectionName = "direction";
+    private const string DoorMarkerName = "marker";
 
     private const string StructuresName = "structureTiles";
     private const string StructurePosName = "pos";
@@ -118,17 +119,33 @@ public class RoomEditor : Editor
                     Vector3Int tilePos = new Vector3Int(x, y, z);
                     var tile = tm.GetTile<UnityEngine.Tilemaps.Tile>(tilePos);
                     if (tile == null) continue;
-                    
-                    int xyToI = (bounds.size.x * (y - bounds.yMin)) + (x - bounds.xMin);
-                    tileTypesProp.GetArrayElementAtIndex(xyToI).objectReferenceValue = tile;
+
+                    switch (tile)
+                    {
+                        case TileType:
+                        {
+                            int xyToI = (bounds.size.x * (y - bounds.yMin)) + (x - bounds.xMin);
+                            tileTypesProp.GetArrayElementAtIndex(xyToI).objectReferenceValue = tile;
+                            break;
+                        }
+                        case StructureTileType structure:
+                        {
+                            structuresProp.arraySize++;
+                            var arrayItem = structuresProp.GetArrayElementAtIndex(structuresProp.arraySize - 1);
+                            arrayItem.FindPropertyRelative(StructurePosName).vector2IntValue = new Vector2Int(x, y);
+                            arrayItem.FindPropertyRelative(StructureTileName).objectReferenceValue = structure;
+                            break;
+                        }
+                    }
 
                     RoomExit.Direction? dir;
-                    if (tile is DoorTileType && (dir = GetExitDirectionAt(x, y, bounds)) != null)
+                    if (tile is IRoomEntranceMarker && (dir = GetExitDirectionAt(x, y, bounds)) != null)
                     {
                         doorsProp.arraySize++;
                         var arrayItem = doorsProp.GetArrayElementAtIndex(doorsProp.arraySize - 1);
                         arrayItem.FindPropertyRelative(DoorPosName).vector2IntValue = new Vector2Int(x, y);
                         arrayItem.FindPropertyRelative(DoorDirectionName).enumValueFlag = (int)dir.Value;
+                        arrayItem.FindPropertyRelative(DoorMarkerName).objectReferenceValue = tile;
                     }
 
                     var tileMatrix = tm.GetTransformMatrix(tilePos); 
@@ -138,14 +155,6 @@ public class RoomEditor : Editor
                         var arrayItem = transformsProp.GetArrayElementAtIndex(transformsProp.arraySize - 1);
                         arrayItem.FindPropertyRelative(OverridePosName).vector3IntValue = tilePos;
                         arrayItem.FindPropertyRelative(OverrideMatrixName).SetMatrixValue(tileMatrix);
-                    }
-
-                    if (tile is StructureTileType structure)
-                    {
-                        structuresProp.arraySize++;
-                        var arrayItem = structuresProp.GetArrayElementAtIndex(structuresProp.arraySize - 1);
-                        arrayItem.FindPropertyRelative(StructurePosName).vector2IntValue = new Vector2Int(x, y);
-                        arrayItem.FindPropertyRelative(StructureTileName).objectReferenceValue = structure;
                     }
                 }
             }    

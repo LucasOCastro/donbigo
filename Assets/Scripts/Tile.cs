@@ -10,7 +10,6 @@ namespace DonBigo
         public TileType Type { get; }
         public GameGrid ParentGrid { get; }
     
-        //TODO ainda não temos um modo de settar o TileType na geração de comodos
         public Tile(Vector2Int pos, TileType tileType, GameGrid grid)
         {
             Pos = pos;
@@ -37,14 +36,10 @@ namespace DonBigo
             }
         }
 
-        private List<StructureTileType> _structure;
-        public List<StructureTileType> Structures
-        {
-            //Isso ainda não tem nenhum suporte a mudar a estrutura duma tile durante o jogo
-            //Possivelmente vamos precisar de uma StructureInstance que carrega informaçao de dano, etc
-            get => _structure;
-            set => _structure = value;
-        }
+        //Isso ainda não tem nenhum suporte a mudar a estrutura duma tile durante o jogo
+        //Possivelmente vamos precisar de uma StructureInstance que carrega informaçao de dano, etc
+        public List<StructureTileType> Structures { get; } = new List<StructureTileType>();
+            
         
         public Entity Entity { get; set; }
     }
