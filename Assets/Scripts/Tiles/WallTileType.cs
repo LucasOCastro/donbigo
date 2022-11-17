@@ -5,7 +5,7 @@ namespace DonBigo
 {
     public class WallTileType : TileType
     {
-        private const float TransparencyMultiplier = 0.1f;
+        private const float TransparencyMultiplier = 0.0f;
 
         protected virtual bool ShouldBeTransparent(Vector2Int pos)
         {
