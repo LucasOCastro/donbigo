@@ -29,6 +29,7 @@ namespace DonBigo.Rooms
         
         public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap)
         {
+            //Usar uma Lista e acessar saidas aleatorias ao inves da Queue talvez dê um resultado mais devidamente aleatório.
             List<RoomInstance> rooms = new();
             Queue<RoomExit> possibleDoors = new();
 

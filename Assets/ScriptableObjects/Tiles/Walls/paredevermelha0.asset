@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 338132a86255415496b5007157d82ee6, type: 3}
-  m_Name: espelho
+  m_Name: paredevermelha0
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: e3720e63a12169d42a03ac45d5974c11, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6143f8feb0c00e045b7e2a9bf0436fe4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
