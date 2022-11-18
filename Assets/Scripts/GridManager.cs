@@ -22,10 +22,7 @@ namespace DonBigo
                 return;
             }
             Instance = this;
-            
             Grid = new GameGrid(mapSize, tilemap);
-            DEBUG_testItem.Instantiate(Grid[5, 5]);
-            DEBUG_testItem.Instantiate(Grid[0, 0]);
         }
 
         private void Update()
