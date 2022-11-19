@@ -1,13 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
+using DonBigo.Rooms;
+using UnityEngine.Tilemaps;
 
 namespace DonBigo
 {
     public class GameGrid
     {
-        private Grid _unityGrid;
+        private Tilemap _tilemap;
         private Tile[,] _tiles;
+        private List<RoomInstance> _rooms;
         
         public int Size { get; }
+        public RectInt Bounds => new RectInt(Vector2Int.zero, Vector2Int.one  * Size);
 
         public Tile this[int x, int y]
         {
@@ -21,8 +26,13 @@ namespace DonBigo
                 return _tiles[x,y];
             }
             
-            private set
+            set
             {
+                if (!InBounds(x,y))
+                {
+                    Debug.LogError("Tentou acessar grid fora das bounds do mapa.");
+                    return;
+                }
                 _tiles[x, y] = value;
             }
         }
@@ -30,35 +40,31 @@ namespace DonBigo
         public Tile this[Vector2Int xy]
         {
             get => this[xy.x, xy.y];
-            private set => this[xy.x, xy.y] = value;
+            set => this[xy.x, xy.y] = value;
         }
 
         public bool InBounds(int x, int y) => x >= 0 && x < Size && y >= 0 && y < Size;
         public bool InBounds(Vector2Int xy) => InBounds(xy.x, xy.y);
 
-        public Vector3 TileToWorld(Vector2Int tile) => _unityGrid.CellToWorld((Vector3Int)tile);
+        public Vector3 TileToWorld(Vector2Int tile) => _tilemap.CellToWorld((Vector3Int)tile);
         public Vector3 TileToWorld(Tile tile) => TileToWorld(tile.Pos);
 
+        public Vector2Int WorldToTilePos(Vector2 pos) => (Vector2Int)_tilemap.WorldToCell(pos);
         public Tile WorldToTile(Vector2 pos)
         {
-            Vector2Int tilePos = (Vector2Int)_unityGrid.WorldToCell(pos);
+            Vector2Int tilePos = WorldToTilePos(pos);
             return InBounds(tilePos) ? this[tilePos] : null;
         }
+        
+        //Não é muito otimizado
+        public RoomInstance RoomAt(Vector2Int pos) => _rooms.Find(r => r.Bounds.Contains(pos));
 
-        public GameGrid(int size, Grid unityGrid)
+        public GameGrid(int size, Tilemap tilemap)
         {
             Size = size;
-            _unityGrid = unityGrid;
+            _tilemap = tilemap;
             _tiles = new Tile[size, size];
-            for (int x = 0; x < size; x++)
-            {
-                for (int y = 0; y < size; y++)
-                {
-                    _tiles[x, y] = new Tile(new Vector2Int(x, y), this);
-                }
-            }
-            
-            //TODO preencher o mapa com base nos comodos
+            _rooms = MapGen.Gen(this, tilemap);
         }
     }
 }

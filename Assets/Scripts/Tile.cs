@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace DonBigo
 {
@@ -8,10 +10,10 @@ namespace DonBigo
         public TileType Type { get; }
         public GameGrid ParentGrid { get; }
     
-        //TODO ainda não temos um modo de settar o TileType na geração de comodos
-        public Tile(Vector2Int pos, GameGrid grid)
+        public Tile(Vector2Int pos, TileType tileType, GameGrid grid)
         {
             Pos = pos;
+            Type = tileType;
             ParentGrid = grid;
         }
 
@@ -33,6 +35,11 @@ namespace DonBigo
                 }
             }
         }
+
+        //Isso ainda não tem nenhum suporte a mudar a estrutura duma tile durante o jogo
+        //Possivelmente vamos precisar de uma StructureInstance que carrega informaçao de dano, etc
+        public List<StructureTileType> Structures { get; } = new List<StructureTileType>();
+            
         
         public Entity Entity { get; set; }
     }

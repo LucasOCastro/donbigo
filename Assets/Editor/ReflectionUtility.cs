@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using Object = System.Object;
 
 public static class ReflectionUtility
 {
@@ -22,5 +25,13 @@ public static class ReflectionUtility
             type = type.BaseType;
         }
         return null;
+    }
+
+    public static IEnumerable<Type> TypesThatInherit(Type parentType, bool includeParent)
+    {
+        return Assembly.GetAssembly(parentType).GetTypes().Where(t =>
+            (includeParent && t == parentType) ||
+            (t != parentType && parentType.IsAssignableFrom(t))
+        );
     }
 }

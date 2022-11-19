@@ -50,8 +50,9 @@ public class IconAttributeEditor : Editor
             case Texture2D tex:
                 return tex;
             case Sprite sprite:
-                return sprite.texture;
+                return (sprite == null) ? null : sprite.texture;
             case GameObject go:
+                if (go == null) return null;
                 if (!go.TryGetComponent<SpriteRenderer>(out var renderer)) return null;
                 return (renderer.sprite != null) ? renderer.sprite.texture : null;
         }
