@@ -35,7 +35,8 @@ namespace DonBigo.Rooms
 
             Room randRoom = RoomDatabase.RandomRoom();
             if (randRoom == null) return rooms;
-            RoomInstance roomInstance = new RoomInstance(randRoom, Vector2Int.zero);
+            Vector2Int center = new Vector2Int((int)grid.Bounds.center.x, (int)grid.Bounds.center.y); 
+            RoomInstance roomInstance = new RoomInstance(randRoom, center);
             PlaceRoom(grid, tilemap, roomInstance);
             rooms.Add(roomInstance);
             foreach (var door in roomInstance.Doors) {
