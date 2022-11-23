@@ -43,30 +43,30 @@ namespace DonBigo
 
         private static bool CanSeeThrough(Tile tile)
         {
-            return tile is { Type: not WallTileType };
+            if (tile == null)
+            {
+                return false;
+            }
+            return tile.Type is not WallTileType;
         }
 
         private static bool IsVisibleThroughObstacle(Tile tile, FloatRange tileAngles, Obstacle obstacle)
         {
-            int visibleAngleCount = 3;
-            if (obstacle.angleRange.InRange(tileAngles.Min)) {
-                visibleAngleCount--;
+            bool minFree = obstacle.angleRange.InRange(tileAngles.Min);
+            bool maxFree = obstacle.angleRange.InRange(tileAngles.Max);
+            bool centerFree = obstacle.angleRange.InRange(tileAngles.Average);
+            if (CanSeeThrough(tile))
+            {
+                return centerFree && (minFree || maxFree);
             }
-            if (obstacle.angleRange.InRange(tileAngles.Max)) {
-                visibleAngleCount--;
-            }
-            if (obstacle.angleRange.InRange(tileAngles.Average)) {
-                visibleAngleCount--;
-            }
-
-            return CanSeeThrough(tile) ? visibleAngleCount > 1 : visibleAngleCount > 0;
+            return minFree || maxFree || centerFree;
         }
         
 
         private static void CastOctant(GameGrid grid, Vector2Int source, Octant octant, int range)
         {
-            bool[,] viewGrid = new bool[2*range + 1, 2*range+1];
-
+            HashSet<Vector2Int> visibleTiles = new HashSet<Vector2Int>();
+            
             List<Obstacle> obstacles = new List<Obstacle>();
             for (int e1 = 1; e1 <= range; e1++)
             {
@@ -87,14 +87,12 @@ namespace DonBigo
                     float farAngle = closeAngle + angleRange;
                     FloatRange tileAngles = new(closeAngle, farAngle);
                     
-                    if (grid[tile] != null)
+                    if (obstacles.Any(obstacle => !IsVisibleThroughObstacle(grid[tile], tileAngles, obstacle)))
                     {
-                        if (obstacles.Any(obstacle => !IsVisibleThroughObstacle(grid[tile], tileAngles, obstacle)))
-                        {
-                            grid.DEBUG_SetColor(tile, Color.red);
-                            //Set as blocked
-                            continue;
-                        }
+                        //visibleTiles.Add()
+                        grid.DEBUG_SetColor(tile, Color.red);
+                        //Set as blocked
+                        continue;
                     }
                     
                     grid.DEBUG_SetColor(tile, Color.green);
