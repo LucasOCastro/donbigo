@@ -14,6 +14,7 @@ namespace DonBigo
         [SerializeField] private Tilemap tilemap;
         
         [SerializeField] private ItemType DEBUG_testItem;
+        [SerializeField] private int DEBUG_testFOVRange = 10;
         private void Awake()
         {
             if (Instance != null)
@@ -27,6 +28,17 @@ namespace DonBigo
 
         private void Update()
         {
+            //DEBUG fov test
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                Vector2 mousePos = Input.mousePosition;
+                Vector2 mouseScreenPos = Camera.main.ScreenToWorldPoint(mousePos);
+                Vector2Int tile = Grid.WorldToTilePos(mouseScreenPos);
+                Debug.Log("Tring to cast from " + tile);
+                if (!Grid.InBounds(tile)) return;
+                ShadowCasting.Cast(Grid, tile, DEBUG_testFOVRange);
+            }
+            
             //DEBUG spawnando pantufa no click
             if (Input.GetMouseButtonDown(0))
             {

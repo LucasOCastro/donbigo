@@ -2608,6 +2608,7 @@ MonoBehaviour:
   mapSize: 50
   tilemap: {fileID: 60745553}
   DEBUG_testItem: {fileID: 11400000, guid: c43fce7eff5707644b2b92a8456c5dd3, type: 2}
+  DEBUG_testFOVRange: 10
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -6871,7 +6872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 60745553}
-  originFollowCamera: 1
+  originFollowCamera: 0
 --- !u!4 &2121899123
 Transform:
   m_ObjectHideFlags: 0

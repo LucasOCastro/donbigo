@@ -66,6 +66,28 @@ namespace DonBigo
             _tiles = new Tile[size, size];
             _rooms = MapGen.Gen(this, tilemap);
         }
+
+        private Dictionary<Color, UnityEngine.Tilemaps.Tile> tileCache = new();
+        public void DEBUG_SetColor(Vector2Int tile, Color color)
+        {
+            UnityEngine.Tilemaps.Tile tileType;
+            if (tileCache.ContainsKey(color))
+            {
+                tileType = tileCache[color];
+            }
+            else
+            {
+                tileType = ScriptableObject.CreateInstance<UnityEngine.Tilemaps.Tile>();
+                tileType.color = color;
+                Texture2D tex = new Texture2D(1, 1);
+                tex.SetPixel(0, 0, color);
+                Sprite sprite = Sprite.Create(tex, new Rect(0, 0, 1, 1), Vector2.zero, 1);
+                tileType.sprite = sprite;
+                tileCache.Add(color, tileType);
+            }
+            
+            _tilemap.SetTile(new Vector3Int(tile.x, tile.y, -1), tileType);
+        }
     }
 }
 
