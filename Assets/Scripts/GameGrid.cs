@@ -86,7 +86,7 @@ namespace DonBigo
                 tileCache.Add(color, tileType);
             }
             
-            _tilemap.SetTile(new Vector3Int(tile.x, tile.y, -1), tileType);
+            //_tilemap.SetTile(new Vector3Int(tile.x, tile.y, -1), tileType);
         }
     }
 }

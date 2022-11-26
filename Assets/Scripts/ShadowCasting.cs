@@ -19,20 +19,19 @@ namespace DonBigo
         {
             public bool startX;
             public Vector2Int increment;
-            public FloatRange angleRange;
             public Color color;
         }
         
         private static Octant[] _octants = 
         {
-            new Octant(){ startX = false, increment = new Vector2Int(-1, 1), angleRange = new FloatRange(0, 45), color = Color.red}, //NNW
-            new Octant(){ startX = true, increment = new Vector2Int(-1, 1), angleRange = new FloatRange(45, 90), color = Color.blue}, //WNW
-            new Octant(){ startX = true, increment = new Vector2Int(-1, -1), angleRange = new FloatRange(90, 135), color = Color.green}, //WSW
-            new Octant(){ startX = false, increment = new Vector2Int(-1, -1), angleRange = new FloatRange(135, 180), color = Color.yellow}, //SSW
-            new Octant(){ startX = false, increment = new Vector2Int(1, -1), angleRange = new FloatRange(180, 225), color = Color.magenta}, //SSE
-            new Octant(){ startX = true, increment = new Vector2Int(1, -1), angleRange = new FloatRange(225, 270), color = Color.cyan}, //ESE
-            new Octant(){ startX = true, increment = new Vector2Int(1, 1), angleRange = new FloatRange(270, 315), color = Color.white}, //ENE
-            new Octant(){ startX = false, increment = new Vector2Int(1, 1), angleRange = new FloatRange(315, 360), color = Color.black}, //NNE
+            new Octant(){ startX = false, increment = new Vector2Int(-1, 1)}, //NNW
+            new Octant(){ startX = true, increment = new Vector2Int(-1, 1)}, //WNW
+            new Octant(){ startX = true, increment = new Vector2Int(-1, -1)}, //WSW
+            new Octant(){ startX = false, increment = new Vector2Int(-1, -1)}, //SSW
+            new Octant(){ startX = false, increment = new Vector2Int(1, -1)}, //SSE
+            new Octant(){ startX = true, increment = new Vector2Int(1, -1)}, //ESE
+            new Octant(){ startX = true, increment = new Vector2Int(1, 1)}, //ENE
+            new Octant(){ startX = false, increment = new Vector2Int(1, 1)}, //NNE
         };
         
         private struct Obstacle
@@ -52,33 +51,49 @@ namespace DonBigo
 
         private static bool IsVisibleThroughObstacle(Tile tile, FloatRange tileAngles, Obstacle obstacle)
         {
-            bool minFree = obstacle.angleRange.InRange(tileAngles.Min);
-            bool maxFree = obstacle.angleRange.InRange(tileAngles.Max);
-            bool centerFree = obstacle.angleRange.InRange(tileAngles.Average);
+            if (tile == null)
+            {
+                return false;
+            }
+            
+            bool minFree = !obstacle.angleRange.InRange(tileAngles.Min);
+            bool maxFree = !obstacle.angleRange.InRange(tileAngles.Max);
+            bool centerFree = !obstacle.angleRange.InRange(tileAngles.Average);
             if (CanSeeThrough(tile))
             {
                 return centerFree && (minFree || maxFree);
             }
-            return minFree || maxFree || centerFree;
+            return centerFree && (minFree || maxFree);//minFree || maxFree || centerFree;
         }
         
-
+        public static HashSet<Vector2Int> visibleTiles = new HashSet<Vector2Int>();
         private static void CastOctant(GameGrid grid, Vector2Int source, Octant octant, int range)
         {
-            HashSet<Vector2Int> visibleTiles = new HashSet<Vector2Int>();
+            //HashSet<Vector2Int> visibleTiles = new HashSet<Vector2Int>();
+            HashSet<Vector2Int> blockedTiles = new HashSet<Vector2Int>();
             
             List<Obstacle> obstacles = new List<Obstacle>();
+            int lastLineObstacleCount = 0;
             for (int e1 = 1; e1 <= range; e1++)
             {
-                float angleRange = 1f / (e1 + 1);
+                // O correto é usar 1f/e1. Com e1-1, as vezes da até infinito, mas por alguma razão
+                // as vezes os melhores resultados vieram com esse valor.
+                float angleRange = 1f / e1;
+
+                int lineObstacleCount = 0;
                 for (int e2 = 0; e2 <= e1; e2++)
                 {
                     Vector2Int offset = octant.startX ? new Vector2Int(e1, e2) : new Vector2Int(e2, e1);
                     offset.x *= octant.increment.x;
                     offset.y *= octant.increment.y;
                     Vector2Int tile = source + offset;
-                    //grid.DEBUG_SetColor(tile, octant.color);
+                    
                     if (!grid.InBounds(tile))
+                    {
+                        continue;
+                    }
+
+                    if (blockedTiles.Contains(tile))
                     {
                         continue;
                     }
@@ -87,34 +102,41 @@ namespace DonBigo
                     float farAngle = closeAngle + angleRange;
                     FloatRange tileAngles = new(closeAngle, farAngle);
                     
-                    if (obstacles.Any(obstacle => !IsVisibleThroughObstacle(grid[tile], tileAngles, obstacle)))
-                    {
-                        //visibleTiles.Add()
-                        grid.DEBUG_SetColor(tile, Color.red);
-                        //Set as blocked
-                        continue;
-                    }
-                    
-                    grid.DEBUG_SetColor(tile, Color.green);
-
                     if (!CanSeeThrough(grid[tile]))
                     {
+                        lineObstacleCount++;
                         obstacles.Add(new Obstacle {
-                            angleRange =  new FloatRange(closeAngle, farAngle),
+                            angleRange =  tileAngles,
                             tile = tile
                         });
-                        //Debug.Log($"Obstacle at {tile} from {source} and sourceCenter={source.Center()} at closeAngle = {closeAngle}");
-                        /*Debug.DrawRay(source.Center(), Quaternion.AngleAxis(closeAngle, Vector3.forward) * Vector3.up, Color.magenta, 30);
-                        Debug.DrawRay(source.Center(), Quaternion.AngleAxis(tileAngles.Average, Vector3.forward) * Vector3.up, Color.red, 30);
-                        Debug.DrawRay(source.Center(), Quaternion.AngleAxis(farAngle, Vector3.forward) * Vector3.up, Color.blue, 30);
-                        */
                     }
+
+                    bool blocked = obstacles
+                        .Where((_, i) => i < (obstacles.Count - lineObstacleCount))
+                        .Any(o => !IsVisibleThroughObstacle(grid[tile], tileAngles, o)); 
+                    if (blocked)
+                    {
+                        if (visibleTiles.Contains(tile)) {
+                            visibleTiles.Remove(tile);
+                        }
+                        blockedTiles.Add(tile);
+                        grid.DEBUG_SetColor(tile, Color.red);
+                        continue;
+                    }
+                    if (blockedTiles.Contains(tile)) {
+                        blockedTiles.Remove(tile);
+                    }
+                    visibleTiles.Add(tile);
+                    grid.DEBUG_SetColor(tile, Color.green);    
                 }
+                lastLineObstacleCount += lineObstacleCount;
             }
         }
     
         public static void Cast(GameGrid grid, Vector2Int source, int range)
         {
+            visibleTiles.Clear();
+            visibleTiles.Add(source);
             foreach (var octant in _octants)
             {
                 CastOctant(grid, source, octant, range);
