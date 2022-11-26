@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace DonBigo
@@ -27,6 +28,7 @@ namespace DonBigo
             Grid = new GameGrid(mapSize, tilemap);
         }
 
+        public static HashSet<Vector2Int> DEBUG_visibleTiles = new HashSet<Vector2Int>();
         public static bool DEBUG_drawVis = false;
         private void Update()
         {
@@ -42,9 +44,9 @@ namespace DonBigo
                 Vector2 mouseScreenPos = Camera.main.ScreenToWorldPoint(mousePos);
                 Vector2Int tile = Grid.WorldToTilePos(mouseScreenPos);
                 if (!Grid.InBounds(tile)) return;
-                ShadowCasting.Cast(Grid, tile, DEBUG_testFOVRange);
-                tilemap.RefreshAllTiles();
                 DEBUG_drawVis = true;
+                DEBUG_visibleTiles = ShadowCasting.Cast(Grid, tile, DEBUG_testFOVRange);
+                tilemap.RefreshAllTiles();
             }
             
             //DEBUG spawnando pantufa no click

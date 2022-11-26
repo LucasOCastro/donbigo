@@ -8,13 +8,6 @@ namespace DonBigo
     //http://www.roguebasin.com/index.php/Restrictive_Precise_Angle_Shadowcasting
     public static class ShadowCasting
     {
-        private static float AntiClockwiseAngle(Vector2 vector)
-        {
-            //Acho q nao precisa normalizar o vetor
-            float angle = Vector2.SignedAngle(Vector2.up, vector);
-            return (angle < 0) ? 360 + angle : angle;
-        }
-
         private struct Octant
         {
             public bool startX;
@@ -66,14 +59,12 @@ namespace DonBigo
             return centerFree && (minFree || maxFree);//minFree || maxFree || centerFree;
         }
         
-        public static HashSet<Vector2Int> visibleTiles = new HashSet<Vector2Int>();
-        private static void CastOctant(GameGrid grid, Vector2Int source, Octant octant, int range)
+        private static void CastOctant(GameGrid grid, Vector2Int source, Octant octant, int range, HashSet<Vector2Int> visibleTiles)
         {
             //HashSet<Vector2Int> visibleTiles = new HashSet<Vector2Int>();
             HashSet<Vector2Int> blockedTiles = new HashSet<Vector2Int>();
             
             List<Obstacle> obstacles = new List<Obstacle>();
-            int lastLineObstacleCount = 0;
             for (int e1 = 1; e1 <= range; e1++)
             {
                 // O correto é usar 1f/e1. Com e1-1, as vezes da até infinito, mas por alguma razão
@@ -111,6 +102,8 @@ namespace DonBigo
                         });
                     }
 
+                    //Operações com Linq não são tão performantes mas são práticas.
+                    //Isso é um possível ponto de otimização.
                     bool blocked = obstacles
                         .Where((_, i) => i < (obstacles.Count - lineObstacleCount))
                         .Any(o => !IsVisibleThroughObstacle(grid[tile], tileAngles, o)); 
@@ -120,27 +113,25 @@ namespace DonBigo
                             visibleTiles.Remove(tile);
                         }
                         blockedTiles.Add(tile);
-                        grid.DEBUG_SetColor(tile, Color.red);
                         continue;
                     }
                     if (blockedTiles.Contains(tile)) {
                         blockedTiles.Remove(tile);
                     }
                     visibleTiles.Add(tile);
-                    grid.DEBUG_SetColor(tile, Color.green);    
                 }
-                lastLineObstacleCount += lineObstacleCount;
             }
         }
     
-        public static void Cast(GameGrid grid, Vector2Int source, int range)
+        public static HashSet<Vector2Int> Cast(GameGrid grid, Vector2Int source, int range)
         {
-            visibleTiles.Clear();
+            HashSet<Vector2Int> visibleTiles = new HashSet<Vector2Int>();
             visibleTiles.Add(source);
             foreach (var octant in _octants)
             {
-                CastOctant(grid, source, octant, range);
+                CastOctant(grid, source, octant, range, visibleTiles);
             }
+            return visibleTiles;
         }
     }    
 }
