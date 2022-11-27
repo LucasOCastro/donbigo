@@ -7,9 +7,9 @@ namespace DonBigo
     {
         private const float TransparencyMultiplier = 0.0f;
 
-        protected virtual bool ShouldBeTransparent(Vector2Int pos)
+        private static bool ShouldBeTransparent(Vector2Int pos)
         {
-            Vector2Int referenceTile = FieldOfViewRenderer.Instance.OriginTile;
+            Vector2Int referenceTile = FieldOfViewRenderer.OriginTile;
             
             //Apenas paredes minimas do comodo
             var room = GridManager.Instance.Grid.RoomAt(referenceTile);
@@ -31,7 +31,7 @@ namespace DonBigo
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
             base.GetTileData(position, tilemap, ref tileData);
-            if (GridManager.Instance == null || GridManager.Instance.Grid == null)
+            if (GridManager.Instance == null || GridManager.Instance.Grid == null || Application.isEditor)
             {
                 return;
             }
