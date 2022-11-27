@@ -67,14 +67,33 @@ namespace DonBigo
             Instance = this;
         }
 
+        private void UpdateTiles(HashSet<Vector2Int> tiles)
+        {
+            foreach (var tile in tiles)
+            {
+                for (int i = 0; i < tilemap.size.z; i++)
+                {
+                    tilemap.RefreshTile(new Vector3Int(tile.x, tile.y, i));
+                }
+            }
+        }
+
         private void UpdateFoV()
         {
-            //Atualizar todos os tiles do tilemap eh algo bem caro.
-            //Com o desenvolvimento de um sistema de FoV, podemos atualizar apenas os tiles necessarios.
             DEBUG_drawVis = true;
+            var oldVisibleTiles = VisibleTiles;
             VisibleTiles = ShadowCasting.Cast(GridManager.Instance.Grid, OriginTile, fovRange);
-            Debug.Log("Cast");
-            tilemap.RefreshAllTiles();
+
+            if (oldVisibleTiles.Count == 0)
+            {
+                tilemap.RefreshAllTiles();
+            }
+            else
+            {
+                UpdateTiles(oldVisibleTiles);
+                UpdateTiles(VisibleTiles);    
+            }
+            //tilemap.RefreshAllTiles();
         }
     }
 }

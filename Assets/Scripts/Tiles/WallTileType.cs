@@ -31,7 +31,7 @@ namespace DonBigo
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
             base.GetTileData(position, tilemap, ref tileData);
-            if (GridManager.Instance == null || GridManager.Instance.Grid == null || Application.isEditor)
+            if (GridManager.Instance == null || GridManager.Instance.Grid == null)
             {
                 return;
             }
