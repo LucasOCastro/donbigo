@@ -10,7 +10,7 @@ namespace DonBigo.Rooms
         [Serializable]
         public struct StructurePosition
         {
-            public Vector2Int pos;
+            public Vector3Int pos;
             public StructureTileType structure;
         }
         [Serializable]

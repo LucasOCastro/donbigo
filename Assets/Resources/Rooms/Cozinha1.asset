@@ -930,27 +930,27 @@ MonoBehaviour:
     localPos: {x: 8, y: 2}
     marker: {fileID: 11400000, guid: 2fdca22fc81ab134ebfc4238214fa78d, type: 2}
   structureTiles:
-  - pos: {x: 0, y: 2}
+  - pos: {x: 0, y: 2, z: 1}
     structure: {fileID: 11400000, guid: 2c366c4ab0403a249a4e92600029c3c6, type: 2}
-  - pos: {x: 0, y: 6}
+  - pos: {x: 0, y: 6, z: 1}
     structure: {fileID: 11400000, guid: 2c366c4ab0403a249a4e92600029c3c6, type: 2}
-  - pos: {x: 1, y: 8}
+  - pos: {x: 1, y: 8, z: 1}
     structure: {fileID: 11400000, guid: 20fa687cb6fab1a4ebd2f4bcb64fa855, type: 2}
-  - pos: {x: 2, y: 4}
+  - pos: {x: 2, y: 4, z: 1}
     structure: {fileID: 11400000, guid: f389ea1b0a3f510439566b9a187cd24d, type: 2}
-  - pos: {x: 3, y: 0}
+  - pos: {x: 3, y: 0, z: 1}
     structure: {fileID: 11400000, guid: 2c366c4ab0403a249a4e92600029c3c6, type: 2}
-  - pos: {x: 7, y: 0}
+  - pos: {x: 7, y: 0, z: 1}
     structure: {fileID: 11400000, guid: 2b4a710543561894c931fd4ca8a09dc1, type: 2}
-  - pos: {x: 3, y: 8}
+  - pos: {x: 3, y: 8, z: 2}
     structure: {fileID: 11400000, guid: 55444e3d9a9728040932ed8b1b79335c, type: 2}
-  - pos: {x: 4, y: 8}
+  - pos: {x: 4, y: 8, z: 2}
     structure: {fileID: 11400000, guid: 55444e3d9a9728040932ed8b1b79335c, type: 2}
-  - pos: {x: 7, y: 1}
+  - pos: {x: 7, y: 1, z: 2}
     structure: {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
-  - pos: {x: 7, y: 4}
+  - pos: {x: 7, y: 4, z: 2}
     structure: {fileID: 11400000, guid: 55444e3d9a9728040932ed8b1b79335c, type: 2}
-  - pos: {x: 7, y: 1}
+  - pos: {x: 7, y: 1, z: 4}
     structure: {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
   transformOverrides:
   - pos: {x: 0, y: 2, z: 1}

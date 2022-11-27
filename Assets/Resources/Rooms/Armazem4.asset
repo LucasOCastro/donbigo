@@ -266,10 +266,10 @@ MonoBehaviour:
     localPos: {x: 6, y: 1}
     marker: {fileID: 11400000, guid: 2fdca22fc81ab134ebfc4238214fa78d, type: 2}
   structureTiles:
-  - pos: {x: 1, y: 3}
+  - pos: {x: 1, y: 3, z: 5}
     structure: {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
-  - pos: {x: 2, y: 3}
+  - pos: {x: 2, y: 3, z: 5}
     structure: {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
-  - pos: {x: 3, y: 3}
+  - pos: {x: 3, y: 3, z: 5}
     structure: {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
   transformOverrides: []

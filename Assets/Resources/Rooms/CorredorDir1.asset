@@ -342,19 +342,19 @@ MonoBehaviour:
     localPos: {x: 14, y: 2}
     marker: {fileID: 11400000, guid: 7c4d8e7e951218947923c0e8f6455a37, type: 2}
   structureTiles:
-  - pos: {x: 0, y: 2}
+  - pos: {x: 0, y: 2, z: 1}
     structure: {fileID: 11400000, guid: 75059bf26c6ef4840b4822304c600446, type: 2}
-  - pos: {x: 3, y: 0}
+  - pos: {x: 3, y: 0, z: 1}
     structure: {fileID: 11400000, guid: 75059bf26c6ef4840b4822304c600446, type: 2}
-  - pos: {x: 5, y: 0}
+  - pos: {x: 5, y: 0, z: 1}
     structure: {fileID: 11400000, guid: f389ea1b0a3f510439566b9a187cd24d, type: 2}
-  - pos: {x: 5, y: 3}
+  - pos: {x: 5, y: 3, z: 1}
     structure: {fileID: 11400000, guid: 95c90664586f933478b0f41be00b3c5c, type: 2}
-  - pos: {x: 7, y: 0}
+  - pos: {x: 7, y: 0, z: 1}
     structure: {fileID: 11400000, guid: 75059bf26c6ef4840b4822304c600446, type: 2}
-  - pos: {x: 9, y: 0}
+  - pos: {x: 9, y: 0, z: 1}
     structure: {fileID: 11400000, guid: f389ea1b0a3f510439566b9a187cd24d, type: 2}
-  - pos: {x: 11, y: 0}
+  - pos: {x: 11, y: 0, z: 1}
     structure: {fileID: 11400000, guid: 75059bf26c6ef4840b4822304c600446, type: 2}
   transformOverrides:
   - pos: {x: 0, y: 2, z: 1}

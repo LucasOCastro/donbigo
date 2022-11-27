@@ -22,7 +22,8 @@ namespace DonBigo.Rooms
 
             foreach (var structurePos in room.Structures)
             {
-                grid[structurePos.pos + min].Structures.Add(structurePos.structure);
+                Vector2Int pos = (Vector2Int)structurePos.pos + min; 
+                grid[pos].Structures.Add(new StructureInstance(structurePos.structure, grid[pos], structurePos.pos.z));
             }
         }
 

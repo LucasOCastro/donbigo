@@ -1067,45 +1067,45 @@ MonoBehaviour:
     localPos: {x: 7, y: 9}
     marker: {fileID: 11400000, guid: 2fdca22fc81ab134ebfc4238214fa78d, type: 2}
   structureTiles:
-  - pos: {x: 1, y: 0}
+  - pos: {x: 1, y: 0, z: 1}
     structure: {fileID: 11400000, guid: 2c366c4ab0403a249a4e92600029c3c6, type: 2}
-  - pos: {x: 1, y: 2}
+  - pos: {x: 1, y: 2, z: 2}
     structure: {fileID: 11400000, guid: 9453b9f27dfda3340ae13181154f8254, type: 2}
-  - pos: {x: 1, y: 3}
+  - pos: {x: 1, y: 3, z: 2}
     structure: {fileID: 11400000, guid: 9453b9f27dfda3340ae13181154f8254, type: 2}
-  - pos: {x: 1, y: 4}
+  - pos: {x: 1, y: 4, z: 2}
     structure: {fileID: 11400000, guid: 9453b9f27dfda3340ae13181154f8254, type: 2}
-  - pos: {x: 1, y: 7}
+  - pos: {x: 1, y: 7, z: 2}
     structure: {fileID: 11400000, guid: 9453b9f27dfda3340ae13181154f8254, type: 2}
-  - pos: {x: 1, y: 11}
+  - pos: {x: 1, y: 11, z: 2}
     structure: {fileID: 11400000, guid: 55444e3d9a9728040932ed8b1b79335c, type: 2}
-  - pos: {x: 2, y: 1}
+  - pos: {x: 2, y: 1, z: 2}
     structure: {fileID: 11400000, guid: 9453b9f27dfda3340ae13181154f8254, type: 2}
-  - pos: {x: 2, y: 5}
+  - pos: {x: 2, y: 5, z: 2}
     structure: {fileID: 11400000, guid: 9453b9f27dfda3340ae13181154f8254, type: 2}
-  - pos: {x: 3, y: 1}
+  - pos: {x: 3, y: 1, z: 2}
     structure: {fileID: 11400000, guid: 9453b9f27dfda3340ae13181154f8254, type: 2}
-  - pos: {x: 3, y: 5}
+  - pos: {x: 3, y: 5, z: 2}
     structure: {fileID: 11400000, guid: 9453b9f27dfda3340ae13181154f8254, type: 2}
-  - pos: {x: 3, y: 7}
+  - pos: {x: 3, y: 7, z: 2}
     structure: {fileID: 11400000, guid: 9453b9f27dfda3340ae13181154f8254, type: 2}
-  - pos: {x: 3, y: 11}
+  - pos: {x: 3, y: 11, z: 2}
     structure: {fileID: 11400000, guid: 11fa40543be4d2b47afef999aee32916, type: 2}
-  - pos: {x: 4, y: 1}
+  - pos: {x: 4, y: 1, z: 2}
     structure: {fileID: 11400000, guid: 9453b9f27dfda3340ae13181154f8254, type: 2}
-  - pos: {x: 4, y: 2}
+  - pos: {x: 4, y: 2, z: 2}
     structure: {fileID: 11400000, guid: 9453b9f27dfda3340ae13181154f8254, type: 2}
-  - pos: {x: 4, y: 3}
+  - pos: {x: 4, y: 3, z: 2}
     structure: {fileID: 11400000, guid: 9453b9f27dfda3340ae13181154f8254, type: 2}
-  - pos: {x: 4, y: 4}
+  - pos: {x: 4, y: 4, z: 2}
     structure: {fileID: 11400000, guid: 9453b9f27dfda3340ae13181154f8254, type: 2}
-  - pos: {x: 5, y: 11}
+  - pos: {x: 5, y: 11, z: 2}
     structure: {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
-  - pos: {x: 6, y: 11}
+  - pos: {x: 6, y: 11, z: 2}
     structure: {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
-  - pos: {x: 5, y: 11}
+  - pos: {x: 5, y: 11, z: 4}
     structure: {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
-  - pos: {x: 6, y: 11}
+  - pos: {x: 6, y: 11, z: 4}
     structure: {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
   transformOverrides:
   - pos: {x: 1, y: 2, z: 2}

@@ -511,13 +511,13 @@ MonoBehaviour:
     localPos: {x: 0, y: 2}
     marker: {fileID: 11400000, guid: 75059bf26c6ef4840b4822304c600446, type: 2}
   structureTiles:
-  - pos: {x: 0, y: 2}
+  - pos: {x: 0, y: 2, z: 1}
     structure: {fileID: 11400000, guid: 75059bf26c6ef4840b4822304c600446, type: 2}
-  - pos: {x: 3, y: 5}
+  - pos: {x: 3, y: 5, z: 2}
     structure: {fileID: 11400000, guid: 5f8b2cb6214c600448d46e03f2b78c47, type: 2}
-  - pos: {x: 5, y: 3}
+  - pos: {x: 5, y: 3, z: 2}
     structure: {fileID: 11400000, guid: 11fa40543be4d2b47afef999aee32916, type: 2}
-  - pos: {x: 5, y: 3}
+  - pos: {x: 5, y: 3, z: 5}
     structure: {fileID: 11400000, guid: c49430c6edcca59468de205172a87b27, type: 2}
   transformOverrides:
   - pos: {x: 0, y: 2, z: 1}

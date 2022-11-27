@@ -39,7 +39,7 @@ namespace DonBigo
             {
                 return false;
             }
-            return tile.Type is not WallTileType;
+            return tile.IsSeeThrough();
         }
 
         private static bool IsVisibleThroughObstacle(Tile tile, FloatRange tileAngles, Obstacle obstacle)

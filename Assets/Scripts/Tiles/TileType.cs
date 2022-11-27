@@ -16,7 +16,7 @@ namespace DonBigo
             //DEBUG
             if (GridManager.DEBUG_drawVis)
             {
-                tileData.color = GridManager.DEBUG_visibleTiles.Contains((Vector2Int)position) ? Color.green : Color.red;
+                tileData.color = GridManager.DEBUG_visibleTiles.Contains((Vector2Int)position) ? tileData.color : Color.black;
             }
         }
 
