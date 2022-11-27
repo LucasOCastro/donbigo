@@ -11,7 +11,7 @@ namespace DonBigo
         {
             Vector2Int referenceTile = FieldOfViewRenderer.Instance.OriginTile;
             
-            //Apenas paredes minimas do comado
+            //Apenas paredes minimas do comodo
             var room = GridManager.Instance.Grid.RoomAt(referenceTile);
             if (room == null) {
                 return false;
