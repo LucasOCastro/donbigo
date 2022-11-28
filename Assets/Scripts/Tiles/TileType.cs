@@ -13,6 +13,21 @@ namespace DonBigo
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
             base.GetTileData(position, tilemap, ref tileData);
+
+            if (GridManager.DEBUG_start != null && GridManager.DEBUG_start.Pos == (Vector2Int)position)
+            {
+                tileData.color = Color.green;
+            }
+            else if (GridManager.DEBUG_end != null && GridManager.DEBUG_end.Pos == (Vector2Int)position)
+            {
+                tileData.color = Color.red;
+            }
+            else if (GridManager.DEBUG_pathTiles.Contains((Vector2Int)position))
+            {
+                tileData.color = Color.yellow;
+            }
+            
+            
             //DEBUG
             if (!FieldOfViewRenderer.DEBUG_drawVis) return;
 

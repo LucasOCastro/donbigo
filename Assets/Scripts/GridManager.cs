@@ -27,10 +27,12 @@ namespace DonBigo
             Grid = new GameGrid(mapSize, tilemap);
         }
 
+        public static Tile DEBUG_start, DEBUG_end;
+        public static HashSet<Vector2Int> DEBUG_pathTiles = new HashSet<Vector2Int>();
         private void Update()
         {
             //DEBUG spawnando pantufa no click
-            if (Input.GetMouseButtonDown(0))
+            /*if (Input.GetMouseButtonDown(0))
             {
                 Vector2 mousePos = Input.mousePosition;
                 Vector2 mouseScreenPos = Camera.main.ScreenToWorldPoint(mousePos);
@@ -45,7 +47,47 @@ namespace DonBigo
                 {
                     DEBUG_testItem.Instantiate(tile);
                 }
+            }*/
+            
+            if (!Input.GetMouseButtonDown(1)) return;
+
+            if (DEBUG_pathTiles.Count > 0)
+            {
+                DEBUG_start = null;
+                DEBUG_end = null;
+                DEBUG_pathTiles.Clear();
+                tilemap.RefreshAllTiles();
             }
+
+            Vector2Int mouse = Grid.MouseOverPos();
+            if (!Grid.InBounds(mouse)) return;
+            if (DEBUG_start == null)
+            {
+                DEBUG_start = Grid[mouse];
+            }
+            else
+            {
+                DEBUG_end = Grid[mouse];
+            }
+
+            tilemap.RefreshAllTiles();
+            if (DEBUG_end == null) return;
+
+            List<Tile> path = PathFinding.Path(DEBUG_start, DEBUG_end);
+            if (path == null)
+            {
+                Debug.Log("Nao consegui achar caminho");
+                DEBUG_start = null;
+                DEBUG_end = null;
+                tilemap.RefreshAllTiles();
+                return;
+            }
+
+            foreach (var tile in path)
+            {
+                DEBUG_pathTiles.Add(tile.Pos);
+            }
+            tilemap.RefreshAllTiles();
         }
     }
 }
