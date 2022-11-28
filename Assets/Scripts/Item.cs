@@ -2,13 +2,13 @@
 
 namespace DonBigo
 {
-    public class Item : MonoBehaviour
+    public class Item : TileObject
     {
         [SerializeField] private ItemType itemType;
         public ItemType Type => itemType;
 
         private Tile _tile;
-        public Tile Tile
+        public override Tile Tile
         {
             get => _tile;
             set

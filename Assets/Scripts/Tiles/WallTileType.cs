@@ -7,11 +7,14 @@ namespace DonBigo
     {
         private const float TransparencyMultiplier = 0.0f;
 
-        protected virtual bool ShouldBeTransparent(Vector2Int pos)
+        private static bool ShouldBeTransparent(Vector2Int pos)
         {
-            Vector2Int referenceTile = FieldOfViewRenderer.Instance.OriginTile;
+            Vector2Int referenceTile = FieldOfViewRenderer.OriginTile;
+            if (!FieldOfViewRenderer.VisibleTiles.Contains(pos) && FieldOfViewRenderer.DEBUG_drawVis) {
+                return true;
+            }
             
-            //Apenas paredes minimas do comado
+            //Apenas paredes minimas do comodo
             var room = GridManager.Instance.Grid.RoomAt(referenceTile);
             if (room == null) {
                 return false;
@@ -26,11 +29,6 @@ namespace DonBigo
             }
             
             return pos.y == room.Bounds.yMin || pos.x == room.Bounds.xMin;
-            
-            //No eixo y global
-            /*Vector3 referencePos = GridManager.Instance.Grid.TileToWorld(referenceTile);
-            Vector3 worldPos = GridManager.Instance.Grid.TileToWorld(pos);
-            return worldPos.y < referencePos.y;*/
         }
     
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)

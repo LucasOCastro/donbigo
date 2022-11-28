@@ -7,8 +7,17 @@ namespace DonBigo
     {
         public void SetInactive(GameGrid grid, Tilemap tilemap, Vector2Int pos)
         {
-            grid[pos].Structures.Remove(this);
-            //Achar a elevação correta é meio estranho, isso é plausivel pra refatoração na geração.
+            //Achar a elevação correta é meio estranho, isso é plausivel pra refatoração.
+            var structures = grid[pos].Structures;
+            for (int i = 0; i < structures.Count; i++)
+            {
+                if (structures[i].Type is EntranceMarkerTile)
+                {
+                    structures.RemoveAt(i);
+                    break;
+                }
+            }
+            
             for (int z = 0; z <= tilemap.size.z; z++)
             {
                 Vector3Int tilePos = new Vector3Int(pos.x, pos.y, z);

@@ -49,7 +49,7 @@ public class RoomEditor : Editor
         {
             if (GUILayout.Button("Instantiate"))
             {
-                Instantiate();
+                SpawnRoom(target as Room);
             }
 
             //Informações de visualização do tilemap armazenado no comodo
@@ -68,43 +68,64 @@ public class RoomEditor : Editor
             if (!overrideConfirm) return;
         }
         
-        UpdateValues(tm);
+        UpdateValues(serializedObject, tm);
         serializedObject.ApplyModifiedProperties();
         AssetDatabase.SaveAssetIfDirty(target);
     }
 
-    private void Instantiate()
+    private static Tilemap SpawnRoom(Room room)
     {
+        if (room == null)
+        {
+            return null;
+        }
+        
         Grid grid = FindObjectOfType<Grid>();
         if (grid == null)
         {
             Debug.LogError("Não tem nenhuma grid na cena!");
-            return;
+            return null;
         }
 
-        GameObject go = new(target.name, typeof(Tilemap), typeof(TilemapRenderer));
+        GameObject go = new(room.name, typeof(Tilemap), typeof(TilemapRenderer));
         go.transform.parent = grid.transform;
         
         TilemapRenderer tmRenderer = go.GetComponent<TilemapRenderer>();
         tmRenderer.mode = TilemapRenderer.Mode.Individual;
         
         Tilemap tm = go.GetComponent<Tilemap>();
-        (target as Room).FillTilemap(tm, Vector2Int.zero);
+        room.FillTilemap(tm, Vector2Int.zero);
+        return tm;
     }
 
-    private void UpdateValues(Tilemap tm)
+    [MenuItem("Assets/Update All Rooms")]
+    private static void UpdateRooms()
+    {
+        var rooms = Resources.FindObjectsOfTypeAll<Room>();
+        foreach (var room in rooms)
+        {
+            SerializedObject obj = new SerializedObject(room);
+            Tilemap tm = SpawnRoom(room);
+            UpdateValues(obj, tm);
+            obj.ApplyModifiedProperties();
+            AssetDatabase.SaveAssetIfDirty(room);
+            DestroyImmediate(tm.gameObject);
+        }
+    }
+
+    private static void UpdateValues(SerializedObject obj, Tilemap tm)
     {
         tm.CompressBounds();
         var bounds = tm.cellBounds;
-        serializedObject.FindProperty(BoundsName).vector3IntValue = bounds.size;
+        obj.FindProperty(BoundsName).vector3IntValue = bounds.size;
          
         var block = tm.GetTilesBlock(bounds);
-        serializedObject.FindProperty(TilesBlockName).SetArrayValue(block);
+        obj.FindProperty(TilesBlockName).SetArrayValue(block);
 
-        var tileTypesProp = serializedObject.FindProperty(TileTypesName);
-        var doorsProp = serializedObject.FindProperty(DoorsName);
-        var transformsProp = serializedObject.FindProperty(TransformOverridesName);
-        var structuresProp = serializedObject.FindProperty(StructuresName);
+        var tileTypesProp = obj.FindProperty(TileTypesName);
+        var doorsProp = obj.FindProperty(DoorsName);
+        var transformsProp = obj.FindProperty(TransformOverridesName);
+        var structuresProp = obj.FindProperty(StructuresName);
         tileTypesProp.arraySize = bounds.size.x * bounds.size.y;
         doorsProp.arraySize = 0;
         transformsProp.arraySize = 0;
@@ -132,7 +153,7 @@ public class RoomEditor : Editor
                         {
                             structuresProp.arraySize++;
                             var arrayItem = structuresProp.GetArrayElementAtIndex(structuresProp.arraySize - 1);
-                            arrayItem.FindPropertyRelative(StructurePosName).vector2IntValue = new Vector2Int(x, y);
+                            arrayItem.FindPropertyRelative(StructurePosName).vector3IntValue = new Vector3Int(x, y, z);
                             arrayItem.FindPropertyRelative(StructureTileName).objectReferenceValue = structure;
                             break;
                         }

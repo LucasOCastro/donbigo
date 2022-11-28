@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace DonBigo
@@ -14,6 +15,7 @@ namespace DonBigo
         [SerializeField] private Tilemap tilemap;
         
         [SerializeField] private ItemType DEBUG_testItem;
+        public DonBigo.Rooms.Room DEBUG_TEST_ROOM;
         private void Awake()
         {
             if (Instance != null)

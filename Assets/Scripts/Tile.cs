@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace DonBigo
@@ -36,11 +37,17 @@ namespace DonBigo
             }
         }
 
-        //Isso ainda não tem nenhum suporte a mudar a estrutura duma tile durante o jogo
-        //Possivelmente vamos precisar de uma StructureInstance que carrega informaçao de dano, etc
-        public List<StructureTileType> Structures { get; } = new List<StructureTileType>();
-            
+        public List<StructureInstance> Structures { get; } = new List<StructureInstance>();
         
         public Entity Entity { get; set; }
+
+        public bool IsSeeThrough()
+        {
+            if (Type is WallTileType)
+            {
+                return false;
+            }
+            return !Structures.Any(s => s.BlocksView);
+        }
     }
 }
