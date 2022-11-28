@@ -14,9 +14,13 @@ namespace DonBigo
         {
             base.GetTileData(position, tilemap, ref tileData);
             //DEBUG
-            if (FieldOfViewRenderer.DEBUG_drawVis)
+            if (!FieldOfViewRenderer.DEBUG_drawVis) return;
+
+            if (!FieldOfViewRenderer.VisibleTiles.Contains((Vector2Int)position))
             {
-                tileData.color = FieldOfViewRenderer.VisibleTiles.Contains((Vector2Int)position) ? tileData.color : Color.black;
+                Color dataColor = tileData.color;
+                dataColor.a = 0;
+                tileData.color = dataColor;
             }
         }
 

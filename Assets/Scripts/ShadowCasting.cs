@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using DonBigo.Rooms;
 using UnityEngine;
 
 namespace DonBigo
@@ -58,19 +58,40 @@ namespace DonBigo
             }
             return centerFree && (minFree || maxFree);//minFree || maxFree || centerFree;
         }
-        
-        private static void CastOctant(GameGrid grid, Vector2Int source, Octant octant, int range, HashSet<Vector2Int> visibleTiles)
+
+        private static bool IsBlocked(GameGrid grid, Vector2Int tile, FloatRange tileAngles,
+            List<Obstacle> obstacles, int lastLineObstacleCount,
+            RoomInstance sourceRoom)
         {
-            //HashSet<Vector2Int> visibleTiles = new HashSet<Vector2Int>();
-            HashSet<Vector2Int> blockedTiles = new HashSet<Vector2Int>();
+            //Tile nula nao e visivel
+            if (grid[tile] == null)
+            {
+                return true;
+            }
+
+            //Nao quero mostrar o chao das salas de baixo
+            if (grid[tile].Type is WallTileType && grid.RoomAt(tile) != sourceRoom)
+            {
+                return true;
+            }
             
+            //Se tem algum obstaculo que impede a visão, é bloqueado
+            return obstacles
+                .Where((_, i) => i < lastLineObstacleCount)
+                .Any(o => !IsVisibleThroughObstacle(grid[tile], tileAngles, o));
+        }
+
+        private static void CastOctant(GameGrid grid, Vector2Int source, RoomInstance sourceRoom, Octant octant,
+            int range, 
+            HashSet<Vector2Int> visibleTiles)
+        {
+            HashSet<Vector2Int> blockedTiles = new HashSet<Vector2Int>();
             List<Obstacle> obstacles = new List<Obstacle>();
             for (int e1 = 1; e1 <= range; e1++)
             {
                 // O correto é usar 1f/e1. Com e1-1, as vezes da até infinito, mas por alguma razão
                 // as vezes os melhores resultados vieram com esse valor.
-                float angleRange = 1f / e1;
-
+                float angleStep = 1f / e1;
                 int lineObstacleCount = 0;
                 for (int e2 = 0; e2 <= e1; e2++)
                 {
@@ -84,13 +105,8 @@ namespace DonBigo
                         continue;
                     }
 
-                    if (blockedTiles.Contains(tile))
-                    {
-                        continue;
-                    }
-
-                    float closeAngle = e2 * angleRange;
-                    float farAngle = closeAngle + angleRange;
+                    float closeAngle = e2 * angleStep;
+                    float farAngle = closeAngle + angleStep;
                     FloatRange tileAngles = new(closeAngle, farAngle);
                     
                     if (!CanSeeThrough(grid[tile]))
@@ -104,32 +120,31 @@ namespace DonBigo
 
                     //Operações com Linq não são tão performantes mas são práticas.
                     //Isso é um possível ponto de otimização.
-                    bool blocked = obstacles
-                        .Where((_, i) => i < (obstacles.Count - lineObstacleCount))
-                        .Any(o => !IsVisibleThroughObstacle(grid[tile], tileAngles, o)); 
+                    bool blocked = IsBlocked(grid, tile, tileAngles, obstacles, 
+                        obstacles.Count - lineObstacleCount,
+                        sourceRoom);
+                    
                     if (blocked)
                     {
-                        if (visibleTiles.Contains(tile)) {
-                            visibleTiles.Remove(tile);
-                        }
+                        visibleTiles.Remove(tile);
                         blockedTiles.Add(tile);
-                        continue;
                     }
-                    if (blockedTiles.Contains(tile)) {
+                    else
+                    {
                         blockedTiles.Remove(tile);
+                        visibleTiles.Add(tile);    
                     }
-                    visibleTiles.Add(tile);
                 }
             }
         }
     
         public static HashSet<Vector2Int> Cast(GameGrid grid, Vector2Int source, int range)
         {
-            HashSet<Vector2Int> visibleTiles = new HashSet<Vector2Int>();
-            visibleTiles.Add(source);
+            HashSet<Vector2Int> visibleTiles = new HashSet<Vector2Int> { source };
+            RoomInstance sourceRoom = grid.RoomAt(source);
             foreach (var octant in _octants)
             {
-                CastOctant(grid, source, octant, range, visibleTiles);
+                CastOctant(grid, source, sourceRoom, octant, range, visibleTiles);
             }
             return visibleTiles;
         }

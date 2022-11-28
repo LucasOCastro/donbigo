@@ -69,11 +69,16 @@ namespace DonBigo
 
         private void UpdateTiles(HashSet<Vector2Int> tiles)
         {
-            foreach (var tile in tiles)
+            foreach (var tilePos in tiles)
             {
+                var tile = GridManager.Instance.Grid[tilePos];
+                if (tile == null) continue;
+                
+                if (tile.Item != null) tile.Item.UpdateRenderVisibility();
+                //if (tile.Entity != null) tile.Entity.UpdateRenderVisibility();
                 for (int i = 0; i < tilemap.size.z; i++)
                 {
-                    tilemap.RefreshTile(new Vector3Int(tile.x, tile.y, i));
+                    tilemap.RefreshTile(new Vector3Int(tilePos.x, tilePos.y, i));
                 }
             }
         }
