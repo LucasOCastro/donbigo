@@ -10,6 +10,9 @@ namespace DonBigo
         private static bool ShouldBeTransparent(Vector2Int pos)
         {
             Vector2Int referenceTile = FieldOfViewRenderer.OriginTile;
+            if (!FieldOfViewRenderer.VisibleTiles.Contains(pos) && FieldOfViewRenderer.DEBUG_drawVis) {
+                return true;
+            }
             
             //Apenas paredes minimas do comodo
             var room = GridManager.Instance.Grid.RoomAt(referenceTile);

@@ -18,9 +18,7 @@ namespace DonBigo
 
             if (!FieldOfViewRenderer.VisibleTiles.Contains((Vector2Int)position))
             {
-                Color dataColor = tileData.color;
-                dataColor.a = 0;
-                tileData.color = dataColor;
+                tileData.color = Color.black;
             }
         }
 
