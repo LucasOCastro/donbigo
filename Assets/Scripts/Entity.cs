@@ -22,6 +22,14 @@ namespace DonBigo
                     transform.position = _tile.ParentGrid.TileToWorld(_tile);
                 }
             }
+            
+        }
+        public void Walk(Tile target)
+        {
+            if (target != null)
+            {
+                Tile = target;
+            }
         }
     }
 }
