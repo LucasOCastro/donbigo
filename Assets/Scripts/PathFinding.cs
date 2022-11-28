@@ -52,6 +52,10 @@ namespace DonBigo
 
         private static float TransitionCost(Tile from, Tile to)
         {
+            if (!to.Walkable)
+            {
+                return -1;
+            }
             bool isDiagonal = (from.Pos - to.Pos).sqrMagnitude > 1;
             return isDiagonal ? DiagonalCost : StraightCost;
         }
@@ -70,6 +74,8 @@ namespace DonBigo
         
         public static List<Tile> Path(Tile source, Tile target)
         {
+            if (!source.Walkable || !target.Walkable) return null;
+            
             var grid = source.ParentGrid;
             List<Vector2Int> openSet = new List<Vector2Int>();
             Dictionary<Vector2Int, Node> nodes = new Dictionary<Vector2Int, Node>();
@@ -93,8 +99,11 @@ namespace DonBigo
                 {
                     Debug.Log("neighbor="+neighbor.Pos);
                     if (closedSet.Contains(neighbor.Pos)) continue;
+
+                    float transitionCost = TransitionCost(grid[node.tile], neighbor);
+                    if (transitionCost < 0) continue;
                     
-                    float possibleCCost = node.cCost + TransitionCost(grid[node.tile], neighbor);
+                    float possibleCCost = node.cCost + transitionCost;
 
                     bool contains = nodes.ContainsKey(neighbor.Pos);
                     if (contains)

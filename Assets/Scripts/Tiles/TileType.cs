@@ -9,6 +9,8 @@ namespace DonBigo
         // Alturas rígidas não são uma prática muito boa, mas tá funcionando e é simples então...
         public const int FloorHeight = 0;
         public const int WallHeight = 2;
+        
+        [field: SerializeField] public virtual bool Walkable { get; private set; } = true;
 
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {

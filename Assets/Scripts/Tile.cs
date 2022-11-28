@@ -59,6 +59,8 @@ namespace DonBigo
         public List<StructureInstance> Structures { get; } = new List<StructureInstance>();
         
         public Entity Entity { get; set; }
+        //public bool Walkable => Type.Walkable && !Structures.Any(s => s.BlockMovement);
+        public bool Walkable => Type is not WallTileType && !Structures.Any(s => s.BlocksMovement);
 
         public bool IsSeeThrough()
         {
