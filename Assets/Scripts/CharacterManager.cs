@@ -14,6 +14,7 @@ namespace DonBigo
             SpriteRenderer DBRenderer = donbigo.GetComponent<SpriteRenderer>();
             DBRenderer.sprite = donbigoSprite[7];
             donbigo.GetComponent<Entity>().Walk(GridManager.Instance.Grid.WorldToTile(new Vector2(0,0)));
+            donbigo.GetComponent<SpriteRenderer>().sortingOrder = 1;
         }
 
         // Update is called once per frame

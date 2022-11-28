@@ -28,6 +28,8 @@ namespace DonBigo
         {
             if (target != null)
             {
+                if (Tile != null)
+                    Tile.Entity = null;
                 Tile = target;
             }
         }
