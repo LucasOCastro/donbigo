@@ -19,7 +19,7 @@ namespace DonBigo
                 if (_tile != null && _tile.Entity != this)
                 {
                     _tile.Entity = this;
-                    transform.position = _tile.ParentGrid.TileToWorld(_tile);
+                    transform.position = _tile.ParentGrid.TileToWorld(_tile) + new Vector3(0,0,2);
                 }
             }
             
