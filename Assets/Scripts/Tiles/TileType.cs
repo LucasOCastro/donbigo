@@ -12,31 +12,39 @@ namespace DonBigo
         
         [field: SerializeField] public virtual bool Walkable { get; private set; } = true;
 
-        public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
+        protected virtual Color GetColor(Vector2Int position, Color baseColor)
         {
-            base.GetTileData(position, tilemap, ref tileData);
-
-            if (GridManager.DEBUG_start != null && GridManager.DEBUG_start.Pos == (Vector2Int)position)
+            if (GridManager.DEBUG_start != null && GridManager.DEBUG_start.Pos == position)
             {
-                tileData.color = Color.green;
+                return Color.green;
             }
-            else if (GridManager.DEBUG_end != null && GridManager.DEBUG_end.Pos == (Vector2Int)position)
+            if (GridManager.DEBUG_end != null && GridManager.DEBUG_end.Pos == position)
             {
-                tileData.color = Color.red;
+                return Color.red;
             }
-            else if (GridManager.DEBUG_pathTiles.Contains((Vector2Int)position))
+            if (GridManager.DEBUG_pathTiles.Contains(position))
             {
-                tileData.color = Color.yellow;
+                return Color.yellow;
             }
             
             
             //DEBUG
-            if (!FieldOfViewRenderer.DEBUG_drawVis) return;
+            if (!FieldOfViewRenderer.DEBUG_drawVis) return baseColor;
 
-            if (!FieldOfViewRenderer.VisibleTiles.Contains((Vector2Int)position))
+            if (!FieldOfViewRenderer.VisibleTiles.Contains(position))
             {
-                tileData.color = Color.black;
+                baseColor.a = 0;
+                //return Color.black;
             }
+
+            return baseColor;
+        }
+
+        public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
+        {
+            base.GetTileData(position, tilemap, ref tileData);
+
+            tileData.color = GetColor((Vector2Int)position, tileData.color);
         }
 
         //Informações sobre som de pegada, etc

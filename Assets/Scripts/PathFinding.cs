@@ -83,7 +83,6 @@ namespace DonBigo
 
             openSet.Add(source.Pos);
             nodes.Add(source.Pos, new Node(source.Pos, source.Pos, 0, ManhattanDistance(source.Pos, target.Pos)));
-            //closedSet.Add(source.Pos);
 
             while (openSet.Count > 0)
             {
@@ -94,10 +93,8 @@ namespace DonBigo
                     return BackPath(node, nodes, grid);
                 }
 
-                //closedSet.Add(node.tile);
                 foreach (var neighbor in grid[node.tile].Neighbors)
                 {
-                    Debug.Log("neighbor="+neighbor.Pos);
                     if (closedSet.Contains(neighbor.Pos)) continue;
 
                     float transitionCost = TransitionCost(grid[node.tile], neighbor);
@@ -122,14 +119,10 @@ namespace DonBigo
                         nodes.Add(neighbor.Pos, neighborNode);
                     }
                     
-                    //if (!closedSet.Contains(neighbor.Pos))
-                    //{
-                        openSet.Add(neighbor.Pos);
-                    //}
+                    openSet.Add(neighbor.Pos);
                 }
             }
 
-            // Not found
             return null; 
         }
     }

@@ -392,7 +392,7 @@ MonoBehaviour:
   mapSize: 100
   tilemap: {fileID: 60745553}
   DEBUG_testItem: {fileID: 11400000, guid: c43fce7eff5707644b2b92a8456c5dd3, type: 2}
-  DEBUG_TEST_ROOM: {fileID: 11400000, guid: 819856307768dbc45aa4764c3faf5462, type: 2}
+  DEBUG_TEST_ROOM: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
