@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace DonBigo
+﻿namespace DonBigo
 {
     public class StructureInstance
     {

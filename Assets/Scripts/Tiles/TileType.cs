@@ -24,7 +24,7 @@ namespace DonBigo
             }
             if (GridManager.DEBUG_pathTiles.Contains(position))
             {
-                return Color.yellow;
+                return Color.black;
             }
             
             
@@ -33,8 +33,8 @@ namespace DonBigo
 
             if (!FieldOfViewRenderer.VisibleTiles.Contains(position))
             {
-                baseColor.a = 0;
-                //return Color.black;
+                //baseColor.a = 0;
+                return Color.black;
             }
 
             return baseColor;
