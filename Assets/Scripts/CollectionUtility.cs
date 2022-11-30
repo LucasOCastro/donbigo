@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DonBigo
 {
@@ -34,6 +35,18 @@ namespace DonBigo
                 return !throwOnEmpty ? default : throw new InvalidOperationException("Sequence was empty");
             }
             return current;
+        }
+
+        public static void SetOrAdd<T1, T2>(this Dictionary<T1, T2> dict, T1 key, T2 value)
+        {
+            if (dict.ContainsKey(key))
+            {
+                dict[key] = value;
+            }
+            else
+            {
+                dict.Add(key, value);
+            }
         }
     }
 }

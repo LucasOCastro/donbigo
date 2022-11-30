@@ -7,8 +7,11 @@ namespace DonBigo
     public class StructureTileType : UnityEngine.Tilemaps.Tile
     {
         [Tooltip("A altura mínima no tilemap pra impedir a visão. Valor negativo nunca impede.")]
-        [SerializeField] private int minViewBlockHeight = -1;
-        public int MinViewBlockHeight => minViewBlockHeight;
+        [field: SerializeField]
+        public int MinViewBlockHeight { get; private set; } = -1;
+        
+        [field: SerializeField]
+        public bool BlocksMovement { get; private set; }
 
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
