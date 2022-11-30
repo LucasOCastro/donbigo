@@ -61,7 +61,7 @@ namespace DonBigo
 
         private static bool IsBlocked(GameGrid grid, Vector2Int tile, FloatRange tileAngles,
             List<Obstacle> obstacles, int lastLineObstacleCount,
-            RoomInstance sourceRoom)
+            RoomInstance sourceRoom, Vector2Int source)
         {
             //Tile nula nao e visivel
             if (grid[tile] == null)
@@ -70,7 +70,8 @@ namespace DonBigo
             }
 
             //Nao quero mostrar o chao das salas de baixo
-            if (grid[tile].Type is WallTileType && grid.RoomAt(tile) != sourceRoom)
+            if (grid[tile].Type is WallTileType && 
+            (grid.RoomAt(tile) != sourceRoom || (tile.x < source.x && tile.y < source.y)))
             {
                 return true;
             }
@@ -122,7 +123,7 @@ namespace DonBigo
                     //Isso é um possível ponto de otimização.
                     bool blocked = IsBlocked(grid, tile, tileAngles, obstacles, 
                         obstacles.Count - lineObstacleCount,
-                        sourceRoom);
+                        sourceRoom, source);
                     
                     if (blocked)
                     {
