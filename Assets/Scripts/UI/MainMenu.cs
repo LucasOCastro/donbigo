@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace DonBigo.UI
@@ -11,12 +12,19 @@ namespace DonBigo.UI
         [SerializeField] private Button muteButton;
         [SerializeField] private Button creditsButton;
         [SerializeField] private Image creditsMenu;
+
+        [SerializeField] private int playSceneID;
         
         private void Awake()
         {
-            playButton.onClick.AddListener(() => Debug.Log("play"));
+            playButton.onClick.AddListener(PlayGame);
             muteButton.onClick.AddListener(() => Debug.Log("mute"));
             creditsButton.onClick.AddListener(() => SetCredits(true));
+        }
+
+        private void PlayGame()
+        {
+            SceneManager.LoadScene(playSceneID);
         }
 
         private void SetCredits(bool open)
