@@ -71,12 +71,13 @@ namespace DonBigo
             }
             return path.ToList();
         }
-        
+
         public static List<Tile> Path(Tile source, Tile target)
         {
             if (!source.Walkable || !target.Walkable) return null;
             
             var grid = source.ParentGrid;
+            // Uma priority queue aqui seria mais apropriada
             List<Vector2Int> openSet = new List<Vector2Int>();
             Dictionary<Vector2Int, Node> nodes = new Dictionary<Vector2Int, Node>();
             HashSet<Vector2Int> closedSet = new HashSet<Vector2Int>();
@@ -118,8 +119,12 @@ namespace DonBigo
                         Node neighborNode = new Node(node.tile, neighbor.Pos, possibleCCost, ManhattanDistance(neighbor.Pos, target.Pos));
                         nodes.Add(neighbor.Pos, neighborNode);
                     }
-                    
-                    openSet.Add(neighbor.Pos);
+
+                    // Contain em lista é feio :(
+                    if (!openSet.Contains(neighbor.Pos))
+                    {
+                        openSet.Add(neighbor.Pos);    
+                    }
                 }
             }
 
