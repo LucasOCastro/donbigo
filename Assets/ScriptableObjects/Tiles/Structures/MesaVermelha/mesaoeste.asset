@@ -35,4 +35,4 @@ MonoBehaviour:
   m_Flags: 1
   m_ColliderType: 1
   <MinViewBlockHeight>k__BackingField: -1
-  <BlocksMovement>k__BackingField: 0
+  <BlocksMovement>k__BackingField: 1
