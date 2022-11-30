@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 namespace DonBigo
@@ -8,7 +9,7 @@ namespace DonBigo
     {
         [Tooltip("A altura mínima no tilemap pra impedir a visão. Valor negativo nunca impede.")]
         [field: SerializeField]
-        public int MinViewBlockHeight { get; private set; } = -1;
+        public int ViewBlockHeight { get; private set; } = -1;
         
         [field: SerializeField]
         public bool BlocksMovement { get; private set; }
