@@ -7,7 +7,7 @@
 
         private int _elevation;
 
-        public bool BlocksView => Type.MinViewBlockHeight >= 0 && _elevation >= Type.MinViewBlockHeight;
+        public bool BlocksView => Type.ViewBlockHeight >= 0 && _elevation == Type.ViewBlockHeight;
         public bool BlocksMovement => Type.BlocksMovement;
 
         public StructureInstance(StructureTileType type, Tile tile, int elevation)
