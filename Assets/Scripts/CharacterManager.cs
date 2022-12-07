@@ -47,6 +47,7 @@ namespace DonBigo
                     // walkPath = PathFinding.Path(donbigo.GetComponent<Entity>().Tile, tile);
                     // pathIndex = 0;
                    donbigo.GetComponent<Entity>().Walk(tile);
+                   FieldOfViewRenderer.OriginTile = donbigo.GetComponent<Entity>().Tile.Pos;
                 }
 
                 
