@@ -22,20 +22,30 @@ namespace DonBigo.Rooms
 
             foreach (var structurePos in room.Structures)
             {
-                grid[structurePos.pos + min].Structures.Add(structurePos.structure);
+                Vector2Int pos = (Vector2Int)structurePos.pos + min; 
+                grid[pos].Structures.Add(new StructureInstance(structurePos.structure, grid[pos], structurePos.pos.z));
             }
         }
 
         
         public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap)
         {
+            if (GridManager.Instance.DEBUG_TEST_ROOM != null)
+            {
+                RoomInstance inst = new RoomInstance(GridManager.Instance.DEBUG_TEST_ROOM, Vector2Int.one);
+                List<RoomInstance> res = new List<RoomInstance>() { inst };
+                PlaceRoom(grid, tilemap, inst);
+                return res;
+            }
+            
             //Usar uma Lista e acessar saidas aleatorias ao inves da Queue talvez dê um resultado mais devidamente aleatório.
             List<RoomInstance> rooms = new();
             Queue<RoomExit> possibleDoors = new();
 
             Room randRoom = RoomDatabase.RandomRoom();
             if (randRoom == null) return rooms;
-            RoomInstance roomInstance = new RoomInstance(randRoom, Vector2Int.zero);
+            Vector2Int center = new Vector2Int((int)grid.Bounds.center.x, (int)grid.Bounds.center.y); 
+            RoomInstance roomInstance = new RoomInstance(randRoom, center);
             PlaceRoom(grid, tilemap, roomInstance);
             rooms.Add(roomInstance);
             foreach (var door in roomInstance.Doors) {
