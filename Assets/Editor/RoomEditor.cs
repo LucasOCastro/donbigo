@@ -44,6 +44,7 @@ public class RoomEditor : Editor
 
         var itemsProp = serializedObject.FindProperty(PossibleItemsName);
         EditorGUILayout.PropertyField(itemsProp, includeChildren: true);
+        serializedObject.ApplyModifiedProperties();
 
         bool alreadyFilled = serializedObject.FindProperty(TilesBlockName).arraySize > 0;
         

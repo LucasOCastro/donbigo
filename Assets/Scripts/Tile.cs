@@ -42,7 +42,10 @@ namespace DonBigo
         public Entity Entity { get; set; }
         public Item Item { get; set; }
         public bool Walkable => Type is not WallTileType && Type.Walkable && Structures.All(s => s.BlocksMovement);
-        public bool SupportsItems => Structures.All(s => s.Type.SurfaceHeight >= 0);
+
+        public bool SupportsItem =>
+            Item == null && Type is not WallTileType && Structures.All(s => s.Type.SurfaceHeight >= 0);
+        public int ItemSurfaceElevation => Structures.Count > 0 ? Structures.Max(s => s.Type.SurfaceHeight) : 0;
         //public Vec3i
         
         public bool IsSeeThrough()

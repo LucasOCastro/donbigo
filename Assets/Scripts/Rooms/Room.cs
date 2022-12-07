@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 namespace DonBigo.Rooms
 {
@@ -28,7 +30,7 @@ namespace DonBigo.Rooms
         [Serializable]
         private struct ItemChance
         {
-            public Item possibleItems;
+            public ItemType item;
             public float chance;
         }
 
@@ -51,6 +53,19 @@ namespace DonBigo.Rooms
         /// Array de estruturas em espaço local na sala.
         /// </summary>
         public StructurePosition[] Structures => structureTiles;
+
+        public IEnumerable<ItemType> GenItemsToSpawn()
+        {
+            if (possibleItems == null || possibleItems.Length == 0) yield break;
+            
+            foreach (var itemChance in possibleItems)
+            {
+                if (Random.value < itemChance.chance)
+                {
+                    yield return itemChance.item;
+                }
+            }   
+        }
 
         // A Unity não suporta a serialização de arrays multidimensionais. Então eu serializo numa array normal,
         // transformo em uma array multidimensional quando necessário e guardo num cache.

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -24,6 +25,15 @@ namespace DonBigo.Rooms
             {
                 Vector2Int pos = (Vector2Int)structurePos.pos + min; 
                 grid[pos].Structures.Add(new StructureInstance(structurePos.structure, grid[pos], structurePos.pos.z));
+            }
+            
+            foreach (var itemChance in room.GenItemsToSpawn())
+            {
+                var tile = grid.TilesInBounds(roomInstance.Bounds).Where(t => t.SupportsItem).Random();
+                if (tile == null) continue;
+                
+                var spawned = itemChance.Instantiate(tile);
+                Debug.Log("Coloquei item em "+tile.Pos + " e pos = " + spawned.transform.position);
             }
         }
 

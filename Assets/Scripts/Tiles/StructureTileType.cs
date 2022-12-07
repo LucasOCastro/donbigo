@@ -13,10 +13,10 @@ namespace DonBigo
         
         [field: SerializeField]
         public bool BlocksMovement { get; private set; }
-        
+
         [field: Tooltip("A altura em que itens spawnam sobre a estrutura. Valor negativo, nunca spawna item.")]
         [field: SerializeField]
-        public int SurfaceHeight { get; private set; }
+        public int SurfaceHeight { get; private set; } = -1;
 
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
