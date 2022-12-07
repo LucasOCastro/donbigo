@@ -6,18 +6,19 @@ namespace DonBigo
 {
     public class CharacterManager : MonoBehaviour
     {
-        GameObject donbigo;
+        public GameObject donbigo;
         [SerializeField] private Sprite[] donbigoSprite;
-        GameObject phantonette;
+        public GameObject phantonette;
         [SerializeField] private Sprite[] phantonetteSprite;
 
         // private List<Tile> walkPath;
         // private int pathIndex;
-        void Start()
+        private void Start()
         {
             donbigo = new GameObject("Player", typeof(SpriteRenderer), typeof(Bigodon));
             SpriteRenderer DBRenderer = donbigo.GetComponent<SpriteRenderer>();
             DBRenderer.sprite = donbigoSprite[7];
+            donbigo.tag = "Player";
             donbigo.GetComponent<Entity>().Walk(GridManager.Instance.Grid.WorldToTile(new Vector2(0,0)));
             
             phantonette = new GameObject("Foe", typeof(SpriteRenderer), typeof(Phantonette));
@@ -28,7 +29,7 @@ namespace DonBigo
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             if (Input.GetMouseButtonDown(0))
             {
