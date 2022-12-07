@@ -25,13 +25,21 @@ namespace DonBigo.Rooms
             }
         }
 
+        [Serializable]
+        private struct ItemChance
+        {
+            public Item possibleItems;
+            public float chance;
+        }
+
         [SerializeField] private string roomName;
         [SerializeField] private Vector3Int size;
         [SerializeField] private TileBase[] tilesBlock;
         [SerializeField] private TileType[] tileTypes;
         [SerializeField] private RoomExit[] doors;
-        [SerializeField] StructurePosition[] structureTiles;
+        [SerializeField] private StructurePosition[] structureTiles;
         [SerializeField] private TransformOverride[] transformOverrides;
+        [SerializeField] private ItemChance[] possibleItems;
 
         public string RoomName => roomName;
         public Vector3Int Size => size;
@@ -64,8 +72,7 @@ namespace DonBigo.Rooms
                 return _tiles;
             }
         }
-
-
+        
         public void FillTilemap(Tilemap tilemap, Vector2Int start)
         {
             BoundsInt fillBounds = new BoundsInt((Vector3Int)start, size);

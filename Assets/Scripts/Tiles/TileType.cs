@@ -10,7 +10,7 @@ namespace DonBigo
         public const int FloorHeight = 0;
         public const int WallHeight = 2;
         
-        [field: SerializeField] public virtual bool Walkable { get; private set; } = true;
+        [field: SerializeField] public bool Walkable { get; private set; } = true;
 
         protected virtual Color GetColor(Vector2Int position, Color baseColor)
         {
