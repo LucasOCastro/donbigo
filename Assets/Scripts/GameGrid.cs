@@ -46,8 +46,14 @@ namespace DonBigo
         public bool InBounds(int x, int y) => x >= 0 && x < Size && y >= 0 && y < Size;
         public bool InBounds(Vector2Int xy) => InBounds(xy.x, xy.y);
 
-        public Vector3 TileToWorld(Vector2Int tile) => _tilemap.CellToWorld((Vector3Int)tile);
-        public Vector3 TileToWorld(Tile tile) => TileToWorld(tile.Pos);
+        public Vector3 TileToWorld(Vector2Int tile, int elevation = 0)
+        {
+            Vector3 basePos = _tilemap.CellToWorld((Vector3Int)tile);
+            basePos.z = 2;
+            basePos.y += elevation * .3f;
+            return basePos;
+        } 
+        public Vector3 TileToWorld(Tile tile, int elevation = 0) => TileToWorld(tile.Pos, elevation);
 
         public Vector2Int WorldToTilePos(Vector2 pos) => (Vector2Int)_tilemap.WorldToCell(pos);
         public Tile WorldToTile(Vector2 pos)
@@ -65,6 +71,21 @@ namespace DonBigo
         
         //Não é muito otimizado
         public RoomInstance RoomAt(Vector2Int pos) => _rooms.Find(r => r.Bounds.Contains(pos));
+
+        public IEnumerable<Tile> TilesInBounds(RectInt bounds)
+        {
+            for (int x = bounds.xMin; x < bounds.xMax; x++)
+            {
+                for (int y = bounds.yMin; y < bounds.yMax; y++)
+                {
+                    Tile tile = this[x, y];
+                    if (tile != null)
+                    {
+                        yield return tile;
+                    }
+                }
+            }
+        }
 
         public GameGrid(int size, Tilemap tilemap)
         {

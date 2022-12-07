@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 namespace DonBigo.Rooms
 {
@@ -25,13 +27,21 @@ namespace DonBigo.Rooms
             }
         }
 
+        [Serializable]
+        private struct ItemChance
+        {
+            public ItemType item;
+            public float chance;
+        }
+
         [SerializeField] private string roomName;
         [SerializeField] private Vector3Int size;
         [SerializeField] private TileBase[] tilesBlock;
         [SerializeField] private TileType[] tileTypes;
         [SerializeField] private RoomExit[] doors;
-        [SerializeField] StructurePosition[] structureTiles;
+        [SerializeField] private StructurePosition[] structureTiles;
         [SerializeField] private TransformOverride[] transformOverrides;
+        [SerializeField] private ItemChance[] possibleItems;
 
         public string RoomName => roomName;
         public Vector3Int Size => size;
@@ -43,6 +53,19 @@ namespace DonBigo.Rooms
         /// Array de estruturas em espaço local na sala.
         /// </summary>
         public StructurePosition[] Structures => structureTiles;
+
+        public IEnumerable<ItemType> GenItemsToSpawn()
+        {
+            if (possibleItems == null || possibleItems.Length == 0) yield break;
+            
+            foreach (var itemChance in possibleItems)
+            {
+                if (Random.value < itemChance.chance)
+                {
+                    yield return itemChance.item;
+                }
+            }   
+        }
 
         // A Unity não suporta a serialização de arrays multidimensionais. Então eu serializo numa array normal,
         // transformo em uma array multidimensional quando necessário e guardo num cache.
@@ -64,8 +87,7 @@ namespace DonBigo.Rooms
                 return _tiles;
             }
         }
-
-
+        
         public void FillTilemap(Tilemap tilemap, Vector2Int start)
         {
             BoundsInt fillBounds = new BoundsInt((Vector3Int)start, size);
