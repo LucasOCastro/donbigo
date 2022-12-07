@@ -161,6 +161,15 @@ MonoBehaviour:
   - {fileID: -1383631253, guid: eddf737b918569b379d3539758086592, type: 3}
   - {fileID: -1271518777, guid: eddf737b918569b379d3539758086592, type: 3}
   - {fileID: -1554543321, guid: eddf737b918569b379d3539758086592, type: 3}
+  phantonetteSprite:
+  - {fileID: 505271935, guid: c71578125c39858ac9cd7587b392895e, type: 3}
+  - {fileID: -1508628535, guid: c71578125c39858ac9cd7587b392895e, type: 3}
+  - {fileID: -1311859326, guid: c71578125c39858ac9cd7587b392895e, type: 3}
+  - {fileID: -982791034, guid: c71578125c39858ac9cd7587b392895e, type: 3}
+  - {fileID: -895261654, guid: c71578125c39858ac9cd7587b392895e, type: 3}
+  - {fileID: 1166364138, guid: c71578125c39858ac9cd7587b392895e, type: 3}
+  - {fileID: -1755396380, guid: c71578125c39858ac9cd7587b392895e, type: 3}
+  - {fileID: 1999109991, guid: c71578125c39858ac9cd7587b392895e, type: 3}
 --- !u!4 &6447304
 Transform:
   m_ObjectHideFlags: 0

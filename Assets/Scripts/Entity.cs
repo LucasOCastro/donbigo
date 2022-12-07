@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace DonBigo
 {
-    public class Entity : MonoBehaviour
+    public class Entity : TileObject
     {
         private Tile _tile;
-        public Tile Tile
+        public override Tile Tile
         {
             get => _tile;
             set
@@ -31,7 +33,10 @@ namespace DonBigo
                 if (Tile != null)
                     Tile.Entity = null;
                 Tile = target;
+                UpdateRenderVisibility();
             }
         }
+
+
     }
 }

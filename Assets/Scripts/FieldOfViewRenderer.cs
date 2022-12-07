@@ -75,7 +75,7 @@ namespace DonBigo
                 if (tile == null) continue;
                 
                 if (tile.Item != null) tile.Item.UpdateRenderVisibility();
-                //if (tile.Entity != null) tile.Entity.UpdateRenderVisibility();
+                if (tile.Entity != null) tile.Entity.UpdateRenderVisibility();
                 for (int i = 0; i < tilemap.size.z; i++)
                 {
                     tilemap.RefreshTile(new Vector3Int(tilePos.x, tilePos.y, i));
