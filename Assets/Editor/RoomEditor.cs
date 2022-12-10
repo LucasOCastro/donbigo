@@ -26,6 +26,8 @@ public class RoomEditor : Editor
     private const string TransformOverridesName = "transformOverrides";
     private const string OverridePosName = "pos";
     private const string OverrideMatrixName = "matrix";
+
+    private const string PossibleItemsName = "possibleItems";
     
     public override void OnInspectorGUI()
     {
@@ -36,10 +38,14 @@ public class RoomEditor : Editor
         }
         newName = EditorGUILayout.TextField(newName);
         if (newName != nameProp.stringValue) {
-            nameProp.stringValue  =newName;
+            nameProp.stringValue = newName;
             serializedObject.ApplyModifiedProperties();
         }
-        
+
+        var itemsProp = serializedObject.FindProperty(PossibleItemsName);
+        EditorGUILayout.PropertyField(itemsProp, includeChildren: true);
+        serializedObject.ApplyModifiedProperties();
+
         bool alreadyFilled = serializedObject.FindProperty(TilesBlockName).arraySize > 0;
         
         Tilemap tm = EditorGUILayout.ObjectField(null, typeof(Tilemap), allowSceneObjects: true) as Tilemap;

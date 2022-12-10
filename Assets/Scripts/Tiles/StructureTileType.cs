@@ -7,12 +7,16 @@ namespace DonBigo
     [ScriptableObjectIcon("sprite")]
     public class StructureTileType : UnityEngine.Tilemaps.Tile
     {
-        [Tooltip("A altura mínima no tilemap pra impedir a visão. Valor negativo nunca impede.")]
+        [field: Tooltip("A altura mínima no tilemap pra impedir a visão. Valor negativo nunca impede.")]
         [field: SerializeField]
         public int ViewBlockHeight { get; private set; } = -1;
         
         [field: SerializeField]
         public bool BlocksMovement { get; private set; }
+
+        [field: Tooltip("A altura em que itens spawnam sobre a estrutura. Valor negativo, nunca spawna item.")]
+        [field: SerializeField]
+        public int SurfaceHeight { get; private set; } = -1;
 
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {

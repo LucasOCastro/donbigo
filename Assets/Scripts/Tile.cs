@@ -18,25 +18,6 @@ namespace DonBigo
             ParentGrid = grid;
         }
 
-        private Item _item;
-        public Item Item
-        {
-            get => _item;
-            set
-            {
-                if (_item != null)
-                {
-                    Debug.LogError("Tentou colocar item onde já tem item");
-                    return;
-                }
-                _item = value;
-                if (_item != null && _item.Tile != this)
-                {
-                    _item.Tile = this;
-                }
-            }
-        }
-
         public IEnumerable<Tile> Neighbors
         {
             get
@@ -59,9 +40,14 @@ namespace DonBigo
         public List<StructureInstance> Structures { get; } = new List<StructureInstance>();
         
         public Entity Entity { get; set; }
-        //public bool Walkable => Type.Walkable && !Structures.Any(s => s.BlockMovement);
-        public bool Walkable => Type is not WallTileType && !Structures.Any(s => s.BlocksMovement);
+        public Item Item { get; set; }
+        public bool Walkable => Type is not WallTileType && Type.Walkable && Structures.All(s => s.BlocksMovement);
 
+        public bool SupportsItem =>
+            Item == null && Type is not WallTileType && Structures.All(s => s.Type.SurfaceHeight >= 0);
+        public int ItemSurfaceElevation => Structures.Count > 0 ? Structures.Max(s => s.Type.SurfaceHeight) : 0;
+        //public Vec3i
+        
         public bool IsSeeThrough()
         {
             if (Type is WallTileType)

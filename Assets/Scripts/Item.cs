@@ -22,10 +22,9 @@ namespace DonBigo
                 if (_tile != null && _tile.Item != this)
                 {
                     _tile.Item = this;
-                    transform.position = _tile.ParentGrid.TileToWorld(_tile);
+                    transform.position = _tile.ParentGrid.TileToWorld(_tile, _tile.ItemSurfaceElevation);
                 }
             }
         }
-
     }
 }
