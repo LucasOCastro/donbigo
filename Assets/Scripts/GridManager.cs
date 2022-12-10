@@ -49,7 +49,7 @@ namespace DonBigo
         private void Update()
         {
             //DEBUG spawnando pantufa no click
-            /*if (Input.GetMouseButtonDown(0))
+            /*/*if (Input.GetMouseButtonDown(0))
             {
                 Vector2 mousePos = Input.mousePosition;
                 Vector2 mouseScreenPos = Camera.main.ScreenToWorldPoint(mousePos);

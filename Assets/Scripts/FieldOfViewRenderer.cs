@@ -42,19 +42,19 @@ namespace DonBigo
                 tilemap.RefreshAllTiles();
             }
             
-            if (originFollowCamera)
-            {
-                Vector3 worldPos = Camera.main.transform.position;
-                OriginTile = GridManager.Instance.Grid.WorldToTilePos(worldPos);
-            }
-            else if (Input.GetMouseButtonDown(0))
-            {
-                Vector2Int mouseTile = GridManager.Instance.Grid.MouseOverPos();
-                if (GridManager.Instance.Grid.InBounds(mouseTile))
-                {
-                    OriginTile = mouseTile;
-                }
-            }
+            // if (originFollowCamera)
+            // {
+            //     Vector3 worldPos = Camera.main.transform.position;
+            //     OriginTile = GridManager.Instance.Grid.WorldToTilePos(worldPos);
+            // }
+            // else if (Input.GetMouseButtonDown(0))
+            // {
+            //     Vector2Int mouseTile = GridManager.Instance.Grid.MouseOverPos();
+            //     if (GridManager.Instance.Grid.InBounds(mouseTile))
+            //     {
+            //         OriginTile = mouseTile;
+            //     }
+            // }
         }
 
         private void Awake()
@@ -75,7 +75,7 @@ namespace DonBigo
                 if (tile == null) continue;
                 
                 if (tile.Item != null) tile.Item.UpdateRenderVisibility();
-                //if (tile.Entity != null) tile.Entity.UpdateRenderVisibility();
+                if (tile.Entity != null) tile.Entity.UpdateRenderVisibility();
                 for (int i = 0; i < tilemap.size.z; i++)
                 {
                     tilemap.RefreshTile(new Vector3Int(tilePos.x, tilePos.y, i));
