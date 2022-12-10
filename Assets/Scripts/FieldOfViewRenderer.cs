@@ -42,19 +42,19 @@ namespace DonBigo
                 tilemap.RefreshAllTiles();
             }
             
-            if (originFollowCamera)
-            {
-                Vector3 worldPos = Camera.main.transform.position;
-                OriginTile = GridManager.Instance.Grid.WorldToTilePos(worldPos);
-            }
-            else if (Input.GetMouseButtonDown(0))
-            {
-                Vector2Int mouseTile = GridManager.Instance.Grid.MouseOverPos();
-                if (GridManager.Instance.Grid.InBounds(mouseTile))
-                {
-                    OriginTile = mouseTile;
-                }
-            }
+            // if (originFollowCamera)
+            // {
+            //     Vector3 worldPos = Camera.main.transform.position;
+            //     OriginTile = GridManager.Instance.Grid.WorldToTilePos(worldPos);
+            // }
+            // else if (Input.GetMouseButtonDown(0))
+            // {
+            //     Vector2Int mouseTile = GridManager.Instance.Grid.MouseOverPos();
+            //     if (GridManager.Instance.Grid.InBounds(mouseTile))
+            //     {
+            //         OriginTile = mouseTile;
+            //     }
+            // }
         }
 
         private void Awake()
