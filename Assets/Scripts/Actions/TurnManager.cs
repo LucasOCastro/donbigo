@@ -39,28 +39,16 @@ namespace DonBigo
                 }
 
                 Action action;
-                while ((action = CurrentEntity.GetAction()) == null)
+                do
                 {
+                    action = CurrentEntity.GetAction();
                     yield return null;
-                }
+                } while (action == null);
                 
                 action.Execute();
                 CycleEntity();
                 yield return new WaitForSeconds(turnDurationSeconds);
             }
         }
-
-        /*public void Update()
-        {
-            if (_entities.Count == 0) return;
-            
-            //TODO as entidades devem ter um método que espera a seleção de uma action a ser realizada.
-            Action action = CurrentEntity.GetAction();
-            if (action != null)
-            {
-                action.Execute();
-                CycleEntity();
-            }
-        }*/
     }
 }
