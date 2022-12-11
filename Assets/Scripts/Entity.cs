@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DonBigo
 {
-    public class Entity : TileObject
+    public abstract class Entity : TileObject
     {
         private Tile _tile;
         public override Tile Tile
@@ -14,14 +14,14 @@ namespace DonBigo
             {
                 if (_tile != null)
                 {
-                    _tile.Item = null;
+                    _tile.Entity = null;
                 }
 
                 _tile = value;
                 if (_tile != null && _tile.Entity != this)
                 {
                     _tile.Entity = this;
-                    transform.position = _tile.ParentGrid.TileToWorld(_tile) + new Vector3(0,0,2);
+                    transform.position = _tile.ParentGrid.TileToWorld(_tile);
                 }
             }
             
@@ -36,7 +36,7 @@ namespace DonBigo
                 UpdateRenderVisibility();
             }
         }
-
-
+        
+        public abstract Action GetAction();
     }
 }

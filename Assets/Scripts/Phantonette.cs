@@ -4,6 +4,11 @@ namespace DonBigo
 {
     public class Phantonette : Entity
     {
+        public override Action GetAction()
+        {
+            return new IdleAction(this);
+        }
+
         private void Update() 
         {
             if (Input.GetKeyDown(KeyCode.F))
