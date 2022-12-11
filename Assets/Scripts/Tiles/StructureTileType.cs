@@ -22,7 +22,7 @@ namespace DonBigo
         {
             base.GetTileData(position, tilemap, ref tileData);
             
-            if (FieldOfViewRenderer.DEBUG_drawVis && !FieldOfViewRenderer.VisibleTiles.Contains((Vector2Int)position))
+            if (FieldOfViewRenderer.DEBUG_drawVis && !FieldOfViewRenderer.IsVisible((Vector2Int)position))
             {
                 Color color = tileData.color;
                 color.a = 0;

@@ -7,7 +7,7 @@ namespace DonBigo
     {
         private static Tile GetFinalDoorPosition(RoomExit door, GameGrid grid)
         {
-            Vector2Int tile = door.Position;
+            Vector2Int tile = door.Position + door.DirectionVector;
             while (grid.InBounds(tile) && grid[tile] != null)
             {
                 if (grid[tile].Walkable)

@@ -40,7 +40,7 @@ namespace DonBigo
             set
             {
                 base.Tile = value;
-                FieldOfViewRenderer.OriginTile = value?.Pos ?? Vector2Int.zero;
+                //FieldOfViewRenderer.OriginTile = value?.Pos ?? Vector2Int.zero;
             }
         }
 

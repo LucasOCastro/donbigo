@@ -12,7 +12,7 @@ namespace DonBigo
                 return baseColor;
             }
 
-            return FieldOfViewRenderer.VisibleTiles.Contains(position) ? baseColor : new Color(0, 0, 0, 0);
+            return FieldOfViewRenderer.IsVisible(position) ? baseColor : new Color(0, 0, 0, 0);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace DonBigo
             //DEBUG
             if (!FieldOfViewRenderer.DEBUG_drawVis) return baseColor;
 
-            if (!FieldOfViewRenderer.VisibleTiles.Contains(position))
+            if (!FieldOfViewRenderer.IsVisible(position))
             {
                 //baseColor.a = 0;
                 return Color.black;
