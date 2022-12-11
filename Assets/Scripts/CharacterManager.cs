@@ -20,16 +20,13 @@ namespace DonBigo
             SpriteRenderer DBRenderer = donbigo.GetComponent<SpriteRenderer>();
             DBRenderer.sprite = donbigoSprite[7];
             donbigo.tag = "Player";
-            // Abaixo setar a posição quando tiver um Spawn implementado vvvvvvvvvvvvv
-            // donbigo.GetComponent<Entity>().Walk(GridManager.Instance.Grid.WorldToTile(new Vector2(0,0)));
             spawner.Spawn(GridManager.Instance.Grid, donbigo.GetComponent<Entity>());
             
             // Geração da Phantonette
             phantonette = new GameObject("Foe", typeof(SpriteRenderer), typeof(Phantonette));
             SpriteRenderer PTRenderer = phantonette.GetComponent<SpriteRenderer>();
             PTRenderer.sprite = phantonetteSprite[7];
-            // Abaixo setar a posição quando tiver um Spawn implementado vvvvvvvvvvvvv
-            phantonette.GetComponent<Entity>().Walk(GridManager.Instance.Grid.WorldToTile(new Vector2(0,0)));
+            spawner.Spawn(GridManager.Instance.Grid, phantonette.GetComponent<Entity>());
         }
     }
 }
