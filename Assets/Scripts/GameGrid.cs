@@ -78,6 +78,8 @@ namespace DonBigo
         //Não é muito otimizado
         public RoomInstance RoomAt(Vector2Int pos) => _rooms.Find(r => r.Bounds.Contains(pos));
 
+        public List<RoomInstance> AllRooms => _rooms;
+
         public IEnumerable<Tile> TilesInBounds(RectInt bounds)
         {
             for (int x = bounds.xMin; x < bounds.xMax; x++)
