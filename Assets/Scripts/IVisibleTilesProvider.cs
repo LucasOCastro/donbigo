@@ -5,6 +5,8 @@ namespace DonBigo
 {
     public interface IVisibleTilesProvider
     {
+        Tile Tile { get; }
+        
         public delegate void OnUpdateViewDelegate(HashSet<Vector2Int> oldTiles, HashSet<Vector2Int> newTiles);
         event OnUpdateViewDelegate OnUpdateViewEvent;
         

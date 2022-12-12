@@ -19,11 +19,13 @@ namespace DonBigo
 
         public override Action GetAction()
         {
+            //Se já tem um caminho, segue ele.
             if (_currentTargetPath != null && _currentTargetPath.Valid && !_currentTargetPath.Finished)
             {
                 return new MoveAction(this, _currentTargetPath.Advance());
             }
 
+            //Se não clicou, não tem ação pra gerar.
             if (!Input.GetMouseButtonDown(0))
             {
                 return null;
@@ -35,14 +37,26 @@ namespace DonBigo
                 return null;
             }
 
+            //Se clicou em si mesmo, espera um turno.
+            if (tile.Entity == this)
+            {
+                return new IdleAction(this);
+            }
+
+            //Se a tile tem uma ação de interação, retorna ela.
             var interactAction = GenInteractAction(tile);
             if (interactAction != null)
             {
                 return interactAction;
             }
             
-            Path path = new Path(this.Tile, tile);
-            _currentTargetPath = (path.Valid && !path.Finished) ? path : null;
+            //Se nenhuma outra ação foi criada, então cria um caminho pra seguir.
+            if (tile.Entity == null && tile.Walkable)
+            {
+                Path path = new Path(this.Tile, tile);
+                _currentTargetPath = (path.Valid && !path.Finished) ? path : null;    
+            }
+            return null;
             
             /*if (_currentTargetPath == null || !_currentTargetPath.Valid || _currentTargetPath.Finished)
             {
@@ -50,7 +64,6 @@ namespace DonBigo
                 _currentTargetPath = (path.Valid && !path.Finished) ? path : null;
             }
             return (_currentTargetPath != null) ? new MoveAction(this, _currentTargetPath.Advance()) : null;*/
-            return null;
         }
     }
 }

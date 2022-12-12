@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2308822ab71f47c5b0190cec4397de2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnDurationSeconds: 0.1
+  turnDurationSeconds: 0.05
 --- !u!1 &60745550
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,8 +620,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 60745553}
-  originFollowCamera: 0
-  fovRange: 100
 --- !u!4 &2121899123
 Transform:
   m_ObjectHideFlags: 0

@@ -69,8 +69,15 @@ namespace DonBigo
                 return true;
             }
 
+            //Sempre mostra as paredes externas da sala
+            bool isWall = grid[tile].Type is WallTileType;
+            if (isWall && sourceRoom.IsOuterWall(grid[tile]))
+            {
+                return false;
+            }
+
             //Nao quero mostrar o chao das salas de baixo
-            if (grid[tile].Type is WallTileType && 
+            if (isWall && 
             (grid.RoomAt(tile) != sourceRoom || (tile.x < source.x && tile.y < source.y)))
             {
                 return true;

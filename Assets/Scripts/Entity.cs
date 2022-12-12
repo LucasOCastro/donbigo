@@ -35,21 +35,12 @@ namespace DonBigo
                     var oldVisible = VisibleTiles;
                     VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
                     OnUpdateViewEvent?.Invoke(oldVisible, VisibleTiles);
+                    
+                    UpdateRenderVisibility();
                 }
             }
         }
-        
-        public void Walk(Tile target)
-        {
-            if (target != null)
-            {
-                if (Tile != null)
-                    Tile.Entity = null;
-                Tile = target;
-                UpdateRenderVisibility();
-            }
-        }
-        
+
         public abstract Action GetAction();
         
         public event IVisibleTilesProvider.OnUpdateViewDelegate OnUpdateViewEvent;

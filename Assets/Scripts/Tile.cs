@@ -38,9 +38,35 @@ namespace DonBigo
         }
 
         public List<StructureInstance> Structures { get; } = new List<StructureInstance>();
-        
-        public Entity Entity { get; set; }
-        public Item Item { get; set; }
+
+        private Entity _entity;
+        public Entity Entity
+        {
+            get => _entity;
+            set
+            {
+                if (_entity != null && value != null)
+                {
+                    Debug.LogError("Settou entidade em tile que ja tem entidade!");
+                }
+                _entity = value;
+            }
+        }
+
+        private Item _item;
+
+        public Item Item
+        {
+            get => _item;
+            set
+            {
+                if (_item != null && value != null)
+                {
+                    Debug.LogError("Settou item em tile que ja tem item!");
+                }
+                _item = value;
+            }
+        }
         public bool Walkable => Type is not WallTileType && Type.Walkable && !Structures.Any(s => s.BlocksMovement);
 
         public bool SupportsItem =>
