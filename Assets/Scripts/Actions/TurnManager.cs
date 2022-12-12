@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using DonBigo;
 using UnityEngine;
 
-namespace DonBigo
+namespace DonBigo.Actions
 {
     public class TurnManager : MonoBehaviour
     {

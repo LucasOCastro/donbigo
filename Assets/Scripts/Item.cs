@@ -27,6 +27,7 @@ namespace DonBigo
 
                 _holder = value;
                 UpdateRenderVisibility();
+                transform.parent = _holder?.Owner.transform;
             }
         }
 
@@ -58,6 +59,14 @@ namespace DonBigo
                 return;
             }
             base.UpdateRenderVisibility();
+        }
+
+        public virtual bool CanBeUsed(Entity doer, Tile target)
+        {
+            return false;
+        }
+        public virtual void UseAction(Entity doer, Tile target)
+        {
         }
     }
 }

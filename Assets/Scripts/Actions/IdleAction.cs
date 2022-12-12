@@ -1,4 +1,6 @@
-﻿namespace DonBigo
+﻿using DonBigo;
+
+namespace DonBigo.Actions
 {
     public class IdleAction : Action
     {

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DonBigo.Actions;
 using UnityEngine;
+using Action = DonBigo.Actions.Action;
 
 namespace DonBigo
 {
@@ -91,7 +93,7 @@ namespace DonBigo
 
             if (Item != null)
             {
-                //pickup action
+                return new PickupAction(doer, Item);
             }
 
             return null;

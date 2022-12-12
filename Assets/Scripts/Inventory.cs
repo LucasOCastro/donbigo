@@ -11,7 +11,7 @@ namespace DonBigo
             Right = 1
         }
         
-        private Entity Owner { get; }
+        public Entity Owner { get; }
         public Handedness CurrentHandedness { get; set; }
         
         private readonly Item[] _inventory = new Item[2];
@@ -44,14 +44,14 @@ namespace DonBigo
         public void DropHand(Handedness hand) => DropHand(hand, Owner.Tile);
         public void DropHand(Handedness hand, Tile tile)
         {
+            Item heldItem = GetHand(hand);
+            if (heldItem == null) return;
+            
             if (!tile.SupportsItem)
             {
                 Debug.LogError("Tentou droppar item em tile que nao suporta item.");
                 return;
             }
-            
-            Item heldItem = GetHand(hand);
-            if (heldItem == null) return;
 
             heldItem.Holder = null;
             heldItem.Tile = tile;
