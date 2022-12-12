@@ -50,6 +50,10 @@ namespace DonBigo
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
             base.GetTileData(position, tilemap, ref tileData);
+            if (!Application.isPlaying)
+            {
+                return;
+            }
 
             tileData.color = GetColor((Vector2Int)position, tileData.color);
         }
