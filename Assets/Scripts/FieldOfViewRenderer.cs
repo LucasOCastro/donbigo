@@ -73,32 +73,36 @@ namespace DonBigo
             }
         }
 
-        private void UpdateFoV(HashSet<Vector2Int> oldVisibleTiles, HashSet<Vector2Int> newVisibleTiles)
+        void RefreshAllTiles()
         {
-            if (oldVisibleTiles == null || newVisibleTiles == null || oldVisibleTiles.Count == 0)
+            var grid = GridManager.Instance.Grid;
+            for (int x = 0; x < grid.Size; x++)
             {
-                //tilemap.RefreshAllTiles();
-                var grid = GridManager.Instance.Grid;
-                for (int x = 0; x < grid.Size; x++)
+                for (int y = 0; y < grid.Size; y++)
                 {
-                    for (int y = 0; y < grid.Size; y++)
+                    if (grid[x, y] == null) continue;
+                    if (grid[x,y].Entity != null) grid[x,y].Entity.UpdateRenderVisibility();
+                    if (grid[x,y].Item != null) grid[x,y].Item.UpdateRenderVisibility();
+                    for (int z = 0; z < tilemap.size.z; z++)
                     {
-                        if (grid[x, y] == null) continue;
-                        if (grid[x,y].Entity != null) grid[x,y].Entity.UpdateRenderVisibility();
-                        if (grid[x,y].Item != null) grid[x,y].Item.UpdateRenderVisibility();
-                        for (int z = 0; z < tilemap.size.z; z++)
-                        {
-                            tilemap.RefreshTile(new Vector3Int(x,y,z));
-                        }
+                        tilemap.RefreshTile(new Vector3Int(x,y,z));
                     }
                 }
+            }
+        }
+
+        private void UpdateFoV(HashSet<Vector2Int> oldVisibleTiles, HashSet<Vector2Int> newVisibleTiles)
+        {
+            /*if (oldVisibleTiles == null || newVisibleTiles == null || oldVisibleTiles.Count == 0)
+            {
+                RefreshAllTiles();
             }
             else
             {
                 UpdateTiles(oldVisibleTiles);
                 UpdateTiles(newVisibleTiles);    
-            }
-            //tilemap.RefreshAllTiles();
+            }*/
+            RefreshAllTiles();
         }
     }
 }

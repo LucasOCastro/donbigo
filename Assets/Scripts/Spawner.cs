@@ -21,7 +21,7 @@ namespace DonBigo
                 center = GridManager.Instance.Grid.AllRooms.Last().Bounds.center;
             }
              
-            while(!grid[(int) center.x, (int) center.y].Walkable)
+            while(!grid[(int) center.x, (int) center.y].Walkable || grid[(int)center.x, (int)center.y].Entity != null)
             {
                 if ((int)(center.x - center.y) == 0)
                 {

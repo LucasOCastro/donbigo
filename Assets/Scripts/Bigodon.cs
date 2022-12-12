@@ -36,18 +36,18 @@ namespace DonBigo
             {
                 return null;
             }
-
-            //Se clicou em si mesmo, espera um turno.
-            if (tile.Entity == this)
-            {
-                return new IdleAction(this);
-            }
-
+            
             //Se a tile tem uma ação de interação, retorna ela.
             var interactAction = GenInteractAction(tile);
             if (interactAction != null)
             {
                 return interactAction;
+            }
+            
+            //Se clicou em si mesmo, espera um turno.
+            if (tile.Entity == this)
+            {
+                return new IdleAction(this);
             }
             
             //Se nenhuma outra ação foi criada, então cria um caminho pra seguir.

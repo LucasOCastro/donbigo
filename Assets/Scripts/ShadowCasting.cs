@@ -76,7 +76,7 @@ namespace DonBigo
                 return false;
             }
 
-            //Nao quero mostrar o chao das salas de baixo
+            //Nao quero mostrar a parede das salas de baixo, nem as paredes internas que obstruem a visão
             if (isWall && 
             (grid.RoomAt(tile) != sourceRoom || (tile.x < source.x && tile.y < source.y)))
             {
@@ -93,7 +93,6 @@ namespace DonBigo
             int range, 
             HashSet<Vector2Int> visibleTiles)
         {
-            HashSet<Vector2Int> blockedTiles = new HashSet<Vector2Int>();
             List<Obstacle> obstacles = new List<Obstacle>();
             for (int e1 = 1; e1 <= range; e1++)
             {
@@ -135,11 +134,9 @@ namespace DonBigo
                     if (blocked)
                     {
                         visibleTiles.Remove(tile);
-                        blockedTiles.Add(tile);
                     }
                     else
                     {
-                        blockedTiles.Remove(tile);
                         visibleTiles.Add(tile);    
                     }
                 }

@@ -4,8 +4,14 @@ namespace DonBigo
 {
     public class Phantonette : Entity
     {
+        private Path _targetPath;
         public override Action GetAction()
         {
+            if (_targetPath != null && _targetPath.Valid && !_targetPath.Finished)
+            {
+                return new MoveAction(this, _targetPath.Advance());
+            }
+            
             return new IdleAction(this);
         }
 
@@ -22,7 +28,7 @@ namespace DonBigo
                 }
                 if (tile != null && tile.Entity == null)
                 {
-                   Tile = tile;
+                    _targetPath = new Path(Tile, tile);
                 }
             }
         }
