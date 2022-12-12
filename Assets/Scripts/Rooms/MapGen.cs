@@ -32,8 +32,7 @@ namespace DonBigo.Rooms
                 var tile = grid.TilesInBounds(roomInstance.Bounds).Where(t => t.SupportsItem).Random();
                 if (tile == null) continue;
                 
-                var spawned = itemChance.Instantiate(tile);
-                Debug.Log("Coloquei item em "+tile.Pos + " e pos = " + spawned.transform.position);
+                itemChance.Instantiate(tile);
             }
         }
 

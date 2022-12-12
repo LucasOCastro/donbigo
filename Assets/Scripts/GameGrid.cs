@@ -68,6 +68,12 @@ namespace DonBigo
             Vector2 mouseScreenPos = Camera.main.ScreenToWorldPoint(mousePos);
             return WorldToTilePos(mouseScreenPos);;
         }
+
+        public Tile MouseOverTile()
+        {
+            Vector2Int pos = MouseOverPos();
+            return InBounds(pos) ? this[pos] : null;
+        }
         
         //Não é muito otimizado
         public RoomInstance RoomAt(Vector2Int pos) => _rooms.Find(r => r.Bounds.Contains(pos));

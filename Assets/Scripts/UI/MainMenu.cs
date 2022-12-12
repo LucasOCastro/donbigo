@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -30,6 +29,7 @@ namespace DonBigo.UI
         private void SetCredits(bool open)
         {
             creditsMenu.gameObject.SetActive(open);
+            StopAllCoroutines();
             if (open)
             {
                 StartCoroutine(CreditsCoroutine());

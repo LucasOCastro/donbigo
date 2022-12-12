@@ -38,15 +38,64 @@ namespace DonBigo
         }
 
         public List<StructureInstance> Structures { get; } = new List<StructureInstance>();
-        
-        public Entity Entity { get; set; }
-        public Item Item { get; set; }
-        public bool Walkable => Type is not WallTileType && Type.Walkable && Structures.All(s => s.BlocksMovement);
+
+        private Entity _entity;
+        public Entity Entity
+        {
+            get => _entity;
+            set
+            {
+                if (_entity != null && value != null)
+                {
+                    Debug.LogError("Settou entidade em tile que ja tem entidade!");
+                }
+                _entity = value;
+            }
+        }
+
+        private Item _item;
+
+        public Item Item
+        {
+            get => _item;
+            set
+            {
+                if (_item != null && value != null)
+                {
+                    Debug.LogError("Settou item em tile que ja tem item!");
+                }
+                _item = value;
+            }
+        }
+        public bool Walkable => Type is not WallTileType && Type.Walkable && !Structures.Any(s => s.BlocksMovement);
 
         public bool SupportsItem =>
             Item == null && Type is not WallTileType && Structures.All(s => s.Type.SurfaceHeight >= 0);
         public int ItemSurfaceElevation => Structures.Count > 0 ? Structures.Max(s => s.Type.SurfaceHeight) : 0;
-        //public Vec3i
+
+        public Action GenInteractAction(Entity doer)
+        {
+            if (Type is IRoomEntranceMarker || Structures.Any(s => s.Type is IRoomEntranceMarker))
+            {
+                //TODO isso é horroroso
+                var room = ParentGrid.RoomAt(Pos);
+                var doorIndex = room.Doors.FindIndex(d => d.Position == Pos);
+                if (doorIndex < 0) return null;
+                return new UseDoorAction(doer, room.Doors[doorIndex]);
+            }
+
+            if (Entity != null)
+            {
+                //Do something
+            }
+
+            if (Item != null)
+            {
+                //pickup action
+            }
+
+            return null;
+        }
         
         public bool IsSeeThrough()
         {

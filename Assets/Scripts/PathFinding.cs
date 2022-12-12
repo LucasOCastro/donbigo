@@ -52,7 +52,7 @@ namespace DonBigo
 
         private static float TransitionCost(Tile from, Tile to)
         {
-            if (!to.Walkable)
+            if (!to.Walkable || to.Entity != null)
             {
                 return -1;
             }

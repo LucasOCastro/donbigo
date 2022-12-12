@@ -31,18 +31,29 @@ namespace DonBigo
             //DEBUG
             if (!FieldOfViewRenderer.DEBUG_drawVis) return baseColor;
 
-            if (!FieldOfViewRenderer.VisibleTiles.Contains(position))
+            if (FieldOfViewRenderer.IsVisible(position))
             {
-                //baseColor.a = 0;
-                return Color.black;
+                return baseColor;
             }
 
-            return baseColor;
+            var grid = GridManager.Instance.Grid;
+            if (FieldOfViewRenderer.Origin != null &&
+                grid.RoomAt(position) != grid.RoomAt(FieldOfViewRenderer.Origin.Tile.Pos))
+            {
+                baseColor.a = 0;
+                return baseColor;
+            }
+            //baseColor.a = 0;
+            return Color.black;
         }
 
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
             base.GetTileData(position, tilemap, ref tileData);
+            if (!Application.isPlaying)
+            {
+                return;
+            }
 
             tileData.color = GetColor((Vector2Int)position, tileData.color);
         }

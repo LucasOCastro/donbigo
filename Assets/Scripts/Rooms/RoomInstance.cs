@@ -23,5 +23,10 @@ namespace DonBigo.Rooms
                 Doors.Add(new RoomExit(realPos, door.ExitDirection, door.Marker));
             }
         }
+
+        public bool IsOuterWall(Tile tile)
+        {
+            return Bounds.Contains(tile.Pos) && (tile.Pos.x == Bounds.xMax - 1 || tile.Pos.y == Bounds.yMax - 1);
+        }
     }
 }

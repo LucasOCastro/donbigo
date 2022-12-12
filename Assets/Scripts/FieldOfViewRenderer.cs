@@ -11,50 +11,40 @@ namespace DonBigo
     {
         //No sistema final, o tilemap sera atrelado a grid atual.
         [SerializeField] private Tilemap tilemap;
-        [SerializeField] private bool originFollowCamera;
-        [SerializeField] private int fovRange = 10;
         
         public static FieldOfViewRenderer Instance { get; private set; }
 
-        private static Vector2Int _originTile;
-        public static Vector2Int OriginTile
+        private static IVisibleTilesProvider _origin;
+        public static IVisibleTilesProvider Origin
         {
-            get => _originTile;
+            get => _origin;
             set
             {
-                if (value == _originTile) return;
+                if (value == _origin) return;
 
-                _originTile = value;
-                Instance.UpdateFoV();
+                if (_origin != null) {
+                    _origin.OnUpdateViewEvent -= Instance.UpdateFoV;
+                }
                 
+                _origin = value;
+                
+                if (value != null) {
+                    value.OnUpdateViewEvent += Instance.UpdateFoV;
+                    Instance.UpdateFoV(null, value.VisibleTiles);
+                }
             }
         }
 
-        public static HashSet<Vector2Int> VisibleTiles { get; private set; } = new();
+        public static bool IsVisible(Vector2Int tile) => (Origin != null) && Origin.IsVisible(tile);
 
-        public static bool DEBUG_drawVis;
+        public static bool DEBUG_drawVis = true;
         private void Update()
         {
-            //DEBUG
             if (Input.GetKeyDown(KeyCode.K))
             {
                 DEBUG_drawVis = !DEBUG_drawVis;
                 tilemap.RefreshAllTiles();
             }
-            
-            // if (originFollowCamera)
-            // {
-            //     Vector3 worldPos = Camera.main.transform.position;
-            //     OriginTile = GridManager.Instance.Grid.WorldToTilePos(worldPos);
-            // }
-            // else if (Input.GetMouseButtonDown(0))
-            // {
-            //     Vector2Int mouseTile = GridManager.Instance.Grid.MouseOverPos();
-            //     if (GridManager.Instance.Grid.InBounds(mouseTile))
-            //     {
-            //         OriginTile = mouseTile;
-            //     }
-            // }
         }
 
         private void Awake()
@@ -83,20 +73,30 @@ namespace DonBigo
             }
         }
 
-        private void UpdateFoV()
+        private void UpdateFoV(HashSet<Vector2Int> oldVisibleTiles, HashSet<Vector2Int> newVisibleTiles)
         {
-            DEBUG_drawVis = true;
-            var oldVisibleTiles = VisibleTiles;
-            VisibleTiles = ShadowCasting.Cast(GridManager.Instance.Grid, OriginTile, fovRange);
-
-            if (oldVisibleTiles.Count == 0)
+            if (oldVisibleTiles == null || newVisibleTiles == null || oldVisibleTiles.Count == 0)
             {
-                tilemap.RefreshAllTiles();
+                //tilemap.RefreshAllTiles();
+                var grid = GridManager.Instance.Grid;
+                for (int x = 0; x < grid.Size; x++)
+                {
+                    for (int y = 0; y < grid.Size; y++)
+                    {
+                        if (grid[x, y] == null) continue;
+                        if (grid[x,y].Entity != null) grid[x,y].Entity.UpdateRenderVisibility();
+                        if (grid[x,y].Item != null) grid[x,y].Item.UpdateRenderVisibility();
+                        for (int z = 0; z < tilemap.size.z; z++)
+                        {
+                            tilemap.RefreshTile(new Vector3Int(x,y,z));
+                        }
+                    }
+                }
             }
             else
             {
                 UpdateTiles(oldVisibleTiles);
-                UpdateTiles(VisibleTiles);    
+                UpdateTiles(newVisibleTiles);    
             }
             //tilemap.RefreshAllTiles();
         }

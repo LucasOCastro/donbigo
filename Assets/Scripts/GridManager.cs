@@ -48,6 +48,13 @@ namespace DonBigo
         
         private void Update()
         {
+            if (Input.GetMouseButtonDown(1))
+            {
+                Tile tile = Grid.MouseOverTile();
+                if (tile == null) return;
+                Debug.Log($"{tile.Pos} - {tile.Type.name} - e={tile.Entity} - i={tile.Item}");
+            }
+            
             //DEBUG spawnando pantufa no click
             /*/*if (Input.GetMouseButtonDown(0))
             {

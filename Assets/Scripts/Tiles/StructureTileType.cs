@@ -21,8 +21,12 @@ namespace DonBigo
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
             base.GetTileData(position, tilemap, ref tileData);
+            if (!Application.isPlaying)
+            {
+                return;
+            }
             
-            if (FieldOfViewRenderer.DEBUG_drawVis && !FieldOfViewRenderer.VisibleTiles.Contains((Vector2Int)position))
+            if (FieldOfViewRenderer.DEBUG_drawVis && !FieldOfViewRenderer.IsVisible((Vector2Int)position))
             {
                 Color color = tileData.color;
                 color.a = 0;
