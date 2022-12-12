@@ -51,6 +51,10 @@ namespace DonBigo
             }
         }
 
+        public virtual void SteppedOn(Entity stepper)
+        {
+        }
+
         public override void UpdateRenderVisibility()
         {
             if (Holder != null)
@@ -61,6 +65,8 @@ namespace DonBigo
             base.UpdateRenderVisibility();
         }
 
+        public virtual bool CanBePickedUp => true;
+        
         public virtual bool CanBeUsed(Entity doer, Tile target)
         {
             return false;

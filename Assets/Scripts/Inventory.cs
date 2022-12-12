@@ -57,6 +57,24 @@ namespace DonBigo
             heldItem.Tile = tile;
             SetHandRaw(hand, null);
         }
+
+        public bool ContainsItem(Item item, out Handedness hand)
+        {
+            if (GetHand(Handedness.Left) == item)
+            {
+                hand = Handedness.Left;
+                return true;
+            }
+
+            if (GetHand(Handedness.Right) == item)
+            {
+                hand = Handedness.Right;
+                return true;
+            }
+
+            hand = (Handedness)(-1);
+            return false;
+        }
         
         public void CycleHandedness()
         {

@@ -52,6 +52,10 @@ namespace DonBigo
                     Debug.LogError("Settou entidade em tile que ja tem entidade!");
                 }
                 _entity = value;
+                if (_item != null && _entity != null)
+                {
+                    _item.SteppedOn(_entity);
+                }
             }
         }
 
@@ -91,7 +95,7 @@ namespace DonBigo
                 //Do something
             }
 
-            if (Item != null)
+            if (Item != null && Item.CanBePickedUp)
             {
                 return new PickupAction(doer, Item);
             }

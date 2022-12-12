@@ -1,4 +1,5 @@
 ﻿using DonBigo;
+using UnityEngine;
 
 namespace DonBigo.Actions
 {
@@ -7,6 +8,10 @@ namespace DonBigo.Actions
         private Item _item;
         public PickupAction(Entity doer, Item item) : base(doer)
         {
+            if (!item.CanBePickedUp)
+            {
+                Debug.LogError("Ação de pegar item que não pode ser pegado.");
+            }
             _item = item;
         }
 

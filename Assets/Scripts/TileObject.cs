@@ -7,15 +7,15 @@ namespace DonBigo
     {
         public abstract Tile Tile { get; set; }
 
-        private SpriteRenderer _sprite;
+        protected SpriteRenderer Renderer { get; private set; }
         protected virtual void Awake()
         {
-            _sprite = GetComponent<SpriteRenderer>();
+            Renderer = GetComponent<SpriteRenderer>();
         }
 
         public void SetRenderVisibility(bool visible)
         {
-            _sprite.enabled = visible;
+            Renderer.enabled = visible;
         }
         public virtual void UpdateRenderVisibility()
         {
