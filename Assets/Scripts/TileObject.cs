@@ -8,7 +8,7 @@ namespace DonBigo
         public abstract Tile Tile { get; set; }
 
         private SpriteRenderer _sprite;
-        private void Awake()
+        protected virtual void Awake()
         {
             _sprite = GetComponent<SpriteRenderer>();
         }
@@ -17,7 +17,7 @@ namespace DonBigo
         {
             _sprite.enabled = visible;
         }
-        public void UpdateRenderVisibility()
+        public virtual void UpdateRenderVisibility()
         {
             SetRenderVisibility(FieldOfViewRenderer.IsVisible(Tile.Pos));
         }
