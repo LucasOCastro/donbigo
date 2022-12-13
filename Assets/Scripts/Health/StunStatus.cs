@@ -8,11 +8,11 @@ namespace DonBigo
         {
         }
         
-        public override void Start(HealthManager health)
+        protected override void OnStart(HealthManager health)
         {
         }
 
-        public override void End(HealthManager health)
+        protected override void OnEnd(HealthManager health)
         {
         }
 

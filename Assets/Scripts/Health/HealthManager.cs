@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using DonBigo.Actions;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
 
 namespace DonBigo
 {
@@ -44,10 +42,14 @@ namespace DonBigo
             return null;
         }
 
-        public void AddStatus(HealthStatus status)
+        public void AddStatus(HealthStatus status, Sprite icon = null)
         {
             _statusList.Add(status);
             status.Start(this);
+            if (icon != null)
+            {
+                StatusIconManager.Instance.MakeIcon(this, status, icon);
+            }
         }
     }
 }
