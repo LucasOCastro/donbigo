@@ -32,7 +32,7 @@ namespace DonBigo
             }
 
             //Se apertou Q e ta segurando item, droppa.
-            if (Inventory.CurrentHand != null && Input.GetKeyDown(KeyCode.Q))
+            if (Inventory.CurrentHand != null && Tile.SupportsItem && Input.GetKeyDown(KeyCode.Q))
             {
                 return new DropAction(this, Tile);
             }

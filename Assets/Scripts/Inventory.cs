@@ -23,6 +23,10 @@ namespace DonBigo
 
         public Item CurrentHand => GetHand(CurrentHandedness);
         public Item GetHand(Handedness hand) => _inventory[(int)hand];
+
+        public Item LeftHand => GetHand(Handedness.Left);
+        public Item RightHand => GetHand(Handedness.Right);
+        
         
         //Essa função só setta o item na array e muda o holder.
         private void SetHandRaw(Handedness hand, Item item)
