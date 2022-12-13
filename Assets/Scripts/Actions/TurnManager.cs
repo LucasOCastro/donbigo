@@ -42,7 +42,9 @@ namespace DonBigo.Actions
                 Action action;
                 do
                 {
-                    action = CurrentEntity.GetAction();
+                    // Primeiro verifica se o HealthManager tem alguma ação prioritária, depois roda o GetAction da entidade.
+                    action = CurrentEntity.Health.Tick();
+                    action ??= CurrentEntity.GetAction();
                     yield return null;
                 } while (action == null);
                 

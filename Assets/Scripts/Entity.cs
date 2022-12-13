@@ -11,11 +11,13 @@ namespace DonBigo
         [field: SerializeField] public int VisionRange { get; set; } = 50;
         
         public Inventory Inventory { get; private set; }
+        public HealthManager Health { get; private set; }
 
         protected override void Awake()
         {
             base.Awake();
             Inventory = new Inventory(this);
+            Health = new HealthManager(this);
         }
 
 
