@@ -2,7 +2,7 @@
 
 namespace DonBigo
 {
-    [ScriptableObjectIcon("prefab")]
+    [ScriptableObjectIcon("inventoryIcon")]
     [CreateAssetMenu(fileName = "NewItem", menuName = "New Item")]
     public class ItemType : ScriptableObject
     {
@@ -12,6 +12,9 @@ namespace DonBigo
         [SerializeField] private bool twoHanded;
         public bool TwoHanded => twoHanded;
 
+        [SerializeField] private Sprite inventoryIcon;
+        public Sprite InventoryIcon => inventoryIcon;
+        
         [SerializeField] private Item prefab;
         public Item Instantiate(Tile tile)
         {

@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using DonBigo;
+using UnityEngine;
 
-namespace DonBigo
+namespace DonBigo.Actions
 {
     /// <summary>
     /// Ação responsável por mover uma entidade em 1 tile.

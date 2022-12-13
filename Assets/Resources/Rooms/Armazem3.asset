@@ -170,3 +170,6 @@ MonoBehaviour:
   - pos: {x: 2, y: 0, z: 1}
     structure: {fileID: 11400000, guid: 2c366c4ab0403a249a4e92600029c3c6, type: 2}
   transformOverrides: []
+  possibleItems:
+  - item: {fileID: 11400000, guid: 4301c384d53aaa84da9424935b8dabdf, type: 2}
+    chance: 100

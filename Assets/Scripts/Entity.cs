@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using DonBigo.Actions;
 using UnityEngine;
+using UnityEngine.XR;
 
 namespace DonBigo
 {
@@ -9,7 +10,15 @@ namespace DonBigo
     {
         [field: SerializeField] public int VisionRange { get; set; } = 50;
         
-        
+        public Inventory Inventory { get; private set; }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            Inventory = new Inventory(this);
+        }
+
+
         private Tile _tile;
         public override Tile Tile
         {

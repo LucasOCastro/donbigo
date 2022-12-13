@@ -1,7 +1,8 @@
-﻿using DonBigo.Rooms;
+﻿using DonBigo;
+using DonBigo.Rooms;
 using UnityEngine;
 
-namespace DonBigo
+namespace DonBigo.Actions
 {
     public class UseDoorAction : MoveAction
     {

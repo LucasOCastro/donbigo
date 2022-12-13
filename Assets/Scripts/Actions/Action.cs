@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using DonBigo;
+using UnityEngine;
 
-namespace DonBigo
+namespace DonBigo.Actions
 {
     public abstract class Action
     {

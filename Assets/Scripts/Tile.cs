@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DonBigo.Actions;
 using UnityEngine;
+using Action = DonBigo.Actions.Action;
 
 namespace DonBigo
 {
@@ -50,6 +52,10 @@ namespace DonBigo
                     Debug.LogError("Settou entidade em tile que ja tem entidade!");
                 }
                 _entity = value;
+                if (_item != null && _entity != null)
+                {
+                    _item.SteppedOn(_entity);
+                }
             }
         }
 
@@ -89,9 +95,9 @@ namespace DonBigo
                 //Do something
             }
 
-            if (Item != null)
+            if (Item != null && Item.CanBePickedUp)
             {
-                //pickup action
+                return new PickupAction(doer, Item);
             }
 
             return null;

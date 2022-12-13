@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24ac2c8838dc494b978302b0eb36587c, type: 3}
-  m_Name: Pantufa
+  m_Name: BearTrap
   m_EditorClassIdentifier: 
-  itemName: Pantufa
+  itemName: BearTrap
   twoHanded: 0
-  inventoryIcon: {fileID: 21300000, guid: ea10bc58c73715d4391c2c4979220f6c, type: 3}
-  prefab: {fileID: 3464660942184671723, guid: 431683dd579a13b448a6ad9ef0441171, type: 3}
+  inventoryIcon: {fileID: -1134841279, guid: 626a01f25ec58ca4592a0d2dc829c65e, type: 3}
+  prefab: {fileID: 6241640919053637301, guid: df84f8c2fc9a10148a53dc9ed83b725a, type: 3}

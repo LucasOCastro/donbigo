@@ -7,19 +7,19 @@ namespace DonBigo
     {
         public abstract Tile Tile { get; set; }
 
-        private SpriteRenderer _sprite;
-        private void Awake()
+        protected SpriteRenderer Renderer { get; private set; }
+        protected virtual void Awake()
         {
-            _sprite = GetComponent<SpriteRenderer>();
+            Renderer = GetComponent<SpriteRenderer>();
         }
 
         public void SetRenderVisibility(bool visible)
         {
-            _sprite.enabled = visible;
+            Renderer.enabled = visible;
         }
-        public void UpdateRenderVisibility()
+        public virtual void UpdateRenderVisibility()
         {
-            SetRenderVisibility(FieldOfViewRenderer.IsVisible(Tile.Pos));
+            SetRenderVisibility(Tile != null && FieldOfViewRenderer.IsVisible(Tile.Pos));
         }
     }
 }

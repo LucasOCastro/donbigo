@@ -15,7 +15,8 @@ namespace DonBigo
         private void LateUpdate()
         {
             player = GameObject.FindGameObjectWithTag("Player");
-            transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10);
+            var pos = player.transform.position;
+            transform.position = new Vector3(pos.x, pos.y + 1, -10);
         }
     }
 }
