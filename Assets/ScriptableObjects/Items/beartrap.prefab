@@ -99,3 +99,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: {fileID: 11400000, guid: 4301c384d53aaa84da9424935b8dabdf, type: 2}
   activatedSprite: {fileID: -316838535, guid: 626a01f25ec58ca4592a0d2dc829c65e, type: 3}
+  stunTurns: 5

@@ -7,6 +7,7 @@ namespace DonBigo
         public enum ArmState {Idle, Armed, Activated}
 
         [SerializeField] private Sprite activatedSprite;
+        [SerializeField] private int stunTurns;
 
         private ArmState _state = ArmState.Idle;
         public ArmState State
@@ -29,6 +30,7 @@ namespace DonBigo
 
             State = ArmState.Activated;
             Renderer.sprite = activatedSprite;
+            stepper.Health.AddStatus(new StunStatus(stunTurns));
             Debug.Log("Mordi o " + stepper);
         }
 

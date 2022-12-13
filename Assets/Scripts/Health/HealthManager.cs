@@ -43,5 +43,11 @@ namespace DonBigo
             }
             return null;
         }
+
+        public void AddStatus(HealthStatus status)
+        {
+            _statusList.Add(status);
+            status.Start(this);
+        }
     }
 }
