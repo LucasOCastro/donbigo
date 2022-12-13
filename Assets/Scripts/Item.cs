@@ -28,6 +28,7 @@ namespace DonBigo
                 _holder = value;
                 UpdateRenderVisibility();
                 transform.parent = _holder?.Owner.transform;
+                if (_holder != null) Tile = null;
             }
         }
 
@@ -48,6 +49,7 @@ namespace DonBigo
                     _tile.Item = this;
                     transform.position = _tile.ParentGrid.TileToWorld(_tile, _tile.ItemSurfaceElevation);
                 }
+                UpdateRenderVisibility();
             }
         }
 

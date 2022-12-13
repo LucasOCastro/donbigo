@@ -19,6 +19,12 @@ namespace DonBigo
 
         public override Action GetAction()
         {
+            //Quando aperta X, muda a mão ativa do inventário.
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                Inventory.CycleHandedness();
+            }
+        
             //Se já tem um caminho, segue ele.
             if (_currentTargetPath != null && _currentTargetPath.Valid && !_currentTargetPath.Finished)
             {

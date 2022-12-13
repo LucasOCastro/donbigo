@@ -37,6 +37,7 @@ namespace DonBigo
         public void SetHand(Handedness hand, Item item)
         {
             Tile dropTile = (item != null) ? item.Tile : Owner.Tile;
+            item.Tile = null;
             DropHand(hand, dropTile);
             SetHandRaw(hand, item);
         }

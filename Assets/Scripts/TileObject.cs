@@ -19,7 +19,7 @@ namespace DonBigo
         }
         public virtual void UpdateRenderVisibility()
         {
-            SetRenderVisibility(FieldOfViewRenderer.IsVisible(Tile.Pos));
+            SetRenderVisibility(Tile != null && FieldOfViewRenderer.IsVisible(Tile.Pos));
         }
     }
 }
