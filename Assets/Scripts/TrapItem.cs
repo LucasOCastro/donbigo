@@ -33,7 +33,6 @@ namespace DonBigo
             
             var stunStatus = new StunStatus(stunTurns);
             stepper.Health.AddStatus(stunStatus, stunIcon);
-            Debug.Log("Mordi o " + stepper);
         }
 
         public override bool CanBeUsed(Entity doer, Tile target)

@@ -37,17 +37,17 @@ namespace DonBigo
                 _tile = value;
                 if (_tile != null)
                 {
-                    if (_tile.Entity != this)
-                    {
-                        _tile.Entity = this;
-                    }
                     transform.position = _tile.ParentGrid.TileToWorld(_tile);
 
                     var oldVisible = VisibleTiles;
                     VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
                     OnUpdateViewEvent?.Invoke(oldVisible, VisibleTiles);
-                    
                     UpdateRenderVisibility();
+                    
+                    if (_tile.Entity != this)
+                    {
+                        _tile.Entity = this;
+                    }
                 }
             }
         }

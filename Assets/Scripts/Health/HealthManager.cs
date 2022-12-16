@@ -6,12 +6,31 @@ namespace DonBigo
 {
     public class HealthManager
     {
+        public event System.Action OnDeathEvent;
+        
         public Entity Owner { get; }
+        public bool Dead { get; private set; }
 
         private readonly List<HealthStatus> _statusList = new List<HealthStatus>();
         public HealthManager(Entity owner)
         {
             Owner = owner;
+        }
+
+        public void Kill(Sprite icon = null)
+        {
+            if (Dead) return;
+            
+            foreach (var status in _statusList)
+            {
+                status.End(this);
+            }
+            _statusList.Clear();
+            
+            AddStatus(new DeadStatus(), icon);
+            OnDeathEvent?.Invoke();
+            Owner.Tile = null;
+            Dead = true;
         }
         
         /// <summary>
@@ -19,6 +38,8 @@ namespace DonBigo
         /// </summary>
         public Action Tick()
         {
+            if (Dead) return new IdleAction(Owner);
+            
             for (var i = 0; i < _statusList.Count; i++)
             {
                 var status = _statusList[i];
