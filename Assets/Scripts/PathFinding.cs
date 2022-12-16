@@ -74,7 +74,7 @@ namespace DonBigo
 
         public static List<Tile> Path(Tile source, Tile target)
         {
-            if (!source.Walkable || !target.Walkable) return null;
+            if (!source.Walkable) return null;
             
             var grid = source.ParentGrid;
             // Uma priority queue aqui seria mais apropriada
@@ -128,7 +128,15 @@ namespace DonBigo
                 }
             }
 
-            return null; 
+            Vector2Int closest = source.Pos;
+            foreach (var node in nodes.Values)
+            {
+                if (node.gCost < nodes[closest].gCost)
+                {
+                    closest = node.tile;
+                }
+            }
+            return BackPath(nodes[closest], nodes, grid); 
         }
     }
 }

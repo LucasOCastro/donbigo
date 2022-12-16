@@ -1,22 +1,30 @@
 using DonBigo.Actions;
-using UnityEngine;
+using DonBigo.AI;
 
 namespace DonBigo
 {
     public class Phantonette : Entity
     {
-        private Path _targetPath;
+        private AIWorker _aiWorker;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            _aiWorker = new AIWorker(this);
+        }
+
         public override Action GetAction()
         {
-            if (_targetPath != null && _targetPath.Valid && !_targetPath.Finished)
+            return _aiWorker.GetAction() ?? new IdleAction(this);
+            /*if (_targetPath != null && _targetPath.Valid && !_targetPath.Finished)
             {
                 return new MoveAction(this, _targetPath.Advance());
             }
             
-            return new IdleAction(this);
+            return new IdleAction(this);*/
         }
 
-        private void Update() 
+        /*private void Update() 
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
@@ -32,6 +40,6 @@ namespace DonBigo
                     _targetPath = new Path(Tile, tile);
                 }
             }
-        }
+        }*/
     }
 }

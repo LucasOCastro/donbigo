@@ -64,7 +64,7 @@ namespace DonBigo
                 //Se nenhuma outra ação foi criada, então cria um caminho pra seguir.
                 if (tile.Entity == null && tile.Walkable)
                 {
-                    Path path = new Path(this.Tile, tile);
+                    Path path = new Path(this.Tile, tile, allowShorterPath: false);
                     _currentTargetPath = (path.Valid && !path.Finished) ? path : null;    
                 }
             }
