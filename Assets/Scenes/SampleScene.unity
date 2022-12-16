@@ -612,7 +612,7 @@ MonoBehaviour:
   mapSize: 75
   tilemap: {fileID: 60745553}
   DEBUG_testItem: {fileID: 11400000, guid: c43fce7eff5707644b2b92a8456c5dd3, type: 2}
-  DEBUG_TEST_ROOM: {fileID: 0}
+  DEBUG_TEST_ROOM: {fileID: 11400000, guid: 819856307768dbc45aa4764c3faf5462, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,6 +935,52 @@ MonoBehaviour:
     itemImage: {fileID: 771237581}
     defaultColor: {r: 0, g: 0.13725491, b: 0.59607846, a: 1}
   selectedColor: {r: 0.704348, g: 0.735849, b: 0, a: 1}
+--- !u!1 &1131061519
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1131061521}
+  - component: {fileID: 1131061520}
+  m_Layer: 0
+  m_Name: StatusIconManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1131061520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131061519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40d49c7139743249326bc9cebf60db7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iconPrefab: {fileID: 8257541768812788494, guid: dcc289b7e3dc8544c80ea08d5bf26b77, type: 3}
+  offset: {x: 0, y: 1.5, z: 8}
+--- !u!4 &1131061521
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131061519}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1575513556
 GameObject:
   m_ObjectHideFlags: 0
