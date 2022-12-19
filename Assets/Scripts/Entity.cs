@@ -11,11 +11,13 @@ namespace DonBigo
         [field: SerializeField] public int VisionRange { get; set; } = 50;
         
         public Inventory Inventory { get; private set; }
+        public HealthManager Health { get; private set; }
 
         protected override void Awake()
         {
             base.Awake();
             Inventory = new Inventory(this);
+            Health = new HealthManager(this);
         }
 
 
@@ -35,17 +37,17 @@ namespace DonBigo
                 _tile = value;
                 if (_tile != null)
                 {
-                    if (_tile.Entity != this)
-                    {
-                        _tile.Entity = this;
-                    }
                     transform.position = _tile.ParentGrid.TileToWorld(_tile);
 
                     var oldVisible = VisibleTiles;
                     VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
                     OnUpdateViewEvent?.Invoke(oldVisible, VisibleTiles);
-                    
                     UpdateRenderVisibility();
+                    
+                    if (_tile.Entity != this)
+                    {
+                        _tile.Entity = this;
+                    }
                 }
             }
         }

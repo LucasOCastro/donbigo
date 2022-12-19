@@ -275,3 +275,8 @@ MonoBehaviour:
   doors: []
   structureTiles: []
   transformOverrides: []
+  possibleItems:
+  - item: {fileID: 11400000, guid: 4301c384d53aaa84da9424935b8dabdf, type: 2}
+    chance: 100
+  - item: {fileID: 11400000, guid: 4301c384d53aaa84da9424935b8dabdf, type: 2}
+    chance: 100
