@@ -7,8 +7,6 @@ namespace DonBigo
     //https://en.wikipedia.org/wiki/A*_search_algorithm
     public static class PathFinding
     {
-        private const int StraightCost = 10, DiagonalCost = 14;
-        
         private struct Node
         {
             public Vector2Int tile, parent;
@@ -41,14 +39,7 @@ namespace DonBigo
             return node;
         }
         
-        //http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
-        //Mistura de Manhattan Distance com Chebyshev e Octile, para permitir movimentos diagonais.
-        private static int ManhattanDistance(Vector2Int a, Vector2Int b)
-        {
-            int dx = Mathf.Abs(a.x - b.x);
-            int dy = Mathf.Abs(a.y - b.y);
-            return StraightCost * (dx + dy) + (DiagonalCost - 2 * StraightCost) * Mathf.Min(dx, dy);
-        }
+        
 
         private static float TransitionCost(Tile from, Tile to)
         {
@@ -57,7 +48,7 @@ namespace DonBigo
                 return -1;
             }
             bool isDiagonal = (from.Pos - to.Pos).sqrMagnitude > 1;
-            return isDiagonal ? DiagonalCost : StraightCost;
+            return isDiagonal ? UtilVec2Int.DiagonalCost : UtilVec2Int.StraightCost;
         }
 
         private static List<Tile> BackPath(Node final, Dictionary<Vector2Int, Node> nodes, GameGrid grid)
@@ -83,7 +74,7 @@ namespace DonBigo
             HashSet<Vector2Int> closedSet = new HashSet<Vector2Int>();
 
             openSet.Add(source.Pos);
-            nodes.Add(source.Pos, new Node(source.Pos, source.Pos, 0, ManhattanDistance(source.Pos, target.Pos)));
+            nodes.Add(source.Pos, new Node(source.Pos, source.Pos, 0, source.Pos.ManhattanDistance(target.Pos)));
 
             while (openSet.Count > 0)
             {
@@ -116,7 +107,7 @@ namespace DonBigo
                     }
                     else
                     {
-                        Node neighborNode = new Node(node.tile, neighbor.Pos, possibleCCost, ManhattanDistance(neighbor.Pos, target.Pos));
+                        Node neighborNode = new Node(node.tile, neighbor.Pos, possibleCCost, neighbor.Pos.ManhattanDistance(target.Pos));
                         nodes.Add(neighbor.Pos, neighborNode);
                     }
 
