@@ -1,5 +1,4 @@
 ﻿using DonBigo.Actions;
-using DonBigo.AI;
 
 namespace DonBigo.AI
 {
@@ -17,8 +16,15 @@ namespace DonBigo.AI
                 CurrentObjective = newObjective;
             }
 
-            action = CurrentObjective.Tick();
+            action = CurrentObjective?.Tick();
             return state;
+
+            //TODO isso aqui seria ideal, então com objetivo nulo a ação seria Idle automatico. Essa mudança precisa refatorar os varios estados para diferenciar de objective=null pra objective=currentobjective.
+            
+            /*AIState state = OnTick(entity, out AIObjective newObjective);
+            CurrentObjective = newObjective;
+            action = CurrentObjective?.Tick();
+            return state;*/
         }
 
         /// <param name="entity">A emtodade executando essa ação.</param>

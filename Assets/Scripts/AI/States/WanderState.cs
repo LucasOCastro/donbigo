@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace DonBigo.AI
 {
     public class WanderState : AIState
@@ -19,6 +17,8 @@ namespace DonBigo.AI
             Item strongestVisibleItem = null;
             foreach (var item in entity.VisibleItems)
             {
+                if (!item.CanBePickedUp) continue;
+                
                 int power = item.Type.CombatPower; 
                 if (power > minPower)
                 {

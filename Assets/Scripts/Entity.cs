@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DonBigo.Actions;
 using UnityEngine;
-using UnityEngine.XR;
 
 namespace DonBigo
 {
@@ -43,22 +41,13 @@ namespace DonBigo
 
                     var oldVisible = VisibleTiles;
                     VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
-                    VisibleEntities.Clear();
                     VisibleItems.Clear();
-                    SeesPlayer = false;
                     foreach (var tile in VisibleTiles)
                     {
                         var item = Tile.ParentGrid[tile].Item; 
                         if (item != null)
                         {
                             VisibleItems.Add(item);
-                        }
-
-                        var entity = Tile.ParentGrid[tile].Entity;
-                        if (entity is Bigodon) SeesPlayer = true;
-                        if (entity != null && entity != this)
-                        {
-                            VisibleEntities.Add(entity);
                         }
                     }
                     
@@ -80,8 +69,9 @@ namespace DonBigo
 
         //Honestamente não gosto muito desse SeesPlayer, nem da VisibleEntities
         //Idealmente, chegar visibilidade de uma entitade deveria sr feito pelo VisibleTiles.
-        public bool SeesPlayer { get; private set; }
-        public List<Entity> VisibleEntities { get; } = new List<Entity>();
+        //Usar o SeesPlayer significa hardcodar o Player como o inimigo unico da IA.
+        //Isso funciona pro projeto atualmente, mas pode complicar alguma coisa no futuro.
+        public bool SeesPlayer => VisibleTiles.Contains(CharacterManager.DonBigo.Tile.Pos);
         public List<Item> VisibleItems { get; } = new List<Item>();
     }
 }
