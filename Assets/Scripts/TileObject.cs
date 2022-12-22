@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DonBigo
 {
-    public abstract class TileObject : MonoBehaviour
+    public abstract class TileObject : MonoBehaviour, ITileGiver
     {
         public abstract Tile Tile { get; set; }
 

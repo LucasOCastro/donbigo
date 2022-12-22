@@ -2,13 +2,11 @@ using DonBigo.Actions;
 
 namespace DonBigo.AI
 {
-    public class FollowObjective : AIObjective
+    public class GoToTargetObjective : AIObjective
     {
-        private Entity _doer;
-        private TileObject _target;
-        public FollowObjective(Entity doer, TileObject target)
+        protected ITileGiver _target;
+        public GoToTargetObjective(Entity doer, ITileGiver target) : base(doer)
         {
-            _doer = doer;
             _target = target;
         }
 
@@ -17,7 +15,7 @@ namespace DonBigo.AI
         {
             if (_currentPath == null || _currentPath.End != _target.Tile)
             {
-                _currentPath = new Path(_doer.Tile, _target.Tile, allowShorterPath: true);
+                _currentPath = new Path(Doer.Tile, _target.Tile, allowShorterPath: true);
             }
 
             if (!_currentPath.Valid || _currentPath.Finished)
@@ -26,11 +24,11 @@ namespace DonBigo.AI
             }
 
             Tile nextTile = _currentPath.Advance();
-            if (nextTile == _doer.Tile)
+            if (nextTile == Doer.Tile)
             {
-                return new IdleAction(_doer);
+                return null;
             }
-            return new MoveAction(_doer, nextTile);
+            return new MoveAction(Doer, nextTile);
         }
     }
 }

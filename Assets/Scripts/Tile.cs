@@ -7,8 +7,10 @@ using Action = DonBigo.Actions.Action;
 
 namespace DonBigo
 {
-    public class Tile
+    public class Tile : ITileGiver
     {
+        
+        
         public Vector2Int Pos { get; }
         public TileType Type { get; }
         public GameGrid ParentGrid { get; }
@@ -60,6 +62,7 @@ namespace DonBigo
         }
 
         private Item _item;
+        private ITileGiver _tileGiverImplementation;
 
         public Item Item
         {
@@ -111,5 +114,7 @@ namespace DonBigo
             }
             return !Structures.Any(s => s.BlocksView);
         }
+
+        Tile ITileGiver.Tile => this;
     }
 }
