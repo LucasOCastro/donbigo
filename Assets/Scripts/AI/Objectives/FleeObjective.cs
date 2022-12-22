@@ -36,7 +36,7 @@ namespace DonBigo.AI
             
         public override Action Tick()
         {
-            if (_targetExit != null && _targetExit.Value.Position.AdjacentTo(Doer.Tile.Pos))
+            if (_targetExit != null && IsAdjacentToTarget)
             {
                 return new UseDoorAction(Doer, _targetExit.Value);
             }
@@ -50,6 +50,7 @@ namespace DonBigo.AI
             if (bestExit != null && (_targetExit == null || _targetExit.Value.Position != bestExit.Value.Position))
             {
                 _targetExit = bestExit;
+                _target = Doer.Tile.ParentGrid[bestExit.Value.Position];
                 //objective = new FollowObjective(entity, entity.Tile.ParentGrid[bestExit.Value.Position]);
             }
             return base.Tick();

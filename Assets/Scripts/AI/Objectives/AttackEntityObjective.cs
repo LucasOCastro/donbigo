@@ -19,7 +19,7 @@ namespace DonBigo.AI
             //Trap: tenta colocar no caminho do player, ou entre si e o player (se tiver ranged)
             //Também tem que considerar usar uma netgun antes de dar tiro, por exemplo
 
-            if (Doer.Tile.Pos.AdjacentTo(_target.Tile.Pos))
+            if (IsAdjacentToTarget)
             {
                 Debug.Log("TOME de " + Doer + " para " + _target);
                 return null;

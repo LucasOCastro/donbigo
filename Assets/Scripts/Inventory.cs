@@ -13,6 +13,30 @@ namespace DonBigo
         
         public Entity Owner { get; }
         public Handedness CurrentHandedness { get; set; }
+
+        public Handedness WeakestHandedness
+        {
+            get
+            {
+                if (LeftHand != null && RightHand != null)
+                {
+                    return (LeftHand.Type.CombatPower < RightHand.Type.CombatPower) ? Handedness.Left : Handedness.Right;
+                }
+                return (LeftHand != null) ? Handedness.Left : Handedness.Right;
+            }
+        }
+        
+        public Handedness StrongestHandedness
+        {
+            get
+            {
+                if (LeftHand != null && RightHand != null)
+                {
+                    return (LeftHand.Type.CombatPower > RightHand.Type.CombatPower) ? Handedness.Left : Handedness.Right;
+                }
+                return (LeftHand != null) ? Handedness.Left : Handedness.Right;
+            }
+        }
         
         private readonly Item[] _inventory = new Item[2];
         
@@ -26,6 +50,9 @@ namespace DonBigo
 
         public Item LeftHand => GetHand(Handedness.Left);
         public Item RightHand => GetHand(Handedness.Right);
+
+        public int CombatPower => (LeftHand != null ? LeftHand.Type.CombatPower : 0) +
+                                  (RightHand != null ? RightHand.Type.CombatPower : 0); 
         
         
         //Essa função só setta o item na array e muda o holder.

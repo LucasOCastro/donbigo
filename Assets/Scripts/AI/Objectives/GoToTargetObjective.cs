@@ -10,9 +10,16 @@ namespace DonBigo.AI
             _target = target;
         }
 
+        protected bool IsAdjacentToTarget =>_target != null && Doer.Tile.Pos.AdjacentTo(_target.Tile.Pos);
+
         private Path _currentPath;
         public override Action Tick()
         {
+            if (_target == null)
+            {
+                return null;
+            }
+            
             if (_currentPath == null || _currentPath.End != _target.Tile)
             {
                 _currentPath = new Path(Doer.Tile, _target.Tile, allowShorterPath: true);

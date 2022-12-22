@@ -14,6 +14,9 @@ namespace DonBigo
 
         [SerializeField] private Sprite inventoryIcon;
         public Sprite InventoryIcon => inventoryIcon;
+
+        [SerializeField] private int combatPower;
+        public int CombatPower => combatPower;
         
         [SerializeField] private Item prefab;
         public Item Instantiate(Tile tile)

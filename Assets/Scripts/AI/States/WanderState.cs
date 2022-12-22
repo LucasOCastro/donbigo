@@ -1,14 +1,55 @@
+using System.Linq;
+
 namespace DonBigo.AI
 {
     public class WanderState : AIState
     {
-        protected override AIState OnTick(AIWorker worker, out AIObjective objective)
+        private static bool ShouldBeAlerted(Entity entity)
         {
-            objective = null;
-            if (CurrentObjective == null)
+            //Mais outros gatilhos
+            return entity.SeesPlayer;
+        }
+        
+        private static Item FindItemToPickup(Entity entity, out Inventory.Handedness handedness)
+        {
+            handedness = entity.Inventory.WeakestHandedness;
+            Item minPowerItem = entity.Inventory.GetHand(handedness);
+            int minPower = (minPowerItem != null) ? minPowerItem.Type.CombatPower : -1;
+
+            Item strongestVisibleItem = null;
+            foreach (var item in entity.VisibleItems)
+            {
+                int power = item.Type.CombatPower; 
+                if (power > minPower)
+                {
+                    strongestVisibleItem = item;
+                    minPower = power;
+                }
+            }
+
+            return strongestVisibleItem;
+        }
+        
+        protected override AIState OnTick(Entity entity, out AIObjective objective)
+        {
+            if (ShouldBeAlerted(entity))
+            {
+                objective = null;
+                return new AlertedState();
+            }
+            
+            Item targetItem = FindItemToPickup(entity, out var handedness);
+            if (targetItem != null)
+            {
+                objective = new PickupItemObjective(entity, targetItem, handedness);
+                return null;
+            }
+            
+            /*if (CurrentObjective == null)
             {
                 objective = new FollowObjective(worker.Owner, CharacterManager.DonBigo);
-            }
+            }*/
+            objective = null;
             return null;
         }
     }
