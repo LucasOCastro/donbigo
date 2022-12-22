@@ -43,6 +43,25 @@ namespace DonBigo
 
                     var oldVisible = VisibleTiles;
                     VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
+                    VisibleEntities.Clear();
+                    VisibleItems.Clear();
+                    SeesPlayer = false;
+                    foreach (var tile in VisibleTiles)
+                    {
+                        var item = Tile.ParentGrid[tile].Item; 
+                        if (item != null)
+                        {
+                            VisibleItems.Add(item);
+                        }
+
+                        var entity = Tile.ParentGrid[tile].Entity;
+                        if (entity is Bigodon) SeesPlayer = true;
+                        if (entity != null && entity != this)
+                        {
+                            VisibleEntities.Add(entity);
+                        }
+                    }
+                    
                     OnUpdateViewEvent?.Invoke(oldVisible, VisibleTiles);
                     UpdateRenderVisibility();
                     
@@ -58,5 +77,11 @@ namespace DonBigo
         
         public event IVisibleTilesProvider.OnUpdateViewDelegate OnUpdateViewEvent;
         public HashSet<Vector2Int> VisibleTiles { get; private set; }
+
+        //Honestamente não gosto muito desse SeesPlayer, nem da VisibleEntities
+        //Idealmente, chegar visibilidade de uma entitade deveria sr feito pelo VisibleTiles.
+        public bool SeesPlayer { get; private set; }
+        public List<Entity> VisibleEntities { get; } = new List<Entity>();
+        public List<Item> VisibleItems { get; } = new List<Item>();
     }
 }

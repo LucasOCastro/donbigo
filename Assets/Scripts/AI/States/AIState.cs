@@ -9,9 +9,9 @@ namespace DonBigo.AI
 
         /// <param name="action">A ação a ser executada.</param>
         /// <returns>Um estado para qual deve transicionar, ou nulo se deve permanecer no mesmo.</returns>
-        public AIState Tick(AIWorker worker, out Action action)
+        public AIState Tick(Entity entity, out Action action)
         {
-            AIState state = OnTick(worker, out AIObjective newObjective);
+            AIState state = OnTick(entity, out AIObjective newObjective);
             if (newObjective != null)
             {
                 CurrentObjective = newObjective;
@@ -21,8 +21,9 @@ namespace DonBigo.AI
             return state;
         }
 
+        /// <param name="entity">A emtodade executando essa ação.</param>
         /// <param name="objective">Um novo objetivo a seguir, ou nulo se deve manter o mesmo.</param>
         /// <returns>Um estado para qual deve transicionar, ou nulo se deve permanecer no mesmo.</returns>
-        protected abstract AIState OnTick(AIWorker worker, out AIObjective objective);
+        protected abstract AIState OnTick(Entity entity, out AIObjective objective);
     }
 }

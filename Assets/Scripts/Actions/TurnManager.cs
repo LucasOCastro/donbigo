@@ -8,8 +8,9 @@ namespace DonBigo.Actions
     public class TurnManager : MonoBehaviour
     {
         [SerializeField] private float turnDurationSeconds = 1f;
-        
+
         public static TurnManager Instance { get; private set; }
+        public static int CurrentTurn { get; private set; }
 
         public static void RegisterEntity(Entity entity) => Instance._entities.Add(entity);
         
@@ -50,6 +51,7 @@ namespace DonBigo.Actions
                 
                 action.Execute();
                 CycleEntity();
+                CurrentTurn++;
                 yield return new WaitForSeconds(turnDurationSeconds);
             }
         }
