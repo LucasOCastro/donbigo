@@ -36,6 +36,22 @@ namespace DonBigo.Rooms
             }
         }
 
+        //Nem um pouco eficiente. Acho que RoomExit deveria ter sido uma classe desde o começo.;
+        private static void UnregisterDoor(RoomExit door, List<RoomInstance> rooms)
+        {
+            foreach (var room in rooms)
+            {
+                for (int i = 0; i < room.Doors.Count; i++)
+                {
+                    if (room.Doors[i].Position == door.Position)
+                    {
+                        room.Doors.RemoveAt(i);
+                        return;
+                    }
+                }
+            }
+        }
+
         
         public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap)
         {
@@ -69,6 +85,7 @@ namespace DonBigo.Rooms
                 {
                     //Se não cabe nenhuma sala nessa porta, então essa porta não será conectada a nada.
                     possibleDoor.Marker.SetInactive(grid, tilemap, possibleDoor.Position);
+                    UnregisterDoor(possibleDoor, rooms);
                     continue;
                 }
                 //Ajustamos a posição em que a sala será colocada com base na posição da porta que será conectada.

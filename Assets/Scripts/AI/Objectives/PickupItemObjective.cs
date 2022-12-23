@@ -13,12 +13,16 @@ namespace DonBigo.AI
             _targetItem = targetItem;
         }
 
+        private bool _completed;
+        public override bool Completed => _completed;
+
         public override Action Tick()
         {
             if (IsAdjacentToTarget)
             {
                 Doer.Inventory.CurrentHandedness = _handedness;
                 _target = null;
+                _completed = true;
                 return new PickupAction(Doer, _targetItem);
             }
             

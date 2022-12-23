@@ -13,6 +13,8 @@ namespace DonBigo.AI
             _fleeFrom = fleeFrom;
         }
 
+        public override bool Completed => !Doer.VisibleTiles.Contains(_fleeFrom.Tile.Pos);
+
         private RoomExit? GetBestExit()
         {
             var currentRoom = Doer.Tile.ParentGrid.RoomAt(Doer.Tile.Pos);

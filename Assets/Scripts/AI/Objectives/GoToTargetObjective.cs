@@ -12,6 +12,8 @@ namespace DonBigo.AI
 
         protected bool IsAdjacentToTarget => _target?.Tile != null && Doer.Tile.Pos.AdjacentTo(_target.Tile.Pos);
 
+        public override bool Completed => IsAdjacentToTarget;
+
         private Path _currentPath;
         public override Action Tick()
         {

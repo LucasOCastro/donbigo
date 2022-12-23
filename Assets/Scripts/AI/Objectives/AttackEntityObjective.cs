@@ -11,6 +11,8 @@ namespace DonBigo.AI
             _targetHealth = target.Health;
         }
 
+        public override bool Completed => _targetHealth.Dead;
+
         public override Action Tick()
         {
             //TODO Quando tivermos os novos itens, isso aqui deverá ser adaptado para diferentes tipos de "armas".

@@ -5,6 +5,8 @@ namespace DonBigo.AI
     public abstract class AIObjective
     {
         public Entity Doer { get; }
+        
+        public abstract bool Completed { get; }
 
         public AIObjective(Entity doer)
         {

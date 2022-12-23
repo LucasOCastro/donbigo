@@ -1,4 +1,4 @@
-using System.Linq;
+using DonBigo.Rooms;
 
 namespace DonBigo.AI
 {
@@ -32,6 +32,12 @@ namespace DonBigo.AI
 
             return strongestVisibleItem;
         }
+
+        private RoomExit? FindRandomExit(Entity entity)
+        {
+            var room = entity.Tile.ParentGrid.RoomAt(entity.Tile.Pos);
+            return (room.Doors.Count > 0) ? room.Doors.Random() : null;
+        }
         
         protected override AIState OnTick(Entity entity, out AIObjective objective)
         {
@@ -40,6 +46,13 @@ namespace DonBigo.AI
                 objective = null;
                 return new AlertedState();
             }
+
+            if (CurrentObjective != null && !CurrentObjective.Completed)
+            {
+                //TODO honestamente só mudar o CurrentObjective diretamente faz mais sentido.
+                objective = CurrentObjective;
+                return null;
+            }
             
             Item targetItem = FindItemToPickup(entity, out var handedness);
             if (targetItem != null)
@@ -47,7 +60,13 @@ namespace DonBigo.AI
                 objective = new PickupItemObjective(entity, targetItem, handedness);
                 return null;
             }
-            
+
+            RoomExit? randomExit = FindRandomExit(entity);
+            if (randomExit != null)
+            {
+                objective = new GoToDoorObjective(entity, randomExit.Value);
+                return null;
+            }
             /*if (CurrentObjective == null)
             {
                 objective = new FollowObjective(worker.Owner, CharacterManager.DonBigo);
