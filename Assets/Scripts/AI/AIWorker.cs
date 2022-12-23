@@ -29,11 +29,18 @@ namespace DonBigo.AI
         private AIState _currentState;
         public Action GetAction()
         {
-            AIState newState = _currentState.Tick(Owner, out Action action);
-            if (newState != null)
+            //Se retorna um novo estado e nenhuma ação, eu quero uma transição instantanea.
+            AIState newState;
+            Action action;
+            do
             {
-                _currentState = newState;
-            }
+                newState = _currentState.Tick(Owner, out action);
+                if (newState != null)
+                {
+                    _currentState = newState;
+                }
+            } while (newState != null && action == null);
+
             return action;
         }
     }

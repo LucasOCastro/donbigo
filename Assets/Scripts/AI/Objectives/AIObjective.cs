@@ -4,7 +4,7 @@ namespace DonBigo.AI
 {
     public abstract class AIObjective
     {
-        protected Entity Doer { get; }
+        public Entity Doer { get; }
 
         public AIObjective(Entity doer)
         {
