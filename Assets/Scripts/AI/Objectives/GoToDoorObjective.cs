@@ -1,6 +1,5 @@
 ﻿using DonBigo.Actions;
 using DonBigo.Rooms;
-using UnityEngine;
 
 namespace DonBigo.AI
 {
@@ -17,7 +16,6 @@ namespace DonBigo.AI
 
         public override Action Tick()
         {
-            Debug.Log("is supposed to go to dor at "+_door.Position+" with target as "+ _target.Tile.Pos +" and am at "+Doer.Tile.Pos);
             if (IsAdjacentToTarget)
             {
                 _completed = true;

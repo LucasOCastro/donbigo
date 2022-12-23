@@ -1,5 +1,7 @@
+using System;
 using DonBigo.Actions;
 using UnityEngine;
+using Action = DonBigo.Actions.Action;
 
 namespace DonBigo
 {
@@ -17,12 +19,43 @@ namespace DonBigo
             return tile.GenInteractAction(this);
         }
 
-        public override Action GetAction()
+        private void Update()
         {
             //Quando aperta X, muda a mão ativa do inventário.
             if (Input.GetKeyDown(KeyCode.X))
             {
                 Inventory.CycleHandedness();
+            }
+            
+            //Quando aperta Esc, limpa o caminho atual.
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                _currentTargetPath = null;
+                _scheduledAction = null;
+            }
+
+            //Não é muito organizado mas acho que ajuda na responsividade
+            if (TurnManager.Instance.CurrentEntity != this)
+            {
+                _scheduledAction = GetAction();
+            }
+        }
+
+        private Action _scheduledAction;
+
+        public override Action GetAction()
+        {
+            if (_scheduledAction != null)
+            {
+                var action = _scheduledAction;
+                _scheduledAction = null;
+                return action;
+            }
+            
+            //Quando aperta espaço, pula um turno.
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                return new IdleAction(this);
             }
         
             //Se já tem um caminho, segue ele.

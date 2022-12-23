@@ -22,7 +22,7 @@ namespace DonBigo
                 {
                     return (LeftHand.Type.CombatPower < RightHand.Type.CombatPower) ? Handedness.Left : Handedness.Right;
                 }
-                return (LeftHand != null) ? Handedness.Left : Handedness.Right;
+                return (LeftHand == null) ? Handedness.Left : Handedness.Right;
             }
         }
         
