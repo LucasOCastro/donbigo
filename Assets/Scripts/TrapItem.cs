@@ -51,6 +51,7 @@ namespace DonBigo
                 Tile = target;
             }
             State = ArmState.Armed;
+            doer.BlacklistedTiles.Add(target.Pos);
         }
 
         public override void UpdateRenderVisibility()

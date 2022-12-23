@@ -55,11 +55,13 @@ namespace DonBigo
 
         public abstract Action GetAction();
         
+        //Provavelmente seria mais pratico armazenar Tile ao inves de Vector2Int.
         public event IVisibleTilesProvider.OnUpdateViewDelegate OnUpdateViewEvent;
         public HashSet<Vector2Int> VisibleTiles { get; private set; }
 
         //Usar o SeesPlayer significa hardcodar o Player como o inimigo unico da IA.
         //Isso funciona pro projeto atualmente, mas pode complicar alguma coisa no futuro.
         public bool SeesPlayer => VisibleTiles.Contains(CharacterManager.DonBigo.Tile.Pos);
+        public HashSet<Vector2Int> BlacklistedTiles { get; } = new();
     }
 }

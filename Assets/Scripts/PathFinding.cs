@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ namespace DonBigo
     //https://en.wikipedia.org/wiki/A*_search_algorithm
     public static class PathFinding
     {
+        private const int BlacklistedCost = 100;
+        
         private struct Node
         {
             public Vector2Int tile, parent;
@@ -41,14 +44,18 @@ namespace DonBigo
         
         
 
-        private static float TransitionCost(Tile from, Tile to)
+        private static int TransitionCost(Tile from, Tile to, Entity pather)
         {
             if (!to.Walkable || to.Entity != null)
             {
                 return -1;
             }
             bool isDiagonal = (from.Pos - to.Pos).sqrMagnitude > 1;
-            return isDiagonal ? UtilVec2Int.DiagonalCost : UtilVec2Int.StraightCost;
+            int baseCost = isDiagonal ? UtilVec2Int.DiagonalCost : UtilVec2Int.StraightCost;
+
+            if (pather != null && pather.BlacklistedTiles.Contains(to.Pos)) baseCost += BlacklistedCost;
+
+            return baseCost;
         }
 
         private static List<Tile> BackPath(Node final, Dictionary<Vector2Int, Node> nodes, GameGrid grid)
@@ -63,7 +70,7 @@ namespace DonBigo
             return path.ToList();
         }
 
-        public static List<Tile> Path(Tile source, Tile target)
+        public static List<Tile> Path(Tile source, Tile target, Entity pather)
         {
             if (!source.Walkable) return null;
             
@@ -89,7 +96,7 @@ namespace DonBigo
                 {
                     if (closedSet.Contains(neighbor.Pos)) continue;
 
-                    float transitionCost = TransitionCost(grid[node.tile], neighbor);
+                    int transitionCost = TransitionCost(grid[node.tile], neighbor, pather);
                     if (transitionCost < 0) continue;
                     
                     float possibleCCost = node.cCost + transitionCost;

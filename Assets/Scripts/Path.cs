@@ -8,9 +8,9 @@ namespace DonBigo
         
         private int _currentIndex;
         private List<Tile> _path;
-        public Path(Tile source, Tile destination, bool allowShorterPath)
+        public Path(Tile source, Tile destination, Entity pather, bool allowShorterPath)
         {
-            _path = PathFinding.Path(source, destination);
+            _path = PathFinding.Path(source, destination, pather);
             Valid = (_path != null) && (Length > 0);
             if (Valid && !allowShorterPath && _path[^1] != destination)
             {

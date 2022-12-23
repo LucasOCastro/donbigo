@@ -24,7 +24,7 @@ namespace DonBigo.AI
             
             if (_currentPath == null || _currentPath.End != _target.Tile)
             {
-                _currentPath = new Path(Doer.Tile, _target.Tile, allowShorterPath: true);
+                _currentPath = new Path(Doer.Tile, _target.Tile, Doer, allowShorterPath: true);
             }
 
             if (!_currentPath.Valid || _currentPath.Finished)
