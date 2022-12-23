@@ -67,10 +67,7 @@ namespace DonBigo.AI
                 objective = new GoToDoorObjective(entity, randomExit.Value);
                 return null;
             }
-            /*if (CurrentObjective == null)
-            {
-                objective = new FollowObjective(worker.Owner, CharacterManager.DonBigo);
-            }*/
+
             objective = null;
             return null;
         }
