@@ -5,12 +5,12 @@ namespace DonBigo.AI
     public class GoToTargetObjective : AIObjective
     {
         protected ITileGiver _target;
-        public GoToTargetObjective(Entity doer, ITileGiver target) : base(doer)
+        protected GoToTargetObjective(Entity doer, ITileGiver target) : base(doer)
         {
             _target = target;
         }
 
-        protected bool IsAdjacentToTarget =>_target != null && Doer.Tile.Pos.AdjacentTo(_target.Tile.Pos);
+        protected bool IsAdjacentToTarget => _target?.Tile != null && Doer.Tile.Pos.AdjacentTo(_target.Tile.Pos);
 
         private Path _currentPath;
         public override Action Tick()

@@ -8,9 +8,9 @@ namespace DonBigo.AI
         private ITileGiver _fleeFrom;
         private RoomExit? _targetExit;
         private Path _targetPath;
-        public FleeObjective(Entity doer, ITileGiver target) : base(doer, null)
+        public FleeObjective(Entity doer, ITileGiver fleeFrom) : base(doer, null)
         {
-            _fleeFrom = target;
+            _fleeFrom = fleeFrom;
         }
 
         private RoomExit? GetBestExit()
@@ -42,17 +42,10 @@ namespace DonBigo.AI
             }
                 
             RoomExit? bestExit = GetBestExit();
-            if (_targetExit == null && bestExit == null)
-            {
-                return null;
-            }
-                
-            if (bestExit != null && (_targetExit == null || _targetExit.Value.Position != bestExit.Value.Position))
-            {
-                _targetExit = bestExit;
-                _target = Doer.Tile.ParentGrid[bestExit.Value.Position];
-                //objective = new FollowObjective(entity, entity.Tile.ParentGrid[bestExit.Value.Position]);
-            }
+            if (bestExit == null) return null;
+            
+            _targetExit = bestExit;
+            _target = Doer.Tile.ParentGrid[bestExit.Value.Position];
             return base.Tick();
         }
     }
