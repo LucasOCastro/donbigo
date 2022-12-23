@@ -41,15 +41,6 @@ namespace DonBigo
 
                     var oldVisible = VisibleTiles;
                     VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
-                    VisibleItems.Clear();
-                    foreach (var tile in VisibleTiles)
-                    {
-                        var item = Tile.ParentGrid[tile].Item; 
-                        if (item != null)
-                        {
-                            VisibleItems.Add(item);
-                        }
-                    }
                     
                     OnUpdateViewEvent?.Invoke(oldVisible, VisibleTiles);
                     UpdateRenderVisibility();
@@ -67,11 +58,8 @@ namespace DonBigo
         public event IVisibleTilesProvider.OnUpdateViewDelegate OnUpdateViewEvent;
         public HashSet<Vector2Int> VisibleTiles { get; private set; }
 
-        //Honestamente não gosto muito desse SeesPlayer, nem da VisibleEntities
-        //Idealmente, chegar visibilidade de uma entitade deveria sr feito pelo VisibleTiles.
         //Usar o SeesPlayer significa hardcodar o Player como o inimigo unico da IA.
         //Isso funciona pro projeto atualmente, mas pode complicar alguma coisa no futuro.
         public bool SeesPlayer => VisibleTiles.Contains(CharacterManager.DonBigo.Tile.Pos);
-        public List<Item> VisibleItems { get; } = new List<Item>();
     }
 }
