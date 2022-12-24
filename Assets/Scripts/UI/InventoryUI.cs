@@ -11,18 +11,17 @@ namespace DonBigo.UI
         private class HandImage
         {
             public Image image, itemImage;
-            public Color defaultColor;
+            public Sprite unselectedSprite, selectedSprite;
 
-            public void Update(bool selected, Color selectedColor, Item item)
+            public void Update(bool selected, Item item)
             {
-                image.color = selected ? selectedColor : defaultColor;
+                image.sprite = selected ? selectedSprite : unselectedSprite;
                 itemImage.gameObject.SetActive(item != null);
                 itemImage.sprite = (item != null) ? item.Type.InventoryIcon : null;
             }
         }
         
         [SerializeField] private HandImage left, right;
-        [SerializeField] private Color selectedColor;
 
         private void Update()
         {
@@ -32,8 +31,8 @@ namespace DonBigo.UI
             var inventory = CharacterManager.DonBigo.Inventory;
             var selectedHandedness = inventory.CurrentHandedness;
 
-            left.Update(selectedHandedness == Inventory.Handedness.Left, selectedColor, inventory.LeftHand);
-            right.Update(selectedHandedness == Inventory.Handedness.Right, selectedColor, inventory.RightHand);
+            left.Update(selectedHandedness == Inventory.Handedness.Left, inventory.LeftHand);
+            right.Update(selectedHandedness == Inventory.Handedness.Right, inventory.RightHand);
         }
     }
 }
