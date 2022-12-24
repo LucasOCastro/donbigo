@@ -26,9 +26,14 @@ namespace DonBigo.UI
         private void Update()
         {
             // Isso deveria ser um observer pattern? Deveria. Porém, encontramos o problema grave de preguiça.
-            if (CharacterManager.DonBigo == null) return;
+
+            Entity player = CharacterManager.DonBigo;
+
+            if (PlayerCamera.DEBUG_PHANTONETTE) player = CharacterManager.Phantonette;
             
-            var inventory = CharacterManager.DonBigo.Inventory;
+            if (player == null) return;
+            
+            var inventory = player.Inventory;
             var selectedHandedness = inventory.CurrentHandedness;
 
             left.Update(selectedHandedness == Inventory.Handedness.Left, inventory.LeftHand);
