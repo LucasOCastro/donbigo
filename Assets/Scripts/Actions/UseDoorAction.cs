@@ -11,7 +11,7 @@ namespace DonBigo.Actions
             Vector2Int tile = door.Position + door.DirectionVector;
             while (grid.InBounds(tile) && grid[tile] != null)
             {
-                if (grid[tile].Walkable)
+                if (grid[tile].Walkable && grid[tile].Entity == null)
                 {
                     return grid[tile];
                 }
