@@ -15,4 +15,6 @@ MonoBehaviour:
   itemName: Pantufa
   twoHanded: 0
   inventoryIcon: {fileID: 21300000, guid: ea10bc58c73715d4391c2c4979220f6c, type: 3}
+  combatPower: 0
+  weaponType: 0
   prefab: {fileID: 3464660942184671723, guid: 431683dd579a13b448a6ad9ef0441171, type: 3}

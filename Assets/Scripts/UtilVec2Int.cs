@@ -6,7 +6,11 @@ namespace DonBigo
     {
         public const int StraightCost = 10, DiagonalCost = 14;
         
-        public static Vector2Int Abs(this Vector2Int vec) => new Vector2Int(Mathf.Abs(vec.x), Mathf.Abs(vec.y));
+        //O Sign do Unity é BURRO e retorna 1 para 0.
+        private static int Sign(int x) => (x > 0) ? 1 : ((x < 0) ? -1 : 0);
+        
+        public static Vector2Int Abs(this Vector2Int vec) => new(Mathf.Abs(vec.x), Mathf.Abs(vec.y));
+        public static Vector2Int Sign(this Vector2Int vec) => new(Sign(vec.x), Sign(vec.y));
         
         public static bool AdjacentTo(this Vector2Int a, Vector2Int b)
         {
