@@ -47,7 +47,10 @@ namespace DonBigo
                 if (_tile != null && _tile.Item != this)
                 {
                     _tile.Item = this;
-                    transform.position = _tile.ParentGrid.TileToWorld(_tile, _tile.ItemSurfaceElevation);
+
+                    Vector3 worldPos = _tile.ParentGrid.TileToWorld(_tile, _tile.ItemSurfaceElevation);
+                    worldPos.z = 0;
+                    transform.position = worldPos;
                 }
                 UpdateRenderVisibility();
             }

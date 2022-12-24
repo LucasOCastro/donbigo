@@ -49,7 +49,6 @@ namespace DonBigo
         public Vector3 TileToWorld(Vector2Int tile, int elevation = 0)
         {
             Vector3 basePos = _tilemap.CellToWorld((Vector3Int)tile);
-            basePos.z = 2;
             basePos.y += elevation * .3f;
             return basePos;
         } 
