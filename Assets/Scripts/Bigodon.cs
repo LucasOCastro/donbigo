@@ -71,6 +71,11 @@ namespace DonBigo
             }
             
             Tile tile =  GridManager.Instance.Grid.MouseOverTile();
+            if (tile == null || !VisibleTiles.Contains(tile.Pos))
+            {
+                return null;
+            }
+            
             //Se tem um item na mao e aperta o botão direito, tenta usar o item.
             Item heldItem = Inventory.CurrentHand; 
             if (heldItem != null && Input.GetMouseButtonDown(1) && heldItem.CanBeUsed(this, tile))
@@ -79,7 +84,7 @@ namespace DonBigo
             }
 
             //Clique esquerdo
-            if (Input.GetMouseButtonDown(0) && tile != null)
+            if (Input.GetMouseButtonDown(0))
             {
                 //Se a tile tem uma ação de interação, retorna ela.
                 var interactAction = GenInteractAction(tile);

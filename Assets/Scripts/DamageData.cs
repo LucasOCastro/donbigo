@@ -16,8 +16,7 @@ namespace DonBigo
             {
                 health.Kill();
             }
-
-            if (stunTurns > 0)
+            else if (stunTurns > 0)
             {
                 var stun = new StunStatus(stunTurns);
                 health.AddStatus(stun, stunIcon);

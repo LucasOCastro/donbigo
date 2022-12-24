@@ -9,6 +9,7 @@ namespace DonBigo
         [SerializeField] private Sprite activatedSprite;
         [SerializeField] private DamageData damage;
 
+        private Entity _armer;
         private ArmState _state = ArmState.Idle;
         public ArmState State
         {
@@ -30,6 +31,7 @@ namespace DonBigo
 
             State = ArmState.Activated;
             Renderer.sprite = activatedSprite;
+            _armer.BlacklistedTiles.Remove(Tile.Pos);
             
             damage.Apply(stepper.Health);
         }
@@ -51,6 +53,7 @@ namespace DonBigo
             }
             State = ArmState.Armed;
             doer.BlacklistedTiles.Add(target.Pos);
+            _armer = doer;
         }
 
         public override void UpdateRenderVisibility()
