@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24ac2c8838dc494b978302b0eb36587c, type: 3}
-  m_Name: BearTrap
+  m_Name: Faca
   m_EditorClassIdentifier: 
-  itemName: Armadilha de Urso
-  inventoryIcon: {fileID: -1134841279, guid: 626a01f25ec58ca4592a0d2dc829c65e, type: 3}
-  combatPower: 20
-  weaponType: 34
-  prefab: {fileID: 6241640919053637301, guid: df84f8c2fc9a10148a53dc9ed83b725a, type: 3}
+  itemName: Faca
+  inventoryIcon: {fileID: 21300000, guid: 66bfcba3d9610b44dbcf8451c0b20449, type: 3}
+  combatPower: 60
+  weaponType: 27
+  prefab: {fileID: 7182306033706704552, guid: 9b348f15f3db240439e7d8b6897e500b, type: 3}

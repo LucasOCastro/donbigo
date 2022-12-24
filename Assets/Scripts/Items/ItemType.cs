@@ -8,9 +8,6 @@ namespace DonBigo
     {
         [SerializeField] private string itemName;
         public string ItemName => itemName;
-        
-        [SerializeField] private bool twoHanded;
-        public bool TwoHanded => twoHanded;
 
         [SerializeField] private Sprite inventoryIcon;
         public Sprite InventoryIcon => inventoryIcon;
