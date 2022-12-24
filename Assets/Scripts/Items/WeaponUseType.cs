@@ -52,7 +52,7 @@ namespace DonBigo
                 Tile bestTile = grid.InBounds(bestPos) ? grid[bestPos] : null;
                 return VerifyTile(bestTile) ?? VerifyTile(attacker.Tile); 
             }
-
+            
             return null;
         }
     }

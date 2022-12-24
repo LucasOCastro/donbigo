@@ -6,8 +6,8 @@ namespace DonBigo
     {
         public enum ArmState {Idle, Armed, Activated}
 
-        [SerializeField] private Sprite activatedSprite, stunIcon;
-        [SerializeField] private int stunTurns;
+        [SerializeField] private Sprite activatedSprite;
+        [SerializeField] private DamageData damage;
 
         private ArmState _state = ArmState.Idle;
         public ArmState State
@@ -31,8 +31,7 @@ namespace DonBigo
             State = ArmState.Activated;
             Renderer.sprite = activatedSprite;
             
-            var stunStatus = new StunStatus(stunTurns);
-            stepper.Health.AddStatus(stunStatus, stunIcon);
+            damage.Apply(stepper.Health);
         }
 
         public override bool CanBeUsed(Entity doer, Tile target)
