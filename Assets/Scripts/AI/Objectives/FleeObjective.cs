@@ -1,5 +1,7 @@
-﻿using DonBigo.Actions;
+﻿using System.Linq;
+using DonBigo.Actions;
 using DonBigo.Rooms;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace DonBigo.AI
@@ -9,9 +11,11 @@ namespace DonBigo.AI
         private ITileGiver _fleeFrom;
         private RoomExit? _targetExit;
         private Path _targetPath;
-        public FleeObjective(Entity doer, ITileGiver fleeFrom) : base(doer, null)
+        private float _fightBackChance;
+        public FleeObjective(Entity doer, ITileGiver fleeFrom, float fightBackChance) : base(doer, null)
         {
             _fleeFrom = fleeFrom;
+            _fightBackChance = fightBackChance;
         }
 
         public override bool Completed => !Doer.VisibleTiles.Contains(_fleeFrom.Tile.Pos);
@@ -46,6 +50,38 @@ namespace DonBigo.AI
 
             return bestExit;
         }
+
+        private static int ItemDefensivenessScore(Item item)
+        {
+            return item.Type.WeaponType.Score(t => t switch
+            {
+                WeaponUseType.Ranged => 2,
+                WeaponUseType.Trap => 1,
+                _ => 0
+            });
+        }
+        
+        //TODO meud eus cara que método HORRIVEL arruma isso ae pleo amor de deusss
+        private UseItemAction GetDefensiveFleeAction()
+        {
+            var inventory = Doer.Inventory;
+
+            var possibleHandednesses =
+                Inventory.AllHandednesses
+                    .Where(h => inventory.GetHand(h) != null
+                                && inventory.GetHand(h).Type.WeaponType.HasFlag(WeaponUseType.Defensive)
+                                && inventory.GetHand(h).GetAttackTile(Doer, _fleeFrom) != null)
+                    .ToArray();
+            if (!possibleHandednesses.Any()) return null;
+
+            var chosenHandedness = possibleHandednesses
+                .RandomElementByWeight(h => ItemDefensivenessScore(inventory.GetHand(h)));
+            
+            
+            Item item = inventory.GetHand(chosenHandedness);
+            Tile targetTile = item.GetAttackTile(Doer, _fleeFrom);
+            return new UseItemAction(Doer, item, targetTile);
+        }
             
         public override Action Tick()
         {
@@ -53,10 +89,16 @@ namespace DonBigo.AI
             {
                 return new UseDoorAction(Doer, _targetExit.Value);
             }
-                
+
+            if (Random.value < _fightBackChance)
+            {
+                Action fightBackAction = GetDefensiveFleeAction();
+                if (fightBackAction != null) return fightBackAction;
+            }
+            
             RoomExit? bestExit = GetBestExit();
             if (bestExit == null) return null;
-            
+
             _targetExit = bestExit;
             _target = Doer.Tile.ParentGrid[bestExit.Value.Position];
             if (IsAdjacentToTarget)

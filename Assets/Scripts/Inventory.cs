@@ -5,6 +5,7 @@ namespace DonBigo
 {
     public class Inventory
     {
+        public static Handedness[] AllHandednesses { get; } = new[] { Handedness.Left, Handedness.Right };
         public enum Handedness
         {
             Left = 0,
@@ -107,7 +108,7 @@ namespace DonBigo
             hand = (Handedness)(-1);
             return false;
         }
-        
+
         public void CycleHandedness()
         {
             CurrentHandedness = CurrentHandedness switch
