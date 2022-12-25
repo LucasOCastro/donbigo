@@ -728,7 +728,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
   - {fileID: 0}
-  - {fileID: 11400000, guid: 2fdca22fc81ab134ebfc4238214fa78d, type: 2}
+  - {fileID: 11400000, guid: ac5bbde25c16811419f8778283a2b526, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -854,18 +854,18 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
   - {fileID: 0}
-  - {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
+  - {fileID: 11400000, guid: 24436c91795dbb1449af34057450f9ad, type: 2}
   - {fileID: 0}
-  - {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
   - {fileID: 0}
-  - {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
+  - {fileID: 11400000, guid: 56759581252fae849986d6685146e607, type: 2}
   - {fileID: 0}
-  - {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -1031,7 +1031,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
-  - {fileID: 11400000, guid: 2fdca22fc81ab134ebfc4238214fa78d, type: 2}
+  - {fileID: 11400000, guid: ac5bbde25c16811419f8778283a2b526, type: 2}
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
@@ -1065,7 +1065,7 @@ MonoBehaviour:
     marker: {fileID: 11400000, guid: 2fdca22fc81ab134ebfc4238214fa78d, type: 2}
   - direction: 2
     localPos: {x: 7, y: 9}
-    marker: {fileID: 11400000, guid: 2fdca22fc81ab134ebfc4238214fa78d, type: 2}
+    marker: {fileID: 11400000, guid: ac5bbde25c16811419f8778283a2b526, type: 2}
   structureTiles:
   - pos: {x: 1, y: 0, z: 1}
     structure: {fileID: 11400000, guid: 2c366c4ab0403a249a4e92600029c3c6, type: 2}
@@ -1118,13 +1118,9 @@ MonoBehaviour:
   - pos: {x: 5, y: 4, z: 2}
     structure: {fileID: 11400000, guid: 9453b9f27dfda3340ae13181154f8254, type: 2}
   - pos: {x: 5, y: 11, z: 2}
-    structure: {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
+    structure: {fileID: 11400000, guid: 24436c91795dbb1449af34057450f9ad, type: 2}
   - pos: {x: 6, y: 11, z: 2}
-    structure: {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
-  - pos: {x: 5, y: 11, z: 4}
-    structure: {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
-  - pos: {x: 6, y: 11, z: 4}
-    structure: {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
+    structure: {fileID: 11400000, guid: 56759581252fae849986d6685146e607, type: 2}
   - pos: {x: 3, y: 11, z: 5}
     structure: {fileID: 11400000, guid: 0fee11063402f0a418c081f79c06ca9b, type: 2}
   transformOverrides:

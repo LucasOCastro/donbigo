@@ -37,7 +37,9 @@ namespace DonBigo
                 _tile = value;
                 if (_tile != null)
                 {
-                    transform.position = _tile.ParentGrid.TileToWorld(_tile);
+                    Vector3 worldPos = _tile.ParentGrid.TileToWorld(_tile);
+                    worldPos.z = 2;
+                    transform.position = worldPos;
 
                     var oldVisible = VisibleTiles;
                     VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
