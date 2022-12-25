@@ -251,7 +251,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
   - {fileID: 0}
-  - {fileID: 11400000, guid: 2fdca22fc81ab134ebfc4238214fa78d, type: 2}
+  - {fileID: 11400000, guid: ac5bbde25c16811419f8778283a2b526, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -852,7 +852,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
-  - {fileID: 11400000, guid: 2fdca22fc81ab134ebfc4238214fa78d, type: 2}
+  - {fileID: 11400000, guid: ac5bbde25c16811419f8778283a2b526, type: 2}
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
@@ -928,7 +928,7 @@ MonoBehaviour:
     marker: {fileID: 11400000, guid: 2c366c4ab0403a249a4e92600029c3c6, type: 2}
   - direction: 2
     localPos: {x: 8, y: 2}
-    marker: {fileID: 11400000, guid: 2fdca22fc81ab134ebfc4238214fa78d, type: 2}
+    marker: {fileID: 11400000, guid: ac5bbde25c16811419f8778283a2b526, type: 2}
   structureTiles:
   - pos: {x: 0, y: 0, z: 1}
     structure: {fileID: 11400000, guid: f389ea1b0a3f510439566b9a187cd24d, type: 2}
