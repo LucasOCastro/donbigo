@@ -28,10 +28,17 @@ namespace DonBigo
         public override void SteppedOn(Entity stepper)
         {
             if (State != ArmState.Armed) return;
-
+            
             State = ArmState.Activated;
             Renderer.sprite = activatedSprite;
             _armer.BlacklistedTiles.Remove(Tile.Pos);
+            
+            //isso é umm CRIME contra os princípios SOLID mas lhkgfçmgfm :)
+            if (stepper.Inventory.ContainsItem<StunImmunityItem>(out var handedness))
+            {
+                stepper.Inventory.GetHand(handedness).Delete();
+                return;
+            }
             
             damage.Apply(stepper.Health);
         }

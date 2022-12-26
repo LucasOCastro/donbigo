@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DonBigo.Actions;
 using UnityEngine;
+using Action = DonBigo.Actions.Action;
 
 namespace DonBigo
 {
@@ -20,6 +22,7 @@ namespace DonBigo
         public void Kill(Sprite icon = null)
         {
             if (Dead) return;
+            if (_immunitySet.Contains(typeof(DeadStatus))) return;
             
             foreach (var status in _statusList)
             {
@@ -65,12 +68,25 @@ namespace DonBigo
 
         public void AddStatus(HealthStatus status, Sprite icon = null)
         {
+            var statusType = status.GetType();
+            if (_immunitySet.Contains(statusType))
+            {
+                _immunitySet.Remove(statusType);
+                return;
+            }
+            
             _statusList.Add(status);
             status.Start(this);
             if (icon != null)
             {
                 StatusIconManager.Instance.MakeIcon(this, status, icon);
             }
+        }
+
+        private HashSet<Type> _immunitySet = new HashSet<Type>();
+        public void AddImmunity<T>(Sprite icon = null) where T: HealthStatus
+        {
+            _immunitySet.Add(typeof(T));
         }
     }
 }

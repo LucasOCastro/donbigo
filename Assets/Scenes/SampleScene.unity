@@ -612,7 +612,7 @@ MonoBehaviour:
   mapSize: 75
   tilemap: {fileID: 60745553}
   DEBUG_testItem: {fileID: 11400000, guid: c43fce7eff5707644b2b92a8456c5dd3, type: 2}
-  DEBUG_TEST_ROOM: {fileID: 11400000, guid: 819856307768dbc45aa4764c3faf5462, type: 2}
+  DEBUG_TEST_ROOM: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,7 +731,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0302d13e51e793a6c909cce4d8c6e62a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  offset: {x: 0, y: 1}
+  DEBUG_followPhantonette: 0
 --- !u!1 &529742578
 GameObject:
   m_ObjectHideFlags: 0

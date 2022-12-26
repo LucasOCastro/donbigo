@@ -79,5 +79,17 @@ namespace DonBigo
         public virtual void UseAction(Entity doer, Tile target)
         {
         }
+
+        public void Delete()
+        {
+            if (Holder != null && Holder.ContainsItem(this, out var handedness))
+            {
+                Holder.SetHand(handedness, null, dropOnHand: false);
+            }
+
+            Holder = null;
+            Tile = null;
+            Destroy(gameObject);
+        }
     }
 }
