@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DonBigo.Actions;
 using UnityEngine;
 using Action = DonBigo.Actions.Action;
@@ -23,8 +24,7 @@ namespace DonBigo
         public void Kill(Sprite icon = null)
         {
             if (Dead) return;
-            if (_immunitySet.Contains(typeof(DeadStatus))) return;
-            
+
             foreach (var status in _statusList)
             {
                 status.End(this);
@@ -35,6 +35,7 @@ namespace DonBigo
             OnDeathEvent?.Invoke();
             Owner.Tile = null;
             Dead = true;
+            OnDeathEvent?.Invoke();
         }
         
         /// <summary>
@@ -69,11 +70,12 @@ namespace DonBigo
 
         public void AddStatus(HealthStatus status, Sprite icon = null, GameObject overlayPrefab = null)
         {
-            var statusType = status.GetType();
-            if (_immunitySet.Contains(statusType))
+            //Não deixo stackar HealthStatus. Acabo o existente e substituo.
+            int existingIndex = _statusList.FindIndex(s => s.GetType() == status.GetType());
+            if (existingIndex >= 0)
             {
-                _immunitySet.Remove(statusType);
-                return;
+                _statusList[existingIndex].End(this);
+                _statusList.RemoveAt(existingIndex);
             }
             
             _statusList.Add(status);
@@ -90,10 +92,5 @@ namespace DonBigo
             }
         }
 
-        private HashSet<Type> _immunitySet = new HashSet<Type>();
-        public void AddImmunity<T>(Sprite icon = null) where T: HealthStatus
-        {
-            _immunitySet.Add(typeof(T));
-        }
     }
 }

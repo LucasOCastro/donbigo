@@ -36,7 +36,7 @@ namespace DonBigo
         public void UpdateTimer(int current, int max)
         {
             float normalized = Mathf.Clamp01((float)current / max);
-            int index = Mathf.FloorToInt(normalized * sprites.Length);
+            int index = (int)(normalized * (sprites.Length - 1));
             SetSprite(sprites[index]);
         }
     }
