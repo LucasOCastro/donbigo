@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DonBigo.Actions;
 using UnityEngine;
 using Action = DonBigo.Actions.Action;
+using Object = UnityEngine.Object;
 
 namespace DonBigo
 {
@@ -66,7 +67,7 @@ namespace DonBigo
             return null;
         }
 
-        public void AddStatus(HealthStatus status, Sprite icon = null)
+        public void AddStatus(HealthStatus status, Sprite icon = null, GameObject overlayPrefab = null)
         {
             var statusType = status.GetType();
             if (_immunitySet.Contains(statusType))
@@ -80,6 +81,12 @@ namespace DonBigo
             if (icon != null)
             {
                 StatusIconManager.Instance.MakeIcon(this, status, icon);
+            }
+
+            if (overlayPrefab != null)
+            {
+                GameObject overlay = Object.Instantiate(overlayPrefab, Owner.transform);
+                status.OnEndEvent += () => Object.Destroy(overlay);
             }
         }
 

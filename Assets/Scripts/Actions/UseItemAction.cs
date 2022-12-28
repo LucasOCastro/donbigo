@@ -1,6 +1,4 @@
-﻿using DonBigo.Actions;
-
-namespace DonBigo.Actions
+﻿namespace DonBigo.Actions
 {
     public class UseItemAction : Action
     {
@@ -14,7 +12,7 @@ namespace DonBigo.Actions
 
         public override void Execute()
         {
-            _item.UseAction(Doer, _target);
+            _item.Use(Doer, _target);
         }
     }
 }

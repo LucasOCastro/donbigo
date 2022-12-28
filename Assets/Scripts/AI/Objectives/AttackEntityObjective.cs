@@ -14,7 +14,7 @@ namespace DonBigo.AI
 
         public override bool Completed => _targetHealth.Dead;
 
-        private static int ItemOffsensivenessScore(Item item)
+        private static int ItemOffensivenessScore(Item item)
         {
             return item.Type.WeaponType.Score(t => t switch
             {
@@ -37,7 +37,7 @@ namespace DonBigo.AI
             if (!possibleHandednesses.Any()) return null;
 
             var chosenHandedness = possibleHandednesses
-                .RandomElementByWeight(h => ItemOffsensivenessScore(inventory.GetHand(h)));
+                .RandomElementByWeight(h => ItemOffensivenessScore(inventory.GetHand(h)));
 
 
             return chosenHandedness;

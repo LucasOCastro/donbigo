@@ -39,6 +39,12 @@ namespace DonBigo.Actions
                 {
                     yield return null;
                 }
+                
+                if (CurrentEntity == _entities[0])
+                {
+                    //Só cycla o turno na primeira entidade
+                    CurrentTurn++;
+                }
 
                 Action action;
                 do
@@ -48,10 +54,9 @@ namespace DonBigo.Actions
                     action ??= CurrentEntity.GetAction();
                     yield return null;
                 } while (action == null);
-                
+
                 action.Execute();
                 CycleEntity();
-                CurrentTurn++;
                 yield return new WaitForSeconds(turnDurationSeconds);
             }
         }

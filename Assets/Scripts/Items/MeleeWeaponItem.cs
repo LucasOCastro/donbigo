@@ -8,10 +8,10 @@ namespace DonBigo
         
         public override bool CanBeUsed(Entity doer, Tile target)
         {
-            return doer.Tile.Pos.AdjacentTo(target.Pos) && target.Entity != null && target.Entity != doer;
+            return base.CanBeUsed(doer, target) && doer.Tile.Pos.AdjacentTo(target.Pos) && target.Entity != null && target.Entity != doer;
         }
 
-        public override void UseAction(Entity doer, Tile target)
+        protected override void UseAction(Entity doer, Tile target)
         {
             damage.Apply(target.Entity.Health);
         }

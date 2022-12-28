@@ -45,10 +45,10 @@ namespace DonBigo
 
         public override bool CanBeUsed(Entity doer, Tile target)
         {
-            return target != null && doer.Tile.Pos.AdjacentTo(target.Pos) && target.Walkable && target.SupportsItem;
+            return base.CanBeUsed(doer, target) && target != null && doer.Tile.Pos.AdjacentTo(target.Pos) && target.Walkable && target.SupportsItem;
         }
 
-        public override void UseAction(Entity doer, Tile target)
+        protected override void UseAction(Entity doer, Tile target)
         {
             if (Holder != null && Holder.ContainsItem(this, out var heldHand))
             {

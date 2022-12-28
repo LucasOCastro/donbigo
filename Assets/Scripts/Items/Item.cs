@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DonBigo.Actions;
+using UnityEngine;
 
 namespace DonBigo
 {
@@ -7,7 +8,14 @@ namespace DonBigo
         [SerializeField] private ItemType itemType;
         public ItemType Type => itemType;
 
-        
+        [SerializeField] private int cooldownTurns;
+        public int CooldownTurns => cooldownTurns;
+
+        private int _lastUsedTurn = -1;
+        /// <summary>Turnos desde o ultimo uso do item. Se o item nunca foi usado, retorna -1.</summary>
+        public int TurnsSinceLastUse => (_lastUsedTurn < 0) ? (-1) : (TurnManager.CurrentTurn - _lastUsedTurn);
+        public bool IsInCooldown => _lastUsedTurn >= 0 && TurnsSinceLastUse < cooldownTurns; 
+
         private Inventory _holder;
         /// <summary>
         /// Inventário que atualmente contem esse item. Pra pegar um item, usa Inventory.SetHand, e não isso.
@@ -74,9 +82,15 @@ namespace DonBigo
         
         public virtual bool CanBeUsed(Entity doer, Tile target)
         {
-            return false;
+            return !IsInCooldown;
         }
-        public virtual void UseAction(Entity doer, Tile target)
+
+        public void Use(Entity doer, Tile target)
+        {
+            UseAction(doer, target);
+            _lastUsedTurn = TurnManager.CurrentTurn;
+        }
+        protected virtual void UseAction(Entity doer, Tile target)
         {
         }
 
