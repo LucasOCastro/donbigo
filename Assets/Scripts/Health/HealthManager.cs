@@ -92,5 +92,6 @@ namespace DonBigo
             }
         }
 
+        public bool HasStatusOfType<T>() where T : HealthStatus => _statusList.Any(s => s is T);
     }
 }

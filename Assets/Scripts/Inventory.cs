@@ -53,9 +53,12 @@ namespace DonBigo
         public Item RightHand => GetHand(Handedness.Right);
 
         public int CombatPower => (LeftHand != null ? LeftHand.Type.CombatPower : 0) +
-                                  (RightHand != null ? RightHand.Type.CombatPower : 0); 
-        
-        
+                                  (RightHand != null ? RightHand.Type.CombatPower : 0);
+
+        public bool HasLethal => (LeftHand != null && LeftHand.Type.WeaponType.HasFlag(WeaponUseType.Lethal)) ||
+                                 (RightHand != null && RightHand.Type.WeaponType.HasFlag(WeaponUseType.Lethal));
+
+
         //Essa função só setta o item na array e muda o holder.
         private void SetHandRaw(Handedness hand, Item item)
         {

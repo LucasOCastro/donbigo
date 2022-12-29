@@ -8,11 +8,11 @@ namespace DonBigo.AI
 {
     public class FleeObjective : GoToTargetObjective
     {
-        private ITileGiver _fleeFrom;
+        private Entity _fleeFrom;
         private RoomExit? _targetExit;
         private Path _targetPath;
         private float _fightBackChance;
-        public FleeObjective(Entity doer, ITileGiver fleeFrom, float fightBackChance) : base(doer, null)
+        public FleeObjective(Entity doer, Entity fleeFrom, float fightBackChance) : base(doer, null)
         {
             _fleeFrom = fleeFrom;
             _fightBackChance = fightBackChance;
@@ -64,6 +64,8 @@ namespace DonBigo.AI
         //TODO meud eus cara que método HORRIVEL arruma isso ae pleo amor de deusss
         private UseItemAction GetDefensiveFleeAction()
         {
+            if (_fleeFrom.Health.HasStatusOfType<StunStatus>()) return null;
+            
             var inventory = Doer.Inventory;
 
             var possibleHandednesses =
