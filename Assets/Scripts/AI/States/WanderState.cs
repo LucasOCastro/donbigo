@@ -33,11 +33,7 @@ namespace DonBigo.AI
             return strongestVisibleItem;
         }
 
-        private RoomExit? FindRandomExit(Entity entity)
-        {
-            var room = entity.Tile.ParentGrid.RoomAt(entity.Tile.Pos);
-            return (room.Doors.Count > 0) ? room.Doors.Random() : null;
-        }
+        
         
         protected override AIState OnTick(Entity entity, out AIObjective objective)
         {
@@ -61,14 +57,7 @@ namespace DonBigo.AI
                 return null;
             }
 
-            RoomExit? randomExit = FindRandomExit(entity);
-            if (randomExit != null)
-            {
-                objective = new GoToDoorObjective(entity, randomExit.Value);
-                return null;
-            }
-
-            objective = null;
+            objective = new WanderDoorObjective(entity);
             return null;
         }
     }
