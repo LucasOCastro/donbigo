@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using DonBigo.Actions;
 using DonBigo.Rooms;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace DonBigo.AI
@@ -12,7 +11,18 @@ namespace DonBigo.AI
         private RoomExit? _targetExit;
         private Path _targetPath;
         private float _fightBackChance;
-        public FleeObjective(Entity doer, Entity fleeFrom, float fightBackChance) : base(doer, null)
+
+        private static int CalcExtraTileCost(Tile from, Tile to, Entity fleeFrom)
+        {
+            /*Vector2 dir = ((Vector2)(to.Pos - from.Pos)).normalized;
+            Vector2 dirToFlee = ((Vector2)(fleeFrom.Tile.Pos - from.Pos)).normalized;
+            return Vector2.Dot(dir, dirToFlee);*/
+            
+            return to.Pos.ManhattanDistance(fleeFrom.Tile.Pos);
+        }
+
+        public FleeObjective(Entity doer, Entity fleeFrom, float fightBackChance) : base(doer, null,
+            (t1, t2) => CalcExtraTileCost(t1, t2, fleeFrom))
         {
             _fleeFrom = fleeFrom;
             _fightBackChance = fightBackChance;
@@ -25,7 +35,7 @@ namespace DonBigo.AI
             Vector2Int doorPos = door.Position;
             const float distanceToDoerWeight = 1;
             const float distanceToTargetWeight = 3;
-            const float deadEndPenalty = 30;
+            const float deadEndPenalty = 200;
             
             int distanceToDoer = Doer.Tile.Pos.ManhattanDistance(doorPos);
             int distanceToTarget = _fleeFrom.Tile.Pos.ManhattanDistance(doorPos);

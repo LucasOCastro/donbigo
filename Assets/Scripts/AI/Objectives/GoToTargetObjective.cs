@@ -4,10 +4,12 @@ namespace DonBigo.AI
 {
     public class GoToTargetObjective : AIObjective
     {
+        private PathFinding.CostFunc _costFunc;
         protected ITileGiver _target;
-        protected GoToTargetObjective(Entity doer, ITileGiver target) : base(doer)
+        protected GoToTargetObjective(Entity doer, ITileGiver target, PathFinding.CostFunc costFunc = null) : base(doer)
         {
             _target = target;
+            _costFunc = costFunc;
         }
 
         protected bool IsAdjacentToTarget => _target?.Tile != null && Doer.Tile.Pos.AdjacentTo(_target.Tile.Pos);
@@ -24,7 +26,7 @@ namespace DonBigo.AI
             
             if (_currentPath == null || _currentPath.End != _target.Tile)
             {
-                _currentPath = new Path(Doer.Tile, _target.Tile, Doer, allowShorterPath: true);
+                _currentPath = new Path(Doer.Tile, _target.Tile, Doer, allowShorterPath: true, _costFunc);
             }
 
             if (!_currentPath.Valid || _currentPath.Finished)

@@ -41,10 +41,10 @@ namespace DonBigo
             set.RemoveAt(bestI);
             return node;
         }
-        
-        
 
-        private static int TransitionCost(Tile from, Tile to, Entity pather)
+        public delegate int CostFunc(Tile from, Tile to);
+
+        private static int TransitionCost(Tile from, Tile to, Entity pather, CostFunc costBonusFunc)
         {
             if (!to.Walkable || to.Entity != null)
             {
@@ -52,8 +52,9 @@ namespace DonBigo
             }
             bool isDiagonal = (from.Pos - to.Pos).sqrMagnitude > 1;
             int baseCost = isDiagonal ? UtilVec2Int.DiagonalCost : UtilVec2Int.StraightCost;
-
+//eu sou demais
             if (pather != null && pather.BlacklistedTiles.Contains(to.Pos)) baseCost += BlacklistedCost;
+            if (costBonusFunc != null) baseCost += costBonusFunc(from, to);
 
             return baseCost;
         }
@@ -70,7 +71,7 @@ namespace DonBigo
             return path.ToList();
         }
 
-        public static List<Tile> Path(Tile source, Tile target, Entity pather)
+        public static List<Tile> Path(Tile source, Tile target, Entity pather, CostFunc costBonusFunc = null)
         {
             if (!source.Walkable) return null;
             
@@ -96,7 +97,7 @@ namespace DonBigo
                 {
                     if (closedSet.Contains(neighbor.Pos)) continue;
 
-                    int transitionCost = TransitionCost(grid[node.tile], neighbor, pather);
+                    int transitionCost = TransitionCost(grid[node.tile], neighbor, pather, costBonusFunc);
                     if (transitionCost < 0) continue;
                     
                     float possibleCCost = node.cCost + transitionCost;
