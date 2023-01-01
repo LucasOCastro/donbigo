@@ -10,6 +10,7 @@ namespace DonBigo
         
         public Inventory Inventory { get; private set; }
         public HealthManager Health { get; private set; }
+        public Memory Memory { get; } = new();
 
         protected override void Awake()
         {
@@ -49,6 +50,7 @@ namespace DonBigo
                     {
                         _tile.Entity = this;
                     }
+                    Memory.RememberBeingAt(Tile);
                 }
             }
         }

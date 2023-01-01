@@ -20,15 +20,27 @@ namespace DonBigo.AI
 
         public override bool Completed => !Doer.VisibleTiles.Contains(_fleeFrom.Tile.Pos);
 
-        private float CalcDoorScore(Vector2Int doorPos)
+        private float CalcDoorScore(RoomExit door)
         {
+            Vector2Int doorPos = door.Position;
             const float distanceToDoerWeight = 1;
             const float distanceToTargetWeight = 3;
+            const float deadEndPenalty = 30;
             
             int distanceToDoer = Doer.Tile.Pos.ManhattanDistance(doorPos);
             int distanceToTarget = _fleeFrom.Tile.Pos.ManhattanDistance(doorPos);
             //return (1f / distanceToDoer) - 3 * (1f / distanceToTarget);
-            return (distanceToDoerWeight * -distanceToDoer) + (distanceToTargetWeight * distanceToTarget);
+            
+            float score = 100f + (distanceToDoerWeight * -distanceToDoer) + (distanceToTargetWeight * distanceToTarget);
+
+            GameGrid grid = Doer.Tile.ParentGrid;
+            RoomInstance finalRoom = door.FinalRoom(grid);
+            if (Doer.Memory.IsDeadEnd(finalRoom))
+            {
+                score -= deadEndPenalty;
+            }
+
+            return score;
         }
         private RoomExit? GetBestExit()
         {
@@ -40,7 +52,7 @@ namespace DonBigo.AI
             {
                 if (exit.Position.AdjacentTo(Doer.Tile.Pos)) return exit;
                 
-                float score = CalcDoorScore(exit.Position);
+                float score = CalcDoorScore(exit);
                 if (bestExit == null || score > bestScore)
                 {
                     bestExit = exit;

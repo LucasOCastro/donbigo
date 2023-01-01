@@ -54,8 +54,9 @@ namespace DonBigo.Actions
                     action ??= CurrentEntity.GetAction();
                     yield return null;
                 } while (action == null);
-
+                
                 action.Execute();
+                CurrentEntity.Memory.RememberAction(action);
                 CycleEntity();
                 yield return new WaitForSeconds(turnDurationSeconds);
             }

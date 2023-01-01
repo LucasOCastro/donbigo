@@ -1,4 +1,7 @@
-﻿using DonBigo.Actions;
+﻿using System.Collections.Generic;
+using DonBigo.Actions;
+using DonBigo.Rooms;
+using UnityEngine;
 
 namespace DonBigo.AI
 {

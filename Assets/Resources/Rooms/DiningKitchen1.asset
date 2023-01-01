@@ -15,7 +15,7 @@ MonoBehaviour:
   roomName: DiningKitchen1
   size: {x: 8, y: 13, z: 6}
   tilesBlock:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
