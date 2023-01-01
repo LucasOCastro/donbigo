@@ -16,11 +16,11 @@ namespace DonBigo.AI
 
         private float CalcDoorScore(RoomExit door)
         {
-            const float recentDoorWeight = 3f;
-            const float fullyExploredPenalty = 10f;
-            const float lastVisitedPenalty = 6f;
+            const float recentDoorWeight = 5f;
+            const float fullyExploredPenalty = 30f;
+            const float lastVisitedPenalty = 20f;
             
-            float score = 100f;
+            float score = 1000f;
             
             RoomInstance finalRoom = door.FinalRoom(Doer.Tile.ParentGrid);
             int visitedOrder = Doer.Memory.RoomVisitedOrder(finalRoom);

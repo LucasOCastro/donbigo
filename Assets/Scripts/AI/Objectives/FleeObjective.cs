@@ -36,7 +36,7 @@ namespace DonBigo.AI
             const float distanceToDoerWeight = 1;
             const float distanceToTargetWeight = 3;
             const float deadEndPenalty = 200;
-            
+
             int distanceToDoer = Doer.Tile.Pos.ManhattanDistance(doorPos);
             int distanceToTarget = _fleeFrom.Tile.Pos.ManhattanDistance(doorPos);
             //return (1f / distanceToDoer) - 3 * (1f / distanceToTarget);

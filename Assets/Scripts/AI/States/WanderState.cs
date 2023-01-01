@@ -35,8 +35,9 @@ namespace DonBigo.AI
 
         
         
-        protected override AIState OnTick(Entity entity, out AIObjective objective)
+        protected override AIState OnTick(AIWorker worker, out AIObjective objective)
         {
+            var entity = worker.Owner;
             if (ShouldBeAlerted(entity))
             {
                 objective = null;

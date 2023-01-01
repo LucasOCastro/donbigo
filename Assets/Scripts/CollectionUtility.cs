@@ -54,5 +54,11 @@ namespace DonBigo
             }
             return default;
         }
+
+        public static void SetOrAdd<T1, T2>(this Dictionary<T1, T2> dict, T1 key, T2 val)
+        {
+            if (dict.ContainsKey(key)) dict[key] = val;
+            else dict.Add(key, val);
+        }
     }
 }

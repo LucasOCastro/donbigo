@@ -21,23 +21,39 @@ namespace DonBigo.AI
     Bônus: criar uma tile especial invisível que a Phantonette pode visitar quando está procurando algo e colocar em lugares que ela não iria só pela busca porta a porta*/
     public class AIWorker
     {
+        private const int StrengthMinUpdateInterval = 50;
+        
         public Entity Owner { get; }
 
+        private int _minStrength;
+        private int _lastStrengthUpdateTurn;
+        private void UpdateMinStrength() => _minStrength = Random.Range(50, 100);
+        public bool FeelsStrong => Owner.Inventory.CombatPower >= _minStrength;
+        
+        
         public AIWorker(Entity owner)
         {
             Owner = owner;
             _currentState = new WanderState();
+            UpdateMinStrength();
         }
         
+
         private AIState _currentState;
         public Action GetAction()
         {
+            if ((TurnManager.CurrentTurn - _lastStrengthUpdateTurn) >= StrengthMinUpdateInterval)
+            {
+                _lastStrengthUpdateTurn = TurnManager.CurrentTurn;
+                UpdateMinStrength();
+            }
+            
             //Se retorna um novo estado e nenhuma ação, eu quero uma transição instantanea.
             AIState newState;
             Action action;
             do
             {
-                newState = _currentState.Tick(Owner, out action);
+                newState = _currentState.Tick(this, out action);
                 if (newState != null)
                 {
                     _currentState = newState;

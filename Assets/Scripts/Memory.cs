@@ -13,7 +13,7 @@ namespace DonBigo
         //Os ultimos (mais da direita) foram visitados mais recentemente.
         private readonly List<RoomInstance> _roomVisitMemory = new List<RoomInstance>();
         private readonly HashSet<RoomInstance> _recordedDeadEnds = new HashSet<RoomInstance>();
-        private RoomInstance _lastThreateningRoom;
+        private readonly Dictionary<TileObject, Tile> _locationMemory = new Dictionary<TileObject, Tile>();
 
         public bool Visited(RoomInstance room) => _visitedRooms.Contains(room);
         public bool Used(RoomExit door) => _usedDoors.Contains(door.Position);
@@ -48,7 +48,12 @@ namespace DonBigo
 
         public void RememberAction(Action action)
         {
-            //if ()
+            foreach (var tilePos in action.Doer.VisibleTiles)
+            {
+                var tile = action.Doer.Tile.ParentGrid[tilePos];
+                if (tile.Entity != null) _locationMemory.SetOrAdd(tile.Entity, tile);
+                if (tile.Item != null) _locationMemory.SetOrAdd(tile.Item, tile);
+            }
             
             if (action is UseDoorAction useDoorAction)
             {
