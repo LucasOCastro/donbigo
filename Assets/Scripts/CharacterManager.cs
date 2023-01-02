@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using DonBigo.Actions;
 using UnityEngine;
 
@@ -31,7 +29,6 @@ namespace DonBigo
             DBRenderer.sprite = donbigoSprite[7];
             DonBigo.tag = "Player";
             // Abaixo setar a posição quando tiver um Spawn implementado vvvvvvvvvvvvv
-            DonBigo.Tile = GridManager.Instance.Grid[25, 25];
             spawner.Spawn(GridManager.Instance.Grid, DonBigo.GetComponent<Entity>());
             
             // Geração da Phantonette
@@ -39,13 +36,21 @@ namespace DonBigo
             SpriteRenderer PTRenderer = Phantonette.GetComponent<SpriteRenderer>();
             PTRenderer.sprite = phantonetteSprite[7];
             // Abaixo setar a posição quando tiver um Spawn implementado vvvvvvvvvvvvv
-            Phantonette.Tile = GridManager.Instance.Grid[20, 20];
             spawner.Spawn(GridManager.Instance.Grid, Phantonette.GetComponent<Entity>());
             
             TurnManager.RegisterEntity(DonBigo);
             TurnManager.RegisterEntity(Phantonette);
             FieldOfViewRenderer.Origin = DonBigo;
-            
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                Tile tile = GridManager.Instance.Grid.MouseOverTile();
+                if (tile == null || !tile.Walkable || tile.Entity != null) return;
+                DonBigo.Tile = tile;
+            }
         }
     }
 }

@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DonBigo.Actions;
 using UnityEngine;
-using UnityEngine.XR;
 
 namespace DonBigo
 {
@@ -12,6 +10,7 @@ namespace DonBigo
         
         public Inventory Inventory { get; private set; }
         public HealthManager Health { get; private set; }
+        public Memory Memory { get; } = new();
 
         protected override void Awake()
         {
@@ -43,6 +42,7 @@ namespace DonBigo
 
                     var oldVisible = VisibleTiles;
                     VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
+                    
                     OnUpdateViewEvent?.Invoke(oldVisible, VisibleTiles);
                     UpdateRenderVisibility();
                     
@@ -50,13 +50,20 @@ namespace DonBigo
                     {
                         _tile.Entity = this;
                     }
+                    Memory.RememberBeingAt(Tile);
                 }
             }
         }
 
         public abstract Action GetAction();
         
+        //Provavelmente seria mais pratico armazenar Tile ao inves de Vector2Int.
         public event IVisibleTilesProvider.OnUpdateViewDelegate OnUpdateViewEvent;
         public HashSet<Vector2Int> VisibleTiles { get; private set; }
+
+        //Usar o SeesPlayer significa hardcodar o Player como o inimigo unico da IA.
+        //Isso funciona pro projeto atualmente, mas pode complicar alguma coisa no futuro.
+        public bool SeesPlayer => VisibleTiles.Contains(CharacterManager.DonBigo.Tile.Pos);
+        public HashSet<Vector2Int> BlacklistedTiles { get; } = new();
     }
 }

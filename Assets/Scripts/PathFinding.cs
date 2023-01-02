@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace DonBigo
     //https://en.wikipedia.org/wiki/A*_search_algorithm
     public static class PathFinding
     {
-        private const int StraightCost = 10, DiagonalCost = 14;
+        private const int BlacklistedCost = 100;
         
         private struct Node
         {
@@ -40,24 +41,22 @@ namespace DonBigo
             set.RemoveAt(bestI);
             return node;
         }
-        
-        //http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
-        //Mistura de Manhattan Distance com Chebyshev e Octile, para permitir movimentos diagonais.
-        private static int ManhattanDistance(Vector2Int a, Vector2Int b)
-        {
-            int dx = Mathf.Abs(a.x - b.x);
-            int dy = Mathf.Abs(a.y - b.y);
-            return StraightCost * (dx + dy) + (DiagonalCost - 2 * StraightCost) * Mathf.Min(dx, dy);
-        }
 
-        private static float TransitionCost(Tile from, Tile to)
+        public delegate int CostFunc(Tile from, Tile to);
+
+        private static int TransitionCost(Tile from, Tile to, Entity pather, CostFunc costBonusFunc)
         {
             if (!to.Walkable || to.Entity != null)
             {
                 return -1;
             }
             bool isDiagonal = (from.Pos - to.Pos).sqrMagnitude > 1;
-            return isDiagonal ? DiagonalCost : StraightCost;
+            int baseCost = isDiagonal ? UtilVec2Int.DiagonalCost : UtilVec2Int.StraightCost;
+//eu sou demais
+            if (pather != null && pather.BlacklistedTiles.Contains(to.Pos)) baseCost += BlacklistedCost;
+            if (costBonusFunc != null) baseCost += costBonusFunc(from, to);
+
+            return baseCost;
         }
 
         private static List<Tile> BackPath(Node final, Dictionary<Vector2Int, Node> nodes, GameGrid grid)
@@ -72,9 +71,9 @@ namespace DonBigo
             return path.ToList();
         }
 
-        public static List<Tile> Path(Tile source, Tile target)
+        public static List<Tile> Path(Tile source, Tile target, Entity pather, CostFunc costBonusFunc = null)
         {
-            if (!source.Walkable || !target.Walkable) return null;
+            if (!source.Walkable) return null;
             
             var grid = source.ParentGrid;
             // Uma priority queue aqui seria mais apropriada
@@ -83,7 +82,7 @@ namespace DonBigo
             HashSet<Vector2Int> closedSet = new HashSet<Vector2Int>();
 
             openSet.Add(source.Pos);
-            nodes.Add(source.Pos, new Node(source.Pos, source.Pos, 0, ManhattanDistance(source.Pos, target.Pos)));
+            nodes.Add(source.Pos, new Node(source.Pos, source.Pos, 0, source.Pos.ManhattanDistance(target.Pos)));
 
             while (openSet.Count > 0)
             {
@@ -98,7 +97,7 @@ namespace DonBigo
                 {
                     if (closedSet.Contains(neighbor.Pos)) continue;
 
-                    float transitionCost = TransitionCost(grid[node.tile], neighbor);
+                    int transitionCost = TransitionCost(grid[node.tile], neighbor, pather, costBonusFunc);
                     if (transitionCost < 0) continue;
                     
                     float possibleCCost = node.cCost + transitionCost;
@@ -116,7 +115,7 @@ namespace DonBigo
                     }
                     else
                     {
-                        Node neighborNode = new Node(node.tile, neighbor.Pos, possibleCCost, ManhattanDistance(neighbor.Pos, target.Pos));
+                        Node neighborNode = new Node(node.tile, neighbor.Pos, possibleCCost, neighbor.Pos.ManhattanDistance(target.Pos));
                         nodes.Add(neighbor.Pos, neighborNode);
                     }
 
@@ -128,7 +127,15 @@ namespace DonBigo
                 }
             }
 
-            return null; 
+            Vector2Int closest = source.Pos;
+            foreach (var node in nodes.Values)
+            {
+                if (node.gCost < nodes[closest].gCost)
+                {
+                    closest = node.tile;
+                }
+            }
+            return BackPath(nodes[closest], nodes, grid); 
         }
     }
 }

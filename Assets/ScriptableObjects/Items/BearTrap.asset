@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ac2c8838dc494b978302b0eb36587c, type: 3}
   m_Name: BearTrap
   m_EditorClassIdentifier: 
-  itemName: BearTrap
-  twoHanded: 0
+  itemName: Armadilha de Urso
   inventoryIcon: {fileID: -1134841279, guid: 626a01f25ec58ca4592a0d2dc829c65e, type: 3}
+  combatPower: 20
+  weaponType: 34
   prefab: {fileID: 6241640919053637301, guid: df84f8c2fc9a10148a53dc9ed83b725a, type: 3}

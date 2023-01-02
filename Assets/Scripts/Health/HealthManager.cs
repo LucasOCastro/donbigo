@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using DonBigo.Actions;
 using UnityEngine;
+using Action = DonBigo.Actions.Action;
+using Object = UnityEngine.Object;
 
 namespace DonBigo
 {
@@ -20,7 +24,7 @@ namespace DonBigo
         public void Kill(Sprite icon = null)
         {
             if (Dead) return;
-            
+
             foreach (var status in _statusList)
             {
                 status.End(this);
@@ -31,6 +35,7 @@ namespace DonBigo
             OnDeathEvent?.Invoke();
             Owner.Tile = null;
             Dead = true;
+            OnDeathEvent?.Invoke();
         }
         
         /// <summary>
@@ -63,14 +68,30 @@ namespace DonBigo
             return null;
         }
 
-        public void AddStatus(HealthStatus status, Sprite icon = null)
+        public void AddStatus(HealthStatus status, Sprite icon = null, GameObject overlayPrefab = null)
         {
+            //Não deixo stackar HealthStatus. Acabo o existente e substituo.
+            int existingIndex = _statusList.FindIndex(s => s.GetType() == status.GetType());
+            if (existingIndex >= 0)
+            {
+                _statusList[existingIndex].End(this);
+                _statusList.RemoveAt(existingIndex);
+            }
+            
             _statusList.Add(status);
             status.Start(this);
             if (icon != null)
             {
                 StatusIconManager.Instance.MakeIcon(this, status, icon);
             }
+
+            if (overlayPrefab != null)
+            {
+                GameObject overlay = Object.Instantiate(overlayPrefab, Owner.transform);
+                status.OnEndEvent += () => Object.Destroy(overlay);
+            }
         }
+
+        public bool HasStatusOfType<T>() where T : HealthStatus => _statusList.Any(s => s is T);
     }
 }

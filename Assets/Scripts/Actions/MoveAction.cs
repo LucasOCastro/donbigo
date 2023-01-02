@@ -9,6 +9,7 @@ namespace DonBigo.Actions
     public class MoveAction : Action
     {
         private Tile _target;
+        public Tile Target => _target;
         public MoveAction(Entity doer, Tile target) : base(doer)
         {
             if (target == null)

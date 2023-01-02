@@ -8,8 +8,9 @@ namespace DonBigo.Actions
     public class TurnManager : MonoBehaviour
     {
         [SerializeField] private float turnDurationSeconds = 1f;
-        
+
         public static TurnManager Instance { get; private set; }
+        public static int CurrentTurn { get; private set; }
 
         public static void RegisterEntity(Entity entity) => Instance._entities.Add(entity);
         
@@ -38,6 +39,12 @@ namespace DonBigo.Actions
                 {
                     yield return null;
                 }
+                
+                if (CurrentEntity == _entities[0])
+                {
+                    //Só cycla o turno na primeira entidade
+                    CurrentTurn++;
+                }
 
                 Action action;
                 do
@@ -49,6 +56,7 @@ namespace DonBigo.Actions
                 } while (action == null);
                 
                 action.Execute();
+                CurrentEntity.Memory.RememberAction(action);
                 CycleEntity();
                 yield return new WaitForSeconds(turnDurationSeconds);
             }

@@ -1,5 +1,7 @@
+using System;
 using DonBigo.Actions;
 using UnityEngine;
+using Action = DonBigo.Actions.Action;
 
 namespace DonBigo
 {
@@ -17,12 +19,43 @@ namespace DonBigo
             return tile.GenInteractAction(this);
         }
 
-        public override Action GetAction()
+        private void Update()
         {
             //Quando aperta X, muda a mão ativa do inventário.
             if (Input.GetKeyDown(KeyCode.X))
             {
                 Inventory.CycleHandedness();
+            }
+            
+            //Quando aperta Esc, limpa o caminho atual.
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                _currentTargetPath = null;
+                _scheduledAction = null;
+            }
+
+            //Não é muito organizado mas acho que ajuda na responsividade
+            if (TurnManager.Instance.CurrentEntity != this)
+            {
+                _scheduledAction = GetAction();
+            }
+        }
+
+        private Action _scheduledAction;
+
+        public override Action GetAction()
+        {
+            if (_scheduledAction != null)
+            {
+                var action = _scheduledAction;
+                _scheduledAction = null;
+                return action;
+            }
+            
+            //Quando aperta espaço, pula um turno.
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                return new IdleAction(this);
             }
         
             //Se já tem um caminho, segue ele.
@@ -38,6 +71,11 @@ namespace DonBigo
             }
             
             Tile tile =  GridManager.Instance.Grid.MouseOverTile();
+            if (tile == null || !VisibleTiles.Contains(tile.Pos))
+            {
+                return null;
+            }
+            
             //Se tem um item na mao e aperta o botão direito, tenta usar o item.
             Item heldItem = Inventory.CurrentHand; 
             if (heldItem != null && Input.GetMouseButtonDown(1) && heldItem.CanBeUsed(this, tile))
@@ -46,7 +84,7 @@ namespace DonBigo
             }
 
             //Clique esquerdo
-            if (Input.GetMouseButtonDown(0) && tile != null)
+            if (Input.GetMouseButtonDown(0))
             {
                 //Se a tile tem uma ação de interação, retorna ela.
                 var interactAction = GenInteractAction(tile);
@@ -64,7 +102,7 @@ namespace DonBigo
                 //Se nenhuma outra ação foi criada, então cria um caminho pra seguir.
                 if (tile.Entity == null && tile.Walkable)
                 {
-                    Path path = new Path(this.Tile, tile);
+                    Path path = new Path(this.Tile, tile, this, allowShorterPath: false);
                     _currentTargetPath = (path.Valid && !path.Finished) ? path : null;    
                 }
             }

@@ -12,12 +12,20 @@ namespace DonBigo.UI
         {
             public Image image, itemImage;
             public Sprite unselectedSprite, selectedSprite;
+            public CooldownTimer cooldownTimer;
 
             public void Update(bool selected, Item item)
             {
                 image.sprite = selected ? selectedSprite : unselectedSprite;
                 itemImage.gameObject.SetActive(item != null);
                 itemImage.sprite = (item != null) ? item.Type.InventoryIcon : null;
+
+                bool cooldown = item != null && item.IsInCooldown; 
+                cooldownTimer.gameObject.SetActive(cooldown);
+                if (cooldown)
+                {
+                    cooldownTimer.UpdateTimer(item.TurnsSinceLastUse, item.CooldownTurns);
+                }
             }
         }
         
@@ -26,13 +34,23 @@ namespace DonBigo.UI
         private void Update()
         {
             // Isso deveria ser um observer pattern? Deveria. Porém, encontramos o problema grave de preguiça.
-            if (CharacterManager.DonBigo == null) return;
+
+            Entity player = CharacterManager.DonBigo;
+
+            if (PlayerCamera.DEBUG_PHANTONETTE) player = CharacterManager.Phantonette;
             
-            var inventory = CharacterManager.DonBigo.Inventory;
+            if (player == null) return;
+            
+            var inventory = player.Inventory;
             var selectedHandedness = inventory.CurrentHandedness;
 
             left.Update(selectedHandedness == Inventory.Handedness.Left, inventory.LeftHand);
             right.Update(selectedHandedness == Inventory.Handedness.Right, inventory.RightHand);
+        }
+
+        public void DoCooldown(Inventory.Handedness hand)
+        {
+            
         }
     }
 }

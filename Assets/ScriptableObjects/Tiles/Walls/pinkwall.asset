@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1518f60367f04d87822a2f98c422d95a, type: 3}
+  m_Script: {fileID: 11500000, guid: 338132a86255415496b5007157d82ee6, type: 3}
   m_Name: pinkwall
   m_EditorClassIdentifier: 
   m_Sprite: {fileID: 21300000, guid: f09aef5080383244ab9a6b4e78b2d372, type: 3}
@@ -34,5 +34,4 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  <Walkable>k__BackingField: 1
-  inactiveSubstitute: {fileID: 0}
+  <Walkable>k__BackingField: 0

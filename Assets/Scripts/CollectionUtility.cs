@@ -41,20 +41,29 @@ namespace DonBigo
         public static T RandomElementByWeight<T>(this IEnumerable<T> sequence, Func<T, float> weightSelector) 
         {
             float totalWeight = sequence.Sum(weightSelector);
-            float itemWeightIndex =  (float)new Random().NextDouble() * totalWeight;
+            float itemWeightIndex =  UnityEngine.Random.value * totalWeight;
             float currentWeightIndex = 0;
 
             foreach(var item in from weightedItem in sequence select new { Value = weightedItem, Weight = weightSelector(weightedItem) }) {
                 currentWeightIndex += item.Weight;
             
                 // If we've hit or passed the weight we are after for this item then it's the one we want....
-                if(currentWeightIndex >= itemWeightIndex)
+                if(currentWeightIndex > itemWeightIndex)
                     return item.Value;
             
             }
-        
-            return default(T);
-        
+            return default;
+        }
+
+        public static void SetOrAdd<T1, T2>(this Dictionary<T1, T2> dict, T1 key, T2 val)
+        {
+            if (dict.ContainsKey(key)) dict[key] = val;
+            else dict.Add(key, val);
+        }
+
+        public static T2 GetOrDefault<T1, T2>(this Dictionary<T1, T2> dict, T1 key, T2 def = default)
+        {
+            return dict.TryGetValue(key, out T2 val) ? val : def;
         }
     }
 }

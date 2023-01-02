@@ -6,9 +6,10 @@ namespace DonBigo
     {
         public enum ArmState {Idle, Armed, Activated}
 
-        [SerializeField] private Sprite activatedSprite, stunIcon;
-        [SerializeField] private int stunTurns;
+        [SerializeField] private Sprite activatedSprite;
+        [SerializeField] private DamageData damage;
 
+        private Entity _armer;
         private ArmState _state = ArmState.Idle;
         public ArmState State
         {
@@ -27,20 +28,27 @@ namespace DonBigo
         public override void SteppedOn(Entity stepper)
         {
             if (State != ArmState.Armed) return;
-
+            
             State = ArmState.Activated;
             Renderer.sprite = activatedSprite;
+            _armer.BlacklistedTiles.Remove(Tile.Pos);
             
-            var stunStatus = new StunStatus(stunTurns);
-            stepper.Health.AddStatus(stunStatus, stunIcon);
+            //isso é umm CRIME contra os princípios SOLID mas lhkgfçmgfm :)
+            if (stepper.Inventory.ContainsItem<StunImmunityItem>(out var handedness))
+            {
+                stepper.Inventory.GetHand(handedness).Delete();
+                return;
+            }
+            
+            damage.Apply(stepper.Health);
         }
 
         public override bool CanBeUsed(Entity doer, Tile target)
         {
-            return target != null && doer.Tile.Pos.AdjacentTo(target.Pos) && target.Walkable && target.SupportsItem;
+            return base.CanBeUsed(doer, target) && target != null && doer.Tile.Pos.AdjacentTo(target.Pos) && target.Walkable && target.SupportsItem;
         }
 
-        public override void UseAction(Entity doer, Tile target)
+        protected override void UseAction(Entity doer, Tile target)
         {
             if (Holder != null && Holder.ContainsItem(this, out var heldHand))
             {
@@ -51,6 +59,8 @@ namespace DonBigo
                 Tile = target;
             }
             State = ArmState.Armed;
+            doer.BlacklistedTiles.Add(target.Pos);
+            _armer = doer;
         }
 
         public override void UpdateRenderVisibility()

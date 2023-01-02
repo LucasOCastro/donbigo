@@ -8,12 +8,15 @@ namespace DonBigo
     {
         [SerializeField] private string itemName;
         public string ItemName => itemName;
-        
-        [SerializeField] private bool twoHanded;
-        public bool TwoHanded => twoHanded;
 
         [SerializeField] private Sprite inventoryIcon;
         public Sprite InventoryIcon => inventoryIcon;
+
+        [SerializeField] private int combatPower;
+        public int CombatPower => combatPower;
+
+        [SerializeField] [SerializeFlagEnum] private WeaponUseType weaponType;
+        public WeaponUseType WeaponType => weaponType;
         
         [SerializeField] private Item prefab;
         public Item Instantiate(Tile tile)

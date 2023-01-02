@@ -5,6 +5,7 @@ namespace DonBigo
 {
     public class Inventory
     {
+        public static Handedness[] AllHandednesses { get; } = new[] { Handedness.Left, Handedness.Right };
         public enum Handedness
         {
             Left = 0,
@@ -13,6 +14,30 @@ namespace DonBigo
         
         public Entity Owner { get; }
         public Handedness CurrentHandedness { get; set; }
+
+        public Handedness WeakestHandedness
+        {
+            get
+            {
+                if (LeftHand != null && RightHand != null)
+                {
+                    return (LeftHand.Type.CombatPower < RightHand.Type.CombatPower) ? Handedness.Left : Handedness.Right;
+                }
+                return (LeftHand == null) ? Handedness.Left : Handedness.Right;
+            }
+        }
+        
+        public Handedness StrongestHandedness
+        {
+            get
+            {
+                if (LeftHand != null && RightHand != null)
+                {
+                    return (LeftHand.Type.CombatPower > RightHand.Type.CombatPower) ? Handedness.Left : Handedness.Right;
+                }
+                return (LeftHand != null) ? Handedness.Left : Handedness.Right;
+            }
+        }
         
         private readonly Item[] _inventory = new Item[2];
         
@@ -26,8 +51,14 @@ namespace DonBigo
 
         public Item LeftHand => GetHand(Handedness.Left);
         public Item RightHand => GetHand(Handedness.Right);
-        
-        
+
+        public int CombatPower => (LeftHand != null ? LeftHand.Type.CombatPower : 0) +
+                                  (RightHand != null ? RightHand.Type.CombatPower : 0);
+
+        public bool HasLethal => (LeftHand != null && LeftHand.Type.WeaponType.HasFlag(WeaponUseType.Lethal)) ||
+                                 (RightHand != null && RightHand.Type.WeaponType.HasFlag(WeaponUseType.Lethal));
+
+
         //Essa função só setta o item na array e muda o holder.
         private void SetHandRaw(Handedness hand, Item item)
         {
@@ -38,11 +69,14 @@ namespace DonBigo
             }
         }
 
-        public void SetHand(Handedness hand, Item item)
+        public void SetHand(Handedness hand, Item item, bool dropOnHand = true)
         {
             Tile dropTile = (item != null) ? item.Tile : Owner.Tile;
-            item.Tile = null;
-            DropHand(hand, dropTile);
+            if (item != null) item.Tile = null;
+            if (dropOnHand)
+            {
+                DropHand(hand, dropTile);    
+            }
             SetHandRaw(hand, item);
         }
 
@@ -65,13 +99,31 @@ namespace DonBigo
 
         public bool ContainsItem(Item item, out Handedness hand)
         {
-            if (GetHand(Handedness.Left) == item)
+            if (LeftHand == item)
             {
                 hand = Handedness.Left;
                 return true;
             }
 
-            if (GetHand(Handedness.Right) == item)
+            if (RightHand == item)
+            {
+                hand = Handedness.Right;
+                return true;
+            }
+
+            hand = (Handedness)(-1);
+            return false;
+        }
+
+        public bool ContainsItem<T>(out Handedness hand) where T : Item
+        {
+            if (LeftHand is T)
+            {
+                hand = Handedness.Left;
+                return true;
+            }
+
+            if (RightHand is T)
             {
                 hand = Handedness.Right;
                 return true;
