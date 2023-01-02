@@ -7,7 +7,14 @@ namespace DonBigo
 {
     public class RangedWeaponItem : Item
     {
+        [Tooltip("Distância máxima de disparo.")]
         [SerializeField] private int range;
+        [Tooltip("Bônus somado na chance.")]
+        [SerializeField] private float accuracyBonus;
+        [Tooltip("A cada tile de distância, menos chance de acertar.")]
+        [SerializeField] private float distanceAccuracyPenalty;
+        [Tooltip("Se verdadeiro e atira quando adjacente, sempre acerta.")]
+        [SerializeField] private bool isPointBlankGuaranteed = true;
         [SerializeField] private DamageData damage;
 
         
@@ -31,10 +38,24 @@ namespace DonBigo
             return true;
         }
 
+        private bool ShouldHit(Tile from, Tile target)
+        {
+            if (isPointBlankGuaranteed && from.Pos.AdjacentTo(target.Pos)) return true;
+            float distance = from.Pos.ManhattanDistance(target.Pos) * 0.1f;
+            float chanceToHit = 100 - (distance * distanceAccuracyPenalty) + accuracyBonus;
+            float random = Random.Range(0f, 100f);
+            
+            Debug.Log($"{chanceToHit} = 100 - ({distance} * {distanceAccuracyPenalty}) + {accuracyBonus}");
+            Debug.Log($"{random} {(random < chanceToHit ? "<" : ">")} {chanceToHit} : {(random < chanceToHit ? "HIT" : "MISS")}");
+            return random < chanceToHit;
+        }
+        
         protected override void UseAction(Entity doer, Tile target)
         {
-            //TODO lidar com algum tipo de aleatoriedade na hora de decidir se a bala acertou ou não?
-            damage.Apply(target.Entity.Health);
+            if (ShouldHit(doer.Tile, target))
+            {
+                damage.Apply(target.Entity.Health);    
+            }
         }
     }
 }

@@ -47,7 +47,6 @@ namespace DonBigo.AI
 
         public override Action Tick()
         {
-            //TODO Quando tivermos os novos itens, isso aqui deverá ser adaptado para diferentes tipos de "armas".
             //Melee: só ataca quando chega no player
             //Ranged: tenta atacar da distância que der
             //Trap: tenta colocar no caminho do player, ou entre si e o player (se tiver ranged)

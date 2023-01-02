@@ -10,7 +10,6 @@ namespace DonBigo.AI
         protected override AIState OnTick(AIWorker worker, out AIObjective objective)
         {
             var entity = worker.Owner;
-            //TODO Desse jeito, ele para de fugir/perseguir quando perde o inimigo de vista, o que é bem ineficaz.
             if (!entity.SeesPlayer)
             {
                 objective = null;

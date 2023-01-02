@@ -100,6 +100,9 @@ MonoBehaviour:
   itemType: {fileID: 11400000, guid: 07d80df6e8637794c99d6ae486ec9ef1, type: 2}
   cooldownTurns: 5
   range: 200
+  accuracyBonus: 0
+  distanceAccuracyPenalty: 10
+  isPointBlankGuaranteed: 1
   damage:
     lethal: 0
     stunTurns: 20
