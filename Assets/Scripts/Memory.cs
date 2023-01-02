@@ -31,6 +31,8 @@ namespace DonBigo
 
         public bool IsDeadEnd(RoomInstance room) => _recordedDeadEnds.Contains(room);
 
+        public Tile LastSeenTile(TileObject obj) => _locationMemory.GetOrDefault(obj);
+
         public void RememberBeingAt(Tile tile)
         {
             RoomInstance room = tile.ParentGrid.RoomAt(tile.Pos);

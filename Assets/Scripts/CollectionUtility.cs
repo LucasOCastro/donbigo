@@ -60,5 +60,10 @@ namespace DonBigo
             if (dict.ContainsKey(key)) dict[key] = val;
             else dict.Add(key, val);
         }
+
+        public static T2 GetOrDefault<T1, T2>(this Dictionary<T1, T2> dict, T1 key, T2 def = default)
+        {
+            return dict.TryGetValue(key, out T2 val) ? val : def;
+        }
     }
 }

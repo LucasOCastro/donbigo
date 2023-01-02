@@ -4,13 +4,14 @@ namespace DonBigo.AI
 {
     public abstract class AIObjective
     {
-        public Entity Doer { get; }
+        public AIWorker Worker { get; }
+        public Entity Doer => Worker.Owner;
         
         public abstract bool Completed { get; }
 
-        public AIObjective(Entity doer)
+        public AIObjective(AIWorker worker)
         {
-            Doer = doer;
+            Worker = worker;
         }
         
         /// <returns>Uma ação a executar.</returns>

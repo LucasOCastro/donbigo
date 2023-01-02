@@ -1,5 +1,3 @@
-using DonBigo.Rooms;
-
 namespace DonBigo.AI
 {
     public class WanderState : AIState
@@ -54,11 +52,11 @@ namespace DonBigo.AI
             Item targetItem = FindItemToPickup(entity, out var handedness);
             if (targetItem != null)
             {
-                objective = new PickupItemObjective(entity, targetItem, handedness);
+                objective = new PickupItemObjective(worker, targetItem, handedness);
                 return null;
             }
 
-            objective = new WanderDoorObjective(entity);
+            objective = new WanderDoorObjective(worker);
             return null;
         }
     }

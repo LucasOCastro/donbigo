@@ -21,7 +21,7 @@ namespace DonBigo.AI
             return to.Pos.ManhattanDistance(fleeFrom.Tile.Pos);
         }
 
-        public FleeObjective(Entity doer, Entity fleeFrom, float fightBackChance) : base(doer, null,
+        public FleeObjective(AIWorker worker, Entity fleeFrom, float fightBackChance) : base(worker, null,
             (t1, t2) => CalcExtraTileCost(t1, t2, fleeFrom))
         {
             _fleeFrom = fleeFrom;

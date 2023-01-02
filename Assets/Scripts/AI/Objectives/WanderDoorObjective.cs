@@ -7,7 +7,7 @@ namespace DonBigo.AI
     public class WanderDoorObjective : GoToTargetObjective
     {
         private RoomExit? _bestExit;
-        public WanderDoorObjective(Entity doer) : base(doer, null)
+        public WanderDoorObjective(AIWorker worker) : base(worker, null)
         {
         }
 
@@ -18,7 +18,10 @@ namespace DonBigo.AI
         {
             const float recentDoorWeight = 5f;
             const float fullyExploredPenalty = 30f;
-            const float lastVisitedPenalty = 20f;
+            const float lastVisitedPenalty = 50f;
+
+            const float distanceFromPlayerStrongWeight = 20f;
+            const float distanceFromPlayerWeakWeight = 100f;
             
             float score = 1000f;
             
@@ -34,6 +37,17 @@ namespace DonBigo.AI
             {
                 score -= fullyExploredPenalty;
             }
+
+            Tile lastSeenPlayerTile = Doer.Memory.LastSeenTile(CharacterManager.DonBigo);
+            if (lastSeenPlayerTile != null)
+            {
+                var grid = Doer.Tile.ParentGrid;
+                if (door.FinalRoom(grid) == grid.RoomAt(lastSeenPlayerTile.Pos))
+                {
+                    score += Worker.FeelsStrong ? distanceFromPlayerStrongWeight : -distanceFromPlayerWeakWeight;
+                }
+            }
+            
             
             Debug.Log("visited at "+door.Position+" got score " + score + " with ord = " + visitedOrder + " and fully visited = "+Doer.Memory.RoomFullyExplored(finalRoom));
 

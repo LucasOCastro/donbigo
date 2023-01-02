@@ -6,7 +6,7 @@ namespace DonBigo.AI
     {
         private PathFinding.CostFunc _costFunc;
         protected ITileGiver _target;
-        protected GoToTargetObjective(Entity doer, ITileGiver target, PathFinding.CostFunc costFunc = null) : base(doer)
+        protected GoToTargetObjective(AIWorker worker, ITileGiver target, PathFinding.CostFunc costFunc = null) : base(worker)
         {
             _target = target;
             _costFunc = costFunc;

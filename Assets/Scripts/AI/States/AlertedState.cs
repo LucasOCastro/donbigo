@@ -20,9 +20,9 @@ namespace DonBigo.AI
             var player = CharacterManager.DonBigo;
             if (_attackObjective == null || _fleeObjective == null)
             {
-                _attackObjective = new AttackEntityObjective(entity, player);
+                _attackObjective = new AttackEntityObjective(worker, player);
                 //TODO lidar com essa fightBackChance
-                _fleeObjective = new FleeObjective(entity, player, 1);
+                _fleeObjective = new FleeObjective(worker, player, 1);
             }
             
             if (player.Health.HasStatusOfType<StunStatus>())

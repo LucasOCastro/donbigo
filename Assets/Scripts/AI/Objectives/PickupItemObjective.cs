@@ -6,8 +6,8 @@ namespace DonBigo.AI
     {
         private Inventory.Handedness _handedness;
         private Item _targetItem;
-        public PickupItemObjective(Entity entity, Item targetItem, Inventory.Handedness handedness) 
-            : base(entity, targetItem)
+        public PickupItemObjective(AIWorker worker, Item targetItem, Inventory.Handedness handedness) 
+            : base(worker, targetItem)
         {
             _handedness = handedness;
             _targetItem = targetItem;

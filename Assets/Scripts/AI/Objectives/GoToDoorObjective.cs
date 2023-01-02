@@ -6,7 +6,7 @@ namespace DonBigo.AI
     public class GoToDoorObjective : GoToTargetObjective
     {
         private RoomExit _door;
-        public GoToDoorObjective(Entity doer, RoomExit door) : base(doer, doer.Tile.ParentGrid[door.Position])
+        public GoToDoorObjective(AIWorker worker, RoomExit door) : base(worker, worker.Owner.Tile.ParentGrid[door.Position])
         {
             _door = door;
         }

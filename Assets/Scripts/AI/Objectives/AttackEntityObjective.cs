@@ -7,7 +7,7 @@ namespace DonBigo.AI
     public class AttackEntityObjective : GoToTargetObjective
     {
         private HealthManager _targetHealth;
-        public AttackEntityObjective(Entity doer, Entity target) : base(doer, target)
+        public AttackEntityObjective(AIWorker worker, Entity target) : base(worker, target)
         {
             _targetHealth = target.Health;
         }
