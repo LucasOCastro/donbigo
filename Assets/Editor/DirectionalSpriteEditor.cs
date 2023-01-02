@@ -32,16 +32,6 @@ public class DirectionalSpriteEditor : PropertyDrawer
 
     private bool _foldout;
 
-    /*public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-    {
-        float baseHeight = base.GetPropertyHeight(property, label);
-        if (!_foldout) return baseHeight;
-
-        return baseHeight + 3 * BoxHeight;
-        
-        return base.GetPropertyHeight(property, label);
-    }*/
-
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         var prop = property.FindPropertyRelative(SpritesPropertyName);

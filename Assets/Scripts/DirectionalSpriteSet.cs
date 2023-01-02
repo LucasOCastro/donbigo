@@ -24,7 +24,7 @@ namespace DonBigo
         {
             if (sprites.Length != SpriteOrder.Length)
             {
-                Debug.LogError("Quantidade de sprite diferente do necessário!");
+                Debug.LogError($"Quantidade de sprite diferente do necessário! Era pra ser {SpriteOrder.Length} mas é {sprites.Length}");
                 return null;
             }
             

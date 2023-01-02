@@ -105,91 +105,154 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Don_Bigo_0
+      name: Don_Bigo_Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cbf6578c16a8cf1f815d3dfd8f91058
-      internalID: 2025868588
+      spriteID: 53c5a1e0b082daa41ba0a190fc008bfd
+      internalID: -545652696
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Don_Bigo_1
+      name: Don_Bigo_Sheet_1
       rect:
         serializedVersion: 2
         x: 64
         y: 0
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 02cc9b5bdc46b1fe887ebb8f522ffc17
-      internalID: 1900576552
+      spriteID: 226551f33fea70f428f63257c164bacc
+      internalID: 1170818007
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Don_Bigo_2
+      name: Don_Bigo_Sheet_2
       rect:
         serializedVersion: 2
         x: 128
         y: 0
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f8ec6a0c78d56e3f99f3c9189e73971
-      internalID: -919410305
+      spriteID: f940ea6679501d94ead58bb4234ec82a
+      internalID: 407434976
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Don_Bigo_3
+      name: Don_Bigo_Sheet_3
       rect:
         serializedVersion: 2
         x: 192
         y: 0
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ff35da7ceea36a6ebbac6c655f7780e
-      internalID: 1660204997
+      spriteID: 2dd2741c2a0c3d741ae5fe339d1f3eed
+      internalID: -1594977684
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Don_Bigo_7
+      name: Don_Bigo_Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99b8571e00dfd9c45bf72ab371078a21
+      internalID: -1597406669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Don_Bigo_Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bcd65d303d76a343b9facf80a3aa2a4
+      internalID: -1282757444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Don_Bigo_Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5, y: 0.1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0599e46eadbab914b852e1491402b701
+      internalID: 1503002100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Don_Bigo_Sheet_7
       rect:
         serializedVersion: 2
         x: 448
@@ -203,71 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 816ee73355a3d1443ba572d4559f1869
-      internalID: -1554543321
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Don_Bigo_6
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bb38b025d34d96ff1adfae88876f8311
-      internalID: -1271518777
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Don_Bigo_5
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fb9b02f1a5e495ea58fa7817b7c1ad7a
-      internalID: -1383631253
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Don_Bigo_4
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e74ad2dbf160269d1b561d594ba8f92e
-      internalID: 178418352
+      spriteID: 1758b0bd2cfc98742bcee3477486aadc
+      internalID: -568214262
       vertices: []
       indices: 
       edges: []
@@ -283,14 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Don_Bigo_1: 1900576552
-      Don_Bigo_3: 1660204997
-      Don_Bigo_4: 178418352
-      Don_Bigo_0: 2025868588
-      Don_Bigo_7: -1554543321
-      Don_Bigo_5: -1383631253
-      Don_Bigo_6: -1271518777
-      Don_Bigo_2: -919410305
+      Don_Bigo_Sheet_2: 407434976
+      Don_Bigo_Sheet_4: -1597406669
+      Don_Bigo_Sheet_7: -568214262
+      Don_Bigo_Sheet_1: 1170818007
+      Don_Bigo_Sheet_6: 1503002100
+      Don_Bigo_Sheet_0: -545652696
+      Don_Bigo_Sheet_3: -1594977684
+      Don_Bigo_Sheet_5: -1282757444
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

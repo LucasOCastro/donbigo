@@ -8,9 +8,9 @@ namespace DonBigo
         public static CharacterManager Instance { get; private set; }
         
         public static Bigodon DonBigo { get; private set; }
-        [SerializeField] private Sprite[] donbigoSprite;
+        [SerializeField] private DirectionalSpriteSet donbigoSprite;
         public static Phantonette Phantonette { get; private set; }
-        [SerializeField] private Sprite[] phantonetteSprite;
+        [SerializeField] private DirectionalSpriteSet phantonetteSprite;
 
         private void Start()
         {
@@ -25,16 +25,14 @@ namespace DonBigo
             Spawner spawner = new Spawner();
             // Geração do Don Bigo
             DonBigo = new GameObject("Player", typeof(SpriteRenderer), typeof(Bigodon)).GetComponent<Bigodon>();
-            SpriteRenderer DBRenderer = DonBigo.GetComponent<SpriteRenderer>();
-            DBRenderer.sprite = donbigoSprite[7];
+            DonBigo.SpriteSet = donbigoSprite;
             DonBigo.tag = "Player";
             // Abaixo setar a posição quando tiver um Spawn implementado vvvvvvvvvvvvv
             spawner.Spawn(GridManager.Instance.Grid, DonBigo.GetComponent<Entity>());
             
             // Geração da Phantonette
             Phantonette = new GameObject("Foe", typeof(SpriteRenderer), typeof(Phantonette)).GetComponent<Phantonette>();
-            SpriteRenderer PTRenderer = Phantonette.GetComponent<SpriteRenderer>();
-            PTRenderer.sprite = phantonetteSprite[7];
+            Phantonette.SpriteSet = phantonetteSprite;
             // Abaixo setar a posição quando tiver um Spawn implementado vvvvvvvvvvvvv
             spawner.Spawn(GridManager.Instance.Grid, Phantonette.GetComponent<Entity>());
             

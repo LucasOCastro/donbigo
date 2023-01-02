@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using DonBigo.Actions;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Action = DonBigo.Actions.Action;
 
 namespace DonBigo
 {
@@ -11,6 +12,7 @@ namespace DonBigo
         public Inventory Inventory { get; private set; }
         public HealthManager Health { get; private set; }
         public Memory Memory { get; } = new();
+        public DirectionalSpriteSet SpriteSet { get; set; }
 
         protected override void Awake()
         {
@@ -33,6 +35,8 @@ namespace DonBigo
                     _tile.Entity = null;
                 }
 
+                Renderer.sprite = SpriteSet.GetDirectionalSprite(_tile, value);
+                
                 _tile = value;
                 if (_tile != null)
                 {
