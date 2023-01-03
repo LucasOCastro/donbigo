@@ -17,6 +17,8 @@ namespace DonBigo.UI
         [SerializeField] private string creditsOpenAnimationName;
         [SerializeField] private string creditsCloseAnimationName;
 
+        [SerializeField] private GameObject[] objectsToDestroyWhenPlay;
+
         private Animator _animator;
         private void Awake()
         {
@@ -48,9 +50,25 @@ namespace DonBigo.UI
         
         private IEnumerator PlayCoroutine()
         {
+            Scene menuScene = SceneManager.GetActiveScene();
+            GameObject canvas = transform.parent.gameObject;
+            
+            //Desativa botões e destroi os objetos que nao poderão existir na proxima cena
             SetButtons(false);
+            foreach (var obj in objectsToDestroyWhenPlay) 
+                Destroy(obj);
+            
+            //Carrega o jogo no fundo, move o canvas com a animação pra nova cena e ativa ela
+            Scene playScene = SceneManager.LoadScene(playSceneID, new LoadSceneParameters(LoadSceneMode.Additive));
+            yield return null; //Precisa esperar um frame pra terminar de carregar
+            SceneManager.MoveGameObjectToScene(canvas, playScene);
+            SceneManager.SetActiveScene(playScene);
+            
+            //Descarrega a cena do menu, toca a animação e destroy esse objeto
+            //var asyncUnload = SceneManager.UnloadSceneAsync(menuScene);
+            //yield return new WaitUntil(() => asyncUnload.isDone);
             yield return PlayAndAwaitAnimationCoroutine(playAnimationName);
-            SceneManager.LoadScene(playSceneID);
+            Destroy(canvas);
         }
 
         private IEnumerator CreditsCoroutine()

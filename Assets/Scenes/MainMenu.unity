@@ -755,6 +755,9 @@ MonoBehaviour:
   playAnimationName: MenuToPlay
   creditsOpenAnimationName: MenuToCredits
   creditsCloseAnimationName: CreditsToMenu
+  objectsToDestroyWhenPlay:
+  - {fileID: 1406607162}
+  - {fileID: 2089498785}
 --- !u!95 &1690500385
 Animator:
   serializedVersion: 4
