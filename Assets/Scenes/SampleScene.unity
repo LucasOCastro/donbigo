@@ -154,23 +154,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   donbigoSprite:
-  - {fileID: 2025868588, guid: eddf737b918569b379d3539758086592, type: 3}
-  - {fileID: 1900576552, guid: eddf737b918569b379d3539758086592, type: 3}
-  - {fileID: -919410305, guid: eddf737b918569b379d3539758086592, type: 3}
-  - {fileID: 1660204997, guid: eddf737b918569b379d3539758086592, type: 3}
-  - {fileID: 178418352, guid: eddf737b918569b379d3539758086592, type: 3}
-  - {fileID: -1383631253, guid: eddf737b918569b379d3539758086592, type: 3}
-  - {fileID: -1271518777, guid: eddf737b918569b379d3539758086592, type: 3}
-  - {fileID: -1554543321, guid: eddf737b918569b379d3539758086592, type: 3}
+    sprites:
+    - {fileID: 1170818007, guid: eddf737b918569b379d3539758086592, type: 3}
+    - {fileID: 407434976, guid: eddf737b918569b379d3539758086592, type: 3}
+    - {fileID: -1594977684, guid: eddf737b918569b379d3539758086592, type: 3}
+    - {fileID: -1597406669, guid: eddf737b918569b379d3539758086592, type: 3}
+    - {fileID: -1282757444, guid: eddf737b918569b379d3539758086592, type: 3}
+    - {fileID: 1503002100, guid: eddf737b918569b379d3539758086592, type: 3}
+    - {fileID: -568214262, guid: eddf737b918569b379d3539758086592, type: 3}
+    - {fileID: -545652696, guid: eddf737b918569b379d3539758086592, type: 3}
   phantonetteSprite:
-  - {fileID: 505271935, guid: c71578125c39858ac9cd7587b392895e, type: 3}
-  - {fileID: -1508628535, guid: c71578125c39858ac9cd7587b392895e, type: 3}
-  - {fileID: -1311859326, guid: c71578125c39858ac9cd7587b392895e, type: 3}
-  - {fileID: -982791034, guid: c71578125c39858ac9cd7587b392895e, type: 3}
-  - {fileID: -895261654, guid: c71578125c39858ac9cd7587b392895e, type: 3}
-  - {fileID: 1166364138, guid: c71578125c39858ac9cd7587b392895e, type: 3}
-  - {fileID: -1755396380, guid: c71578125c39858ac9cd7587b392895e, type: 3}
-  - {fileID: 1999109991, guid: c71578125c39858ac9cd7587b392895e, type: 3}
+    sprites:
+    - {fileID: -1902928597, guid: c71578125c39858ac9cd7587b392895e, type: 3}
+    - {fileID: -161031532, guid: c71578125c39858ac9cd7587b392895e, type: 3}
+    - {fileID: 421969019, guid: c71578125c39858ac9cd7587b392895e, type: 3}
+    - {fileID: -2078092750, guid: c71578125c39858ac9cd7587b392895e, type: 3}
+    - {fileID: 450640217, guid: c71578125c39858ac9cd7587b392895e, type: 3}
+    - {fileID: 1503044075, guid: c71578125c39858ac9cd7587b392895e, type: 3}
+    - {fileID: 997358209, guid: c71578125c39858ac9cd7587b392895e, type: 3}
+    - {fileID: 823895464, guid: c71578125c39858ac9cd7587b392895e, type: 3}
 --- !u!4 &6447304
 Transform:
   m_ObjectHideFlags: 0

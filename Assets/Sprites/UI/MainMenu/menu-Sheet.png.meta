@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c71578125c39858ac9cd7587b392895e
+guid: 5eb3b4f855df4094db6033b997c75437
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -105,169 +105,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Phantonette_Sheet_0
+      name: menu-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        width: 200
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0d45aaec16d45404c8972f8a5514f644
-      internalID: 823895464
+      spriteID: 6234aa69d0d785c41bc494f36e2ff29a
+      internalID: -1777030952
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phantonette_Sheet_1
+      name: menu-Sheet_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 200
         y: 0
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        width: 200
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 41ca5245b56be7644ae1706b02487fc6
-      internalID: -1902928597
+      spriteID: c3e413d2423ef014ea0159ea772b7a36
+      internalID: 1863292185
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phantonette_Sheet_2
+      name: menu-Sheet_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 400
         y: 0
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        width: 200
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb3e84cbe99552745948e3fbc01bfb9c
-      internalID: -161031532
+      spriteID: 1fe1916af291da04a95078c47f1ccd05
+      internalID: 1464776903
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phantonette_Sheet_3
+      name: menu-Sheet_3
       rect:
         serializedVersion: 2
-        x: 192
+        x: 600
         y: 0
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        width: 200
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73b75f8dbb634d1458bc24b6ac58ae11
-      internalID: 421969019
+      spriteID: eb2dce35c92bb4c419712ee2bfec7708
+      internalID: -218446980
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phantonette_Sheet_4
+      name: menu-Sheet_4
       rect:
         serializedVersion: 2
-        x: 256
+        x: 800
         y: 0
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        width: 200
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54386de2e7b303e42ab48d00fa53bf24
-      internalID: -2078092750
+      spriteID: a6e810350ec6a9b438fd5ba87c8bc929
+      internalID: 922134018
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phantonette_Sheet_5
+      name: menu-Sheet_5
       rect:
         serializedVersion: 2
-        x: 320
+        x: 1000
         y: 0
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        width: 200
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d1fe0eec2acdac545b73d324bf723ea8
-      internalID: 450640217
+      spriteID: 8f437f9ea081eda4891e9dae3cd6cc00
+      internalID: 262002569
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Phantonette_Sheet_6
+      name: menu-Sheet_6
       rect:
         serializedVersion: 2
-        x: 384
+        x: 1200
         y: 0
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
+        width: 200
+        height: 150
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46b2fe6ff8d42ca459cdaa019a54303c
-      internalID: 1503044075
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Phantonette_Sheet_7
-      rect:
-        serializedVersion: 2
-        x: 448
-        y: 0
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.5, y: 0.1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 413d7589b79aa2846af2b0b6051ca595
-      internalID: 997358209
+      spriteID: e716196213b396f4385d03f32211c9e1
+      internalID: -624299926
       vertices: []
       indices: 
       edges: []
@@ -283,14 +262,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Phantonette_Sheet_4: -2078092750
-      Phantonette_Sheet_6: 1503044075
-      Phantonette_Sheet_2: -161031532
-      Phantonette_Sheet_5: 450640217
-      Phantonette_Sheet_7: 997358209
-      Phantonette_Sheet_3: 421969019
-      Phantonette_Sheet_0: 823895464
-      Phantonette_Sheet_1: -1902928597
+      menu-Sheet_5: 262002569
+      menu-Sheet_1: 1863292185
+      menu-Sheet_3: -218446980
+      menu-Sheet_2: 1464776903
+      menu-Sheet_0: -1777030952
+      menu-Sheet_4: 922134018
+      menu-Sheet_6: -624299926
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

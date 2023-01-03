@@ -8,6 +8,7 @@ namespace DonBigo.Actions
     public class TurnManager : MonoBehaviour
     {
         [SerializeField] private float turnDurationSeconds = 1f;
+        public float TurnDuration => turnDurationSeconds;
 
         public static TurnManager Instance { get; private set; }
         public static int CurrentTurn { get; private set; }
