@@ -21,7 +21,8 @@ namespace DonBigo.Actions
 
         public override void Execute()
         {
-            Doer.Tile = _target;
+            //Doer.Tile = _target;
+            Doer.TranslateToTile(_target, TurnManager.Instance.TurnDuration);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using DonBigo.Actions;
 using UnityEngine;
 using Action = DonBigo.Actions.Action;
 
@@ -22,6 +24,12 @@ namespace DonBigo
         }
 
 
+        private static Vector3 TileWorldPos(Tile tile)
+        {
+            Vector3 worldPos = tile.ParentGrid.TileToWorld(tile);
+            worldPos.z = 2.5f;
+            return worldPos;
+        }
         private Tile _tile;
         public override Tile Tile
         {
@@ -40,9 +48,8 @@ namespace DonBigo
                 _tile = value;
                 if (_tile != null)
                 {
-                    Vector3 worldPos = _tile.ParentGrid.TileToWorld(_tile);
-                    worldPos.z = 2;
-                    transform.position = worldPos;
+                    transform.position = TileWorldPos(_tile);
+                    //_currentMoveCoroutine = StartCoroutine(MoveTransformCoroutine(worldPos));
 
                     var oldVisible = VisibleTiles;
                     VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
@@ -58,6 +65,51 @@ namespace DonBigo
                 }
             }
         }
+
+        private Coroutine _currentMoveCoroutine;
+        public void TranslateToTile(Tile tile, float time)
+        {
+            if (_currentMoveCoroutine != null)
+            {
+                StopCoroutine(_currentMoveCoroutine);
+                _currentMoveCoroutine = null;
+            }
+            
+            _currentMoveCoroutine = StartCoroutine(MoveTransformCoroutine(tile, time));
+        }
+
+        private IEnumerator MoveTransformCoroutine(Tile targetTile, float time)
+        {
+            Renderer.sprite = SpriteSet.GetDirectionalSprite(Tile, targetTile);
+            Vector3 targetPos = TileWorldPos(targetTile);
+
+            float distance = (targetPos - transform.position).magnitude;
+            float speed = distance / time;
+            while (transform.position != targetPos)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+                yield return null;
+            }
+            _currentMoveCoroutine = null;
+            Tile = targetTile;
+        }
+        
+        /*private Coroutine _currentMoveCoroutine;
+        private IEnumerator MoveTransformCoroutine(Vector3 to, float time)
+        {
+            if (_currentMoveCoroutine != null)
+            {
+                StopCoroutine(_currentMoveCoroutine);
+            }
+
+            float distance = (to - transform.position).magnitude;
+            float speed = distance / TurnManager.Instance.TurnDuration;
+            while (transform.position != to)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, to, speed * Time.deltaTime);
+                yield return null;
+            }
+        }*/
 
         public abstract Action GetAction();
         
