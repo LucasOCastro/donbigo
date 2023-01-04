@@ -75,10 +75,15 @@ namespace DonBigo
             {
                 return false;
             }
+            
+            //Tile de outra sala nao é visivel
+            if (grid.RoomAt(tile) != sourceRoom)
+            {
+                return true;
+            }
 
             //Nao quero mostrar a parede das salas de baixo, nem as paredes internas que obstruem a visão
-            if (isWall && 
-            (grid.RoomAt(tile) != sourceRoom || (tile.x < source.x && tile.y < source.y)))
+            if (isWall && tile.x < source.x && tile.y < source.y)
             {
                 return true;
             }
