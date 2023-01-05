@@ -29,7 +29,7 @@ namespace DonBigo
         public static RoomInstance FinalRoom(this RoomExit exit, GameGrid grid)
         {
             Tile finalTile = exit.FinalTile(grid);
-            return (finalTile == null) ? null : grid.RoomAt(finalTile.Pos);
+            return finalTile?.Room;
         }
     }
 }

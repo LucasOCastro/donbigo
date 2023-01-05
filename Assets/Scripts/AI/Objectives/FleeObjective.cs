@@ -54,7 +54,7 @@ namespace DonBigo.AI
         }
         private RoomExit? GetBestExit()
         {
-            var currentRoom = Doer.Tile.ParentGrid.RoomAt(Doer.Tile.Pos);
+            var currentRoom = Doer.Tile.Room;
 
             RoomExit? bestExit = null;
             float bestScore = 0;

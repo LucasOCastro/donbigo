@@ -42,7 +42,7 @@ namespace DonBigo.AI
             if (lastSeenPlayerTile != null)
             {
                 var grid = Doer.Tile.ParentGrid;
-                if (door.FinalRoom(grid) == grid.RoomAt(lastSeenPlayerTile.Pos))
+                if (door.FinalRoom(grid) == lastSeenPlayerTile.Room)
                 {
                     score += Worker.FeelsStrong ? distanceFromPlayerStrongWeight : -distanceFromPlayerWeakWeight;
                 }
@@ -56,7 +56,7 @@ namespace DonBigo.AI
         
         private RoomExit? FindRandomExit()
         {
-            var room = Doer.Tile.ParentGrid.RoomAt(Doer.Tile.Pos);
+            var room = Doer.Tile.Room;
             return room.Doors.RandomElementByWeight(CalcDoorScore);
         }
 

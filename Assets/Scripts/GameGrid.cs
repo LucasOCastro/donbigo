@@ -73,9 +73,6 @@ namespace DonBigo
             Vector2Int pos = MouseOverPos();
             return InBounds(pos) ? this[pos] : null;
         }
-        
-        //Não é muito otimizado
-        public RoomInstance RoomAt(Vector2Int pos) => _rooms.Find(r => r.Bounds.Contains(pos));
 
         public List<RoomInstance> AllRooms => _rooms;
 
@@ -94,12 +91,12 @@ namespace DonBigo
             }
         }
 
-        public GameGrid(int size, Tilemap tilemap)
+        public GameGrid(int size, Tilemap tilemap, TileType filler)
         {
             Size = size;
             _tilemap = tilemap;
             _tiles = new Tile[size, size];
-            _rooms = MapGen.Gen(this, tilemap);
+            _rooms = MapGen.Gen(this, tilemap, filler);
         }
     }
 }

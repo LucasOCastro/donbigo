@@ -24,6 +24,11 @@ namespace DonBigo.Rooms
             }
         }
 
+        public RoomInstance()
+        {
+            Doors = new List<RoomExit>();
+        }
+
         public bool IsOuterWall(Tile tile)
         {
             return Bounds.Contains(tile.Pos) && (tile.Pos.x == Bounds.xMax - 1 || tile.Pos.y == Bounds.yMax - 1);

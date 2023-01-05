@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace DonBigo
 {
@@ -17,7 +18,19 @@ namespace DonBigo
             Vector2Int absDif = (b - a).Abs();
             return absDif.x < 2 && absDif.y < 2;
         }
-        
+
+        public static IEnumerable<Vector2Int> Neighbors(this Vector2Int vec)
+        {
+            for (int x = -1; x <= 1; x++)
+            {
+                for (int y = -1; y <= 1; y++)
+                {
+                    if (x == 0 && y == 0) continue;
+                    yield return vec + new Vector2Int(x, y);
+                }
+            }
+        }
+
         //http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html
         //Mistura de Manhattan Distance com Chebyshev e Octile, para permitir movimentos diagonais.
         public static int ManhattanDistance(this Vector2Int a, Vector2Int b)

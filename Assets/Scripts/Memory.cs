@@ -35,7 +35,7 @@ namespace DonBigo
 
         public void RememberBeingAt(Tile tile)
         {
-            RoomInstance room = tile.ParentGrid.RoomAt(tile.Pos);
+            RoomInstance room = tile.Room;
             if (_visitedRooms.Contains(room))
             {
                 _roomVisitMemory.Remove(room);

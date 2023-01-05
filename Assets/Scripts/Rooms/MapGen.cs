@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -17,7 +18,7 @@ namespace DonBigo.Rooms
                 for (int y = 0; y < room.Size.y; y++)
                 {
                     Vector2Int worldPos = new Vector2Int(x, y) + min;
-                    grid[worldPos] = new Tile(worldPos, room.Tiles[x, y], grid);
+                    grid[worldPos] = new Tile(worldPos, room.Tiles[x, y], grid, roomInstance);
                 }
             }
 
@@ -36,9 +37,10 @@ namespace DonBigo.Rooms
             }
         }
 
-        //Nem um pouco eficiente. Acho que RoomExit deveria ter sido uma classe desde o começo.;
-        private static void UnregisterDoor(RoomExit door, List<RoomInstance> rooms)
+        //Nem um pouco eficiente. Acho que RoomExit deveria ter sido uma classe desde o começo.
+        private static void UnregisterDoor(RoomExit door, List<RoomInstance> rooms, GameGrid grid, Tilemap tilemap)
         {
+            door.Marker.SetInactive(grid, tilemap, door.Position);
             foreach (var room in rooms)
             {
                 for (int i = 0; i < room.Doors.Count; i++)
@@ -52,8 +54,80 @@ namespace DonBigo.Rooms
             }
         }
 
+        private static void FloodFill(Vector2Int start, Predicate<Vector2Int> condition, Action<Vector2Int> action)
+        {
+            HashSet<Vector2Int> closedSet = new();
+            Stack<Vector2Int> stack = new();
+            stack.Push(start);
+            closedSet.Add(start);
+            while (stack.Count > 0)
+            {
+                Vector2Int tile = stack.Pop();
+                action(tile);
+                foreach (var neighbor in tile.Neighbors())
+                {
+                    if (!closedSet.Contains(neighbor) && condition(neighbor))
+                    {
+                        stack.Push(neighbor);
+                        closedSet.Add(neighbor);
+                    }
+                }
+            }
+        }
+
+        private static void FillInternal(GameGrid grid, Tilemap tilemap, List<RoomExit> badExits,
+            List<RoomInstance> rooms, TileType filler)
+        {
+            bool IsGoodInternal(List<Vector2Int> tiles)
+            {
+                if (tiles.Count == 0) return false;
+                //Excluindo os internos que tocam nas bordas da grid
+                Vector2Int min = grid.Bounds.min;
+                Vector2Int max = grid.Bounds.max - Vector2Int.one;
+                return tiles.All(t => (t.x != min.x) && (t.y != min.y) && (t.x != max.x) && (t.y != max.y));
+            }
+
+            HashSet<Vector2Int> badSet = new HashSet<Vector2Int>();
+            foreach (var exit in badExits)
+            {
+                Vector2Int startPos = exit.Position + exit.DirectionVector;
+                //Já decidi que aqui nao forma interno bom, então tira a porta
+                if (badSet.Contains(startPos) || !grid.InBounds(startPos))
+                {
+                    UnregisterDoor(exit, rooms, grid, tilemap);
+                    continue;
+                }
+                //Já foi preenchido com jardim, então nao tem o que fazer
+                if (grid[startPos] != null) continue; 
+
+                List<Vector2Int> internalTiles = new();
+                FloodFill(startPos, 
+                    p => grid.InBounds(p) && grid[p] == null, 
+                    p => internalTiles.Add(p));
+
+                if (!IsGoodInternal(internalTiles))
+                {
+                    Debug.Log("bad internal: " + internalTiles[0]);
+                    UnregisterDoor(exit, rooms, grid, tilemap);
+                    foreach (Vector2Int badTile in internalTiles)
+                    {
+                        badSet.Add(badTile);
+                    }
+                    continue;
+                }
+
+                Debug.Log("good internal: "+internalTiles[0]);
+                RoomInstance roomInstance = new RoomInstance();
+                foreach (Vector2Int tile in internalTiles)
+                {
+                    grid[tile] = new Tile(tile, filler, grid, roomInstance);
+                    tilemap.SetTile((Vector3Int)tile, filler);
+                }
+            }
+        }
+
         
-        public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap)
+        public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap, TileType filler)
         {
             if (GridManager.Instance.DEBUG_TEST_ROOM != null)
             {
@@ -77,15 +151,16 @@ namespace DonBigo.Rooms
                 possibleDoors.Enqueue(door);
             }
 
+            List<RoomExit> badExits = new();
+            
             while (possibleDoors.Count > 0)
             {
                 RoomExit possibleDoor = possibleDoors.Dequeue();
                 randRoom = RoomDatabase.RandomRoomThatFits(grid, possibleDoor, out RoomExit chosenDoor);
                 if (randRoom == null) 
                 {
-                    //Se não cabe nenhuma sala nessa porta, então essa porta não será conectada a nada.
-                    possibleDoor.Marker.SetInactive(grid, tilemap, possibleDoor.Position);
-                    UnregisterDoor(possibleDoor, rooms);
+                    //Se não cabe nenhuma sala nessa porta, então podemos tentar criar um jardim interno.
+                    badExits.Add(possibleDoor);
                     continue;
                 }
                 //Ajustamos a posição em que a sala será colocada com base na posição da porta que será conectada.
@@ -101,6 +176,9 @@ namespace DonBigo.Rooms
                     possibleDoors.Enqueue(exit);
                 }
             }
+            
+            FillInternal(grid, tilemap, badExits, rooms, filler);
+            
             tilemap.CompressBounds();
             return rooms;
         }
