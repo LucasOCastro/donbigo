@@ -38,7 +38,7 @@ namespace DonBigo
 
             var grid = GridManager.Instance.Grid;
             if (FieldOfViewRenderer.Origin != null &&
-                grid.RoomAt(position) != grid.RoomAt(FieldOfViewRenderer.Origin.Tile.Pos))
+                grid[position].Room != FieldOfViewRenderer.Origin.Tile.Room)
             {
                 baseColor.a = 0;
                 return baseColor;
