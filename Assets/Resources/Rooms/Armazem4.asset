@@ -152,19 +152,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
+  - {fileID: 11400000, guid: 36423397f6e3f934d838f3c575fb7c4a, type: 2}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
+  - {fileID: 11400000, guid: 36423397f6e3f934d838f3c575fb7c4a, type: 2}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
+  - {fileID: 11400000, guid: 36423397f6e3f934d838f3c575fb7c4a, type: 2}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
   - {fileID: 0}
   - {fileID: 0}
@@ -267,11 +267,11 @@ MonoBehaviour:
     marker: {fileID: 11400000, guid: 2fdca22fc81ab134ebfc4238214fa78d, type: 2}
   structureTiles:
   - pos: {x: 1, y: 3, z: 5}
-    structure: {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
+    structure: {fileID: 11400000, guid: 36423397f6e3f934d838f3c575fb7c4a, type: 2}
   - pos: {x: 2, y: 3, z: 5}
-    structure: {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
+    structure: {fileID: 11400000, guid: 36423397f6e3f934d838f3c575fb7c4a, type: 2}
   - pos: {x: 3, y: 3, z: 5}
-    structure: {fileID: 11400000, guid: 92c6e68ea2d4bd74686911360f9e669c, type: 2}
+    structure: {fileID: 11400000, guid: 36423397f6e3f934d838f3c575fb7c4a, type: 2}
   transformOverrides: []
   possibleItems:
   - item: {fileID: 11400000, guid: 4301c384d53aaa84da9424935b8dabdf, type: 2}
