@@ -31,7 +31,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - {fileID: 0}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
   - {fileID: 0}
@@ -196,7 +196,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 11400000, guid: 21c98e89cad4ec148bba78109757e827, type: 2}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - {fileID: 0}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
   - {fileID: 0}
@@ -593,6 +593,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9cb39600de9903a4b8c37092c6bcefd3, type: 2}
   - {fileID: 11400000, guid: 21c98e89cad4ec148bba78109757e827, type: 2}
   doors:
+  - direction: 3
+    localPos: {x: 0, y: 5}
+    marker: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
+  - direction: 1
+    localPos: {x: 5, y: 0}
+    marker: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - direction: 0
     localPos: {x: 5, y: 11}
     marker: {fileID: 11400000, guid: 7c4d8e7e951218947923c0e8f6455a37, type: 2}
@@ -600,6 +606,10 @@ MonoBehaviour:
     localPos: {x: 11, y: 5}
     marker: {fileID: 11400000, guid: 7c4d8e7e951218947923c0e8f6455a37, type: 2}
   structureTiles:
+  - pos: {x: 0, y: 5, z: 1}
+    structure: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
+  - pos: {x: 5, y: 0, z: 1}
+    structure: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - pos: {x: 10, y: 1, z: 1}
     structure: {fileID: 11400000, guid: f389ea1b0a3f510439566b9a187cd24d, type: 2}
   - pos: {x: 10, y: 7, z: 1}
@@ -633,6 +643,24 @@ MonoBehaviour:
   - pos: {x: 8, y: 5, z: 2}
     structure: {fileID: 11400000, guid: 289cb820639a4664b8772ccbe18b6170, type: 2}
   transformOverrides:
+  - pos: {x: 0, y: 5, z: 1}
+    matrix:
+      e00: -1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   - pos: {x: 2, y: 1, z: 2}
     matrix:
       e00: -1

@@ -96,10 +96,11 @@ namespace DonBigo.Rooms
                 Tile tile = grid[pos];
                 StructureInstance mat = new StructureInstance(fillerMat, tile, matElevation);
                 tile.Structures.Add(mat);
+                tile.Room.Doors.Add(new RoomExit(pos, opposing.OpposedDirection, fillerMat));
 
                 Vector3Int tilemapPos = new Vector3Int(tile.Pos.x, tile.Pos.y, matElevation);
                 tilemap.SetTile(tilemapPos, fillerMat);
-                var matrix = Matrix4x4.identity;
+                var matrix = Matrix4x4.identity;// * Matrix4x4.Scale(new Vector3(opposing.DirectionVector.x != 0 ? -1 : 1, 1, 1));
                 tilemap.SetTransformMatrix(tilemapPos, matrix);
             }
 
@@ -199,8 +200,12 @@ namespace DonBigo.Rooms
                     possibleDoors.Enqueue(exit);
                 }
             }
+
+            if (filler != null && fillerMat != null)
+            {
+                FillInternal(grid, tilemap, badExits, rooms, filler, fillerMat);    
+            }
             
-            FillInternal(grid, tilemap, badExits, rooms, filler, fillerMat);
             
             tilemap.CompressBounds();
             return rooms;

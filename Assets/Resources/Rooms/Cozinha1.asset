@@ -46,7 +46,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 676f12403953f764d8efca46bdedd447, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -647,14 +647,24 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 894c8c67e1af0d546b63b8e3e333eb99, type: 2}
   - {fileID: 11400000, guid: 894c8c67e1af0d546b63b8e3e333eb99, type: 2}
   doors:
+  - direction: 3
+    localPos: {x: 0, y: 2}
+    marker: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
+  - direction: 1
+    localPos: {x: 5, y: 0}
+    marker: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - direction: 2
     localPos: {x: 8, y: 2}
     marker: {fileID: 11400000, guid: ac5bbde25c16811419f8778283a2b526, type: 2}
   structureTiles:
   - pos: {x: 0, y: 0, z: 1}
     structure: {fileID: 11400000, guid: f389ea1b0a3f510439566b9a187cd24d, type: 2}
+  - pos: {x: 0, y: 2, z: 1}
+    structure: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - pos: {x: 1, y: 8, z: 1}
     structure: {fileID: 11400000, guid: 20fa687cb6fab1a4ebd2f4bcb64fa855, type: 2}
+  - pos: {x: 5, y: 0, z: 1}
+    structure: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - pos: {x: 2, y: 8, z: 2}
     structure: {fileID: 11400000, guid: 0a4aa1c0cbfd92441b5abc8d6fd18910, type: 2}
   - pos: {x: 3, y: 2, z: 2}
@@ -698,6 +708,24 @@ MonoBehaviour:
   - pos: {x: 7, y: 6, z: 5}
     structure: {fileID: 11400000, guid: 0fee11063402f0a418c081f79c06ca9b, type: 2}
   transformOverrides:
+  - pos: {x: 0, y: 2, z: 1}
+    matrix:
+      e00: -1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   - pos: {x: 7, y: 0, z: 2}
     matrix:
       e00: -1

@@ -218,7 +218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &60745551
 Transform:
   m_ObjectHideFlags: 0
@@ -346,45 +346,45 @@ Tilemap:
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
-      e00: 5.7207293e-29
+      e00: -8.131523e-12
       e01: 0
-      e02: -1.4496416e+10
-      e03: -1.4496416e+10
-      e10: 7.72e-43
+      e02: -8.081546e-39
+      e03: -8.081546e-39
+      e10: 8.35e-43
       e11: 0
-      e12: 7.71e-43
-      e13: 7.71e-43
-      e20: -2.9988225e-23
-      e21: 1.7e-44
-      e22: 5.777833e-29
-      e23: 8.594915e+9
-      e30: 4.5905e-41
+      e12: 8.35e-43
+      e13: 8.35e-43
+      e20: -1.116805e-17
+      e21: 1e-45
+      e22: 2.1280224e-19
+      e23: 3.7154767e+19
+      e30: 4.5904e-41
       e31: 0
-      e32: 7.72e-43
-      e33: 7.75e-43
+      e32: 8.37e-43
+      e33: 8.4e-43
   - m_RefCount: 0
     m_Data:
       e00: 0
       e01: 0
-      e02: 3.3750038
-      e03: 3.3750038
+      e02: -8.081546e-39
+      e03: -8.081546e-39
       e10: 0
       e11: 0
-      e12: 6.99e-43
-      e13: 6.99e-43
-      e20: 9.965297e+12
+      e12: 8.35e-43
+      e13: 8.35e-43
+      e20: -1.116805e-17
       e21: 1e-45
-      e22: -6.2527286e-19
-      e23: -3.9282296e+19
+      e22: 2.1277246e-19
+      e23: 3.7154767e+19
       e30: 4.5904e-41
       e31: 0
-      e32: 6.99e-43
-      e33: 7.02e-43
+      e32: 8.37e-43
+      e33: 8.4e-43
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
   - m_RefCount: 0
-    m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
+    m_Data: {r: 3.5402e-41, g: 3.5402e-41, b: 3.5402e-41, a: 3.5402e-41}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -615,7 +615,7 @@ MonoBehaviour:
   tilemap: {fileID: 60745553}
   fillerTile: {fileID: 11400000, guid: a2bddda293f87614aab76fb27ec9cb61, type: 2}
   fillerMat: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
-  seed: 7865
+  seed: -1
   DEBUG_TEST_ROOM: {fileID: 0}
 --- !u!1 &519420028
 GameObject:

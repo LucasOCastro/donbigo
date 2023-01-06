@@ -21,6 +21,15 @@ namespace DonBigo.Rooms
         [SerializeField] private UnityEngine.Object marker;
         
         public Direction ExitDirection => direction;
+
+        public Direction OpposedDirection => ExitDirection switch {
+            Direction.Up => Direction.Down,
+            Direction.Down => Direction.Up,
+            Direction.Right => Direction.Left,
+            Direction.Left => Direction.Right,
+            _ => throw new IndexOutOfRangeException()
+        };
+        
         public Vector2Int Position => localPos;
         public IRoomEntranceMarker Marker => marker as IRoomEntranceMarker;
 

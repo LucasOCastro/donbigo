@@ -133,7 +133,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -1339,7 +1339,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -3376,12 +3376,22 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bad7a36f6bbdbaf43ae6109c7cbb6a4e, type: 2}
   - {fileID: 11400000, guid: 26ef37df19ebe0f4ea9a04eadfaf4fc1, type: 2}
   - {fileID: 11400000, guid: 26ef37df19ebe0f4ea9a04eadfaf4fc1, type: 2}
-  doors: []
+  doors:
+  - direction: 3
+    localPos: {x: 0, y: 7}
+    marker: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
+  - direction: 1
+    localPos: {x: 13, y: 0}
+    marker: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   structureTiles:
   - pos: {x: 0, y: 0, z: 1}
     structure: {fileID: 11400000, guid: 20fa687cb6fab1a4ebd2f4bcb64fa855, type: 2}
+  - pos: {x: 0, y: 7, z: 1}
+    structure: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - pos: {x: 0, y: 10, z: 1}
     structure: {fileID: 11400000, guid: f389ea1b0a3f510439566b9a187cd24d, type: 2}
+  - pos: {x: 13, y: 0, z: 1}
+    structure: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - pos: {x: 15, y: 0, z: 1}
     structure: {fileID: 11400000, guid: 95c90664586f933478b0f41be00b3c5c, type: 2}
   - pos: {x: 0, y: 14, z: 2}
@@ -3784,5 +3794,23 @@ MonoBehaviour:
     structure: {fileID: 11400000, guid: 36423397f6e3f934d838f3c575fb7c4a, type: 2}
   - pos: {x: 19, y: 14, z: 8}
     structure: {fileID: 11400000, guid: 36423397f6e3f934d838f3c575fb7c4a, type: 2}
-  transformOverrides: []
+  transformOverrides:
+  - pos: {x: 0, y: 7, z: 1}
+    matrix:
+      e00: -1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
   possibleItems: []
