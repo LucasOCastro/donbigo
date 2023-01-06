@@ -614,6 +614,8 @@ MonoBehaviour:
   mapSize: 75
   tilemap: {fileID: 60745553}
   fillerTile: {fileID: 11400000, guid: a2bddda293f87614aab76fb27ec9cb61, type: 2}
+  fillerMat: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
+  seed: 7865
   DEBUG_TEST_ROOM: {fileID: 0}
 --- !u!1 &519420028
 GameObject:

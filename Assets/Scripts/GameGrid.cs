@@ -91,12 +91,12 @@ namespace DonBigo
             }
         }
 
-        public GameGrid(int size, Tilemap tilemap, TileType filler)
+        public GameGrid(int size, Tilemap tilemap, TileType filler, EntranceMarkerTile fillerMat)
         {
             Size = size;
             _tilemap = tilemap;
             _tiles = new Tile[size, size];
-            _rooms = MapGen.Gen(this, tilemap, filler);
+            _rooms = MapGen.Gen(this, tilemap, filler, fillerMat);
         }
     }
 }

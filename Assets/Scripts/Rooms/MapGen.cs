@@ -76,7 +76,7 @@ namespace DonBigo.Rooms
         }
 
         private static void FillInternal(GameGrid grid, Tilemap tilemap, List<RoomExit> badExits,
-            List<RoomInstance> rooms, TileType filler)
+            List<RoomInstance> rooms, TileType filler, EntranceMarkerTile fillerMat)
         {
             bool IsGoodInternal(List<Vector2Int> tiles)
             {
@@ -84,10 +84,27 @@ namespace DonBigo.Rooms
                 //Excluindo os internos que tocam nas bordas da grid
                 Vector2Int min = grid.Bounds.min;
                 Vector2Int max = grid.Bounds.max - Vector2Int.one;
-                return tiles.All(t => (t.x != min.x) && (t.y != min.y) && (t.x != max.x) && (t.y != max.y));
+                return tiles.All(t => grid.InBounds(t) && grid[t] == null && 
+                                      (t.x != min.x) && (t.y != min.y) && (t.x != max.x) && (t.y != max.y));
+            }
+
+            void CreateDoor(RoomExit opposing)
+            {
+                const int matElevation = 1;
+                Vector2Int pos = opposing.Position + opposing.DirectionVector;
+                Debug.Log("Will make door at " + pos);
+                Tile tile = grid[pos];
+                StructureInstance mat = new StructureInstance(fillerMat, tile, matElevation);
+                tile.Structures.Add(mat);
+
+                Vector3Int tilemapPos = new Vector3Int(tile.Pos.x, tile.Pos.y, matElevation);
+                tilemap.SetTile(tilemapPos, fillerMat);
+                var matrix = Matrix4x4.identity;
+                tilemap.SetTransformMatrix(tilemapPos, matrix);
             }
 
             HashSet<Vector2Int> badSet = new HashSet<Vector2Int>();
+            HashSet<Vector2Int> goodSet = new HashSet<Vector2Int>();
             foreach (var exit in badExits)
             {
                 Vector2Int startPos = exit.Position + exit.DirectionVector;
@@ -98,10 +115,14 @@ namespace DonBigo.Rooms
                     continue;
                 }
                 //Já foi preenchido com jardim, então nao tem o que fazer
-                if (grid[startPos] != null) continue; 
+                if (goodSet.Contains(startPos))
+                {
+                    CreateDoor(exit);
+                    continue;
+                } 
 
                 List<Vector2Int> internalTiles = new();
-                FloodFill(startPos, 
+                FloodFill(startPos,
                     p => grid.InBounds(p) && grid[p] == null, 
                     p => internalTiles.Add(p));
 
@@ -120,14 +141,16 @@ namespace DonBigo.Rooms
                 RoomInstance roomInstance = new RoomInstance();
                 foreach (Vector2Int tile in internalTiles)
                 {
+                    goodSet.Add(tile);
                     grid[tile] = new Tile(tile, filler, grid, roomInstance);
                     tilemap.SetTile((Vector3Int)tile, filler);
                 }
+                CreateDoor(exit);
             }
         }
 
         
-        public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap, TileType filler)
+        public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap, TileType filler, EntranceMarkerTile fillerMat)
         {
             if (GridManager.Instance.DEBUG_TEST_ROOM != null)
             {
@@ -177,7 +200,7 @@ namespace DonBigo.Rooms
                 }
             }
             
-            FillInternal(grid, tilemap, badExits, rooms, filler);
+            FillInternal(grid, tilemap, badExits, rooms, filler, fillerMat);
             
             tilemap.CompressBounds();
             return rooms;

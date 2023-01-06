@@ -14,7 +14,12 @@ namespace DonBigo
         
         [SerializeField] private int mapSize = 50;
         [SerializeField] private Tilemap tilemap;
-        [SerializeField] private TileType fillerTile; 
+        
+        
+        [SerializeField] private TileType fillerTile;
+        [SerializeField] private EntranceMarkerTile fillerMat;
+
+        [SerializeField] private int seed;
         
         public DonBigo.Rooms.Room DEBUG_TEST_ROOM;
         private void Awake()
@@ -24,8 +29,9 @@ namespace DonBigo
                 Destroy(gameObject);
                 return;
             }
+            Random.InitState(seed);
             Instance = this;
-            Grid = new GameGrid(mapSize, tilemap, fillerTile);
+            Grid = new GameGrid(mapSize, tilemap, fillerTile, fillerMat);
         }
 
         public static Tile DEBUG_start, DEBUG_end;
