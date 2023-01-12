@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 namespace DonBigo.Rooms
 {
@@ -22,10 +23,37 @@ namespace DonBigo.Rooms
                 }
             }
 
+            List<Room.StructurePosition> vents = new List<Room.StructurePosition>();
             foreach (var structurePos in room.Structures)
             {
-                Vector2Int pos = (Vector2Int)structurePos.pos + min; 
-                grid[pos].Structures.Add(new StructureInstance(structurePos.structure, grid[pos], structurePos.pos.z));
+                if (structurePos.structure is VentTileType)
+                {
+                    vents.Add(structurePos);
+                    continue;
+                }
+                
+                Vector2Int pos = (Vector2Int)structurePos.pos + min;
+                grid[pos].Structures.Add(structurePos.structure.GetInstance(grid[pos], structurePos.pos.z));
+            }
+
+
+            int ventIndex = -1;
+            if (vents.Count > 0 && Random.value < room.VentChance)
+            {
+                ventIndex = vents.RandomIndex();
+                var ventPosition = vents[ventIndex];
+                
+                Vector2Int pos = min + (Vector2Int)ventPosition.pos;
+                Vent vent = new Vent(ventPosition.structure as VentTileType, grid[pos], ventPosition.pos.z);
+                grid[pos].Structures.Add(vent);
+                roomInstance.Vents.Add(vent);
+                grid.AllVents.Add(vent);
+            }
+            
+            for (int i = 0; i < vents.Count; i++)
+            {
+                if (i == ventIndex) continue;
+                tilemap.SetTile(vents[i].pos + (Vector3Int)min, null);
             }
             
             foreach (var itemChance in room.GenItemsToSpawn())

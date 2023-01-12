@@ -42,6 +42,8 @@ namespace DonBigo.Rooms
         [SerializeField] private StructurePosition[] structureTiles;
         [SerializeField] private TransformOverride[] transformOverrides;
         [SerializeField] private ItemChance[] possibleItems;
+        [Range(0f, 1f)]
+        [SerializeField] private float ventChance;
 
         public string RoomName => roomName;
         public Vector3Int Size => size;
@@ -53,6 +55,10 @@ namespace DonBigo.Rooms
         /// Array de estruturas em espaço local na sala.
         /// </summary>
         public StructurePosition[] Structures => structureTiles;
+        /// <summary>
+        /// Chance de ser uma sala com vent, varia de 0 a 1.
+        /// </summary>
+        public float VentChance => ventChance;
 
         public IEnumerable<ItemType> GenItemsToSpawn()
         {

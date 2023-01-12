@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace DonBigo.Rooms
@@ -7,10 +8,13 @@ namespace DonBigo.Rooms
     {
         public Room Room { get; }
         public RectInt Bounds { get; }
+
         /// <summary>
         /// Array de portas em espaço global no mapa.
         /// </summary>
-        public List<RoomExit> Doors { get; }
+        public List<RoomExit> Doors { get; } = new List<RoomExit>();
+
+        public List<StructureInstance> Vents { get; } = new List<StructureInstance>();
 
         public RoomInstance(Room room, Vector2Int pos)
         {
@@ -26,7 +30,6 @@ namespace DonBigo.Rooms
 
         public RoomInstance()
         {
-            Doors = new List<RoomExit>();
         }
 
         public bool IsOuterWall(Tile tile)

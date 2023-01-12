@@ -75,6 +75,7 @@ namespace DonBigo
         }
 
         public List<RoomInstance> AllRooms => _rooms;
+        public List<Vent> AllVents { get; } = new List<Vent>();
 
         public IEnumerable<Tile> TilesInBounds(RectInt bounds)
         {
@@ -97,6 +98,15 @@ namespace DonBigo
             _tilemap = tilemap;
             _tiles = new Tile[size, size];
             _rooms = MapGen.Gen(this, tilemap, filler, fillerMat);
+            
+        }
+
+        public void RefreshTile(Tile tile)
+        {
+            for (int i = 0; i < _tilemap.size.z; i++)
+            {
+                _tilemap.RefreshTile(new Vector3Int(tile.Pos.x, tile.Pos.y, i));    
+            }
         }
     }
 }
