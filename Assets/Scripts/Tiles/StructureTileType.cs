@@ -48,5 +48,10 @@ namespace DonBigo
                 tileData.color = color;
             }
         }
+
+        public virtual StructureInstance GetInstance(Tile tile, int elevation)
+        {
+            return new StructureInstance(this, tile, elevation);
+        }
     }
 }
