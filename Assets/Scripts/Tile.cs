@@ -95,6 +95,12 @@ namespace DonBigo
                 return new UseDoorAction(doer, Room.Doors[doorIndex]);
             }
 
+            Vent vent = Structures.FindOfType<StructureInstance, Vent>();
+            if (vent != null)
+            {
+                return new ToggleVentAction(doer, vent);
+            }
+
             if (Entity != null)
             {
                 //Do something

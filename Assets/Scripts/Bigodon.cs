@@ -53,7 +53,7 @@ namespace DonBigo
             }
             
             //Quando aperta espaço, pula um turno.
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space))
             {
                 return new IdleAction(this);
             }
