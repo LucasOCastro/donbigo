@@ -77,6 +77,21 @@ namespace DonBigo
         public static T2 FindOfType<T1, T2>(this IEnumerable<T1> col) where T2 : class, T1 =>
             col.FirstOrDefault(t => t is T2) as T2;
 
+        public static bool MoreThan<T>(this IEnumerable<T> col, Func<T, bool> condition, int moreThan)
+        {
+            int count = 0;
+            foreach (T t in col)
+            {
+                if (condition(t))
+                {
+                    count++;
+                    if (count > moreThan) return true;
+                }
+            }
+
+            return false;
+        }
+
         public static void SetOrAdd<T1, T2>(this Dictionary<T1, T2> dict, T1 key, T2 val)
         {
             if (dict.ContainsKey(key)) dict[key] = val;

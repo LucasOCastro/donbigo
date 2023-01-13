@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using DonBigo.Rooms;
 using UnityEngine.Tilemaps;
@@ -76,6 +77,7 @@ namespace DonBigo
 
         public List<RoomInstance> AllRooms => _rooms;
         public List<Vent> AllVents { get; } = new List<Vent>();
+        public bool CanUseVents => AllVents.MoreThan(v => v.Open, 1);
 
         public IEnumerable<Tile> TilesInBounds(RectInt bounds)
         {
@@ -83,6 +85,8 @@ namespace DonBigo
             {
                 for (int y = bounds.yMin; y < bounds.yMax; y++)
                 {
+                    if (!InBounds(x, y)) continue;
+                    
                     Tile tile = this[x, y];
                     if (tile != null)
                     {

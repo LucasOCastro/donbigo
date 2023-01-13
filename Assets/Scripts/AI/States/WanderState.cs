@@ -76,7 +76,7 @@ namespace DonBigo.AI
             }
             
             var vent = entity.Tile.Room.Vents.Where(v => v.Open).Random();
-            if (vent != null && Random.value < VentChance)
+            if (vent != null && vent.Tile.ParentGrid.CanUseVents && Random.value < VentChance)
             {
                 Debug.Log("will enter vent");
                 objective = new GoToTargetObjective(worker, vent.Tile);
