@@ -46,23 +46,26 @@ namespace DonBigo
                 Renderer.sprite = SpriteSet.GetDirectionalSprite(_tile, value);
                 
                 _tile = value;
-                if (_tile != null)
+                if (_tile == null)
                 {
-                    transform.position = TileWorldPos(_tile);
-                    //_currentMoveCoroutine = StartCoroutine(MoveTransformCoroutine(worldPos));
-
-                    var oldVisible = VisibleTiles;
-                    VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
-                    
-                    OnUpdateViewEvent?.Invoke(oldVisible, VisibleTiles);
-                    UpdateRenderVisibility();
-                    
-                    if (_tile.Entity != this)
-                    {
-                        _tile.Entity = this;
-                    }
-                    Memory.RememberBeingAt(Tile);
+                    SetRenderVisibility(false);
+                    VisibleTiles.Clear();
+                    return;
                 }
+                transform.position = TileWorldPos(_tile);
+                //_currentMoveCoroutine = StartCoroutine(MoveTransformCoroutine(worldPos));
+
+                var oldVisible = VisibleTiles;
+                VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
+                    
+                OnUpdateViewEvent?.Invoke(oldVisible, VisibleTiles);
+                UpdateRenderVisibility();
+                    
+                if (_tile.Entity != this)
+                {
+                    _tile.Entity = this;
+                }
+                Memory.RememberBeingAt(Tile);
             }
         }
 

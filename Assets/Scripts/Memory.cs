@@ -52,7 +52,8 @@ namespace DonBigo
         {
             foreach (var tilePos in action.Doer.VisibleTiles)
             {
-                var tile = action.Doer.Tile.ParentGrid[tilePos];
+                var tile = action.Doer.Tile?.ParentGrid[tilePos];
+                if (tile == null) continue;
                 if (tile.Entity != null) _locationMemory.SetOrAdd(tile.Entity, tile);
                 if (tile.Item != null) _locationMemory.SetOrAdd(tile.Item, tile);
             }
