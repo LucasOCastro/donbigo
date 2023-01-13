@@ -12,13 +12,14 @@
                 Tile.ParentGrid.RefreshTile(Tile);
             }
         }
-        
+
         private VentTileType VentType { get; }
         public Tile FinalTile { get; }
         public Vent(VentTileType type, Tile tile, int elevation) : base(type, tile, elevation)
         {
             VentType = type;
-            FinalTile = Tile.ParentGrid[Tile.Pos + VentType.Direction];
+            FinalTile = Tile.Walkable ? Tile : Tile.ParentGrid[Tile.Pos + VentType.Direction];
+            Open = false;
         }
     }
 }

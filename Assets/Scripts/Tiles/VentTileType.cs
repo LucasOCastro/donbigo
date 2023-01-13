@@ -17,10 +17,12 @@ namespace DonBigo
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
             base.GetTileData(position, tilemap, ref tileData);
-            if (Application.isEditor) return;
+            if (!Application.isPlaying) return;
+            if (GridManager.Instance == null || GridManager.Instance.Grid == null) return;
 
             var tile = GridManager.Instance.Grid[position.x, position.y];
-            if (tile?.Structures.Find(s => s is Vent) is not Vent vent) return;
+            Vent vent = tile?.Structures.FindOfType<StructureInstance, Vent>();
+            if (vent == null) return;
 
             tileData.sprite = vent.Open ? openSprite : closedSprite;
         }

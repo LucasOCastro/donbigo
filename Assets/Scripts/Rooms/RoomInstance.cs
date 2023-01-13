@@ -14,7 +14,7 @@ namespace DonBigo.Rooms
         /// </summary>
         public List<RoomExit> Doors { get; } = new List<RoomExit>();
 
-        public List<StructureInstance> Vents { get; } = new List<StructureInstance>();
+        public List<Vent> Vents { get; } = new List<Vent>();
 
         public RoomInstance(Room room, Vector2Int pos)
         {
