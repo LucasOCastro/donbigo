@@ -5,7 +5,7 @@ namespace DonBigo.AI
 {
     public class WanderState : AIState
     {
-        private const float VentChance = 1f;
+        private const float VentChanceMultiplier = 0.8f;
         
         private static bool ShouldBeAlerted(Entity entity)
         {
@@ -40,6 +40,7 @@ namespace DonBigo.AI
         protected override AIState OnTick(AIWorker worker, out AIObjective objective)
         {
             var entity = worker.Owner;
+            var room = entity.Tile.Room;
             if (ShouldBeAlerted(entity))
             {
                 objective = null;
@@ -60,7 +61,7 @@ namespace DonBigo.AI
                 return new VentingState(_targetVent);
             }
 
-            var closedVent = entity.Tile.Room.Vents.FirstOrDefault(v => !v.Open);
+            var closedVent = room.Vents.FirstOrDefault(v => !v.Open);
             if (closedVent != null)
             {
                 Debug.Log("will open vent");
@@ -74,14 +75,20 @@ namespace DonBigo.AI
                 objective = new PickupItemObjective(worker, targetItem, handedness);
                 return null;
             }
+
             
-            var vent = entity.Tile.Room.Vents.Where(v => v.Open).Random();
-            if (vent != null && vent.Tile.ParentGrid.CanUseVents && Random.value < VentChance)
+            var openVents = room.Vents.Where(v => v.Open);
+            int openVentCount = openVents.Count();
+            if (openVentCount > 0)
             {
-                Debug.Log("will enter vent");
-                objective = new GoToTargetObjective(worker, vent.Tile);
-                _targetVent = vent;
-                return null;
+                float ventChance = (openVentCount * VentChanceMultiplier) / (room.Doors.Count + openVentCount);
+                if (entity.Tile.ParentGrid.CanUseVents && Random.value < ventChance)
+                {
+                    var vent = openVents.Random();
+                    objective = new GoToTargetObjective(worker, vent.Tile);
+                    _targetVent = vent;
+                    return null;
+                }
             }
 
             objective = new WanderDoorObjective(worker);
