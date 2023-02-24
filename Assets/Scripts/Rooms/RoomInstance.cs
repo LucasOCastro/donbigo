@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -26,6 +27,28 @@ namespace DonBigo.Rooms
                 Vector2Int realPos = pos + door.Position;
                 Doors.Add(new RoomExit(realPos, door.ExitDirection, door.Marker));
             }
+        }
+
+        public IRoomExit GetExit(Func<IRoomExit, float> scoreFunc, Func<IRoomExit, bool> guaranteedSelect,
+            bool allowVents, bool useRandom)
+        {
+            IEnumerable<IRoomExit> exits = Doors.Select(d => d as IRoomExit);
+
+            var openVents = Vents.Where(v => v.Open);
+            int openVentCount = openVents.Count();
+            if (openVentCount > 0 && allowVents)
+            {
+                exits = exits.Concat(openVents);
+            }
+
+            if (guaranteedSelect != null)
+            {
+                var guaranteedExit = exits.First(guaranteedSelect);
+                if (guaranteedExit != null) return guaranteedExit;
+            }
+
+            bool IsBetter(IRoomExit a, IRoomExit b) => scoreFunc(a) > scoreFunc(b);
+            return useRandom ? exits.RandomElementByWeight(scoreFunc) : exits.Best(IsBetter);
         }
 
         public RoomInstance()

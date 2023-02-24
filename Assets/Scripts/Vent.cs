@@ -1,6 +1,10 @@
-﻿namespace DonBigo
+﻿using DonBigo.Actions;
+using DonBigo.Rooms;
+using UnityEngine;
+
+namespace DonBigo
 {
-    public class Vent : StructureInstance
+    public class Vent : StructureInstance, IRoomExit
     {
         private bool _open;
         public bool Open
@@ -14,12 +18,19 @@
         }
 
         private VentTileType VentType { get; }
-        public Tile FinalTile { get; }
+        public Tile UseTile => RoomExitUtility.FindWalkable(Tile.Pos, VentType.Direction, Tile.ParentGrid);
         public Vent(VentTileType type, Tile tile, int elevation) : base(type, tile, elevation)
         {
             VentType = type;
-            FinalTile = Tile.Walkable ? Tile : Tile.ParentGrid[Tile.Pos + VentType.Direction];
             Open = false;
+        }
+
+        Tile IRoomExit.UseTile(GameGrid grid) => UseTile;
+        public Vector2Int Position => Tile.Pos;
+
+        public Action GenAction(Entity doer)
+        {
+            return new UseVentAction(doer, this);
         }
     }
 }
