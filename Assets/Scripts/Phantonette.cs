@@ -16,30 +16,12 @@ namespace DonBigo
         public override Action GetAction()
         {
             return _aiWorker.GetAction() ?? new IdleAction(this);
-            /*if (_targetPath != null && _targetPath.Valid && !_targetPath.Finished)
-            {
-                return new MoveAction(this, _targetPath.Advance());
-            }
-            
-            return new IdleAction(this);*/
         }
 
-        /*private void Update() 
+        public override void EnterVent(Vent vent)
         {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                Tile tile = GridManager.Instance.Grid.MouseOverTile();
-                if (tile == null) {
-                    Debug.Log("NULL");
-                }
-                else {
-                    Debug.Log($"{tile.Pos} ({tile.Type})");
-                }
-                if (tile != null && tile.Entity == null)
-                {
-                    _targetPath = new Path(Tile, tile);
-                }
-            }
-        }*/
+            base.EnterVent(vent);
+            _aiWorker.EnterVentState(vent);
+        }
     }
 }

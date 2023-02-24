@@ -69,7 +69,8 @@ namespace DonBigo.AI
 
             _progress++;
             if (_progress <= _distance) return null;
-            worker.Owner.Tile = _targetVent.FinalTile;
+            
+            worker.Owner.ExitVent(_targetVent);
             return new WanderState();
         }
     }

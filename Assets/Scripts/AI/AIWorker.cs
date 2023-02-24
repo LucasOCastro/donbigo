@@ -38,6 +38,15 @@ namespace DonBigo.AI
             UpdateMinStrength();
         }
         
+        public void EnterVentState(Vent vent)
+        {
+            if (!Owner.IsVenting)
+            {
+                Owner.EnterVent(vent);    
+            }
+            var state = new VentingState(vent);
+            _currentState = state;
+        }
 
         private AIState _currentState;
         public Action GetAction()
@@ -58,6 +67,8 @@ namespace DonBigo.AI
                 {
                     _currentState = newState;
                 }
+                
+                
             } while (newState != null && action == null);
 
             return action;
