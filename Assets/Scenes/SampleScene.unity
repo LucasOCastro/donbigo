@@ -617,6 +617,7 @@ MonoBehaviour:
   fillerMat: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   seed: -1
   DEBUG_TEST_ROOM: {fileID: 0}
+  DEBUG_Item: {fileID: 11400000, guid: 07d80df6e8637794c99d6ae486ec9ef1, type: 2}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

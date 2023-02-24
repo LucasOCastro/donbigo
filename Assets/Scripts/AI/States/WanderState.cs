@@ -5,8 +5,6 @@ namespace DonBigo.AI
 {
     public class WanderState : AIState
     {
-        private const float VentChanceMultiplier = 0.8f;
-        
         private static bool ShouldBeAlerted(Entity entity)
         {
             //Mais outros gatilhos
@@ -36,7 +34,6 @@ namespace DonBigo.AI
             return strongestVisibleItem;
         }
 
-        private Vent _targetVent;
         protected override AIState OnTick(AIWorker worker, out AIObjective objective)
         {
             var entity = worker.Owner;
@@ -54,13 +51,6 @@ namespace DonBigo.AI
                 return null;
             }
 
-            if (CurrentObjective is { Completed: true } && _targetVent != null)
-            {
-                Debug.Log("entered vent");
-                objective = null;
-                return new VentingState(_targetVent);
-            }
-
             var closedVent = room.Vents.FirstOrDefault(v => !v.Open);
             if (closedVent != null)
             {
@@ -75,22 +65,7 @@ namespace DonBigo.AI
                 objective = new PickupItemObjective(worker, targetItem, handedness);
                 return null;
             }
-
             
-            var openVents = room.Vents.Where(v => v.Open);
-            int openVentCount = openVents.Count();
-            if (openVentCount > 0)
-            {
-                float ventChance = (openVentCount * VentChanceMultiplier) / (room.Doors.Count + openVentCount);
-                if (entity.Tile.ParentGrid.CanUseVents && Random.value < ventChance)
-                {
-                    var vent = openVents.Random();
-                    objective = new GoToTargetObjective(worker, vent.Tile);
-                    _targetVent = vent;
-                    return null;
-                }
-            }
-
             objective = new WanderDoorObjective(worker);
             return null;
         }

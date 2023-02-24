@@ -8,7 +8,7 @@ namespace DonBigo.AI
     public class FleeObjective : GoToTargetObjective
     {
         private Entity _fleeFrom;
-        private RoomExit? _targetExit;
+        private IRoomExit _targetExit;
         private Path _targetPath;
         private float _fightBackChance;
 
@@ -30,12 +30,14 @@ namespace DonBigo.AI
 
         public override bool Completed => !Doer.VisibleTiles.Contains(_fleeFrom.Tile.Pos);
 
-        private float CalcDoorScore(RoomExit door)
+        private bool IsDoorGuaranteed(IRoomExit exit) => exit.Position.AdjacentTo(Doer.Tile.Pos);
+        private float CalcDoorScore(IRoomExit exit)
         {
-            Vector2Int doorPos = door.Position;
+            Vector2Int doorPos = exit.UseTile(Doer.Tile.ParentGrid).Pos;
             const float distanceToDoerWeight = 1;
             const float distanceToTargetWeight = 3;
             const float deadEndPenalty = 200;
+            const float ventOffset = 1000;
 
             int distanceToDoer = Doer.Tile.Pos.ManhattanDistance(doorPos);
             int distanceToTarget = _fleeFrom.Tile.Pos.ManhattanDistance(doorPos);
@@ -43,34 +45,22 @@ namespace DonBigo.AI
             
             float score = 100f + (distanceToDoerWeight * -distanceToDoer) + (distanceToTargetWeight * distanceToTarget);
 
-            GameGrid grid = Doer.Tile.ParentGrid;
-            RoomInstance finalRoom = door.FinalRoom(grid);
-            if (Doer.Memory.IsDeadEnd(finalRoom))
+            if (exit is Vent)
             {
-                score -= deadEndPenalty;
+                score += ventOffset;
             }
 
-            return score;
-        }
-        private RoomExit? GetBestExit()
-        {
-            var currentRoom = Doer.Tile.Room;
-
-            RoomExit? bestExit = null;
-            float bestScore = 0;
-            foreach (var exit in currentRoom.Doors)
+            if (exit is RoomExit door)
             {
-                if (exit.Position.AdjacentTo(Doer.Tile.Pos)) return exit;
-                
-                float score = CalcDoorScore(exit);
-                if (bestExit == null || score > bestScore)
+                GameGrid grid = Doer.Tile.ParentGrid;
+                RoomInstance finalRoom = door.FinalRoom(grid);
+                if (Doer.Memory.IsDeadEnd(finalRoom))
                 {
-                    bestExit = exit;
-                    bestScore = score;
+                    score -= deadEndPenalty;
                 }
             }
-
-            return bestExit;
+            
+            return score;
         }
 
         private static int ItemDefensivenessScore(Item item)
@@ -111,7 +101,7 @@ namespace DonBigo.AI
         {
             if (_targetExit != null && IsAdjacentToTarget)
             {
-                return new UseDoorAction(Doer, _targetExit.Value);
+                return _targetExit.GenAction(Doer);
             }
 
             if (Random.value < _fightBackChance)
@@ -119,15 +109,15 @@ namespace DonBigo.AI
                 Action fightBackAction = GetDefensiveFleeAction();
                 if (fightBackAction != null) return fightBackAction;
             }
-            
-            RoomExit? bestExit = GetBestExit();
+
+            var bestExit = Doer.Tile.Room.GetExit(CalcDoorScore, IsDoorGuaranteed, true, false);
             if (bestExit == null) return null;
 
             _targetExit = bestExit;
-            _target = Doer.Tile.ParentGrid[bestExit.Value.Position];
+            _target = Doer.Tile.ParentGrid[bestExit.Position];
             if (IsAdjacentToTarget)
             {
-                return new UseDoorAction(Doer, _targetExit.Value);
+                return _targetExit.GenAction(Doer);
             }
             return base.Tick();
         }

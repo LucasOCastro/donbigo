@@ -42,8 +42,10 @@ namespace DonBigo.AI
         {
             if (!Owner.IsVenting)
             {
-                Owner.EnterVent(vent);    
+                Owner.EnterVent(vent);
             }
+            
+            
             var state = new VentingState(vent);
             _currentState = state;
         }
@@ -67,8 +69,6 @@ namespace DonBigo.AI
                 {
                     _currentState = newState;
                 }
-                
-                
             } while (newState != null && action == null);
 
             return action;

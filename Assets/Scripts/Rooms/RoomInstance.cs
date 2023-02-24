@@ -36,7 +36,7 @@ namespace DonBigo.Rooms
 
             var openVents = Vents.Where(v => v.Open);
             int openVentCount = openVents.Count();
-            if (openVentCount > 0 && allowVents)
+            if (openVentCount > 0 && allowVents && GridManager.Instance.Grid.CanUseVents)
             {
                 exits = exits.Concat(openVents);
             }
