@@ -40,4 +40,4 @@ MonoBehaviour:
   randomSprites: []
   closedSprite: {fileID: 21300000, guid: b9e0cde65456c3442851cc612d86b109, type: 3}
   openSprite: {fileID: 21300000, guid: 4de69d649ea0e924ead2268bb760cc69, type: 3}
-  direction: {x: 0, y: 0}
+  direction: {x: 0, y: 1}
