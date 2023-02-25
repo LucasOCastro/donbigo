@@ -62,14 +62,14 @@ namespace DonBigo
         [SerializeField] private ItemType DEBUG_Item;
         private void Update()
         {
-            if (Input.GetKey(KeyCode.I))
+            var tile = Grid.MouseOverTile();
+            if (tile == null) return;
+            if (Input.GetKeyDown(KeyCode.I) && tile.Item == null)
             {
                 DEBUG_Item.Instantiate(Grid.MouseOverTile());
             }
             if (Input.GetMouseButtonDown(1))
             {
-                Tile tile = Grid.MouseOverTile();
-                if (tile == null) return;
                 Debug.Log($"{tile.Pos} - {tile.Type.name} - e={tile.Entity} - i={tile.Item}");
             }
         }

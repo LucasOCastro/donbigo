@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using DonBigo.Actions;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace DonBigo.AI
@@ -14,12 +15,13 @@ namespace DonBigo.AI
 
         public override bool Completed => _targetHealth.Dead;
 
-        private static int ItemOffensivenessScore(Item item)
+        private int ItemOffensivenessScore(Item item)
         {
             return item.Type.WeaponType.Score(t => t switch
             {
                 WeaponUseType.Ranged => 2,
                 WeaponUseType.Melee => 1,
+                WeaponUseType.Lethal => _targetHealth.HasStatusOfType<StunStatus>() ? 10 : 0,
                 _ => 0
             });
         }
@@ -32,8 +34,9 @@ namespace DonBigo.AI
                 Inventory.AllHandednesses
                     .Where(h => inventory.GetHand(h) != null
                                 && inventory.GetHand(h).Type.WeaponType.HasFlag(WeaponUseType.Offensive)
-                                && inventory.GetHand(h).GetAttackTile(Doer, _target) != null)
-                    .ToArray();
+                                && inventory.GetHand(h).GetAttackTile(Doer, _target) != null);
+                                
+                
             if (!possibleHandednesses.Any()) return null;
 
             var chosenHandedness = possibleHandednesses
@@ -74,7 +77,9 @@ namespace DonBigo.AI
                 return base.Tick();
             }
 
-            return new UseItemAction(Doer, attackItem, _targetHealth.Owner.Tile);
+            var action = new UseItemAction(Doer, attackItem, _targetHealth.Owner.Tile);
+            _currentAttackHandedness = null;
+            return action;
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DonBigo
 {
     public class Inventory
     {
-        public static Handedness[] AllHandednesses { get; } = new[] { Handedness.Left, Handedness.Right };
+        public static IEnumerable<Handedness> AllHandednesses { get; } = new[] { Handedness.Left, Handedness.Right };
         public enum Handedness
         {
             Left = 0,
@@ -15,29 +16,18 @@ namespace DonBigo
         public Entity Owner { get; }
         public Handedness CurrentHandedness { get; set; }
 
-        public Handedness WeakestHandedness
+        private static int ItemCombatPower(Item item)
         {
-            get
-            {
-                if (LeftHand != null && RightHand != null)
-                {
-                    return (LeftHand.Type.CombatPower < RightHand.Type.CombatPower) ? Handedness.Left : Handedness.Right;
-                }
-                return (LeftHand == null) ? Handedness.Left : Handedness.Right;
-            }
+            return (item == null || item.IsInCooldown) ? 0 : item.Type.CombatPower;
         }
-        
-        public Handedness StrongestHandedness
-        {
-            get
-            {
-                if (LeftHand != null && RightHand != null)
-                {
-                    return (LeftHand.Type.CombatPower > RightHand.Type.CombatPower) ? Handedness.Left : Handedness.Right;
-                }
-                return (LeftHand != null) ? Handedness.Left : Handedness.Right;
-            }
-        }
+
+        public Handedness WeakestHandedness => (ItemCombatPower(LeftHand) < ItemCombatPower(RightHand))
+            ? Handedness.Left
+            : Handedness.Right;
+
+        public Handedness StrongestHandedness => (ItemCombatPower(LeftHand) > ItemCombatPower(RightHand))
+            ? Handedness.Left
+            : Handedness.Right;
         
         private readonly Item[] _inventory = new Item[2];
         
@@ -52,8 +42,7 @@ namespace DonBigo
         public Item LeftHand => GetHand(Handedness.Left);
         public Item RightHand => GetHand(Handedness.Right);
 
-        public int CombatPower => (LeftHand != null ? LeftHand.Type.CombatPower : 0) +
-                                  (RightHand != null ? RightHand.Type.CombatPower : 0);
+        public int CombatPower => ItemCombatPower(LeftHand) + ItemCombatPower(RightHand);
 
         public bool HasLethal => (LeftHand != null && LeftHand.Type.WeaponType.HasFlag(WeaponUseType.Lethal)) ||
                                  (RightHand != null && RightHand.Type.WeaponType.HasFlag(WeaponUseType.Lethal));
