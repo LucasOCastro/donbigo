@@ -71,14 +71,19 @@ namespace DonBigo
 
             //Sempre mostra as paredes externas da sala
             bool isWall = grid[tile].Type is WallTileType;
-            if (isWall && sourceRoom.IsOuterWall(grid[tile]))
+            if (isWall && (sourceRoom != null && sourceRoom.IsOuterWall(grid[tile])))
             {
                 return false;
             }
+            
+            //Tile de outra sala nao é visivel
+            if (grid[tile].Room != sourceRoom)
+            {
+                return true;
+            }
 
             //Nao quero mostrar a parede das salas de baixo, nem as paredes internas que obstruem a visão
-            if (isWall && 
-            (grid.RoomAt(tile) != sourceRoom || (tile.x < source.x && tile.y < source.y)))
+            if (isWall && tile.x < source.x && tile.y < source.y)
             {
                 return true;
             }
@@ -146,7 +151,7 @@ namespace DonBigo
         public static HashSet<Vector2Int> Cast(GameGrid grid, Vector2Int source, int range)
         {
             HashSet<Vector2Int> visibleTiles = new HashSet<Vector2Int> { source };
-            RoomInstance sourceRoom = grid.RoomAt(source);
+            RoomInstance sourceRoom = grid[source].Room;
             foreach (var octant in _octants)
             {
                 CastOctant(grid, source, sourceRoom, octant, range, visibleTiles);

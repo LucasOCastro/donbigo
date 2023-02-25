@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace DonBigo.AI
 {
@@ -23,10 +24,10 @@ namespace DonBigo.AI
                 //TODO lidar com essa fightBackChance
                 _fleeObjective = new FleeObjective(worker, player, 1);
             }
-            
+
             if (player.Health.HasStatusOfType<StunStatus>())
             {
-                Debug.Log($"Player stunnado e {(entity.Inventory.HasLethal ? "" : "não")} tenho lethal.");
+                Debug.Log($"Player stunnado e {(entity.Inventory.HasLethal ? "" : "não ")}tenho lethal.");
                 objective = entity.Inventory.HasLethal ? _attackObjective : _fleeObjective;
             }
             else

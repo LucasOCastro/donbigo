@@ -35,7 +35,7 @@ namespace DonBigo
 
         public void RememberBeingAt(Tile tile)
         {
-            RoomInstance room = tile.ParentGrid.RoomAt(tile.Pos);
+            RoomInstance room = tile.Room;
             if (_visitedRooms.Contains(room))
             {
                 _roomVisitMemory.Remove(room);
@@ -52,7 +52,8 @@ namespace DonBigo
         {
             foreach (var tilePos in action.Doer.VisibleTiles)
             {
-                var tile = action.Doer.Tile.ParentGrid[tilePos];
+                var tile = action.Doer.Tile?.ParentGrid[tilePos];
+                if (tile == null) continue;
                 if (tile.Entity != null) _locationMemory.SetOrAdd(tile.Entity, tile);
                 if (tile.Item != null) _locationMemory.SetOrAdd(tile.Item, tile);
             }

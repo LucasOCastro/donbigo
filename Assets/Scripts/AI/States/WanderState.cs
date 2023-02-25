@@ -1,3 +1,6 @@
+using System.Linq;
+using UnityEngine;
+
 namespace DonBigo.AI
 {
     public class WanderState : AIState
@@ -31,21 +34,28 @@ namespace DonBigo.AI
             return strongestVisibleItem;
         }
 
-        
-        
         protected override AIState OnTick(AIWorker worker, out AIObjective objective)
         {
             var entity = worker.Owner;
+            var room = entity.Tile.Room;
             if (ShouldBeAlerted(entity))
             {
                 objective = null;
                 return new AlertedState();
             }
 
-            if (CurrentObjective != null && !CurrentObjective.Completed)
+            if (CurrentObjective is { Completed: false })
             {
                 //TODO honestamente só mudar o CurrentObjective diretamente faz mais sentido.
                 objective = CurrentObjective;
+                return null;
+            }
+
+            var closedVent = room.Vents.FirstOrDefault(v => !v.Open);
+            if (closedVent != null)
+            {
+                Debug.Log("will open vent");
+                objective = new OpenVentObjective(worker, closedVent);
                 return null;
             }
             
@@ -55,7 +65,7 @@ namespace DonBigo.AI
                 objective = new PickupItemObjective(worker, targetItem, handedness);
                 return null;
             }
-
+            
             objective = new WanderDoorObjective(worker);
             return null;
         }

@@ -108,13 +108,6 @@ namespace DonBigo
             }
             
             return null;
-            
-            /*if (_currentTargetPath == null || !_currentTargetPath.Valid || _currentTargetPath.Finished)
-            {
-                Path path = new Path(this.Tile, tile);
-                _currentTargetPath = (path.Valid && !path.Finished) ? path : null;
-            }
-            return (_currentTargetPath != null) ? new MoveAction(this, _currentTargetPath.Advance()) : null;*/
         }
     }
 }

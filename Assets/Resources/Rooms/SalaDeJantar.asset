@@ -31,7 +31,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: f942e2cc76d41b645b433bdff185220b, type: 2}
-  - {fileID: 11400000, guid: 75059bf26c6ef4840b4822304c600446, type: 2}
+  - {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - {fileID: 0}
   - {fileID: 11400000, guid: f942e2cc76d41b645b433bdff185220b, type: 2}
   - {fileID: 0}
@@ -115,7 +115,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 11400000, guid: 26ef37df19ebe0f4ea9a04eadfaf4fc1, type: 2}
   - {fileID: 11400000, guid: f942e2cc76d41b645b433bdff185220b, type: 2}
-  - {fileID: 11400000, guid: 2c366c4ab0403a249a4e92600029c3c6, type: 2}
+  - {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - {fileID: 0}
   - {fileID: 11400000, guid: f942e2cc76d41b645b433bdff185220b, type: 2}
   - {fileID: 0}
@@ -247,7 +247,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 11400000, guid: 26ef37df19ebe0f4ea9a04eadfaf4fc1, type: 2}
   - {fileID: 11400000, guid: f942e2cc76d41b645b433bdff185220b, type: 2}
-  - {fileID: 11400000, guid: 75059bf26c6ef4840b4822304c600446, type: 2}
+  - {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - {fileID: 0}
   - {fileID: 11400000, guid: f942e2cc76d41b645b433bdff185220b, type: 2}
   - {fileID: 0}
@@ -547,13 +547,13 @@ MonoBehaviour:
   doors:
   - direction: 3
     localPos: {x: 0, y: 3}
-    marker: {fileID: 11400000, guid: 2c366c4ab0403a249a4e92600029c3c6, type: 2}
+    marker: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - direction: 3
     localPos: {x: 0, y: 7}
-    marker: {fileID: 11400000, guid: 75059bf26c6ef4840b4822304c600446, type: 2}
+    marker: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - direction: 1
     localPos: {x: 5, y: 0}
-    marker: {fileID: 11400000, guid: 75059bf26c6ef4840b4822304c600446, type: 2}
+    marker: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - direction: 0
     localPos: {x: 5, y: 11}
     marker: {fileID: 11400000, guid: 2fdca22fc81ab134ebfc4238214fa78d, type: 2}
@@ -567,15 +567,15 @@ MonoBehaviour:
   - pos: {x: 0, y: 0, z: 1}
     structure: {fileID: 11400000, guid: 20fa687cb6fab1a4ebd2f4bcb64fa855, type: 2}
   - pos: {x: 0, y: 3, z: 1}
-    structure: {fileID: 11400000, guid: 2c366c4ab0403a249a4e92600029c3c6, type: 2}
+    structure: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - pos: {x: 0, y: 7, z: 1}
-    structure: {fileID: 11400000, guid: 75059bf26c6ef4840b4822304c600446, type: 2}
+    structure: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - pos: {x: 0, y: 10, z: 1}
     structure: {fileID: 11400000, guid: 95c90664586f933478b0f41be00b3c5c, type: 2}
   - pos: {x: 1, y: 10, z: 1}
     structure: {fileID: 11400000, guid: 20fa687cb6fab1a4ebd2f4bcb64fa855, type: 2}
   - pos: {x: 5, y: 0, z: 1}
-    structure: {fileID: 11400000, guid: 75059bf26c6ef4840b4822304c600446, type: 2}
+    structure: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - pos: {x: 8, y: 10, z: 1}
     structure: {fileID: 11400000, guid: 2b4a710543561894c931fd4ca8a09dc1, type: 2}
   - pos: {x: 9, y: 0, z: 1}
@@ -877,3 +877,4 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+  possibleItems: []

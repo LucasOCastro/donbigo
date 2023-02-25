@@ -58,7 +58,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 1319784824c0ab04a8a1e9337ca2fa9b, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -100,7 +100,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 1319784824c0ab04a8a1e9337ca2fa9b, type: 2}
-  - {fileID: 11400000, guid: 2c366c4ab0403a249a4e92600029c3c6, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -354,16 +354,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 26ef37df19ebe0f4ea9a04eadfaf4fc1, type: 2}
   doors:
   - direction: 3
-    localPos: {x: 0, y: 2}
-    marker: {fileID: 11400000, guid: 2c366c4ab0403a249a4e92600029c3c6, type: 2}
+    localPos: {x: 0, y: 1}
+    marker: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - direction: 2
     localPos: {x: 5, y: 1}
     marker: {fileID: 11400000, guid: 2fdca22fc81ab134ebfc4238214fa78d, type: 2}
   structureTiles:
   - pos: {x: 0, y: 0, z: 1}
     structure: {fileID: 11400000, guid: 20fa687cb6fab1a4ebd2f4bcb64fa855, type: 2}
-  - pos: {x: 0, y: 2, z: 1}
-    structure: {fileID: 11400000, guid: 2c366c4ab0403a249a4e92600029c3c6, type: 2}
+  - pos: {x: 0, y: 1, z: 1}
+    structure: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   - pos: {x: 0, y: 5, z: 2}
     structure: {fileID: 11400000, guid: d7f73705f52bd4648a938a028d811bcc, type: 2}
   - pos: {x: 1, y: 5, z: 2}
@@ -395,7 +395,7 @@ MonoBehaviour:
   - pos: {x: 4, y: 5, z: 6}
     structure: {fileID: 11400000, guid: eda285b0224807249be6c3f8bbf32106, type: 2}
   transformOverrides:
-  - pos: {x: 0, y: 2, z: 1}
+  - pos: {x: 0, y: 1, z: 1}
     matrix:
       e00: -1
       e01: 0
@@ -449,3 +449,4 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
+  possibleItems: []

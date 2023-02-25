@@ -79,7 +79,7 @@ public class RoomEditor : Editor
         AssetDatabase.SaveAssetIfDirty(target);
     }
 
-    private static Tilemap SpawnRoom(Room room)
+    public static Tilemap SpawnRoom(Room room)
     {
         if (room == null)
         {
@@ -105,13 +105,16 @@ public class RoomEditor : Editor
     }
 
     [MenuItem("Assets/Update All Rooms")]
-    private static void UpdateRooms()
+    public static void UpdateRooms() => UpdateRooms(null);
+    public static void UpdateRooms(System.Action<Tilemap> updateAction)
     {
         var rooms = Resources.FindObjectsOfTypeAll<Room>();
         foreach (var room in rooms)
         {
             SerializedObject obj = new SerializedObject(room);
             Tilemap tm = SpawnRoom(room);
+            if (tm == null) return;
+            updateAction?.Invoke(tm);
             UpdateValues(obj, tm);
             obj.ApplyModifiedProperties();
             AssetDatabase.SaveAssetIfDirty(room);
@@ -119,7 +122,7 @@ public class RoomEditor : Editor
         }
     }
 
-    private static void UpdateValues(SerializedObject obj, Tilemap tm)
+    public static void UpdateValues(SerializedObject obj, Tilemap tm)
     {
         tm.CompressBounds();
         var bounds = tm.cellBounds;

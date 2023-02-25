@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using DonBigo.Rooms;
 using UnityEngine.Tilemaps;
@@ -73,11 +74,10 @@ namespace DonBigo
             Vector2Int pos = MouseOverPos();
             return InBounds(pos) ? this[pos] : null;
         }
-        
-        //Não é muito otimizado
-        public RoomInstance RoomAt(Vector2Int pos) => _rooms.Find(r => r.Bounds.Contains(pos));
 
         public List<RoomInstance> AllRooms => _rooms;
+        public List<Vent> AllVents { get; } = new List<Vent>();
+        public bool CanUseVents => AllVents.MoreThan(v => v.Open, 1);
 
         public IEnumerable<Tile> TilesInBounds(RectInt bounds)
         {
@@ -85,6 +85,8 @@ namespace DonBigo
             {
                 for (int y = bounds.yMin; y < bounds.yMax; y++)
                 {
+                    if (!InBounds(x, y)) continue;
+                    
                     Tile tile = this[x, y];
                     if (tile != null)
                     {
@@ -94,12 +96,21 @@ namespace DonBigo
             }
         }
 
-        public GameGrid(int size, Tilemap tilemap)
+        public GameGrid(int size, Tilemap tilemap, TileType filler, EntranceMarkerTile fillerMat, Room startingRoom)
         {
             Size = size;
             _tilemap = tilemap;
             _tiles = new Tile[size, size];
-            _rooms = MapGen.Gen(this, tilemap);
+            _rooms = MapGen.Gen(this, tilemap, filler, fillerMat, startingRoom);
+            
+        }
+
+        public void RefreshTile(Tile tile)
+        {
+            for (int i = 0; i < _tilemap.size.z; i++)
+            {
+                _tilemap.RefreshTile(new Vector3Int(tile.Pos.x, tile.Pos.y, i));    
+            }
         }
     }
 }

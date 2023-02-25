@@ -6,20 +6,23 @@ namespace DonBigo
 {
     public static class CollectionUtility
     {
-        public static T Random<T>(this IList<T> col, bool throwOnEmpty = false)
+        public static int RandomIndex<T>(this IList<T> col, bool throwOnEmpty = false)
         {
             int count = col.Count;
             if (count == 0)
             {
                 return !throwOnEmpty ? default : throw new InvalidOperationException("Sequence was empty");
             }
-
-            return col[UnityEngine.Random.Range(0, count)];
+            return UnityEngine.Random.Range(0, count);
         }
-        
+
+        public static T Random<T>(this IList<T> col, bool throwOnEmpty = false) => col[col.RandomIndex(throwOnEmpty)];
+
         //https://stackoverflow.com/a/648240
         public static T Random<T>(this IEnumerable<T> col, bool throwOnEmpty = false)
         {
+            if (col is IList<T> list) return Random(list, throwOnEmpty);
+            
             T current = default;
             int count = 0;
             foreach (T element in col)
@@ -53,6 +56,40 @@ namespace DonBigo
             
             }
             return default;
+        }
+
+        public static T Best<T>(this IEnumerable<T> col, Func<T, T, bool> isBetter)
+        {
+            bool found = false;
+            T best = default;
+            foreach (T t in col)
+            {
+                if (!found || isBetter(t, best))
+                {
+                    best = t;
+                    found = true;
+                }
+            }
+
+            return best;
+        }
+
+        public static T2 FindOfType<T1, T2>(this IEnumerable<T1> col) where T2 : class, T1 =>
+            col.FirstOrDefault(t => t is T2) as T2;
+
+        public static bool MoreThan<T>(this IEnumerable<T> col, Func<T, bool> condition, int moreThan)
+        {
+            int count = 0;
+            foreach (T t in col)
+            {
+                if (condition(t))
+                {
+                    count++;
+                    if (count > moreThan) return true;
+                }
+            }
+
+            return false;
         }
 
         public static void SetOrAdd<T1, T2>(this Dictionary<T1, T2> dict, T1 key, T2 val)

@@ -15,12 +15,39 @@ namespace DonBigo
         public HealthManager Health { get; private set; }
         public Memory Memory { get; } = new();
         public DirectionalSpriteSet SpriteSet { get; set; }
+        
+        public bool IsVenting { get; private set; }
+        
 
         protected override void Awake()
         {
             base.Awake();
             Inventory = new Inventory(this);
             Health = new HealthManager(this);
+        }
+
+        public virtual void EnterVent(Vent vent)
+        {
+            if (IsVenting)
+            {
+                Debug.LogError("Entrou em vent sendo que já tá em vent!");
+                return;
+            }
+
+            Tile = null;
+            IsVenting = true;
+        }
+
+        public virtual void ExitVent(Vent vent)
+        {
+            if (!IsVenting)
+            {
+                Debug.LogError("Saiu de vent sem estar em vent!");
+                return;
+            }
+
+            Tile = vent.UseTile;
+            IsVenting = false;
         }
 
 
@@ -46,23 +73,26 @@ namespace DonBigo
                 Renderer.sprite = SpriteSet.GetDirectionalSprite(_tile, value);
                 
                 _tile = value;
-                if (_tile != null)
+                if (_tile == null)
                 {
-                    transform.position = TileWorldPos(_tile);
-                    //_currentMoveCoroutine = StartCoroutine(MoveTransformCoroutine(worldPos));
-
-                    var oldVisible = VisibleTiles;
-                    VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
-                    
-                    OnUpdateViewEvent?.Invoke(oldVisible, VisibleTiles);
-                    UpdateRenderVisibility();
-                    
-                    if (_tile.Entity != this)
-                    {
-                        _tile.Entity = this;
-                    }
-                    Memory.RememberBeingAt(Tile);
+                    SetRenderVisibility(false);
+                    VisibleTiles.Clear();
+                    return;
                 }
+                transform.position = TileWorldPos(_tile);
+                //_currentMoveCoroutine = StartCoroutine(MoveTransformCoroutine(worldPos));
+
+                var oldVisible = VisibleTiles;
+                VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
+                    
+                OnUpdateViewEvent?.Invoke(oldVisible, VisibleTiles);
+                UpdateRenderVisibility();
+                    
+                if (_tile.Entity != this)
+                {
+                    _tile.Entity = this;
+                }
+                Memory.RememberBeingAt(Tile);
             }
         }
 
