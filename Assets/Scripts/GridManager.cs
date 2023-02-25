@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DonBigo.Rooms;
 using UnityEngine;
 using UnityEngine.Profiling;
 using UnityEngine.Tilemaps;
@@ -14,10 +15,11 @@ namespace DonBigo
         
         [SerializeField] private int mapSize = 50;
         [SerializeField] private Tilemap tilemap;
-        
-        
+        [SerializeField] private Room startingRoom;
         [SerializeField] private TileType fillerTile;
         [SerializeField] private EntranceMarkerTile fillerMat;
+        
+        
 
         [SerializeField] private int seed = -1;
         
@@ -36,7 +38,7 @@ namespace DonBigo
             }
 
             Instance = this;
-            Grid = new GameGrid(mapSize, tilemap, fillerTile, fillerMat);
+            Grid = new GameGrid(mapSize, tilemap, fillerTile, fillerMat, startingRoom);
         }
 
         public static Tile DEBUG_start, DEBUG_end;
@@ -56,9 +58,14 @@ namespace DonBigo
                 RefreshTile(tile);
             }
         }
-        
+
+        [SerializeField] private ItemType DEBUG_Item;
         private void Update()
         {
+            if (Input.GetKey(KeyCode.I))
+            {
+                DEBUG_Item.Instantiate(Grid.MouseOverTile());
+            }
             if (Input.GetMouseButtonDown(1))
             {
                 Tile tile = Grid.MouseOverTile();

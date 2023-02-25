@@ -178,8 +178,10 @@ namespace DonBigo.Rooms
             }
         }
 
-        
-        public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap, TileType filler, EntranceMarkerTile fillerMat)
+
+        public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap, TileType filler,
+            EntranceMarkerTile fillerMat, Room startingRoom)
+
         {
             if (GridManager.Instance.DEBUG_TEST_ROOM != null)
             {
@@ -188,33 +190,35 @@ namespace DonBigo.Rooms
                 PlaceRoom(grid, tilemap, inst);
                 return res;
             }
-            
+
             //Usar uma Lista e acessar saidas aleatorias ao inves da Queue talvez dê um resultado mais devidamente aleatório.
             List<RoomInstance> rooms = new();
             Queue<RoomExit> possibleDoors = new();
 
-            Room randRoom = RoomDatabase.RandomRoom();
+            Room randRoom = (startingRoom != null) ? startingRoom : RoomDatabase.RandomRoom();
             if (randRoom == null) return rooms;
-            Vector2Int center = new Vector2Int((int)grid.Bounds.center.x, (int)grid.Bounds.center.y); 
+            Vector2Int center = new Vector2Int((int)grid.Bounds.center.x, (int)grid.Bounds.center.y);
             RoomInstance roomInstance = new RoomInstance(randRoom, center);
             PlaceRoom(grid, tilemap, roomInstance);
             rooms.Add(roomInstance);
-            foreach (var door in roomInstance.Doors) {
+            foreach (var door in roomInstance.Doors)
+            {
                 possibleDoors.Enqueue(door);
             }
 
             List<RoomExit> badExits = new();
-            
+
             while (possibleDoors.Count > 0)
             {
                 RoomExit possibleDoor = possibleDoors.Dequeue();
                 randRoom = RoomDatabase.RandomRoomThatFits(grid, possibleDoor, out RoomExit chosenDoor);
-                if (randRoom == null) 
+                if (randRoom == null)
                 {
                     //Se não cabe nenhuma sala nessa porta, então podemos tentar criar um jardim interno.
                     badExits.Add(possibleDoor);
                     continue;
                 }
+
                 //Ajustamos a posição em que a sala será colocada com base na posição da porta que será conectada.
                 Vector2Int newRoomMin = (possibleDoor.Position + possibleDoor.DirectionVector) - chosenDoor.Position;
                 roomInstance = new RoomInstance(randRoom, newRoomMin);
@@ -231,10 +235,10 @@ namespace DonBigo.Rooms
 
             if (filler != null && fillerMat != null)
             {
-                FillInternal(grid, tilemap, badExits, rooms, filler, fillerMat);    
+                FillInternal(grid, tilemap, badExits, rooms, filler, fillerMat);
             }
-            
-            
+
+
             tilemap.CompressBounds();
             return rooms;
         }
