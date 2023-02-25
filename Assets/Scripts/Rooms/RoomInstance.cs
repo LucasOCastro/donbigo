@@ -43,7 +43,7 @@ namespace DonBigo.Rooms
 
             if (guaranteedSelect != null)
             {
-                var guaranteedExit = exits.First(guaranteedSelect);
+                var guaranteedExit = exits.FirstOrDefault(guaranteedSelect);
                 if (guaranteedExit != null) return guaranteedExit;
             }
 
