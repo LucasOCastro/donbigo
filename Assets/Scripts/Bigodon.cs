@@ -9,6 +9,46 @@ namespace DonBigo
     {
         private Path _currentTargetPath;
 
+        private Tile CastFromShadows(Vector2Int tile)
+        {
+            const int maxDistance = 25;
+            const int sweepRange = 1;
+
+            var grid = Tile.ParentGrid;
+            var room = Tile.Room;
+            var bounds = room.Bounds;
+            if (tile.x < bounds.min.x || tile.y < bounds.min.y)
+            {
+                return null;
+            }
+
+            if (room.Bounds.Contains(tile)) return Tile.ParentGrid[tile];
+
+            for (int i = 0; i <= sweepRange; i++)
+            {
+                for (int j = -sweepRange; j <= sweepRange; j++)
+                {
+                    Vector2Int offset = (tile.x >= bounds.max.x) ? new Vector2Int(i, j) : new Vector2Int(j, i);
+                    Vector2Int checkTile = Tile.Pos + offset;
+                    int distance = checkTile.ManhattanDistance(tile);
+                    if (grid[checkTile] == null || !grid.InBounds(checkTile) || !VisibleTiles.Contains(checkTile) ||
+                        distance > maxDistance)
+                    {
+                        continue;
+                    }
+
+                    if (grid[checkTile].Type is DoorTileType ||
+                        grid[checkTile].Structures.Exists(s => s is Vent || s.Type is EntranceMarkerTile))
+                    {
+                        return grid[checkTile];
+                    }
+                }
+            }
+            
+
+            return null;
+        }
+        
         private Action GenInteractAction(Tile tile)
         {
             if (!this.Tile.Pos.AdjacentTo(tile.Pos))
@@ -69,16 +109,13 @@ namespace DonBigo
             {
                 return new DropAction(this, Tile);
             }
-            
-            Tile tile =  GridManager.Instance.Grid.MouseOverTile();
-            if (tile == null || !VisibleTiles.Contains(tile.Pos))
-            {
-                return null;
-            }
+
+            var mousePos = GridManager.Instance.Grid.MouseOverPos();
+            var tile =  GridManager.Instance.Grid.MouseOverTile();
             
             //Se tem um item na mao e aperta o botão direito, tenta usar o item.
             Item heldItem = Inventory.CurrentHand; 
-            if (heldItem != null && Input.GetMouseButtonDown(1) && heldItem.CanBeUsed(this, tile))
+            if (tile != null && VisibleTiles.Contains(mousePos) && heldItem != null && Input.GetMouseButtonDown(1) && heldItem.CanBeUsed(this, tile))
             {
                 return new UseItemAction(this, heldItem, tile);
             }
@@ -86,6 +123,12 @@ namespace DonBigo
             //Clique esquerdo
             if (Input.GetMouseButtonDown(0))
             {
+                if (tile == null || !VisibleTiles.Contains(mousePos))
+                {
+                    tile = CastFromShadows(mousePos);
+                    if (tile == null) return null;
+                }
+            
                 //Se a tile tem uma ação de interação, retorna ela.
                 var interactAction = GenInteractAction(tile);
                 if (interactAction != null)
