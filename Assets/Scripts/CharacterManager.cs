@@ -1,5 +1,6 @@
 using DonBigo.Actions;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace DonBigo
 {
@@ -11,6 +12,8 @@ namespace DonBigo
         [SerializeField] private DirectionalSpriteSet donbigoSprite;
         public static Phantonette Phantonette { get; private set; }
         [SerializeField] private DirectionalSpriteSet phantonetteSprite;
+
+        public static IEnumerable<Entity> AllEntities { get; private set; }
 
         private void Start()
         {
@@ -42,6 +45,8 @@ namespace DonBigo
 
             DonBigo.Health.OnDeathEvent += () => GameEnder.Instance.EndGame(GameEnder.Condition.Defeat);
             Phantonette.Health.OnDeathEvent += () => GameEnder.Instance.EndGame(GameEnder.Condition.Victory);
+            
+            AllEntities = new Entity[] { DonBigo, Phantonette };
         }
 
         private void Update()

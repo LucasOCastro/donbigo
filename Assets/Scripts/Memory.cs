@@ -61,6 +61,13 @@ namespace DonBigo
             if (action is UseDoorAction useDoorAction)
             {
                 _usedDoors.Add(useDoorAction.Exit.Position);
+                //Quando uso uma porta, a outra entidade lembra que eu fui pro outro lado
+                foreach (var entity in CharacterManager.AllEntities)
+                {
+                    if (entity == useDoorAction.Doer) continue;
+                    if (!entity.VisibleTiles.Contains(useDoorAction.From.Pos)) continue;
+                    entity.Memory._locationMemory.SetOrAdd(useDoorAction.Doer, useDoorAction.To);
+                }
             }
         }
     }
