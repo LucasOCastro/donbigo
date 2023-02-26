@@ -1,5 +1,6 @@
 using System;
 using DonBigo.Actions;
+using DonBigo.UI;
 using UnityEngine;
 using Action = DonBigo.Actions.Action;
 
@@ -85,6 +86,7 @@ namespace DonBigo
 
         public override Action GetAction()
         {
+            TileHighlighter.Highlight(null);
             if (_scheduledAction != null)
             {
                 var action = _scheduledAction;
@@ -120,14 +122,17 @@ namespace DonBigo
                 return new UseItemAction(this, heldItem, tile);
             }
 
+            if (tile == null || !VisibleTiles.Contains(mousePos))
+            {
+                tile = CastFromShadows(mousePos);
+                if (tile == null) return null;
+            }
+            TileHighlighter.Highlight(tile);
+            
             //Clique esquerdo
             if (Input.GetMouseButtonDown(0))
             {
-                if (tile == null || !VisibleTiles.Contains(mousePos))
-                {
-                    tile = CastFromShadows(mousePos);
-                    if (tile == null) return null;
-                }
+                
             
                 //Se a tile tem uma ação de interação, retorna ela.
                 var interactAction = GenInteractAction(tile);
