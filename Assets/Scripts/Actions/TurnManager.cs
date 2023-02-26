@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using DonBigo;
 using UnityEngine;
 
 namespace DonBigo.Actions
@@ -27,10 +27,18 @@ namespace DonBigo.Actions
                 return;
             }
             Instance = this;
-            StartCoroutine(TurnTickCoroutine());
         }
 
         private void CycleEntity() => _entityIndex = (_entityIndex + 1) % _entities.Count;
+
+        private void OnEnable()
+        {
+            StartCoroutine(TurnTickCoroutine());
+        }
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+        }
 
         private IEnumerator TurnTickCoroutine()
         {

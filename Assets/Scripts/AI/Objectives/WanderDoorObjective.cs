@@ -18,7 +18,7 @@ namespace DonBigo.AI
         {
             const float recentDoorWeight = 5f;
             const float fullyExploredPenalty = 30f;
-            const float lastVisitedPenalty = 50f;
+            const float lastVisitedPenalty = 800f;
 
             const float distanceFromPlayerStrongWeight = 20f;
             const float distanceFromPlayerWeakWeight = 100f;
@@ -69,7 +69,6 @@ namespace DonBigo.AI
                 if (_bestExit == null) return null;
                 _target = Doer.Tile.ParentGrid[_bestExit.Position];
             }
-            if (_bestExit == null) return null;
 
             if (!IsAdjacentToTarget)
             {

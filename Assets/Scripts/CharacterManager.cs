@@ -39,6 +39,9 @@ namespace DonBigo
             TurnManager.RegisterEntity(DonBigo);
             TurnManager.RegisterEntity(Phantonette);
             FieldOfViewRenderer.Origin = DonBigo;
+
+            DonBigo.Health.OnDeathEvent += () => GameEnder.Instance.EndGame(GameEnder.Condition.Defeat);
+            Phantonette.Health.OnDeathEvent += () => GameEnder.Instance.EndGame(GameEnder.Condition.Victory);
         }
 
         private void Update()

@@ -87,6 +87,10 @@ namespace DonBigo
 
         public void Use(Entity doer, Tile target)
         {
+            if (IsInCooldown)
+            {
+                Debug.LogError("Usou item em cooldown!");
+            }
             UseAction(doer, target);
             _lastUsedTurn = TurnManager.CurrentTurn;
         }

@@ -33,7 +33,7 @@ namespace DonBigo.AI
             Vent vent;
             if (playerTile == null)
             {
-                vent = vents.Random();
+                vent = vents.RandomElementByWeight(v => worker.Owner.Memory.RoomFullyExplored(v.UseTile.Room) ? 1 : 10);
             }
             else if (worker.FeelsStrong)
             {
