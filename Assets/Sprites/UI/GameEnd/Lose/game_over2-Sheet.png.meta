@@ -109,7 +109,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 900
         width: 240
         height: 180
       alignment: 0
@@ -130,7 +130,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 240
-        y: 0
+        y: 900
         width: 240
         height: 180
       alignment: 0
@@ -151,7 +151,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 480
-        y: 0
+        y: 900
         width: 240
         height: 180
       alignment: 0
@@ -172,7 +172,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 720
-        y: 0
+        y: 900
         width: 240
         height: 180
       alignment: 0
@@ -193,7 +193,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 960
-        y: 0
+        y: 900
         width: 240
         height: 180
       alignment: 0
@@ -214,7 +214,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1200
-        y: 0
+        y: 900
         width: 240
         height: 180
       alignment: 0
@@ -234,8 +234,8 @@ TextureImporter:
       name: game_over2-Sheet_6
       rect:
         serializedVersion: 2
-        x: 1440
-        y: 0
+        x: 0
+        y: 720
         width: 240
         height: 180
       alignment: 0
@@ -255,8 +255,8 @@ TextureImporter:
       name: game_over2-Sheet_7
       rect:
         serializedVersion: 2
-        x: 1680
-        y: 0
+        x: 240
+        y: 720
         width: 240
         height: 180
       alignment: 0
@@ -276,8 +276,8 @@ TextureImporter:
       name: game_over2-Sheet_8
       rect:
         serializedVersion: 2
-        x: 1920
-        y: 0
+        x: 480
+        y: 720
         width: 240
         height: 180
       alignment: 0
@@ -297,8 +297,8 @@ TextureImporter:
       name: game_over2-Sheet_9
       rect:
         serializedVersion: 2
-        x: 2160
-        y: 0
+        x: 720
+        y: 720
         width: 240
         height: 180
       alignment: 0
@@ -318,8 +318,8 @@ TextureImporter:
       name: game_over2-Sheet_10
       rect:
         serializedVersion: 2
-        x: 2400
-        y: 0
+        x: 960
+        y: 720
         width: 240
         height: 180
       alignment: 0
@@ -339,8 +339,8 @@ TextureImporter:
       name: game_over2-Sheet_11
       rect:
         serializedVersion: 2
-        x: 2640
-        y: 0
+        x: 1200
+        y: 720
         width: 240
         height: 180
       alignment: 0
@@ -360,8 +360,8 @@ TextureImporter:
       name: game_over2-Sheet_12
       rect:
         serializedVersion: 2
-        x: 2880
-        y: 0
+        x: 0
+        y: 540
         width: 240
         height: 180
       alignment: 0
@@ -381,8 +381,8 @@ TextureImporter:
       name: game_over2-Sheet_13
       rect:
         serializedVersion: 2
-        x: 3120
-        y: 0
+        x: 240
+        y: 540
         width: 240
         height: 180
       alignment: 0
@@ -402,8 +402,8 @@ TextureImporter:
       name: game_over2-Sheet_14
       rect:
         serializedVersion: 2
-        x: 3360
-        y: 0
+        x: 480
+        y: 540
         width: 240
         height: 180
       alignment: 0
@@ -423,8 +423,8 @@ TextureImporter:
       name: game_over2-Sheet_15
       rect:
         serializedVersion: 2
-        x: 3600
-        y: 0
+        x: 720
+        y: 540
         width: 240
         height: 180
       alignment: 0
@@ -444,8 +444,8 @@ TextureImporter:
       name: game_over2-Sheet_16
       rect:
         serializedVersion: 2
-        x: 3840
-        y: 0
+        x: 960
+        y: 540
         width: 240
         height: 180
       alignment: 0
@@ -465,8 +465,8 @@ TextureImporter:
       name: game_over2-Sheet_17
       rect:
         serializedVersion: 2
-        x: 4080
-        y: 0
+        x: 1200
+        y: 540
         width: 240
         height: 180
       alignment: 0
@@ -486,8 +486,8 @@ TextureImporter:
       name: game_over2-Sheet_18
       rect:
         serializedVersion: 2
-        x: 4320
-        y: 0
+        x: 0
+        y: 360
         width: 240
         height: 180
       alignment: 0
@@ -507,8 +507,8 @@ TextureImporter:
       name: game_over2-Sheet_19
       rect:
         serializedVersion: 2
-        x: 4560
-        y: 0
+        x: 240
+        y: 360
         width: 240
         height: 180
       alignment: 0
@@ -528,8 +528,8 @@ TextureImporter:
       name: game_over2-Sheet_20
       rect:
         serializedVersion: 2
-        x: 4800
-        y: 0
+        x: 480
+        y: 360
         width: 240
         height: 180
       alignment: 0
@@ -549,8 +549,8 @@ TextureImporter:
       name: game_over2-Sheet_21
       rect:
         serializedVersion: 2
-        x: 5040
-        y: 0
+        x: 720
+        y: 360
         width: 240
         height: 180
       alignment: 0
@@ -570,8 +570,8 @@ TextureImporter:
       name: game_over2-Sheet_22
       rect:
         serializedVersion: 2
-        x: 5280
-        y: 0
+        x: 960
+        y: 360
         width: 240
         height: 180
       alignment: 0
@@ -591,8 +591,8 @@ TextureImporter:
       name: game_over2-Sheet_23
       rect:
         serializedVersion: 2
-        x: 5520
-        y: 0
+        x: 1200
+        y: 360
         width: 240
         height: 180
       alignment: 0
@@ -612,8 +612,8 @@ TextureImporter:
       name: game_over2-Sheet_24
       rect:
         serializedVersion: 2
-        x: 5760
-        y: 0
+        x: 0
+        y: 180
         width: 240
         height: 180
       alignment: 0
@@ -633,8 +633,8 @@ TextureImporter:
       name: game_over2-Sheet_25
       rect:
         serializedVersion: 2
-        x: 6000
-        y: 0
+        x: 240
+        y: 180
         width: 240
         height: 180
       alignment: 0
@@ -654,8 +654,8 @@ TextureImporter:
       name: game_over2-Sheet_26
       rect:
         serializedVersion: 2
-        x: 6240
-        y: 0
+        x: 480
+        y: 180
         width: 240
         height: 180
       alignment: 0
@@ -675,8 +675,8 @@ TextureImporter:
       name: game_over2-Sheet_27
       rect:
         serializedVersion: 2
-        x: 6480
-        y: 0
+        x: 720
+        y: 180
         width: 240
         height: 180
       alignment: 0
@@ -696,8 +696,8 @@ TextureImporter:
       name: game_over2-Sheet_28
       rect:
         serializedVersion: 2
-        x: 6720
-        y: 0
+        x: 960
+        y: 180
         width: 240
         height: 180
       alignment: 0
@@ -717,8 +717,8 @@ TextureImporter:
       name: game_over2-Sheet_29
       rect:
         serializedVersion: 2
-        x: 6960
-        y: 0
+        x: 1200
+        y: 180
         width: 240
         height: 180
       alignment: 0
@@ -738,7 +738,7 @@ TextureImporter:
       name: game_over2-Sheet_30
       rect:
         serializedVersion: 2
-        x: 7200
+        x: 0
         y: 0
         width: 240
         height: 180
@@ -759,7 +759,7 @@ TextureImporter:
       name: game_over2-Sheet_31
       rect:
         serializedVersion: 2
-        x: 7440
+        x: 240
         y: 0
         width: 240
         height: 180
@@ -780,7 +780,7 @@ TextureImporter:
       name: game_over2-Sheet_32
       rect:
         serializedVersion: 2
-        x: 7680
+        x: 480
         y: 0
         width: 240
         height: 180
@@ -801,7 +801,7 @@ TextureImporter:
       name: game_over2-Sheet_33
       rect:
         serializedVersion: 2
-        x: 7920
+        x: 720
         y: 0
         width: 240
         height: 180
@@ -822,7 +822,7 @@ TextureImporter:
       name: game_over2-Sheet_34
       rect:
         serializedVersion: 2
-        x: 8160
+        x: 960
         y: 0
         width: 240
         height: 180
@@ -843,7 +843,7 @@ TextureImporter:
       name: game_over2-Sheet_35
       rect:
         serializedVersion: 2
-        x: 8400
+        x: 1200
         y: 0
         width: 240
         height: 180
@@ -856,69 +856,6 @@ TextureImporter:
       bones: []
       spriteID: 19405ed9fc93dad47b493b5e8fbc24db
       internalID: -174224447
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: game_over2-Sheet_36
-      rect:
-        serializedVersion: 2
-        x: 8640
-        y: 0
-        width: 240
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 047e24e5dc0986646959ee6b45c789b5
-      internalID: -182427929
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: game_over2-Sheet_37
-      rect:
-        serializedVersion: 2
-        x: 8880
-        y: 0
-        width: 240
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f6bb437772dfa9d4aa0c30f5f0c2692f
-      internalID: -1759550199
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: game_over2-Sheet_38
-      rect:
-        serializedVersion: 2
-        x: 9120
-        y: 0
-        width: 240
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2420ec13c3493ee41a95c3f6f8502a68
-      internalID: 751638860
       vertices: []
       indices: 
       edges: []
@@ -937,8 +874,8 @@ TextureImporter:
       game_over2-Sheet_3: 174530804
       game_over2-Sheet_13: -478657198
       game_over2-Sheet_35: -174224447
+      game_over2-Sheet_33: 1488159404
       game_over2-Sheet_31: 2055336360
-      game_over2-Sheet_36: -182427929
       game_over2-Sheet_12: -1297838823
       game_over2-Sheet_22: 916515370
       game_over2-Sheet_16: 527177676
@@ -947,8 +884,6 @@ TextureImporter:
       game_over2-Sheet_27: 632912522
       game_over2-Sheet_29: -555842029
       game_over2-Sheet_11: -299605898
-      game_over2-Sheet_37: -1759550199
-      game_over2-Sheet_38: 751638860
       game_over2-Sheet_14: 907027899
       game_over2-Sheet_8: 1132550415
       game_over2-Sheet_9: 1205577938
@@ -958,9 +893,8 @@ TextureImporter:
       game_over2-Sheet_25: 619465046
       game_over2-Sheet_30: 588130121
       game_over2-Sheet_4: 515044747
-      game_over2-Sheet_33: 1488159404
-      game_over2-Sheet_2: 1164518615
       game_over2-Sheet_7: -2001664927
+      game_over2-Sheet_2: 1164518615
       game_over2-Sheet_28: -1406654366
       game_over2-Sheet_6: 1898986986
       game_over2-Sheet_0: 830831146

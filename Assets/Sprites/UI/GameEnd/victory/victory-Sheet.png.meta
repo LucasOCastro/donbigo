@@ -109,7 +109,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 1080
         width: 240
         height: 180
       alignment: 0
@@ -130,7 +130,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 240
-        y: 0
+        y: 1080
         width: 240
         height: 180
       alignment: 0
@@ -151,7 +151,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 480
-        y: 0
+        y: 1080
         width: 240
         height: 180
       alignment: 0
@@ -172,7 +172,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 720
-        y: 0
+        y: 1080
         width: 240
         height: 180
       alignment: 0
@@ -193,7 +193,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 960
-        y: 0
+        y: 1080
         width: 240
         height: 180
       alignment: 0
@@ -214,7 +214,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1200
-        y: 0
+        y: 1080
         width: 240
         height: 180
       alignment: 0
@@ -235,7 +235,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1440
-        y: 0
+        y: 1080
         width: 240
         height: 180
       alignment: 0
@@ -255,8 +255,8 @@ TextureImporter:
       name: victory-Sheet_7
       rect:
         serializedVersion: 2
-        x: 1680
-        y: 0
+        x: 0
+        y: 900
         width: 240
         height: 180
       alignment: 0
@@ -276,8 +276,8 @@ TextureImporter:
       name: victory-Sheet_8
       rect:
         serializedVersion: 2
-        x: 1920
-        y: 0
+        x: 240
+        y: 900
         width: 240
         height: 180
       alignment: 0
@@ -297,8 +297,8 @@ TextureImporter:
       name: victory-Sheet_9
       rect:
         serializedVersion: 2
-        x: 2160
-        y: 0
+        x: 480
+        y: 900
         width: 240
         height: 180
       alignment: 0
@@ -318,8 +318,8 @@ TextureImporter:
       name: victory-Sheet_10
       rect:
         serializedVersion: 2
-        x: 2400
-        y: 0
+        x: 720
+        y: 900
         width: 240
         height: 180
       alignment: 0
@@ -339,8 +339,8 @@ TextureImporter:
       name: victory-Sheet_11
       rect:
         serializedVersion: 2
-        x: 2640
-        y: 0
+        x: 960
+        y: 900
         width: 240
         height: 180
       alignment: 0
@@ -360,8 +360,8 @@ TextureImporter:
       name: victory-Sheet_12
       rect:
         serializedVersion: 2
-        x: 2880
-        y: 0
+        x: 1200
+        y: 900
         width: 240
         height: 180
       alignment: 0
@@ -381,8 +381,8 @@ TextureImporter:
       name: victory-Sheet_13
       rect:
         serializedVersion: 2
-        x: 3120
-        y: 0
+        x: 1440
+        y: 900
         width: 240
         height: 180
       alignment: 0
@@ -402,8 +402,8 @@ TextureImporter:
       name: victory-Sheet_14
       rect:
         serializedVersion: 2
-        x: 3360
-        y: 0
+        x: 0
+        y: 720
         width: 240
         height: 180
       alignment: 0
@@ -423,8 +423,8 @@ TextureImporter:
       name: victory-Sheet_15
       rect:
         serializedVersion: 2
-        x: 3600
-        y: 0
+        x: 240
+        y: 720
         width: 240
         height: 180
       alignment: 0
@@ -444,8 +444,8 @@ TextureImporter:
       name: victory-Sheet_16
       rect:
         serializedVersion: 2
-        x: 3840
-        y: 0
+        x: 480
+        y: 720
         width: 240
         height: 180
       alignment: 0
@@ -465,8 +465,8 @@ TextureImporter:
       name: victory-Sheet_17
       rect:
         serializedVersion: 2
-        x: 4080
-        y: 0
+        x: 720
+        y: 720
         width: 240
         height: 180
       alignment: 0
@@ -486,8 +486,8 @@ TextureImporter:
       name: victory-Sheet_18
       rect:
         serializedVersion: 2
-        x: 4320
-        y: 0
+        x: 960
+        y: 720
         width: 240
         height: 180
       alignment: 0
@@ -507,8 +507,8 @@ TextureImporter:
       name: victory-Sheet_19
       rect:
         serializedVersion: 2
-        x: 4560
-        y: 0
+        x: 1200
+        y: 720
         width: 240
         height: 180
       alignment: 0
@@ -528,8 +528,8 @@ TextureImporter:
       name: victory-Sheet_20
       rect:
         serializedVersion: 2
-        x: 4800
-        y: 0
+        x: 1440
+        y: 720
         width: 240
         height: 180
       alignment: 0
@@ -549,8 +549,8 @@ TextureImporter:
       name: victory-Sheet_21
       rect:
         serializedVersion: 2
-        x: 5040
-        y: 0
+        x: 0
+        y: 540
         width: 240
         height: 180
       alignment: 0
@@ -570,8 +570,8 @@ TextureImporter:
       name: victory-Sheet_22
       rect:
         serializedVersion: 2
-        x: 5280
-        y: 0
+        x: 240
+        y: 540
         width: 240
         height: 180
       alignment: 0
@@ -591,8 +591,8 @@ TextureImporter:
       name: victory-Sheet_23
       rect:
         serializedVersion: 2
-        x: 5520
-        y: 0
+        x: 480
+        y: 540
         width: 240
         height: 180
       alignment: 0
@@ -612,8 +612,8 @@ TextureImporter:
       name: victory-Sheet_24
       rect:
         serializedVersion: 2
-        x: 5760
-        y: 0
+        x: 720
+        y: 540
         width: 240
         height: 180
       alignment: 0
@@ -633,8 +633,8 @@ TextureImporter:
       name: victory-Sheet_25
       rect:
         serializedVersion: 2
-        x: 6000
-        y: 0
+        x: 960
+        y: 540
         width: 240
         height: 180
       alignment: 0
@@ -654,8 +654,8 @@ TextureImporter:
       name: victory-Sheet_26
       rect:
         serializedVersion: 2
-        x: 6240
-        y: 0
+        x: 1200
+        y: 540
         width: 240
         height: 180
       alignment: 0
@@ -675,8 +675,8 @@ TextureImporter:
       name: victory-Sheet_27
       rect:
         serializedVersion: 2
-        x: 6480
-        y: 0
+        x: 1440
+        y: 540
         width: 240
         height: 180
       alignment: 0
@@ -696,8 +696,8 @@ TextureImporter:
       name: victory-Sheet_28
       rect:
         serializedVersion: 2
-        x: 6720
-        y: 0
+        x: 0
+        y: 360
         width: 240
         height: 180
       alignment: 0
@@ -717,8 +717,8 @@ TextureImporter:
       name: victory-Sheet_29
       rect:
         serializedVersion: 2
-        x: 6960
-        y: 0
+        x: 240
+        y: 360
         width: 240
         height: 180
       alignment: 0
@@ -738,8 +738,8 @@ TextureImporter:
       name: victory-Sheet_30
       rect:
         serializedVersion: 2
-        x: 7200
-        y: 0
+        x: 480
+        y: 360
         width: 240
         height: 180
       alignment: 0
@@ -759,8 +759,8 @@ TextureImporter:
       name: victory-Sheet_31
       rect:
         serializedVersion: 2
-        x: 7440
-        y: 0
+        x: 720
+        y: 360
         width: 240
         height: 180
       alignment: 0
@@ -780,8 +780,8 @@ TextureImporter:
       name: victory-Sheet_32
       rect:
         serializedVersion: 2
-        x: 7680
-        y: 0
+        x: 960
+        y: 360
         width: 240
         height: 180
       alignment: 0
@@ -801,8 +801,8 @@ TextureImporter:
       name: victory-Sheet_33
       rect:
         serializedVersion: 2
-        x: 7920
-        y: 0
+        x: 1200
+        y: 360
         width: 240
         height: 180
       alignment: 0
@@ -822,8 +822,8 @@ TextureImporter:
       name: victory-Sheet_34
       rect:
         serializedVersion: 2
-        x: 8160
-        y: 0
+        x: 1440
+        y: 360
         width: 240
         height: 180
       alignment: 0
@@ -843,8 +843,8 @@ TextureImporter:
       name: victory-Sheet_35
       rect:
         serializedVersion: 2
-        x: 8400
-        y: 0
+        x: 0
+        y: 180
         width: 240
         height: 180
       alignment: 0
@@ -864,8 +864,8 @@ TextureImporter:
       name: victory-Sheet_36
       rect:
         serializedVersion: 2
-        x: 8640
-        y: 0
+        x: 240
+        y: 180
         width: 240
         height: 180
       alignment: 0
@@ -885,8 +885,8 @@ TextureImporter:
       name: victory-Sheet_37
       rect:
         serializedVersion: 2
-        x: 8880
-        y: 0
+        x: 480
+        y: 180
         width: 240
         height: 180
       alignment: 0
@@ -906,8 +906,8 @@ TextureImporter:
       name: victory-Sheet_38
       rect:
         serializedVersion: 2
-        x: 9120
-        y: 0
+        x: 720
+        y: 180
         width: 240
         height: 180
       alignment: 0
@@ -927,8 +927,8 @@ TextureImporter:
       name: victory-Sheet_39
       rect:
         serializedVersion: 2
-        x: 9360
-        y: 0
+        x: 960
+        y: 180
         width: 240
         height: 180
       alignment: 0
@@ -948,8 +948,8 @@ TextureImporter:
       name: victory-Sheet_40
       rect:
         serializedVersion: 2
-        x: 9600
-        y: 0
+        x: 1200
+        y: 180
         width: 240
         height: 180
       alignment: 0
@@ -969,8 +969,8 @@ TextureImporter:
       name: victory-Sheet_41
       rect:
         serializedVersion: 2
-        x: 9840
-        y: 0
+        x: 1440
+        y: 180
         width: 240
         height: 180
       alignment: 0
@@ -990,7 +990,7 @@ TextureImporter:
       name: victory-Sheet_42
       rect:
         serializedVersion: 2
-        x: 10080
+        x: 0
         y: 0
         width: 240
         height: 180
@@ -1003,111 +1003,6 @@ TextureImporter:
       bones: []
       spriteID: 6dfad977b5e04cb4295b024dab4d80e6
       internalID: -481054067
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: victory-Sheet_43
-      rect:
-        serializedVersion: 2
-        x: 10320
-        y: 0
-        width: 240
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7b6f864ac1ad3b443b9868c3d3294f67
-      internalID: -1071188539
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: victory-Sheet_44
-      rect:
-        serializedVersion: 2
-        x: 10560
-        y: 0
-        width: 240
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b9717d775ba96684382ce2b607e84b37
-      internalID: 373508381
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: victory-Sheet_45
-      rect:
-        serializedVersion: 2
-        x: 10800
-        y: 0
-        width: 240
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 687cdee830241c34f854596437929e6c
-      internalID: -468535459
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: victory-Sheet_46
-      rect:
-        serializedVersion: 2
-        x: 11040
-        y: 0
-        width: 240
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f464b99f5853eda4886dd304bc6de0d9
-      internalID: 69779909
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: victory-Sheet_47
-      rect:
-        serializedVersion: 2
-        x: 11280
-        y: 0
-        width: 240
-        height: 180
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 339800ed72e102d44b6c7fd30ebc4531
-      internalID: 602524180
       vertices: []
       indices: 
       edges: []
@@ -1125,7 +1020,6 @@ TextureImporter:
     nameFileIdTable:
       victory-Sheet_29: -1253939257
       victory-Sheet_28: 553597483
-      victory-Sheet_43: -1071188539
       victory-Sheet_15: -1303536051
       victory-Sheet_24: 290463966
       victory-Sheet_42: -481054067
@@ -1134,10 +1028,8 @@ TextureImporter:
       victory-Sheet_22: 180170717
       victory-Sheet_27: 1473767236
       victory-Sheet_16: 746782244
-      victory-Sheet_46: 69779909
       victory-Sheet_17: 1672921296
       victory-Sheet_23: 1454309574
-      victory-Sheet_44: 373508381
       victory-Sheet_37: -798117398
       victory-Sheet_13: 528387234
       victory-Sheet_30: 1390542309
@@ -1156,7 +1048,6 @@ TextureImporter:
       victory-Sheet_6: 1328999079
       victory-Sheet_3: 815567368
       victory-Sheet_21: -22399777
-      victory-Sheet_47: 602524180
       victory-Sheet_25: -917579796
       victory-Sheet_19: -1329655841
       victory-Sheet_12: -1157746891
@@ -1167,7 +1058,6 @@ TextureImporter:
       victory-Sheet_20: -1839431006
       victory-Sheet_11: 1569067532
       victory-Sheet_36: -1705501428
-      victory-Sheet_45: -468535459
       victory-Sheet_8: -351694403
       victory-Sheet_33: -1193887441
       victory-Sheet_34: 569008014
