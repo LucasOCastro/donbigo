@@ -17,3 +17,8 @@ MonoBehaviour:
   - "e a\xED o meu nome :)"
   - "mas que a\xED de l\xE1 foi o"
   - "n\xE9<br>n\xE9<br>duvido porrraaaaa"
+  grabInstruction:
+  - Aperta pra pegar ae :)
+  walkTarget: {x: 8, y: 2}
+  grabItem: {fileID: 11400000, guid: c43fce7eff5707644b2b92a8456c5dd3, type: 2}
+  itemTile: {x: 9, y: 2}

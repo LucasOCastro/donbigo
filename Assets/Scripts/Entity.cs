@@ -96,6 +96,8 @@ namespace DonBigo
             }
         }
 
+        public void SetLookDirection(Vector2Int dir) => Renderer.sprite = SpriteSet.GetDirectionalSprite(dir);
+
         private Coroutine _currentMoveCoroutine;
         public void TranslateToTile(Tile tile, float time)
         {
@@ -123,23 +125,6 @@ namespace DonBigo
             _currentMoveCoroutine = null;
             Tile = targetTile;
         }
-        
-        /*private Coroutine _currentMoveCoroutine;
-        private IEnumerator MoveTransformCoroutine(Vector3 to, float time)
-        {
-            if (_currentMoveCoroutine != null)
-            {
-                StopCoroutine(_currentMoveCoroutine);
-            }
-
-            float distance = (to - transform.position).magnitude;
-            float speed = distance / TurnManager.Instance.TurnDuration;
-            while (transform.position != to)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, to, speed * Time.deltaTime);
-                yield return null;
-            }
-        }*/
 
         public abstract Action GetAction();
         
