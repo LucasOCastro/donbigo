@@ -180,7 +180,7 @@ namespace DonBigo.Rooms
 
 
         public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap, TileType filler,
-            EntranceMarkerTile fillerMat, Room startingRoom)
+            EntranceMarkerTile fillerMat, Room startingRoom, Vector2 normalizedGenStart)
 
         {
             if (GridManager.Instance.DEBUG_TEST_ROOM != null)
@@ -197,8 +197,11 @@ namespace DonBigo.Rooms
 
             Room randRoom = (startingRoom != null) ? startingRoom : RoomDatabase.RandomRoom();
             if (randRoom == null) return rooms;
-            Vector2Int center = new Vector2Int((int)grid.Bounds.center.x, (int)grid.Bounds.center.y);
-            RoomInstance roomInstance = new RoomInstance(randRoom, center);
+            Vector2Int genStart = new Vector2Int(
+                (int)(grid.Bounds.size.x * normalizedGenStart.x + grid.Bounds.min.x),
+                (int)(grid.Bounds.size.y * normalizedGenStart.y + grid.Bounds.min.y)
+            );
+            RoomInstance roomInstance = new RoomInstance(randRoom, genStart);
             PlaceRoom(grid, tilemap, roomInstance);
             rooms.Add(roomInstance);
             foreach (var door in roomInstance.Doors)

@@ -14,6 +14,7 @@ namespace DonBigo
         public GameGrid Grid { get; private set; }
         
         [SerializeField] private int mapSize = 50;
+        [SerializeField] private Vector2 normalizedGenStart = new(.5f, .5f);
         [SerializeField] private Tilemap tilemap;
         [SerializeField] private Room startingRoom;
         [SerializeField] private TileType fillerTile;
@@ -38,7 +39,7 @@ namespace DonBigo
             }
 
             Instance = this;
-            Grid = new GameGrid(mapSize, tilemap, fillerTile, fillerMat, startingRoom);
+            Grid = new GameGrid(mapSize, tilemap, fillerTile, fillerMat, startingRoom, normalizedGenStart);
         }
 
         public static Tile DEBUG_start, DEBUG_end;
