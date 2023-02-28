@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62c9c41fd14e4fad876344134439bf9d, type: 3}
+  m_Name: IntroductionTutorialStage
+  m_EditorClassIdentifier: 
+  introductionDialogue:
+  - mas quando eu hahahahha
+  - "e a\xED o meu nome :)"
+  - "mas que a\xED de l\xE1 foi o"
+  - "n\xE9<br>n\xE9<br>duvido porrraaaaa"
