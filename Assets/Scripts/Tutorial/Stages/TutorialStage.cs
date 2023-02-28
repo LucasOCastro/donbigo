@@ -12,6 +12,13 @@ namespace DonBigo.Tutorial.Stages
         {
             DialogueShower.Instance.ShowDialogue(dialogue);
             yield return new WaitUntil(() => !DialogueShower.Instance.Shown);
-        } 
+        }
+
+        protected static Tile GetTile(Vector2Int localPos)
+        {
+            var grid = GridManager.Instance.Grid;
+            Vector2Int pos = localPos + grid.AllRooms[0].Bounds.min;
+            return grid[pos];
+        }
     }
 }
