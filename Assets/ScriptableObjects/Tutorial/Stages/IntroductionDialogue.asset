@@ -13,5 +13,17 @@ MonoBehaviour:
   m_Name: IntroductionDialogue
   m_EditorClassIdentifier: 
   dialogues:
-  - Eae bora ae haha aperta enter
-  - Bora la pra estante :)
+  - "Ol\xE1 sr. Emanuel Begault, ou como prefere ser chamado, Don Big\xF4.\nN\xE3o
+    se assuste, sou eu, a sua assistente, a Franchella.\n\nUse <sprite name=enter>
+    para continuar.\n"
+  - "Eu vim te preparar para sua pr\xF3xima miss\xE3o.\n<i>... n\xE3o que um grande
+    investigador como voc\xEA precise de muito preparo ...</i>\nBasicamente, voc\xEA
+    vai entrar numa mans\xE3o abandonada em busca de uma criminosa mort\xEDfera,
+    a Phantonette."
+  - "Eu me fantasiei como ela para voc\xEA saber quando a vir.\n<i>... n\xE3o que
+    fosse muito dif\xEDcil, de qualquer forma ...</i>\n<i>... ela tem um visual t\xE3o
+    chamativo, extravagante ... um senso de moda afiado ...</i>\nAh, foi mal, me
+    distra\xED."
+  - "Quando estiver l\xE1, vai ter que <sprite name=lclick> clicar no tile para onde
+    quiser ir.\nExperimente andar at\xE9 os azulejos azuis, ao lado da estante."
+  englishDialogues: []
