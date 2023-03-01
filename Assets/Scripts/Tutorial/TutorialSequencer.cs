@@ -7,7 +7,8 @@ namespace DonBigo.Tutorial
     public class TutorialSequencer : MonoBehaviour
     {
         [SerializeField] private TutorialStage[] stages;
-        [SerializeField] private Vector2Int phantonettePos, donbigoPos;
+        [SerializeField] private Vector2Int phantonettePos,phantonetteDir;
+        [SerializeField] private Vector2Int donbigoPos, donbigoDir;
 
         private void Start()
         {
@@ -25,11 +26,11 @@ namespace DonBigo.Tutorial
 
             phantonettePos += room.Bounds.min;
             phantonette.Tile = grid[phantonettePos];
-            phantonette.SetLookDirection(Vector2Int.down);
+            phantonette.SetLookDirection(phantonetteDir);
 
             donbigoPos += room.Bounds.min;
             donbigo.Tile = grid[donbigoPos];
-            donbigo.SetLookDirection(Vector2Int.up);
+            donbigo.SetLookDirection(donbigoDir);
         }
 
         private IEnumerator TutorialCoroutine()

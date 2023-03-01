@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed9d61cb2ae244559047a6af837a073b, type: 3}
   m_Name: PickupGun
   m_EditorClassIdentifier: 
-  itemPos: {x: 9, y: 2}
+  itemPos: {x: 8, y: 2}
   itemType: {fileID: 11400000, guid: 3154651d6db92154f9984a622ee3884e, type: 2}
   useItem: 0

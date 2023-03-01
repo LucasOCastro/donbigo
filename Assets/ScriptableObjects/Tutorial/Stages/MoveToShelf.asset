@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c06af9d48b405d87a161c36916039a, type: 3}
   m_Name: MoveToShelf
   m_EditorClassIdentifier: 
-  localTile: {x: 8, y: 2}
+  localTile: {x: 7, y: 2}
