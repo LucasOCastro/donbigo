@@ -72,27 +72,12 @@ namespace DonBigo
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 _currentTargetPath = null;
-                _scheduledAction = null;
-            }
-
-            //Não é muito organizado mas acho que ajuda na responsividade
-            if (TurnManager.Instance.CurrentEntity != this)
-            {
-                _scheduledAction = GetAction();
             }
         }
-
-        private Action _scheduledAction;
 
         public override Action GetAction()
         {
             TileHighlighter.Highlight(null);
-            if (_scheduledAction != null)
-            {
-                var action = _scheduledAction;
-                _scheduledAction = null;
-                return action;
-            }
             
             //Quando aperta espaço, pula um turno.
             if (Input.GetKeyDown(KeyCode.Space))

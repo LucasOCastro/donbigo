@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DonBigo.Actions;
 using TMPro;
 using UnityEngine;
 
@@ -29,6 +30,7 @@ namespace DonBigo.Tutorial
 
         private void SetShown(bool shown)
         {
+            TurnManager.Instance.gameObject.SetActive(!shown);
             text.text = "";
             dialogueContainer.SetActive(shown);
         }

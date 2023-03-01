@@ -49,7 +49,7 @@ namespace DonBigo.Actions
                     yield return null;
                 }
                 
-                if (CurrentEntity == _entities[0])
+                if (_entityIndex == 0)
                 {
                     //Só cycla o turno na primeira entidade
                     CurrentTurn++;
