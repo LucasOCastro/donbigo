@@ -52,14 +52,16 @@ namespace DonBigo
                 }
 
                 _tile = value;
-                if (_tile != null && _tile.Item != this)
+                if (_tile != null)
                 {
-                    _tile.Item = this;
-
-                    Vector3 worldPos = _tile.ParentGrid.TileToWorld(_tile, _tile.ItemSurfaceElevation);
-                    worldPos.z = 0;
-                    transform.position = worldPos;
+                    if (_tile.Item != this) _tile.Item = this;
+                    
+                    int elevation = _tile.ItemSurfaceElevation >= 0 ? _tile.ItemSurfaceElevation : 0;
+                    Vector3 worldPos = _tile.ParentGrid.TileToWorld(_tile, elevation);
+                    worldPos.z = 1;
+                    transform.position = (worldPos);
                 }
+                
                 UpdateRenderVisibility();
             }
         }

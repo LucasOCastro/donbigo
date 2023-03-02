@@ -101,7 +101,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
   - {fileID: 0}
-  - {fileID: 11400000, guid: 36423397f6e3f934d838f3c575fb7c4a, type: 2}
+  - {fileID: 11400000, guid: eda285b0224807249be6c3f8bbf32106, type: 2}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
   - {fileID: 0}
   - {fileID: 11400000, guid: bad7a36f6bbdbaf43ae6109c7cbb6a4e, type: 2}
@@ -419,7 +419,7 @@ MonoBehaviour:
   doors: []
   structureTiles:
   - pos: {x: 8, y: 2, z: 2}
-    structure: {fileID: 11400000, guid: 36423397f6e3f934d838f3c575fb7c4a, type: 2}
+    structure: {fileID: 11400000, guid: eda285b0224807249be6c3f8bbf32106, type: 2}
   transformOverrides: []
   possibleItems: []
   ventChance: 0

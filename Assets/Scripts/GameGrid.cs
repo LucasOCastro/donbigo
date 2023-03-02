@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using DonBigo.Rooms;
 using UnityEngine.Tilemaps;
@@ -8,6 +7,7 @@ namespace DonBigo
 {
     public class GameGrid
     {
+        public const float WorldElevationOffsetMultiplier = 0.2807145f;
         private Tilemap _tilemap;
         private Tile[,] _tiles;
         private List<RoomInstance> _rooms;
@@ -50,7 +50,7 @@ namespace DonBigo
         public Vector3 TileToWorld(Vector2Int tile, int elevation = 0)
         {
             Vector3 basePos = _tilemap.CellToWorld((Vector3Int)tile);
-            basePos.y += elevation * .3f;
+            basePos.y += elevation * WorldElevationOffsetMultiplier;
             return basePos;
         } 
         public Vector3 TileToWorld(Tile tile, int elevation = 0) => TileToWorld(tile.Pos, elevation);

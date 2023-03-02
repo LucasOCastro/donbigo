@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: ExplainPickupSlippers
   m_EditorClassIdentifier: 
   dialogues:
-  - Pega com esquerdo, ela vai te proteger da trap!
-  - "a\xED depois pega a trap ksksksks"
+  - "Tamb\xE9m <sprite name=lclick> clicando, voc\xEA recolhe e utiliza itens espalhados
+    pela mans\xE3o.\r\nIncluindo <sprite name=trap> armadilhas de urso, <sprite name=knife>
+    fac\xF5es, <sprite name=netgun> disparadores de rede, <sprite name=gun> armas
+    de fogo ...\r\n<i>... e <sprite name=pantufa> pantufas ...</i>"
+  - Tente pegar a armadilha que colocarei em cima da estante.
   englishDialogues: []
