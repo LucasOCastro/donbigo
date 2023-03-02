@@ -415,7 +415,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
@@ -1016,11 +1016,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: ESSEA TExto aquiii <sprite=0> e ae <sprite=1> e ae <sprite=2> e ae <sprite=3>
-    e ae <sprite=4> e ae <sprite=5> e ae <sprite=6> e ae <sprite=7> e ae <sprite=8>
+    e ae <sprite=4> e ae <sprite=5> e ae <sprite=6> e ae <sprite=7> e ae  eeeee <sprite=8>
     e ae <sprite=9> e ae <sprite=10> e ae <sprite name=enter>
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 84e0adc7d99f9794193764ad2285a4f8, type: 2}
+  m_sharedMaterial: {fileID: -1165862201889048903, guid: 84e0adc7d99f9794193764ad2285a4f8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
