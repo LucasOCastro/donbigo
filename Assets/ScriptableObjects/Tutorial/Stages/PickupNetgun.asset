@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed9d61cb2ae244559047a6af837a073b, type: 3}
-  m_Name: PickupTrap
+  m_Name: PickupNetgun
   m_EditorClassIdentifier: 
   itemPos: {x: 8, y: 2}
-  itemType: {fileID: 11400000, guid: 4301c384d53aaa84da9424935b8dabdf, type: 2}
+  itemType: {fileID: 11400000, guid: 07d80df6e8637794c99d6ae486ec9ef1, type: 2}
   useItem: 0

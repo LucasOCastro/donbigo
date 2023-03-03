@@ -41,10 +41,7 @@ public class RoomEditor : Editor
             nameProp.stringValue = newName;
             serializedObject.ApplyModifiedProperties();
         }
-
-        var itemsProp = serializedObject.FindProperty(PossibleItemsName);
-        EditorGUILayout.PropertyField(itemsProp, includeChildren: true);
-        serializedObject.ApplyModifiedProperties();
+        
 
         bool alreadyFilled = serializedObject.FindProperty(TilesBlockName).arraySize > 0;
         
@@ -59,9 +56,9 @@ public class RoomEditor : Editor
             }
 
             //Informações de visualização do tilemap armazenado no comodo
-            EditorGUI.BeginDisabledGroup(true);
+            //EditorGUI.BeginDisabledGroup(true);
             base.OnInspectorGUI();
-            EditorGUI.EndDisabledGroup();
+            //EditorGUI.EndDisabledGroup();
         }
         
         if (tm == null) return;

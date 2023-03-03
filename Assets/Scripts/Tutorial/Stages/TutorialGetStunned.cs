@@ -6,9 +6,11 @@ namespace DonBigo.Tutorial.Stages
     [CreateAssetMenu(fileName = "StunnedTutorialStage", menuName = "Tutorial/Stunned")]
     public class TutorialGetStunned : TutorialStage
     {
+        [SerializeField] private bool phantonette;
         public override IEnumerator UpdateCoroutine()
         {
-            yield return new WaitUntil(() => CharacterManager.DonBigo.Health.HasStatusOfType<StunStatus>());
+            Entity character = phantonette ? CharacterManager.Phantonette : CharacterManager.DonBigo;
+            yield return new WaitUntil(() => character.Health.HasStatusOfType<StunStatus>());
         }
     }
 }

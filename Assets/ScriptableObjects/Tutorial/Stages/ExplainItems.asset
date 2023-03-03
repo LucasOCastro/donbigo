@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a56e110e09e8495181cadcfa840001b6, type: 3}
+  m_Name: ExplainItems
+  m_EditorClassIdentifier: 
+  dialogues:
+  - "<sprite name=netgun> disparadores de rede deixam o atingido paralisado por um
+    tempo tamb\xE9m, e podem acertar alvos distantes, entretanto alvos pr\xF3ximos
+    t\xEAm maior probabilidade de serem atingidos."
+  - "J\xE1 os <sprite name=knife> fac\xF5es e as <sprite name=gun> armas de fogo
+    s\xE3o letais, com as <sprite name=gun> armas de fogo acertando alvos distantes
+    tamb\xE9m."
+  - "Mas n\xE3o deixe de pegar <sprite name=pantufa> pantufas na falta de algo melhor,
+    pois al\xE9m de quentinhas e estilosas, ter um par em m\xE3os te salva de ser
+    paralisado por uma <sprite name=trap> armadilha de urso caso pise em alguma."
+  - Experimente pegar a pantufa com <sprite name=lclick>
+  englishDialogues: []

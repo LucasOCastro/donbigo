@@ -410,7 +410,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -546,15 +546,20 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fcddb89b2e8e2214db3c3bb03356ce85, type: 2}
   - {fileID: 11400000, guid: 572cd7afd720e0141b638b4a9b21833b, type: 2}
   - {fileID: 11400000, guid: 3f4a2b7a3a40a7e49a3ee56e1a06a780, type: 2}
-  - {fileID: 11400000, guid: e60d30c6cacbb134fb0b33bceb02ae09, type: 2}
+  - {fileID: 11400000, guid: 036137c9330317645955de63d8fe6aaa, type: 2}
   - {fileID: 11400000, guid: 10b8ffe320ea4074bbf342b64b53991b, type: 2}
-  - {fileID: 11400000, guid: 036137c9330317645955de63d8fe6aaa, type: 2}
-  - {fileID: 11400000, guid: 952e03a4a56ee7b48914941c31839254, type: 2}
-  - {fileID: 11400000, guid: 2e17fb40dfefca44e9a40a12b47979aa, type: 2}
-  - {fileID: 11400000, guid: 036137c9330317645955de63d8fe6aaa, type: 2}
   - {fileID: 11400000, guid: a2e4e15ddf9001649a81e8323375bfc1, type: 2}
-  - {fileID: 11400000, guid: 34e272ddad2ce0e4d833c0679e5f3ae7, type: 2}
-  - {fileID: 11400000, guid: e97139b4ea54f4747907ee878136931d, type: 2}
+  - {fileID: 11400000, guid: 3a1ebb187efb8234a884f90c05f0cfa4, type: 2}
+  - {fileID: 11400000, guid: e60d30c6cacbb134fb0b33bceb02ae09, type: 2}
+  - {fileID: 11400000, guid: e41785c5be62e82449f2be430233b810, type: 2}
+  - {fileID: 11400000, guid: e60d30c6cacbb134fb0b33bceb02ae09, type: 2}
+  - {fileID: 11400000, guid: da914523f15ebfb4dbd4a9504bac4f7c, type: 2}
+  - {fileID: 11400000, guid: f95b70b2f74a6714987959fab6b38461, type: 2}
+  - {fileID: 11400000, guid: b7d92bc02e6c12746b5be377589ce4c0, type: 2}
+  - {fileID: 11400000, guid: 9b42a976230f91444a4a6037b2ec8aaf, type: 2}
+  - {fileID: 11400000, guid: 9d30c881ae76ea84bbb8deb04759e5e3, type: 2}
+  - {fileID: 11400000, guid: 71a33bfabf2a5d2478634d0e8111bbaa, type: 2}
+  - {fileID: 11400000, guid: 3a3893e257d8ab644ae14bced89d3ad4, type: 2}
   phantonettePos: {x: 5, y: 5}
   phantonetteDir: {x: -1, y: -1}
   donbigoPos: {x: 3, y: 3}
@@ -1044,13 +1049,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535

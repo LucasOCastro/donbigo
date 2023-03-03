@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a56e110e09e8495181cadcfa840001b6, type: 3}
-  m_Name: ExplainTrap
+  m_Name: ExplainHands
   m_EditorClassIdentifier: 
   dialogues:
-  - "Tome cuidado, <sprite name=trap> armadilhas de urso s\xE3o praticamente invis\xEDveis
-    naquele lugar t\xE3o mal iluminado, aquele que cair nelas fica paralisado por
-    um tempo."
-  - "Coloque ela no ch\xE3o com <sprite name=rclick>.\nExperimente pisar em cima
-    ... N\xE3o se preocupe, essa \xE9 de borracha."
+  - "Agora, voc\xEA tem duas m\xE3os, n\xE3o tem?\r\nPois bem, voc\xEA pode segurar
+    um item em cada uma."
+  - "Aperte <sprite name=ekey> para mudar a m\xE3o ativa.\nMude para a m\xE3o vazia
+    e pegue a outra pantufa com <sprite name=lclick>"
   englishDialogues: []
