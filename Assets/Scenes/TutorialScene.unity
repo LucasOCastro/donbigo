@@ -415,7 +415,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
@@ -454,7 +454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueContainer: {fileID: 541721127}
   text: {fileID: 1896743568}
-  skipKey: 32
+  skipKey: 13
   secondsBetweenLetters: 0.02
 --- !u!1001 &1125145196
 PrefabInstance:

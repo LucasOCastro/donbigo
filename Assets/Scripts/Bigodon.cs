@@ -62,14 +62,14 @@ namespace DonBigo
 
         private void Update()
         {
-            //Quando aperta X, muda a mão ativa do inventário.
-            if (Input.GetKeyDown(KeyCode.X))
+            //Quando aperta E, muda a mão ativa do inventário.
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 Inventory.CycleHandedness();
             }
             
-            //Quando aperta Esc, limpa o caminho atual.
-            if (Input.GetKeyDown(KeyCode.Escape))
+            //Quando aperta Espaço, limpa o caminho atual.
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 _currentTargetPath = null;
             }
@@ -80,7 +80,7 @@ namespace DonBigo
             TileHighlighter.Highlight(null);
             
             //Quando aperta espaço, pula um turno.
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (_currentTargetPath == null && Input.GetKeyDown(KeyCode.Space))
             {
                 return new IdleAction(this);
             }
