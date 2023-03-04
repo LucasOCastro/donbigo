@@ -13,12 +13,13 @@ namespace DonBigo
         private ArmState _state = ArmState.Idle;
         public ArmState State
         {
-            get => _state;
-            private set
+            get => _state; 
+            set
             {
                 if (value == _state) return;
                 
                 _state = value;
+                if (_state == ArmState.Activated) Renderer.sprite = activatedSprite;
                 UpdateRenderVisibility();
             }
         }
@@ -30,8 +31,7 @@ namespace DonBigo
             if (State != ArmState.Armed) return;
             
             State = ArmState.Activated;
-            Renderer.sprite = activatedSprite;
-            _armer.BlacklistedTiles.Remove(Tile.Pos);
+            if (_armer != null) _armer.BlacklistedTiles.Remove(Tile.Pos);
             
             //isso é umm CRIME contra os princípios SOLID mas lhkgfçmgfm :)
             if (stepper.Inventory.ContainsItem<StunImmunityItem>(out var handedness))

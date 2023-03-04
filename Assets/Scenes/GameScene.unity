@@ -442,6 +442,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
+      propertyPath: doorTrap
+      value: 
+      objectReference: {fileID: 11400000, guid: 4301c384d53aaa84da9424935b8dabdf, type: 2}
+    - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
+      propertyPath: doorTrapChance
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 4871445199822071230, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
       propertyPath: m_Name
       value: Grid

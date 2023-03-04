@@ -96,6 +96,25 @@ namespace DonBigo
             }
         }
 
+        public void SpreadTraps(ItemType trap, float doorChance)
+        {
+            if (trap == null || doorChance <= 0 || trap.InstanceType != typeof(TrapItem)) return;
+
+            foreach (var room in AllRooms)
+            {
+                foreach (var exit in room.Doors)
+                {
+                    if (Random.Range(0f, 1f) >= doorChance) continue;
+                    
+                    var tile = exit.FinalTile(this);
+                    if (!tile.SupportsItem) continue;
+
+                    var instance = (TrapItem)trap.Instantiate(tile);
+                    instance.State = TrapItem.ArmState.Armed;
+                }
+            }
+        }
+
         public GameGrid(int size, Tilemap tilemap, TileType filler, EntranceMarkerTile fillerMat, Room startingRoom, Vector2 normalizedGenStart)
         {
             Size = size;
