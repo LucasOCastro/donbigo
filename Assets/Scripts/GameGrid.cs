@@ -115,6 +115,14 @@ namespace DonBigo
             }
         }
 
+        public void MakeSound(Tile source, Entity doer)
+        {
+            foreach (var entity in CharacterManager.AllEntities)
+            {
+                entity.Memory.RememberLocation(doer, source);
+            }
+        }
+
         public GameGrid(int size, Tilemap tilemap, TileType filler, EntranceMarkerTile fillerMat, Room startingRoom, Vector2 normalizedGenStart)
         {
             Size = size;

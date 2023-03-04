@@ -32,6 +32,7 @@ namespace DonBigo
         public bool IsDeadEnd(RoomInstance room) => _recordedDeadEnds.Contains(room);
 
         public Tile LastSeenTile(TileObject obj) => _locationMemory.GetOrDefault(obj);
+        public void RememberLocation(TileObject obj, Tile tile) => _locationMemory.SetOrAdd(obj, tile);
 
         public void RememberBeingAt(Tile tile)
         {
@@ -54,8 +55,8 @@ namespace DonBigo
             {
                 var tile = action.Doer.Tile?.ParentGrid[tilePos];
                 if (tile == null) continue;
-                if (tile.Entity != null) _locationMemory.SetOrAdd(tile.Entity, tile);
-                if (tile.Item != null) _locationMemory.SetOrAdd(tile.Item, tile);
+                if (tile.Entity != null) RememberLocation(tile.Entity, tile);
+                if (tile.Item != null) RememberLocation(tile.Item, tile);
             }
             
             if (action is UseDoorAction useDoorAction)
@@ -66,7 +67,7 @@ namespace DonBigo
                 {
                     if (entity == useDoorAction.Doer) continue;
                     if (!entity.VisibleTiles.Contains(useDoorAction.From.Pos)) continue;
-                    entity.Memory._locationMemory.SetOrAdd(useDoorAction.Doer, useDoorAction.To);
+                    entity.Memory.RememberLocation(useDoorAction.Doer, useDoorAction.To);
                 }
             }
         }

@@ -29,6 +29,8 @@ namespace DonBigo
         public override void SteppedOn(Entity stepper)
         {
             if (State != ArmState.Armed) return;
+
+            stepper.Tile.ParentGrid.MakeSound(Tile, stepper);
             
             State = ArmState.Activated;
             if (_armer != null) _armer.BlacklistedTiles.Remove(Tile.Pos);
