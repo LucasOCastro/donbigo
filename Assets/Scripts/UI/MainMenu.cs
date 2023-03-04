@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,7 +13,7 @@ namespace DonBigo.UI
         [SerializeField] private Button creditsButton;
 
         [SerializeField] private int playSceneID;
-
+        
         [SerializeField] private string playAnimationName;
         [SerializeField] private string creditsOpenAnimationName;
         [SerializeField] private string creditsCloseAnimationName;
@@ -22,7 +23,7 @@ namespace DonBigo.UI
         {
             _animator = GetComponent<Animator>();
             playButton.onClick.AddListener(() => StartCoroutine(PlayCoroutine()));
-            muteButton.onClick.AddListener(() => Debug.Log("mute"));
+            muteButton.onClick.AddListener(() => Settings.Mute = !Settings.Mute);
             creditsButton.onClick.AddListener((() => StartCoroutine(CreditsCoroutine())));
         }
 
