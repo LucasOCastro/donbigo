@@ -85,8 +85,7 @@ namespace DonBigo
                 var oldVisible = VisibleTiles;
                 VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
                     
-                OnUpdateViewEvent?.Invoke(oldVisible, VisibleTiles);
-                UpdateRenderVisibility();
+                UpdateView(oldVisible, VisibleTiles);
                     
                 if (_tile.Entity != this)
                 {
@@ -94,6 +93,12 @@ namespace DonBigo
                 }
                 Memory.RememberBeingAt(Tile);
             }
+        }
+
+        protected virtual void UpdateView(HashSet<Vector2Int> oldVisible, HashSet<Vector2Int> newVisible)
+        {
+            OnUpdateViewEvent?.Invoke(oldVisible, newVisible);
+            UpdateRenderVisibility();
         }
 
         public void SetLookDirection(Vector2Int dir) => Renderer.sprite = SpriteSet.GetDirectionalSprite(dir);
