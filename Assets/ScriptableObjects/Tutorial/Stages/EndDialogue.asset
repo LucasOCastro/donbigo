@@ -18,4 +18,5 @@ MonoBehaviour:
     Ah, tudo bem, apenas me assustei um pouco...'
   - "Certo, agora voc\xEA est\xE1 pronto para enfrentar a verdadeira Phantonette.\n<i>...
     N\xE3o se preocupe comigo, eu dou um jeito ...</i>"
-  englishDialogues: []
+  englishDialogues:
+  - 

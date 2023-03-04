@@ -14,7 +14,7 @@ namespace DonBigo.Tutorial.Stages
 
         public override IEnumerator UpdateCoroutine()
         {
-            yield return WaitForDialogue(dialogues);
+            yield return WaitForDialogue(Settings.English ? englishDialogues : dialogues);
         }
     }
 }

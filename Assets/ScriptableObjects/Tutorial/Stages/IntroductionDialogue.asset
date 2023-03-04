@@ -26,4 +26,27 @@ MonoBehaviour:
     distra\xED."
   - "Quando estiver l\xE1, vai ter que <sprite name=lclick> clicar no tile para onde
     quiser ir.\nExperimente andar at\xE9 os azulejos azuis."
-  englishDialogues: []
+  englishDialogues:
+  - "Hello Mr. Emanuel Begault, or as you prefer to be called, Don Big\xF4.\nDon't
+    be alarmed, it's me, your assistant, Franchella.\n\nPlease use <sprite name=enter>
+    to continue."
+  - 'I came to prepare you for your next mission.
+
+    <i>... not that a great investigator
+    like you needs much preparation ...</i>
+
+    Basically, you will enter an abandoned
+    mansion in search of a deadly criminal, the Phantonette.'
+  - 'I dressed up as her so you would know when you see her.
+
+    <i>... not that
+    it would be very difficult anyways ...</i>
+
+    <i>... she has such a striking,
+    extravagant look ... a sharp sense of fashion ...</i>
+
+    Oh, sorry, I got distracted.'
+  - 'When you''re there, you''ll have to <sprite name=lclick> click on the tile where
+    you want to go.
+
+    Try walking to the blue tiles.'

@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ExplainPickup
   m_EditorClassIdentifier: 
   dialogues:
+  - "Se mudar de ideia enquanto anda at\xE9 algum lugar, apertar <sprite name=space>
+    cancela o seu movimento atual."
   - "Tamb\xE9m <sprite name=lclick> clicando, voc\xEA recolhe e utiliza itens espalhados
     pela mans\xE3o.\r\nIncluindo <sprite name=trap> armadilhas de urso, <sprite name=knife>
     fac\xF5es, <sprite name=netgun> disparadores de rede, <sprite name=gun> armas
