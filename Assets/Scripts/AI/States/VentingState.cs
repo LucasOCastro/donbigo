@@ -25,7 +25,7 @@ namespace DonBigo.AI
             if (!vents.Any())
             {
                 distance = 0;
-                return _entryVent;
+                return _entryVent.Open ? _entryVent : null;
             }
             
             var playerTile = entity.Memory.LastSeenTile(CharacterManager.DonBigo);
@@ -54,21 +54,27 @@ namespace DonBigo.AI
         
         protected override AIState OnTick(AIWorker worker, out AIObjective objective)
         {
+            if (_targetVent is { Open: false }) _targetVent = null;
+            
             worker.Owner.Tile = null;
             objective = null;
             
-            var bestTargetVent = GetBestTargetVent(worker, out int bestDistance);
-            if (bestTargetVent != _targetVent)
+            if (_targetVent == null )
             {
-                _targetVent = bestTargetVent;
+                _targetVent = GetBestTargetVent(worker, out int bestDistance);;
                 _progress = 0;
                 _distance = bestDistance;
             }
 
-            if (_targetVent == null) return null;
+            //Morre se ficar preso nas ventilações
+            if (_targetVent == null)
+            {
+                worker.Owner.Health.Kill();
+                return null;
+            }
 
             _progress++;
-            if (_progress <= _distance) return null;
+            if (_progress < _distance) return null;
             
             worker.Owner.ExitVent(_targetVent);
             return new WanderState();
