@@ -10,6 +10,11 @@ namespace DonBigo
 
         [SerializeField] private int cooldownTurns;
         public int CooldownTurns => cooldownTurns;
+        
+        [SerializeField] private AudioSource audioSource;
+        protected void PlayAudio(AudioClip clip) => audioSource.PlayOneShot(clip);
+
+        [SerializeField] private AudioClip useAudio;
 
         private int _lastUsedTurn = -1;
         /// <summary>Turnos desde o ultimo uso do item. Se o item nunca foi usado, retorna -1.</summary>
@@ -93,6 +98,7 @@ namespace DonBigo
             {
                 Debug.LogError("Usou item em cooldown!");
             }
+            if (useAudio != null) PlayAudio(useAudio);
             UseAction(doer, target);
             _lastUsedTurn = TurnManager.CurrentTurn;
         }

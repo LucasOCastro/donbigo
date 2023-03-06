@@ -8,6 +8,7 @@ namespace DonBigo
 
         [SerializeField] private Sprite activatedSprite;
         [SerializeField] private DamageData damage;
+        [SerializeField] private AudioClip activateAudio;
 
         private Entity _armer;
         private ArmState _state = ArmState.Idle;
@@ -30,6 +31,7 @@ namespace DonBigo
         {
             if (State != ArmState.Armed) return;
 
+            if (activateAudio != null) PlayAudio(activateAudio);
             stepper.Tile.ParentGrid.MakeSound(Tile, stepper);
             
             State = ArmState.Activated;
