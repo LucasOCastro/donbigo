@@ -857,7 +857,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1011599934
@@ -882,8 +882,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: TUTORIAL
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 84e0adc7d99f9794193764ad2285a4f8, type: 2}
-  m_sharedMaterial: {fileID: -1165862201889048903, guid: 84e0adc7d99f9794193764ad2285a4f8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ad22820494241824d8da1d23588ad3c7, type: 2}
+  m_sharedMaterial: {fileID: -2298710897037420885, guid: ad22820494241824d8da1d23588ad3c7, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -907,8 +907,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1734,5 +1734,5 @@ MonoBehaviour:
   m_UpscaleRT: 0
   m_PixelSnapping: 0
   m_CropFrameX: 1
-  m_CropFrameY: 0
+  m_CropFrameY: 1
   m_StretchFill: 0

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3c5b38d25c28f824dad1f24c88476f5f
+guid: 426833eb36408d64888ba041c654eb90
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
   fontSize: 16
-  forceTextureCase: -2
+  forceTextureCase: -1
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
@@ -12,7 +12,7 @@ TrueTypeFontImporter:
   - monogramextended
   fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 0
+  fontRenderingMode: 2
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1
