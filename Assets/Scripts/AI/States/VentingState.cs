@@ -54,30 +54,34 @@ namespace DonBigo.AI
         
         protected override AIState OnTick(AIWorker worker, out AIObjective objective)
         {
+            //Se a vent alvo foi fechada, anula pra poder escolher outra
             if (_targetVent is { Open: false }) _targetVent = null;
             
-            worker.Owner.Tile = null;
             objective = null;
+
+            //Se já saiu da vent, começa a wanderar.
+            if (_targetVent != null && _progress >= _distance) return new WanderState();
             
+            //Se não tem vent alvo, encontra uma.
             if (_targetVent == null )
             {
-                _targetVent = GetBestTargetVent(worker, out int bestDistance);;
+                _targetVent = GetBestTargetVent(worker, out int bestDistance);
+                //Se não encontrou uma vent alvo, então ficou preso. Se ficou preso, morre.
+                if (_targetVent == null)
+                {
+                    worker.Owner.Health.Kill();
+                    return null;
+                }
                 _progress = 0;
                 _distance = bestDistance;
-            }
-
-            //Morre se ficar preso nas ventilações
-            if (_targetVent == null)
-            {
-                worker.Owner.Health.Kill();
-                return null;
             }
 
             _progress++;
             if (_progress < _distance) return null;
             
+            //Se completou a viagem, sai da vent mas espera o proximo turno pra começar a wanderar.
             worker.Owner.ExitVent(_targetVent);
-            return new WanderState();
+            return null;
         }
     }
 }
