@@ -7,7 +7,7 @@ namespace DonBigo
 {
     public class GameGrid
     {
-        public const float WorldElevationOffsetMultiplier = 0.2807145f;
+        public const float WorldElevationOffsetMultiplier = 0.2714285f;
         private Tilemap _tilemap;
         private Tile[,] _tiles;
         private List<RoomInstance> _rooms;

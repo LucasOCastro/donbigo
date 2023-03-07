@@ -45,26 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75fc42cdf636094b484d88da3187db2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  donbigoSprite:
-    sprites:
-    - {fileID: 1170818007, guid: eddf737b918569b379d3539758086592, type: 3}
-    - {fileID: 407434976, guid: eddf737b918569b379d3539758086592, type: 3}
-    - {fileID: -1594977684, guid: eddf737b918569b379d3539758086592, type: 3}
-    - {fileID: -1597406669, guid: eddf737b918569b379d3539758086592, type: 3}
-    - {fileID: -1282757444, guid: eddf737b918569b379d3539758086592, type: 3}
-    - {fileID: 1503002100, guid: eddf737b918569b379d3539758086592, type: 3}
-    - {fileID: -568214262, guid: eddf737b918569b379d3539758086592, type: 3}
-    - {fileID: -545652696, guid: eddf737b918569b379d3539758086592, type: 3}
-  phantonetteSprite:
-    sprites:
-    - {fileID: -1902928597, guid: c71578125c39858ac9cd7587b392895e, type: 3}
-    - {fileID: -161031532, guid: c71578125c39858ac9cd7587b392895e, type: 3}
-    - {fileID: 421969019, guid: c71578125c39858ac9cd7587b392895e, type: 3}
-    - {fileID: -2078092750, guid: c71578125c39858ac9cd7587b392895e, type: 3}
-    - {fileID: 450640217, guid: c71578125c39858ac9cd7587b392895e, type: 3}
-    - {fileID: 1503044075, guid: c71578125c39858ac9cd7587b392895e, type: 3}
-    - {fileID: 997358209, guid: c71578125c39858ac9cd7587b392895e, type: 3}
-    - {fileID: 823895464, guid: c71578125c39858ac9cd7587b392895e, type: 3}
+  donbigoPrefab: {fileID: 6028357747039801066, guid: 258b80b2601992f4abb44a9e9e38b127, type: 3}
+  phantonettePrefab: {fileID: 1653239215803980532, guid: 94b22b21221039a4893ffe035474c8ae, type: 3}
 --- !u!114 &5445930677007729876
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,7 +26,8 @@ namespace DonBigo
                 MoveAction => moveSound,
                 _ => null
             };
-            _source.PlayOneShot(clip);
+            
+            if (clip != null) _source.PlayOneShot(clip);
         }
         
         private void OnEnable()

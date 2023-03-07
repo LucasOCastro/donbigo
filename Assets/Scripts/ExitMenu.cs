@@ -17,7 +17,10 @@ namespace DonBigo
             set
             {
                 menu.SetActive(value);
-                TurnManager.Instance.enabled = !value;
+                if (TurnManager.Instance != null)
+                {
+                    TurnManager.Instance.enabled = !value;
+                }
             }
         }
 
