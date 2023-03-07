@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DonBigo.Actions;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace DonBigo
@@ -13,7 +14,11 @@ namespace DonBigo
         public bool Open
         {
             get => menu.activeSelf;
-            set => menu.SetActive(value);
+            set
+            {
+                menu.SetActive(value);
+                TurnManager.Instance.enabled = !value;
+            }
         }
 
         private void Awake()
