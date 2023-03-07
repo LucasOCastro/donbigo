@@ -9,7 +9,7 @@ namespace DonBigo.Actions
     {
         [SerializeField] private float turnDurationSeconds = 1f;
         public float TurnDuration => turnDurationSeconds;
-
+        
         public static TurnManager Instance { get; private set; }
         public static int CurrentTurn { get; private set; }
 
@@ -39,7 +39,7 @@ namespace DonBigo.Actions
         {
             StopAllCoroutines();
         }
-
+        
         private IEnumerator TurnTickCoroutine()
         {
             while (true)
@@ -65,7 +65,7 @@ namespace DonBigo.Actions
                 } while (action == null);
                 
                 action.Execute();
-                CurrentEntity.Memory.RememberAction(action);
+                CurrentEntity.OnExecuteAction?.Invoke(action);
                 CycleEntity();
                 yield return new WaitForSeconds(turnDurationSeconds);
             }

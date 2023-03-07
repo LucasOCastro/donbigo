@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using DonBigo.Actions;
 using UnityEngine;
 using Action = DonBigo.Actions.Action;
 
@@ -10,20 +8,32 @@ namespace DonBigo
     public abstract class Entity : TileObject, IVisibleTilesProvider
     {
         [field: SerializeField] public int VisionRange { get; set; } = 50;
+        [field: SerializeField] public DirectionalSpriteSet SpriteSet { get; private set; }
         
         public Inventory Inventory { get; private set; }
         public HealthManager Health { get; private set; }
         public Memory Memory { get; } = new();
-        public DirectionalSpriteSet SpriteSet { get; set; }
+        
         
         public bool IsVenting { get; private set; }
         
+        public delegate void ExecuteActionDelegate(Action action);
+        public ExecuteActionDelegate OnExecuteAction;
 
         protected override void Awake()
         {
             base.Awake();
             Inventory = new Inventory(this);
             Health = new HealthManager(this);
+        }
+
+        private void OnEnable()
+        {
+            OnExecuteAction += Memory.RememberAction;
+        }
+        private void OnDisable()
+        {
+            OnExecuteAction -= Memory.RememberAction;
         }
 
         public virtual void EnterVent(Vent vent)
