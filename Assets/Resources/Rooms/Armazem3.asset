@@ -214,4 +214,4 @@ MonoBehaviour:
     chance: 100
   - item: {fileID: 11400000, guid: 07d80df6e8637794c99d6ae486ec9ef1, type: 2}
     chance: 100
-  ventChance: 1
+  ventChance: 0.05
