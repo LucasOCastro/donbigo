@@ -7,6 +7,23 @@ using Random = UnityEngine.Random;
 
 namespace DonBigo.Rooms
 {
+    [System.Serializable]
+    public struct MapGenData
+    {
+        public int mapSize;
+        public Vector2 normalizedGenStart;
+        public Room startingRoom;
+        public ItemType[] necessaryItems;
+        
+        [Header("Fillers")]
+        public TileType fillerTile;
+        public EntranceMarkerTile fillerMat;
+
+        [Header("Traps")]
+        [Range(0f,1f)] public float doorTrapChance;  
+        public ItemType doorTrap;
+    }
+    
     public static class MapGen
     {
         private static void PlaceRoom(GameGrid grid, Tilemap tilemap, RoomInstance roomInstance)
@@ -179,8 +196,7 @@ namespace DonBigo.Rooms
         }
 
 
-        public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap, TileType filler,
-            EntranceMarkerTile fillerMat, Room startingRoom, Vector2 normalizedGenStart)
+        public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap, MapGenData data)
 
         {
             if (GridManager.Instance.DEBUG_TEST_ROOM != null)
@@ -195,11 +211,11 @@ namespace DonBigo.Rooms
             List<RoomInstance> rooms = new();
             Queue<RoomExit> possibleDoors = new();
 
-            Room randRoom = (startingRoom != null) ? startingRoom : RoomDatabase.RandomRoom();
+            Room randRoom = (data.startingRoom != null) ? data.startingRoom : RoomDatabase.RandomRoom();
             if (randRoom == null) return rooms;
             Vector2Int genStart = new Vector2Int(
-                (int)(grid.Bounds.size.x * normalizedGenStart.x + grid.Bounds.min.x),
-                (int)(grid.Bounds.size.y * normalizedGenStart.y + grid.Bounds.min.y)
+                (int)(grid.Bounds.size.x * data.normalizedGenStart.x + grid.Bounds.min.x),
+                (int)(grid.Bounds.size.y * data.normalizedGenStart.y + grid.Bounds.min.y)
             );
             RoomInstance roomInstance = new RoomInstance(randRoom, genStart);
             PlaceRoom(grid, tilemap, roomInstance);
@@ -236,9 +252,9 @@ namespace DonBigo.Rooms
                 }
             }
 
-            if (filler != null && fillerMat != null)
+            if (data.fillerTile != null && data.fillerTile != null)
             {
-                FillInternal(grid, tilemap, badExits, rooms, filler, fillerMat);
+                FillInternal(grid, tilemap, badExits, rooms, data.fillerTile, data.fillerMat);
             }
 
 

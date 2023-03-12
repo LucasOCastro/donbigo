@@ -804,11 +804,27 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 03de1df0ca825b04db69e4a5b6f0f093, type: 2}
     - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
+      propertyPath: genData.mapSize
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
+      propertyPath: genData.startingRoom
+      value: 
+      objectReference: {fileID: 11400000, guid: 03de1df0ca825b04db69e4a5b6f0f093, type: 2}
+    - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
       propertyPath: normalizedGenStart.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
       propertyPath: normalizedGenStart.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
+      propertyPath: genData.normalizedGenStart.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
+      propertyPath: genData.normalizedGenStart.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4871445199822071230, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}

@@ -12,12 +12,8 @@ namespace DonBigo
         
         public GameGrid Grid { get; private set; }
         
-        [SerializeField] private int mapSize = 50;
-        [SerializeField] private Vector2 normalizedGenStart = new(.5f, .5f);
         [SerializeField] private Tilemap tilemap;
-        [SerializeField] private Room startingRoom;
-        [SerializeField] private TileType fillerTile;
-        [SerializeField] private EntranceMarkerTile fillerMat;
+        [SerializeField] private MapGenData genData;
 
         [Range(0f,1f)] [SerializeField] private float doorTrapChance;  
         [SerializeField] private ItemType doorTrap;
@@ -40,7 +36,7 @@ namespace DonBigo
             }
 
             Instance = this;
-            Grid = new GameGrid(mapSize, tilemap, fillerTile, fillerMat, startingRoom, normalizedGenStart);
+            Grid = new GameGrid(tilemap, genData);
             Grid.SpreadTraps(doorTrap, doorTrapChance);
         }
 

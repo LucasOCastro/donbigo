@@ -12,6 +12,7 @@ namespace DonBigo
     {
         private Path _currentTargetPath;
 
+        //Pra evitar cliques em portas não sendo considerados, clicar fora duma sala tenta achar algo interativel perto do player
         private Tile CastFromShadows(Vector2Int tile)
         {
             const int maxDistance = 25;

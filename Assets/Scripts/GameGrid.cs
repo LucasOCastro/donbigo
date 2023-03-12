@@ -123,13 +123,12 @@ namespace DonBigo
             }
         }
 
-        public GameGrid(int size, Tilemap tilemap, TileType filler, EntranceMarkerTile fillerMat, Room startingRoom, Vector2 normalizedGenStart)
+        public GameGrid(Tilemap tilemap, MapGenData genData)
         {
-            Size = size;
+            Size = genData.mapSize;
             _tilemap = tilemap;
-            _tiles = new Tile[size, size];
-            _rooms = MapGen.Gen(this, tilemap, filler, fillerMat, startingRoom, normalizedGenStart);
-            
+            _tiles = new Tile[Size, Size];
+            _rooms = MapGen.Gen(this, tilemap, genData);
         }
 
         public void RefreshTile(Tile tile)

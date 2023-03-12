@@ -105,10 +105,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapSize: 75
+  normalizedGenStart: {x: 0.5, y: 0.5}
   tilemap: {fileID: 4871445200121710345}
   startingRoom: {fileID: 11400000, guid: cb58afac8819d0e458f2e4a0f2589ebf, type: 2}
   fillerTile: {fileID: 11400000, guid: a2bddda293f87614aab76fb27ec9cb61, type: 2}
   fillerMat: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
+  genData:
+    mapSize: 75
+    normalizedGenStart: {x: 0.5, y: 0.5}
+    startingRoom: {fileID: 0}
+    necessaryItems:
+    - {fileID: 11400000, guid: 3154651d6db92154f9984a622ee3884e, type: 2}
+    - {fileID: 11400000, guid: 893cd10d12e11f24a8c5dec8aeec7310, type: 2}
+    fillerTile: {fileID: 11400000, guid: a2bddda293f87614aab76fb27ec9cb61, type: 2}
+    fillerMat: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
+    doorTrapChance: 0.02
+    doorTrap: {fileID: 11400000, guid: 4301c384d53aaa84da9424935b8dabdf, type: 2}
+  doorTrapChance: 0
+  doorTrap: {fileID: 0}
   seed: -1
   DEBUG_TEST_ROOM: {fileID: 0}
   DEBUG_Item: {fileID: 11400000, guid: 3154651d6db92154f9984a622ee3884e, type: 2}
