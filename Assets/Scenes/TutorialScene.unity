@@ -827,6 +827,14 @@ PrefabInstance:
       propertyPath: genData.normalizedGenStart.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
+      propertyPath: genData.necessaryItems.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
+      propertyPath: genData.necessaryItems.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 893cd10d12e11f24a8c5dec8aeec7310, type: 2}
     - target: {fileID: 4871445199822071230, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
       propertyPath: m_Name
       value: Grid

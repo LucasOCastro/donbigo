@@ -15,10 +15,6 @@ namespace DonBigo
         [SerializeField] private Tilemap tilemap;
         [SerializeField] private MapGenData genData;
 
-        [Range(0f,1f)] [SerializeField] private float doorTrapChance;  
-        [SerializeField] private ItemType doorTrap;
-
-
         [SerializeField] private int seed = -1;
         
         public DonBigo.Rooms.Room DEBUG_TEST_ROOM;
@@ -37,7 +33,7 @@ namespace DonBigo
 
             Instance = this;
             Grid = new GameGrid(tilemap, genData);
-            Grid.SpreadTraps(doorTrap, doorTrapChance);
+            Grid.SpreadTraps(genData.doorTrap, genData.doorTrapChance);
         }
 
         public static Tile DEBUG_start, DEBUG_end;

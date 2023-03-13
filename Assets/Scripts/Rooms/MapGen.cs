@@ -26,7 +26,7 @@ namespace DonBigo.Rooms
     
     public static class MapGen
     {
-        private static void PlaceRoom(GameGrid grid, Tilemap tilemap, RoomInstance roomInstance)
+        private static void PlaceRoom(GameGrid grid, Tilemap tilemap, RoomInstance roomInstance, Dictionary<ItemType, bool> itemChanceChecklist)
         {
             Room room = roomInstance.Room;
             Vector2Int min = roomInstance.Bounds.min;
@@ -72,13 +72,17 @@ namespace DonBigo.Rooms
                 if (i == ventIndex) continue;
                 tilemap.SetTile(vents[i].pos + (Vector3Int)min, null);
             }
-            
+
             foreach (var itemChance in room.GenItemsToSpawn())
             {
                 var tile = grid.TilesInBounds(roomInstance.Bounds).Where(t => t.SupportsItem).Random();
                 if (tile == null) continue;
                 
                 itemChance.Instantiate(tile);
+                if (itemChanceChecklist != null && itemChanceChecklist.ContainsKey(itemChance))
+                {
+                    itemChanceChecklist[itemChance] = true;
+                }
             }
         }
 
@@ -196,6 +200,8 @@ namespace DonBigo.Rooms
         }
 
 
+        private const int MaxSafetyRegenCount = 5;
+        private static int safetyRegenCount = 0;
         public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap, MapGenData data)
 
         {
@@ -203,7 +209,7 @@ namespace DonBigo.Rooms
             {
                 RoomInstance inst = new RoomInstance(GridManager.Instance.DEBUG_TEST_ROOM, Vector2Int.one);
                 List<RoomInstance> res = new List<RoomInstance>() { inst };
-                PlaceRoom(grid, tilemap, inst);
+                PlaceRoom(grid, tilemap, inst, null);
                 return res;
             }
 
@@ -211,6 +217,10 @@ namespace DonBigo.Rooms
             List<RoomInstance> rooms = new();
             Queue<RoomExit> possibleDoors = new();
 
+            //Para garantir que não teremos softlock, armazenar os itens que ja foram colocados em um dicionario
+            var necessaryItemChecklist = data.necessaryItems.ToDictionary(i => i, _ => false);
+
+            //Colocar a sala inicial do mapa
             Room randRoom = (data.startingRoom != null) ? data.startingRoom : RoomDatabase.RandomRoom();
             if (randRoom == null) return rooms;
             Vector2Int genStart = new Vector2Int(
@@ -218,7 +228,7 @@ namespace DonBigo.Rooms
                 (int)(grid.Bounds.size.y * data.normalizedGenStart.y + grid.Bounds.min.y)
             );
             RoomInstance roomInstance = new RoomInstance(randRoom, genStart);
-            PlaceRoom(grid, tilemap, roomInstance);
+            PlaceRoom(grid, tilemap, roomInstance, necessaryItemChecklist);
             rooms.Add(roomInstance);
             foreach (var door in roomInstance.Doors)
             {
@@ -241,7 +251,7 @@ namespace DonBigo.Rooms
                 //Ajustamos a posição em que a sala será colocada com base na posição da porta que será conectada.
                 Vector2Int newRoomMin = (possibleDoor.Position + possibleDoor.DirectionVector) - chosenDoor.Position;
                 roomInstance = new RoomInstance(randRoom, newRoomMin);
-                PlaceRoom(grid, tilemap, roomInstance);
+                PlaceRoom(grid, tilemap, roomInstance, necessaryItemChecklist);
                 rooms.Add(roomInstance);
 
                 foreach (var exit in roomInstance.Doors)
@@ -251,6 +261,18 @@ namespace DonBigo.Rooms
                     possibleDoors.Enqueue(exit);
                 }
             }
+
+            //Se faltou algum item essencial, precisamos gerar outro mapa.
+            if (safetyRegenCount < MaxSafetyRegenCount && necessaryItemChecklist.Values.Any(v => v == false))
+            {
+                Debug.Log("Map Regen");
+                safetyRegenCount++;
+                return Gen(grid, tilemap, data);
+            }
+
+            if (safetyRegenCount > 0)
+                Debug.LogError("Regen map too much :(");
+            safetyRegenCount = 0;
 
             if (data.fillerTile != null && data.fillerTile != null)
             {
