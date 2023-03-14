@@ -141,7 +141,6 @@ namespace DonBigo.Rooms
             {
                 const int matElevation = 1;
                 Vector2Int pos = opposing.Position + opposing.DirectionVector;
-                Debug.Log("Will make door at " + pos);
                 Tile tile = grid[pos];
                 StructureInstance mat = new StructureInstance(fillerMat, tile, matElevation);
                 tile.Structures.Add(mat);
@@ -178,7 +177,6 @@ namespace DonBigo.Rooms
 
                 if (!IsGoodInternal(internalTiles))
                 {
-                    Debug.Log("bad internal: " + internalTiles[0]);
                     UnregisterDoor(exit, rooms, grid, tilemap);
                     foreach (Vector2Int badTile in internalTiles)
                     {
@@ -187,7 +185,6 @@ namespace DonBigo.Rooms
                     continue;
                 }
 
-                Debug.Log("good internal: "+internalTiles[0]);
                 RoomInstance roomInstance = new RoomInstance();
                 foreach (Vector2Int tile in internalTiles)
                 {
@@ -200,8 +197,8 @@ namespace DonBigo.Rooms
         }
 
 
-        private const int MaxSafetyRegenCount = 5;
-        private static int safetyRegenCount = 0;
+        private const int MaxSafetyRegenCount = 10;
+        private static int _safetyRegenCount = 0;
         public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap, MapGenData data)
         {
             if (GridManager.Instance.DEBUG_TEST_ROOM != null)
@@ -262,17 +259,17 @@ namespace DonBigo.Rooms
             }
 
             //Se faltou algum item essencial, precisamos gerar outro mapa.
-            if (safetyRegenCount < MaxSafetyRegenCount && necessaryItemChecklist.Values.Any(v => v == false))
+            if (_safetyRegenCount < MaxSafetyRegenCount && necessaryItemChecklist.Values.Any(v => v == false))
             {
                 Debug.Log("Map Regen");
-                safetyRegenCount++;
+                _safetyRegenCount++;
                 grid.ClearMap();
                 return Gen(grid, tilemap, data);
             }
 
-            if (safetyRegenCount >= MaxSafetyRegenCount)
+            if (_safetyRegenCount >= MaxSafetyRegenCount)
                 Debug.LogError("Regen map too much :(");
-            safetyRegenCount = 0;
+            _safetyRegenCount = 0;
 
             if (data.fillerTile != null && data.fillerTile != null)
             {

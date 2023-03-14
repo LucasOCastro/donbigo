@@ -580,5 +580,7 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  possibleItems: []
+  possibleItems:
+  - item: {fileID: 11400000, guid: 893cd10d12e11f24a8c5dec8aeec7310, type: 2}
+    chance: 0.08
   ventChance: 0.1
