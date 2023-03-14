@@ -31,7 +31,7 @@ namespace DonBigo.Rooms
         private struct ItemChance
         {
             public ItemType item;
-            public float chance;
+            [Range(0f,1f)] public float chance;
         }
 
         [SerializeField] private string roomName;

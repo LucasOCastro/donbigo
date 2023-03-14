@@ -203,7 +203,6 @@ namespace DonBigo.Rooms
         private const int MaxSafetyRegenCount = 5;
         private static int safetyRegenCount = 0;
         public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap, MapGenData data)
-
         {
             if (GridManager.Instance.DEBUG_TEST_ROOM != null)
             {
@@ -267,10 +266,11 @@ namespace DonBigo.Rooms
             {
                 Debug.Log("Map Regen");
                 safetyRegenCount++;
+                grid.ClearMap();
                 return Gen(grid, tilemap, data);
             }
 
-            if (safetyRegenCount > 0)
+            if (safetyRegenCount >= MaxSafetyRegenCount)
                 Debug.LogError("Regen map too much :(");
             safetyRegenCount = 0;
 

@@ -138,6 +138,25 @@ namespace DonBigo
                 _tilemap.RefreshTile(new Vector3Int(tile.Pos.x, tile.Pos.y, i));    
             }
         }
+
+        public void ClearMap()
+        {
+            Debug.Log("Map cleared");
+            _tilemap.ClearAllTiles();
+            AllVents?.Clear();
+            AllRooms?.Clear();
+            for (int x = 0; x < Size; x++)
+            {
+                for (int y = 0; y < Size; y++)
+                {
+                    if (_tiles[x,y] == null) continue;
+                    
+                    if (_tiles[x,y].Item != null) _tiles[x,y].Item.Delete();
+                    if (_tiles[x,y].Entity != null) _tiles[x,y].Entity.Delete();
+                    _tiles[x, y] = null;
+                }
+            }
+        }
     }
 }
 

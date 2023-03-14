@@ -106,7 +106,7 @@ namespace DonBigo
         {
         }
 
-        public void Delete()
+        public override void Delete()
         {
             if (Holder != null && Holder.ContainsItem(this, out var handedness))
             {

@@ -151,5 +151,12 @@ namespace DonBigo
         //Isso funciona pro projeto atualmente, mas pode complicar alguma coisa no futuro.
         public bool SeesPlayer => VisibleTiles.Contains(CharacterManager.DonBigo.Tile.Pos);
         public HashSet<Vector2Int> BlacklistedTiles { get; } = new();
+
+        public override void Delete()
+        {
+            if (Inventory.LeftHand) Inventory.LeftHand.Delete();
+            if (Inventory.RightHand) Inventory.RightHand.Delete();
+            Destroy(gameObject);
+        }
     }
 }
