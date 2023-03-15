@@ -454,6 +454,10 @@ PrefabInstance:
       propertyPath: doorTrapChance
       value: 0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
+      propertyPath: genData.startingRoom
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4871445199822071230, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
       propertyPath: m_Name
       value: Grid

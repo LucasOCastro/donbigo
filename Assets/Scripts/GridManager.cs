@@ -39,21 +39,6 @@ namespace DonBigo
         public static Tile DEBUG_start, DEBUG_end;
         public static HashSet<Vector2Int> DEBUG_pathTiles = new HashSet<Vector2Int>();
 
-        void RefreshTile(Vector2Int tile)
-        {
-            for (int z = 0; z < tilemap.size.z; z++)
-            {
-                tilemap.RefreshTile(new Vector3Int(tile.x, tile.y, z));
-            }
-        }
-        void RefreshTiles(IEnumerable<Vector2Int> tiles)
-        {
-            foreach (var tile in tiles)
-            {
-                RefreshTile(tile);
-            }
-        }
-
         [SerializeField] private ItemType DEBUG_Item;
         private void Update()
         {
@@ -67,6 +52,7 @@ namespace DonBigo
             {
                 Debug.Log($"{tile.Pos} - {tile.Type.name} - e={tile.Entity} - i={tile.Item}");
             }
+            if (Input.GetKeyDown(KeyCode.R)) tilemap.RefreshAllTiles();
         }
     }
 }

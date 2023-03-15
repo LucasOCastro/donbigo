@@ -99,7 +99,7 @@ namespace DonBigo
             HashSet<Vector2Int> visibleTiles)
         {
             List<Obstacle> obstacles = new List<Obstacle>();
-            for (int e1 = 1; e1 <= range; e1++)
+            for (int e1 = 1; e1 <= Mathf.Ceil(range/10f); e1++)
             {
                 // O correto é usar 1f/e1. Com e1-1, as vezes da até infinito, mas por alguma razão
                 // as vezes os melhores resultados vieram com esse valor.
@@ -132,9 +132,12 @@ namespace DonBigo
 
                     //Operações com Linq não são tão performantes mas são práticas.
                     //Isso é um possível ponto de otimização.
-                    bool blocked = IsBlocked(grid, tile, tileAngles, obstacles, 
-                        obstacles.Count - lineObstacleCount,
-                        sourceRoom, source);
+                    Vector2Int difVec = (tile - source).Abs();
+                    bool blocked =  difVec.x > range || difVec.y > range ||
+                        //(tile.ManhattanDistance(source) > range) ||
+                                   IsBlocked(grid, tile, tileAngles, obstacles,
+                                       obstacles.Count - lineObstacleCount,
+                                       sourceRoom, source);
                     
                     if (blocked)
                     {

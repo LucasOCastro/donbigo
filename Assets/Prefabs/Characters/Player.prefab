@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdc3f0a6690cc8162a377b88fa406139, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <VisionRange>k__BackingField: 50
+  <VisionRange>k__BackingField: 70
   <SpriteSet>k__BackingField:
     sprites:
     - {fileID: 1170818007, guid: eddf737b918569b379d3539758086592, type: 3}

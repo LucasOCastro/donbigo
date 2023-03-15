@@ -103,27 +103,6 @@ namespace DonBigo.Rooms
             }
         }
 
-        private static void FloodFill(Vector2Int start, Predicate<Vector2Int> condition, Action<Vector2Int> action)
-        {
-            HashSet<Vector2Int> closedSet = new();
-            Stack<Vector2Int> stack = new();
-            stack.Push(start);
-            closedSet.Add(start);
-            while (stack.Count > 0)
-            {
-                Vector2Int tile = stack.Pop();
-                action(tile);
-                foreach (var neighbor in tile.Neighbors())
-                {
-                    if (!closedSet.Contains(neighbor) && condition(neighbor))
-                    {
-                        stack.Push(neighbor);
-                        closedSet.Add(neighbor);
-                    }
-                }
-            }
-        }
-
         private static void FillInternal(GameGrid grid, Tilemap tilemap, List<RoomExit> badExits,
             List<RoomInstance> rooms, TileType filler, EntranceMarkerTile fillerMat)
         {
@@ -171,7 +150,7 @@ namespace DonBigo.Rooms
                 } 
 
                 List<Vector2Int> internalTiles = new();
-                FloodFill(startPos,
+                UtilVec2Int.FloodFill(startPos,
                     p => grid.InBounds(p) && grid[p] == null, 
                     p => internalTiles.Add(p));
 

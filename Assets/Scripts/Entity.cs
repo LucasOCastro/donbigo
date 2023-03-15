@@ -7,7 +7,7 @@ namespace DonBigo
 {
     public abstract class Entity : TileObject, IVisibleTilesProvider
     {
-        [field: SerializeField] public int VisionRange { get; set; } = 50;
+        [field: SerializeField] public int VisionRange { get; private set; } = 50;
         [field: SerializeField] public DirectionalSpriteSet SpriteSet { get; private set; }
         
         public Inventory Inventory { get; private set; }
