@@ -2,13 +2,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DonBigo
+namespace DonBigo.UI
 {
     public class ExitMenu : MonoBehaviour
     {
         [SerializeField] private GameObject menu;
         [SerializeField] private Button exitButton;
-        [SerializeField] private Button closeButton;
+        [SerializeField] private Button muteButton;
         [SerializeField] private KeyCode menuKey = KeyCode.Escape;
 
         public bool Open
@@ -27,7 +27,7 @@ namespace DonBigo
         private void Awake()
         {
             exitButton.onClick.AddListener(() => GameEnder.Instance.EndGame(GameEnder.Condition.Exit));
-            closeButton.onClick.AddListener(() => Open = false);
+            muteButton.onClick.AddListener(() => Settings.Mute = !Settings.Mute);
             Open = false;
         }
 
