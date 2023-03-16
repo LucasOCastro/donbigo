@@ -1,5 +1,6 @@
 ﻿using DonBigo.Actions;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace DonBigo.UI
@@ -8,8 +9,8 @@ namespace DonBigo.UI
     {
         [SerializeField] private GameObject menu;
         [SerializeField] private Button exitButton;
-        [SerializeField] private Button muteButton;
         [SerializeField] private KeyCode menuKey = KeyCode.Escape;
+        [SerializeField] private UnityEvent<bool> onToggle;
 
         public bool Open
         {
@@ -21,6 +22,7 @@ namespace DonBigo.UI
                 {
                     TurnManager.Instance.enabled = !value;
                 }
+                onToggle?.Invoke(value);
             }
         }
 
