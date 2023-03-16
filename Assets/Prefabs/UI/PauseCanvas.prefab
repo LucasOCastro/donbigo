@@ -1223,35 +1223,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 126359576934979224, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 126359576934979224, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 126359576934979224, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 112.5
       objectReference: {fileID: 0}
     - target: {fileID: 126359576934979224, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 126359577242975314, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 126359577242975314, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 126359577242975314, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 37.5
       objectReference: {fileID: 0}
     - target: {fileID: 126359577242975314, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 126359577546676182, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
       propertyPath: m_Name
@@ -1291,11 +1291,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 126359577546676183, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 200
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 126359577546676183, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 126359577546676183, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
       propertyPath: m_LocalPosition.x
