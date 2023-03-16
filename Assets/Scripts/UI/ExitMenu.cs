@@ -27,7 +27,6 @@ namespace DonBigo.UI
         private void Awake()
         {
             exitButton.onClick.AddListener(() => GameEnder.Instance.EndGame(GameEnder.Condition.Exit));
-            muteButton.onClick.AddListener(() => Settings.Mute = !Settings.Mute);
             Open = false;
         }
 

@@ -23,7 +23,7 @@ namespace DonBigo.UI
         {
             _animator = GetComponent<Animator>();
             playButton.onClick.AddListener(() => StartCoroutine(PlayCoroutine()));
-            muteButton.onClick.AddListener(() => Settings.Mute = !Settings.Mute);
+            muteButton.onClick.AddListener(() => Settings.MuteMusic = !Settings.MuteMusic);
             creditsButton.onClick.AddListener((() => StartCoroutine(CreditsCoroutine())));
         }
 
