@@ -39,7 +39,7 @@ namespace DonBigo
             {
                 return GetDirectionalSprite(SpriteOrder[0]);
             }
-            Vector2Int dir = (to.Pos - from.Pos).Sign(); 
+            Vector2Int dir = (to.Pos - from.Pos).Sign();
             return GetDirectionalSprite(dir);
         }
     }
