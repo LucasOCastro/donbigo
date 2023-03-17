@@ -579,7 +579,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9b42a976230f91444a4a6037b2ec8aaf, type: 2}
   - {fileID: 11400000, guid: 9d30c881ae76ea84bbb8deb04759e5e3, type: 2}
   - {fileID: 11400000, guid: 71a33bfabf2a5d2478634d0e8111bbaa, type: 2}
-  - {fileID: 11400000, guid: 3a3893e257d8ab644ae14bced89d3ad4, type: 2}
+  - {fileID: 11400000, guid: b6acb8813e9adda41b6dccadd22ad79c, type: 2}
   phantonettePos: {x: 5, y: 5}
   phantonetteDir: {x: -1, y: -1}
   donbigoPos: {x: 3, y: 3}
@@ -1293,6 +1293,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7412418653045753422, guid: f39624189a51d2a49a7e0fca5cafacde, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7412418653747609136, guid: f39624189a51d2a49a7e0fca5cafacde, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

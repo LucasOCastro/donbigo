@@ -10,9 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a56e110e09e8495181cadcfa840001b6, type: 3}
-  m_Name: ExplainNetgun
+  m_Name: 8-EndDialogue
   m_EditorClassIdentifier: 
-  dialogues:
-  - "Perfeito! Que tal testar essa arma de redes?\nUse <sprite name=rclick> em mim.\n<i>...
-    N\xE3o se preocupe, estou preparada ...</i>"
-  englishDialogues: []
+  dialogueAsset:
+    asset: {fileID: 4900000, guid: 1ea6654e4592e3f43b0266fa2f3f5914, type: 3}
+    br:
+    - '<i>Gyaah!</i>
+
+      Ah, tudo bem, apenas me assustei um pouco...'
+    - "Certo, agora voc\xEA est\xE1 pronto para enfrentar a verdadeira Phantonette.\n<i>...
+      N\xE3o se preocupe comigo, eu dou um jeito ...</i>"
+    en:
+    - 
