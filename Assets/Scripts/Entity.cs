@@ -9,6 +9,9 @@ namespace DonBigo
     {
         [field: SerializeField] public int VisionRange { get; private set; } = 50;
         [field: SerializeField] public DirectionalSpriteSet SpriteSet { get; private set; }
+     
+        [field: Range(0,360)]
+        [field: SerializeField] public float VisionAngle { get; private set; } = 45;
         
         public Inventory Inventory { get; private set; }
         public HealthManager Health { get; private set; }
@@ -107,7 +110,7 @@ namespace DonBigo
                 //Caso contrário, move pra tile final e atualiza o FoV.
                 transform.position = TileWorldPos(_tile);
                 var oldVisible = VisibleTiles;
-                VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
+                VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, LookDirection, VisionRange);
                     
                 UpdateView(oldVisible, VisibleTiles);
                     
@@ -156,7 +159,7 @@ namespace DonBigo
 
         private IEnumerator MoveTransformCoroutine(Tile targetTile, float time)
         {
-            Renderer.sprite = SpriteSet.GetDirectionalSprite(Tile, targetTile);
+            LookDirection = (targetTile.Pos - Tile.Pos).Sign();
             Vector3 targetPos = TileWorldPos(targetTile);
 
             float distance = (targetPos - transform.position).magnitude;
