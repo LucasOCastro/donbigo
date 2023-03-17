@@ -212,7 +212,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1263ee5e6df840440b4665b98146ec29, type: 2}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: a177a3c037756f74cbab20e0aa0e8bd2, type: 2}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
   - {fileID: 0}
   - {fileID: 0}
@@ -358,6 +358,8 @@ MonoBehaviour:
     structure: {fileID: 11400000, guid: 95c90664586f933478b0f41be00b3c5c, type: 2}
   - pos: {x: 3, y: 13, z: 1}
     structure: {fileID: 11400000, guid: 20fa687cb6fab1a4ebd2f4bcb64fa855, type: 2}
+  - pos: {x: 0, y: 13, z: 2}
+    structure: {fileID: 11400000, guid: a177a3c037756f74cbab20e0aa0e8bd2, type: 2}
   transformOverrides:
   - pos: {x: 0, y: 3, z: 1}
     matrix:
@@ -414,3 +416,4 @@ MonoBehaviour:
       e32: 0
       e33: 1
   possibleItems: []
+  ventChance: 0.1

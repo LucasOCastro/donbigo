@@ -47,6 +47,7 @@ namespace DonBigo
         public bool HasLethal => (LeftHand != null && LeftHand.Type.WeaponType.HasFlag(WeaponUseType.Lethal)) ||
                                  (RightHand != null && RightHand.Type.WeaponType.HasFlag(WeaponUseType.Lethal));
 
+        public bool Empty => LeftHand == null && RightHand == null;
 
         //Essa função só setta o item na array e muda o holder.
         private void SetHandRaw(Handedness hand, Item item)

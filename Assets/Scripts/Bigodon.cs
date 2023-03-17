@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using DonBigo.Actions;
 using DonBigo.UI;
 using UnityEngine;
@@ -10,6 +12,7 @@ namespace DonBigo
     {
         private Path _currentTargetPath;
 
+        //Pra evitar cliques em portas não sendo considerados, clicar fora duma sala tenta achar algo interativel perto do player
         private Tile CastFromShadows(Vector2Int tile)
         {
             const int maxDistance = 25;
@@ -62,40 +65,41 @@ namespace DonBigo
 
         private void Update()
         {
-            //Quando aperta X, muda a mão ativa do inventário.
-            if (Input.GetKeyDown(KeyCode.X))
+            //Quando aperta E, muda a mão ativa do inventário.
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 Inventory.CycleHandedness();
             }
             
-            //Quando aperta Esc, limpa o caminho atual.
-            if (Input.GetKeyDown(KeyCode.Escape))
+            //Quando aperta Espaço, limpa o caminho atual.
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 _currentTargetPath = null;
-                _scheduledAction = null;
-            }
-
-            //Não é muito organizado mas acho que ajuda na responsividade
-            if (TurnManager.Instance.CurrentEntity != this)
-            {
-                _scheduledAction = GetAction();
             }
         }
 
-        private Action _scheduledAction;
+        private bool _seesPhantonette;
+        protected override void UpdateView(HashSet<Vector2Int> oldVisible, HashSet<Vector2Int> newVisible)
+        {
+            base.UpdateView(oldVisible, newVisible);
+
+
+            if (CharacterManager.Phantonette == null || CharacterManager.Phantonette.Tile == null) return;
+            
+            bool sees = newVisible.Contains(CharacterManager.Phantonette.Tile.Pos);
+            if (sees != _seesPhantonette)
+            {
+                _currentTargetPath = null;
+            }
+            _seesPhantonette = sees;
+        }
 
         public override Action GetAction()
         {
             TileHighlighter.Highlight(null);
-            if (_scheduledAction != null)
-            {
-                var action = _scheduledAction;
-                _scheduledAction = null;
-                return action;
-            }
             
             //Quando aperta espaço, pula um turno.
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (_currentTargetPath == null && Input.GetKeyDown(KeyCode.Space))
             {
                 return new IdleAction(this);
             }
@@ -103,7 +107,12 @@ namespace DonBigo
             //Se já tem um caminho, segue ele.
             if (_currentTargetPath != null && _currentTargetPath.Valid && !_currentTargetPath.Finished)
             {
-                return new MoveAction(this, _currentTargetPath.Advance());
+                var advance = _currentTargetPath.Advance();
+                if (advance.Entity == null)
+                {
+                    return new MoveAction(this, advance);
+                }
+                _currentTargetPath = null;
             }
 
             //Se apertou Q e ta segurando item, droppa.

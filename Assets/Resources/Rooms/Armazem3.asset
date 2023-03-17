@@ -210,8 +210,8 @@ MonoBehaviour:
     structure: {fileID: 11400000, guid: 4da4a59725c946b4dafec4ef81f5a591, type: 2}
   transformOverrides: []
   possibleItems:
-  - item: {fileID: 11400000, guid: 4301c384d53aaa84da9424935b8dabdf, type: 2}
-    chance: 100
   - item: {fileID: 11400000, guid: 07d80df6e8637794c99d6ae486ec9ef1, type: 2}
-    chance: 100
-  ventChance: 1
+    chance: 0.1
+  - item: {fileID: 11400000, guid: 07d80df6e8637794c99d6ae486ec9ef1, type: 2}
+    chance: 0.1
+  ventChance: 0.05

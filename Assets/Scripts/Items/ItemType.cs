@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace DonBigo
 {
@@ -19,6 +20,9 @@ namespace DonBigo
         public WeaponUseType WeaponType => weaponType;
         
         [SerializeField] private Item prefab;
+
+        public Type InstanceType => prefab.GetType();
+        
         public Item Instantiate(Tile tile)
         {
             Item instance = Instantiate(prefab);

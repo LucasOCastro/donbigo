@@ -12,7 +12,7 @@ namespace DonBigo.UI
         [SerializeField] private Button creditsButton;
 
         [SerializeField] private int playSceneID;
-
+        
         [SerializeField] private string playAnimationName;
         [SerializeField] private string creditsOpenAnimationName;
         [SerializeField] private string creditsCloseAnimationName;
@@ -22,7 +22,6 @@ namespace DonBigo.UI
         {
             _animator = GetComponent<Animator>();
             playButton.onClick.AddListener(() => StartCoroutine(PlayCoroutine()));
-            muteButton.onClick.AddListener(() => Debug.Log("mute"));
             creditsButton.onClick.AddListener((() => StartCoroutine(CreditsCoroutine())));
         }
 

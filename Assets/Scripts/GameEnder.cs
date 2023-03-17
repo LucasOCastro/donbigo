@@ -10,7 +10,8 @@ namespace DonBigo
         public enum Condition
         {
             Victory,
-            Defeat
+            Defeat,
+            Exit
         }
 
         [SerializeField] private Animator victoryAnimator;
@@ -31,12 +32,14 @@ namespace DonBigo
 
         private static IEnumerator PlayAnimationAndEndCoroutine(Animator animator, int scene)
         {
-            animator.gameObject.SetActive(true);
-            yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
+            if (animator != null)
+            {
+                animator.gameObject.SetActive(true);
+                yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
 
-            yield return new WaitUntil(() => Input.anyKeyDown);    
-            
-            
+                yield return new WaitUntil(() => Input.anyKeyDown);
+            }
+
             var loadOperation = SceneManager.LoadSceneAsync(scene);
             yield return new WaitUntil(() => loadOperation.isDone);
         }
@@ -48,6 +51,7 @@ namespace DonBigo
             {
                 Condition.Victory => victoryAnimator,
                 Condition.Defeat => defeatAnimator,
+                Condition.Exit => null,
                 _ => null
             };
             StartCoroutine(PlayAnimationAndEndCoroutine(animator, menuSceneIndex));

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace DonBigo
@@ -27,6 +28,27 @@ namespace DonBigo
                 {
                     if (x == 0 && y == 0) continue;
                     yield return vec + new Vector2Int(x, y);
+                }
+            }
+        }
+        
+        public static void FloodFill(Vector2Int start, Predicate<Vector2Int> condition, Action<Vector2Int> action)
+        {
+            HashSet<Vector2Int> closedSet = new();
+            Stack<Vector2Int> stack = new();
+            stack.Push(start);
+            closedSet.Add(start);
+            while (stack.Count > 0)
+            {
+                Vector2Int tile = stack.Pop();
+                action(tile);
+                foreach (var neighbor in tile.Neighbors())
+                {
+                    if (!closedSet.Contains(neighbor) && condition(neighbor))
+                    {
+                        stack.Push(neighbor);
+                        closedSet.Add(neighbor);
+                    }
                 }
             }
         }

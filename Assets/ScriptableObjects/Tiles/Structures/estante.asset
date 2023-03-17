@@ -34,7 +34,7 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  <ViewBlockHeight>k__BackingField: 2
+  <ViewBlockHeight>k__BackingField: 3
   <BlocksMovement>k__BackingField: 1
   <SurfaceHeight>k__BackingField: -1
   randomSprites:

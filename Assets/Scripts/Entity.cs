@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using DonBigo.Actions;
 using UnityEngine;
 using Action = DonBigo.Actions.Action;
 
@@ -9,21 +7,33 @@ namespace DonBigo
 {
     public abstract class Entity : TileObject, IVisibleTilesProvider
     {
-        [field: SerializeField] public int VisionRange { get; set; } = 50;
+        [field: SerializeField] public int VisionRange { get; private set; } = 50;
+        [field: SerializeField] public DirectionalSpriteSet SpriteSet { get; private set; }
         
         public Inventory Inventory { get; private set; }
         public HealthManager Health { get; private set; }
         public Memory Memory { get; } = new();
-        public DirectionalSpriteSet SpriteSet { get; set; }
+        
         
         public bool IsVenting { get; private set; }
         
+        public delegate void ExecuteActionDelegate(Action action);
+        public ExecuteActionDelegate OnExecuteAction;
 
         protected override void Awake()
         {
             base.Awake();
             Inventory = new Inventory(this);
             Health = new HealthManager(this);
+        }
+
+        private void OnEnable()
+        {
+            OnExecuteAction += Memory.RememberAction;
+        }
+        private void OnDisable()
+        {
+            OnExecuteAction -= Memory.RememberAction;
         }
 
         public virtual void EnterVent(Vent vent)
@@ -85,8 +95,7 @@ namespace DonBigo
                 var oldVisible = VisibleTiles;
                 VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
                     
-                OnUpdateViewEvent?.Invoke(oldVisible, VisibleTiles);
-                UpdateRenderVisibility();
+                UpdateView(oldVisible, VisibleTiles);
                     
                 if (_tile.Entity != this)
                 {
@@ -95,6 +104,14 @@ namespace DonBigo
                 Memory.RememberBeingAt(Tile);
             }
         }
+
+        protected virtual void UpdateView(HashSet<Vector2Int> oldVisible, HashSet<Vector2Int> newVisible)
+        {
+            OnUpdateViewEvent?.Invoke(oldVisible, newVisible);
+            UpdateRenderVisibility();
+        }
+
+        public void SetLookDirection(Vector2Int dir) => Renderer.sprite = SpriteSet.GetDirectionalSprite(dir);
 
         private Coroutine _currentMoveCoroutine;
         public void TranslateToTile(Tile tile, float time)
@@ -123,23 +140,6 @@ namespace DonBigo
             _currentMoveCoroutine = null;
             Tile = targetTile;
         }
-        
-        /*private Coroutine _currentMoveCoroutine;
-        private IEnumerator MoveTransformCoroutine(Vector3 to, float time)
-        {
-            if (_currentMoveCoroutine != null)
-            {
-                StopCoroutine(_currentMoveCoroutine);
-            }
-
-            float distance = (to - transform.position).magnitude;
-            float speed = distance / TurnManager.Instance.TurnDuration;
-            while (transform.position != to)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, to, speed * Time.deltaTime);
-                yield return null;
-            }
-        }*/
 
         public abstract Action GetAction();
         
@@ -151,5 +151,12 @@ namespace DonBigo
         //Isso funciona pro projeto atualmente, mas pode complicar alguma coisa no futuro.
         public bool SeesPlayer => VisibleTiles.Contains(CharacterManager.DonBigo.Tile.Pos);
         public HashSet<Vector2Int> BlacklistedTiles { get; } = new();
+
+        public override void Delete()
+        {
+            if (Inventory.LeftHand) Inventory.LeftHand.Delete();
+            if (Inventory.RightHand) Inventory.RightHand.Delete();
+            Destroy(gameObject);
+        }
     }
 }

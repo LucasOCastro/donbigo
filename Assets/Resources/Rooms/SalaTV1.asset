@@ -57,7 +57,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: c8e3f615c2d304a44a279fb5cf9b7d5e, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
@@ -317,7 +317,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: b73d17a4559ae55499e1fadb97efb4d1, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
@@ -427,7 +427,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 4da4a59725c946b4dafec4ef81f5a591, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
@@ -747,12 +747,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: a177a3c037756f74cbab20e0aa0e8bd2, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
@@ -778,6 +773,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: a177a3c037756f74cbab20e0aa0e8bd2, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 6745a94bbc73e20498c52cb381ac2204, type: 2}
@@ -1060,12 +1060,16 @@ MonoBehaviour:
     structure: {fileID: 11400000, guid: 20fa687cb6fab1a4ebd2f4bcb64fa855, type: 2}
   - pos: {x: 10, y: 12, z: 1}
     structure: {fileID: 11400000, guid: 95c90664586f933478b0f41be00b3c5c, type: 2}
+  - pos: {x: 0, y: 5, z: 2}
+    structure: {fileID: 11400000, guid: b73d17a4559ae55499e1fadb97efb4d1, type: 2}
   - pos: {x: 2, y: 5, z: 2}
     structure: {fileID: 11400000, guid: 4bce91ccbee523d4ba1005a312eed695, type: 2}
   - pos: {x: 2, y: 6, z: 2}
     structure: {fileID: 11400000, guid: 9d90be4c33107d94082b24d0f7635056, type: 2}
   - pos: {x: 2, y: 7, z: 2}
     structure: {fileID: 11400000, guid: 87a7c42115db13944ab0f247b4fd9909, type: 2}
+  - pos: {x: 2, y: 12, z: 2}
+    structure: {fileID: 11400000, guid: a177a3c037756f74cbab20e0aa0e8bd2, type: 2}
   - pos: {x: 3, y: 9, z: 2}
     structure: {fileID: 11400000, guid: 495c070fa2e1b49479ecefa7f376bfdd, type: 2}
   - pos: {x: 4, y: 9, z: 2}
@@ -1076,12 +1080,18 @@ MonoBehaviour:
     structure: {fileID: 11400000, guid: 7db348714ca40c8488ea5b7097b9c79b, type: 2}
   - pos: {x: 7, y: 9, z: 2}
     structure: {fileID: 11400000, guid: 289cb820639a4664b8772ccbe18b6170, type: 2}
+  - pos: {x: 8, y: 0, z: 2}
+    structure: {fileID: 11400000, guid: c8e3f615c2d304a44a279fb5cf9b7d5e, type: 2}
   - pos: {x: 8, y: 5, z: 2}
     structure: {fileID: 11400000, guid: 495c070fa2e1b49479ecefa7f376bfdd, type: 2}
   - pos: {x: 8, y: 6, z: 2}
     structure: {fileID: 11400000, guid: e104d55884f027e4390ade0148e23d02, type: 2}
   - pos: {x: 8, y: 7, z: 2}
     structure: {fileID: 11400000, guid: 289cb820639a4664b8772ccbe18b6170, type: 2}
+  - pos: {x: 8, y: 12, z: 2}
+    structure: {fileID: 11400000, guid: a177a3c037756f74cbab20e0aa0e8bd2, type: 2}
+  - pos: {x: 10, y: 6, z: 2}
+    structure: {fileID: 11400000, guid: 4da4a59725c946b4dafec4ef81f5a591, type: 2}
   - pos: {x: 5, y: 3, z: 4}
     structure: {fileID: 11400000, guid: f08ae6f0c922fa44dbaa7becc2e1294f, type: 2}
   transformOverrides:
@@ -1229,4 +1239,7 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-  possibleItems: []
+  possibleItems:
+  - item: {fileID: 11400000, guid: c43fce7eff5707644b2b92a8456c5dd3, type: 2}
+    chance: 0.2
+  ventChance: 0.3

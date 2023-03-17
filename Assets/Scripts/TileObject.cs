@@ -21,5 +21,7 @@ namespace DonBigo
         {
             SetRenderVisibility(Tile != null && FieldOfViewRenderer.IsVisible(Tile.Pos));
         }
+
+        public abstract void Delete();
     }
 }

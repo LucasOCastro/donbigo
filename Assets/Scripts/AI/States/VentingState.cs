@@ -25,7 +25,7 @@ namespace DonBigo.AI
             if (!vents.Any())
             {
                 distance = 0;
-                return _entryVent;
+                return _entryVent.Open ? _entryVent : null;
             }
             
             var playerTile = entity.Memory.LastSeenTile(CharacterManager.DonBigo);
@@ -54,24 +54,34 @@ namespace DonBigo.AI
         
         protected override AIState OnTick(AIWorker worker, out AIObjective objective)
         {
-            worker.Owner.Tile = null;
-            objective = null;
+            //Se a vent alvo foi fechada, anula pra poder escolher outra
+            if (_targetVent is { Open: false }) _targetVent = null;
             
-            var bestTargetVent = GetBestTargetVent(worker, out int bestDistance);
-            if (bestTargetVent != _targetVent)
+            objective = null;
+
+            //Se já saiu da vent, começa a wanderar.
+            if (_targetVent != null && _progress >= _distance) return new WanderState();
+            
+            //Se não tem vent alvo, encontra uma.
+            if (_targetVent == null )
             {
-                _targetVent = bestTargetVent;
+                _targetVent = GetBestTargetVent(worker, out int bestDistance);
+                //Se não encontrou uma vent alvo, então ficou preso. Se ficou preso, morre.
+                if (_targetVent == null)
+                {
+                    worker.Owner.Health.Kill();
+                    return null;
+                }
                 _progress = 0;
                 _distance = bestDistance;
             }
 
-            if (_targetVent == null) return null;
-
             _progress++;
-            if (_progress <= _distance) return null;
+            if (_progress < _distance) return null;
             
+            //Se completou a viagem, sai da vent mas espera o proximo turno pra começar a wanderar.
             worker.Owner.ExitVent(_targetVent);
-            return new WanderState();
+            return null;
         }
     }
 }

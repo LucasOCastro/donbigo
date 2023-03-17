@@ -7,9 +7,26 @@ using Random = UnityEngine.Random;
 
 namespace DonBigo.Rooms
 {
+    [System.Serializable]
+    public struct MapGenData
+    {
+        public int mapSize;
+        public Vector2 normalizedGenStart;
+        public Room startingRoom;
+        public ItemType[] necessaryItems;
+        
+        [Header("Fillers")]
+        public TileType fillerTile;
+        public EntranceMarkerTile fillerMat;
+
+        [Header("Traps")]
+        [Range(0f,1f)] public float doorTrapChance;  
+        public ItemType doorTrap;
+    }
+    
     public static class MapGen
     {
-        private static void PlaceRoom(GameGrid grid, Tilemap tilemap, RoomInstance roomInstance)
+        private static void PlaceRoom(GameGrid grid, Tilemap tilemap, RoomInstance roomInstance, Dictionary<ItemType, bool> itemChanceChecklist)
         {
             Room room = roomInstance.Room;
             Vector2Int min = roomInstance.Bounds.min;
@@ -55,13 +72,17 @@ namespace DonBigo.Rooms
                 if (i == ventIndex) continue;
                 tilemap.SetTile(vents[i].pos + (Vector3Int)min, null);
             }
-            
+
             foreach (var itemChance in room.GenItemsToSpawn())
             {
                 var tile = grid.TilesInBounds(roomInstance.Bounds).Where(t => t.SupportsItem).Random();
                 if (tile == null) continue;
                 
                 itemChance.Instantiate(tile);
+                if (itemChanceChecklist != null && itemChanceChecklist.ContainsKey(itemChance))
+                {
+                    itemChanceChecklist[itemChance] = true;
+                }
             }
         }
 
@@ -77,27 +98,6 @@ namespace DonBigo.Rooms
                     {
                         room.Doors.RemoveAt(i);
                         return;
-                    }
-                }
-            }
-        }
-
-        private static void FloodFill(Vector2Int start, Predicate<Vector2Int> condition, Action<Vector2Int> action)
-        {
-            HashSet<Vector2Int> closedSet = new();
-            Stack<Vector2Int> stack = new();
-            stack.Push(start);
-            closedSet.Add(start);
-            while (stack.Count > 0)
-            {
-                Vector2Int tile = stack.Pop();
-                action(tile);
-                foreach (var neighbor in tile.Neighbors())
-                {
-                    if (!closedSet.Contains(neighbor) && condition(neighbor))
-                    {
-                        stack.Push(neighbor);
-                        closedSet.Add(neighbor);
                     }
                 }
             }
@@ -120,7 +120,6 @@ namespace DonBigo.Rooms
             {
                 const int matElevation = 1;
                 Vector2Int pos = opposing.Position + opposing.DirectionVector;
-                Debug.Log("Will make door at " + pos);
                 Tile tile = grid[pos];
                 StructureInstance mat = new StructureInstance(fillerMat, tile, matElevation);
                 tile.Structures.Add(mat);
@@ -151,13 +150,12 @@ namespace DonBigo.Rooms
                 } 
 
                 List<Vector2Int> internalTiles = new();
-                FloodFill(startPos,
+                UtilVec2Int.FloodFill(startPos,
                     p => grid.InBounds(p) && grid[p] == null, 
                     p => internalTiles.Add(p));
 
                 if (!IsGoodInternal(internalTiles))
                 {
-                    Debug.Log("bad internal: " + internalTiles[0]);
                     UnregisterDoor(exit, rooms, grid, tilemap);
                     foreach (Vector2Int badTile in internalTiles)
                     {
@@ -166,7 +164,6 @@ namespace DonBigo.Rooms
                     continue;
                 }
 
-                Debug.Log("good internal: "+internalTiles[0]);
                 RoomInstance roomInstance = new RoomInstance();
                 foreach (Vector2Int tile in internalTiles)
                 {
@@ -179,15 +176,15 @@ namespace DonBigo.Rooms
         }
 
 
-        public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap, TileType filler,
-            EntranceMarkerTile fillerMat, Room startingRoom)
-
+        private const int MaxSafetyRegenCount = 10;
+        private static int _safetyRegenCount = 0;
+        public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap, MapGenData data)
         {
             if (GridManager.Instance.DEBUG_TEST_ROOM != null)
             {
                 RoomInstance inst = new RoomInstance(GridManager.Instance.DEBUG_TEST_ROOM, Vector2Int.one);
                 List<RoomInstance> res = new List<RoomInstance>() { inst };
-                PlaceRoom(grid, tilemap, inst);
+                PlaceRoom(grid, tilemap, inst, null);
                 return res;
             }
 
@@ -195,11 +192,18 @@ namespace DonBigo.Rooms
             List<RoomInstance> rooms = new();
             Queue<RoomExit> possibleDoors = new();
 
-            Room randRoom = (startingRoom != null) ? startingRoom : RoomDatabase.RandomRoom();
+            //Para garantir que não teremos softlock, armazenar os itens que ja foram colocados em um dicionario
+            var necessaryItemChecklist = data.necessaryItems.ToDictionary(i => i, _ => false);
+
+            //Colocar a sala inicial do mapa
+            Room randRoom = (data.startingRoom != null) ? data.startingRoom : RoomDatabase.RandomRoom();
             if (randRoom == null) return rooms;
-            Vector2Int center = new Vector2Int((int)grid.Bounds.center.x, (int)grid.Bounds.center.y);
-            RoomInstance roomInstance = new RoomInstance(randRoom, center);
-            PlaceRoom(grid, tilemap, roomInstance);
+            Vector2Int genStart = new Vector2Int(
+                (int)(grid.Bounds.size.x * data.normalizedGenStart.x + grid.Bounds.min.x),
+                (int)(grid.Bounds.size.y * data.normalizedGenStart.y + grid.Bounds.min.y)
+            );
+            RoomInstance roomInstance = new RoomInstance(randRoom, genStart);
+            PlaceRoom(grid, tilemap, roomInstance, necessaryItemChecklist);
             rooms.Add(roomInstance);
             foreach (var door in roomInstance.Doors)
             {
@@ -222,7 +226,7 @@ namespace DonBigo.Rooms
                 //Ajustamos a posição em que a sala será colocada com base na posição da porta que será conectada.
                 Vector2Int newRoomMin = (possibleDoor.Position + possibleDoor.DirectionVector) - chosenDoor.Position;
                 roomInstance = new RoomInstance(randRoom, newRoomMin);
-                PlaceRoom(grid, tilemap, roomInstance);
+                PlaceRoom(grid, tilemap, roomInstance, necessaryItemChecklist);
                 rooms.Add(roomInstance);
 
                 foreach (var exit in roomInstance.Doors)
@@ -233,9 +237,22 @@ namespace DonBigo.Rooms
                 }
             }
 
-            if (filler != null && fillerMat != null)
+            //Se faltou algum item essencial, precisamos gerar outro mapa.
+            if (_safetyRegenCount < MaxSafetyRegenCount && necessaryItemChecklist.Values.Any(v => v == false))
             {
-                FillInternal(grid, tilemap, badExits, rooms, filler, fillerMat);
+                Debug.Log("Map Regen");
+                _safetyRegenCount++;
+                grid.ClearMap();
+                return Gen(grid, tilemap, data);
+            }
+
+            if (_safetyRegenCount >= MaxSafetyRegenCount)
+                Debug.LogError("Regen map too much :(");
+            _safetyRegenCount = 0;
+
+            if (data.fillerTile != null && data.fillerTile != null)
+            {
+                FillInternal(grid, tilemap, badExits, rooms, data.fillerTile, data.fillerMat);
             }
 
 

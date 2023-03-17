@@ -8,17 +8,19 @@ namespace DonBigo
 
         [SerializeField] private Sprite activatedSprite;
         [SerializeField] private DamageData damage;
+        [SerializeField] private AudioClip activateAudio;
 
         private Entity _armer;
         private ArmState _state = ArmState.Idle;
         public ArmState State
         {
-            get => _state;
-            private set
+            get => _state; 
+            set
             {
                 if (value == _state) return;
                 
                 _state = value;
+                if (_state == ArmState.Activated) Renderer.sprite = activatedSprite;
                 UpdateRenderVisibility();
             }
         }
@@ -28,10 +30,12 @@ namespace DonBigo
         public override void SteppedOn(Entity stepper)
         {
             if (State != ArmState.Armed) return;
+
+            if (activateAudio != null) PlayAudio(activateAudio);
+            stepper.Tile.ParentGrid.MakeSound(Tile, stepper);
             
             State = ArmState.Activated;
-            Renderer.sprite = activatedSprite;
-            _armer.BlacklistedTiles.Remove(Tile.Pos);
+            if (_armer != null) _armer.BlacklistedTiles.Remove(Tile.Pos);
             
             //isso é umm CRIME contra os princípios SOLID mas lhkgfçmgfm :)
             if (stepper.Inventory.ContainsItem<StunImmunityItem>(out var handedness))

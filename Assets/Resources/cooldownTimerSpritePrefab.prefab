@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1322179913110597621}
   - component: {fileID: 5827963265850631358}
   - component: {fileID: 4148377574900768044}
+  - component: {fileID: -3394990459759724259}
   m_Layer: 0
   m_Name: cooldownTimerSpritePrefab
   m_TagString: Untagged
@@ -110,3 +111,15 @@ MonoBehaviour:
   - {fileID: -979030998, guid: 57d8b344811ce004d9fe716825b33a32, type: 3}
   sprite: {fileID: 5827963265850631358}
   image: {fileID: 0}
+--- !u!114 &-3394990459759724259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985861085800703522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bbec0ad99fb47c9a12c8ac143715181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

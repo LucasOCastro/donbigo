@@ -9,7 +9,7 @@ namespace DonBigo.Actions
     {
         [SerializeField] private float turnDurationSeconds = 1f;
         public float TurnDuration => turnDurationSeconds;
-
+        
         public static TurnManager Instance { get; private set; }
         public static int CurrentTurn { get; private set; }
 
@@ -39,7 +39,7 @@ namespace DonBigo.Actions
         {
             StopAllCoroutines();
         }
-
+        
         private IEnumerator TurnTickCoroutine()
         {
             while (true)
@@ -49,7 +49,7 @@ namespace DonBigo.Actions
                     yield return null;
                 }
                 
-                if (CurrentEntity == _entities[0])
+                if (_entityIndex == 0)
                 {
                     //Só cycla o turno na primeira entidade
                     CurrentTurn++;
@@ -65,7 +65,7 @@ namespace DonBigo.Actions
                 } while (action == null);
                 
                 action.Execute();
-                CurrentEntity.Memory.RememberAction(action);
+                CurrentEntity.OnExecuteAction?.Invoke(action);
                 CycleEntity();
                 yield return new WaitForSeconds(turnDurationSeconds);
             }

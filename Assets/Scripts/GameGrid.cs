@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using DonBigo.Rooms;
 using UnityEngine.Tilemaps;
@@ -8,6 +7,7 @@ namespace DonBigo
 {
     public class GameGrid
     {
+        public const float WorldElevationOffsetMultiplier = 0.2714285f;
         private Tilemap _tilemap;
         private Tile[,] _tiles;
         private List<RoomInstance> _rooms;
@@ -50,7 +50,7 @@ namespace DonBigo
         public Vector3 TileToWorld(Vector2Int tile, int elevation = 0)
         {
             Vector3 basePos = _tilemap.CellToWorld((Vector3Int)tile);
-            basePos.y += elevation * .3f;
+            basePos.y += elevation * WorldElevationOffsetMultiplier;
             return basePos;
         } 
         public Vector3 TileToWorld(Tile tile, int elevation = 0) => TileToWorld(tile.Pos, elevation);
@@ -96,13 +96,39 @@ namespace DonBigo
             }
         }
 
-        public GameGrid(int size, Tilemap tilemap, TileType filler, EntranceMarkerTile fillerMat, Room startingRoom)
+        public void SpreadTraps(ItemType trap, float doorChance)
         {
-            Size = size;
+            if (trap == null || doorChance <= 0 || trap.InstanceType != typeof(TrapItem)) return;
+
+            foreach (var room in AllRooms)
+            {
+                foreach (var exit in room.Doors)
+                {
+                    if (Random.Range(0f, 1f) >= doorChance) continue;
+                    
+                    var tile = exit.FinalTile(this);
+                    if (!tile.SupportsItem) continue;
+
+                    var instance = (TrapItem)trap.Instantiate(tile);
+                    instance.State = TrapItem.ArmState.Armed;
+                }
+            }
+        }
+
+        public void MakeSound(Tile source, Entity doer)
+        {
+            foreach (var entity in CharacterManager.AllEntities)
+            {
+                entity.Memory.RememberLocation(doer, source);
+            }
+        }
+
+        public GameGrid(Tilemap tilemap, MapGenData genData)
+        {
+            Size = genData.mapSize;
             _tilemap = tilemap;
-            _tiles = new Tile[size, size];
-            _rooms = MapGen.Gen(this, tilemap, filler, fillerMat, startingRoom);
-            
+            _tiles = new Tile[Size, Size];
+            _rooms = MapGen.Gen(this, tilemap, genData);
         }
 
         public void RefreshTile(Tile tile)
@@ -110,6 +136,25 @@ namespace DonBigo
             for (int i = 0; i < _tilemap.size.z; i++)
             {
                 _tilemap.RefreshTile(new Vector3Int(tile.Pos.x, tile.Pos.y, i));    
+            }
+        }
+
+        public void ClearMap()
+        {
+            Debug.Log("Map cleared");
+            _tilemap.ClearAllTiles();
+            AllVents?.Clear();
+            AllRooms?.Clear();
+            for (int x = 0; x < Size; x++)
+            {
+                for (int y = 0; y < Size; y++)
+                {
+                    if (_tiles[x,y] == null) continue;
+                    
+                    if (_tiles[x,y].Item != null) _tiles[x,y].Item.Delete();
+                    if (_tiles[x,y].Entity != null) _tiles[x,y].Entity.Delete();
+                    _tiles[x, y] = null;
+                }
             }
         }
     }

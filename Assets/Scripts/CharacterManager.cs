@@ -1,3 +1,4 @@
+using System;
 using DonBigo.Actions;
 using UnityEngine;
 using System.Collections.Generic;
@@ -9,9 +10,9 @@ namespace DonBigo
         public static CharacterManager Instance { get; private set; }
         
         public static Bigodon DonBigo { get; private set; }
-        [SerializeField] private DirectionalSpriteSet donbigoSprite;
+        [SerializeField] private Bigodon donbigoPrefab;
         public static Phantonette Phantonette { get; private set; }
-        [SerializeField] private DirectionalSpriteSet phantonetteSprite;
+        [SerializeField] private Phantonette phantonettePrefab;
 
         public static IEnumerable<Entity> AllEntities { get; private set; }
 
@@ -27,17 +28,12 @@ namespace DonBigo
             
             Spawner spawner = new Spawner();
             // Geração do Don Bigo
-            DonBigo = new GameObject("Player", typeof(SpriteRenderer), typeof(Bigodon)).GetComponent<Bigodon>();
-            DonBigo.SpriteSet = donbigoSprite;
-            DonBigo.tag = "Player";
-            // Abaixo setar a posição quando tiver um Spawn implementado vvvvvvvvvvvvv
-            spawner.Spawn(GridManager.Instance.Grid, DonBigo.GetComponent<Entity>());
+            DonBigo = Instantiate(donbigoPrefab);
+            spawner.Spawn(GridManager.Instance.Grid, DonBigo);
             
             // Geração da Phantonette
-            Phantonette = new GameObject("Foe", typeof(SpriteRenderer), typeof(Phantonette)).GetComponent<Phantonette>();
-            Phantonette.SpriteSet = phantonetteSprite;
-            // Abaixo setar a posição quando tiver um Spawn implementado vvvvvvvvvvvvv
-            spawner.Spawn(GridManager.Instance.Grid, Phantonette.GetComponent<Entity>());
+            Phantonette = Instantiate(phantonettePrefab);
+            spawner.Spawn(GridManager.Instance.Grid, Phantonette);
             
             TurnManager.RegisterEntity(DonBigo);
             TurnManager.RegisterEntity(Phantonette);

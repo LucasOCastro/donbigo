@@ -10,6 +10,11 @@ namespace DonBigo
 
         [SerializeField] private int cooldownTurns;
         public int CooldownTurns => cooldownTurns;
+        
+        [SerializeField] private AudioSource audioSource;
+        protected void PlayAudio(AudioClip clip) => audioSource.PlayOneShot(clip);
+
+        [SerializeField] private AudioClip useAudio;
 
         private int _lastUsedTurn = -1;
         /// <summary>Turnos desde o ultimo uso do item. Se o item nunca foi usado, retorna -1.</summary>
@@ -52,14 +57,16 @@ namespace DonBigo
                 }
 
                 _tile = value;
-                if (_tile != null && _tile.Item != this)
+                if (_tile != null)
                 {
-                    _tile.Item = this;
-
-                    Vector3 worldPos = _tile.ParentGrid.TileToWorld(_tile, _tile.ItemSurfaceElevation);
-                    worldPos.z = 0;
-                    transform.position = worldPos;
+                    if (_tile.Item != this) _tile.Item = this;
+                    
+                    int elevation = _tile.ItemSurfaceElevation >= 0 ? _tile.ItemSurfaceElevation : 0;
+                    Vector3 worldPos = _tile.ParentGrid.TileToWorld(_tile, elevation);
+                    worldPos.z = 1;
+                    transform.position = (worldPos);
                 }
+                
                 UpdateRenderVisibility();
             }
         }
@@ -91,6 +98,7 @@ namespace DonBigo
             {
                 Debug.LogError("Usou item em cooldown!");
             }
+            if (useAudio != null) PlayAudio(useAudio);
             UseAction(doer, target);
             _lastUsedTurn = TurnManager.CurrentTurn;
         }
@@ -98,7 +106,7 @@ namespace DonBigo
         {
         }
 
-        public void Delete()
+        public override void Delete()
         {
             if (Holder != null && Holder.ContainsItem(this, out var handedness))
             {
