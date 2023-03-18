@@ -46,7 +46,8 @@ namespace DonBigo
             if (tile == null) return;
             if (Input.GetKeyDown(KeyCode.I) && tile.Item == null)
             {
-                DEBUG_Item.Instantiate(Grid.MouseOverTile());
+                var i = DEBUG_Item.Instantiate(Grid.MouseOverTile());
+                if (i is TrapItem trap) trap.State = TrapItem.ArmState.Armed;
             }
             if (Input.GetMouseButtonDown(1))
             {

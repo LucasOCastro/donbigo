@@ -121,6 +121,13 @@ namespace DonBigo
             {
                 entity.Memory.RememberLocation(doer, source);
             }
+            
+            if (doer is not Bigodon)
+            {
+                //FindObjectOfType é o exemplo mais classico de codigo porco no unity mas fazeroque
+                //Ou é isso ou um singleton
+                Object.FindObjectOfType<PlayerCamera>().Jump(doer);
+            }
         }
 
         public GameGrid(Tilemap tilemap, MapGenData genData)

@@ -487,6 +487,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 4301c384d53aaa84da9424935b8dabdf, type: 2}
     - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
+      propertyPath: DEBUG_Item
+      value: 
+      objectReference: {fileID: 11400000, guid: 4301c384d53aaa84da9424935b8dabdf, type: 2}
+    - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
       propertyPath: startingRoom
       value: 
       objectReference: {fileID: 0}
