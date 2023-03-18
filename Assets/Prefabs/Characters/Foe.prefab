@@ -108,4 +108,4 @@ MonoBehaviour:
     - {fileID: 1503044075, guid: c71578125c39858ac9cd7587b392895e, type: 3}
     - {fileID: 997358209, guid: c71578125c39858ac9cd7587b392895e, type: 3}
     - {fileID: 823895464, guid: c71578125c39858ac9cd7587b392895e, type: 3}
-  <VisionAngle>k__BackingField: 60
+  <VisionAngle>k__BackingField: 90

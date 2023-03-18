@@ -110,7 +110,7 @@ MonoBehaviour:
     - {fileID: 1503002100, guid: eddf737b918569b379d3539758086592, type: 3}
     - {fileID: -568214262, guid: eddf737b918569b379d3539758086592, type: 3}
     - {fileID: -545652696, guid: eddf737b918569b379d3539758086592, type: 3}
-  <VisionAngle>k__BackingField: 60
+  <VisionAngle>k__BackingField: 90
 --- !u!82 &2196502274478531211
 AudioSource:
   m_ObjectHideFlags: 0

@@ -8,10 +8,11 @@ namespace DonBigo
     public abstract class Entity : TileObject, IVisibleTilesProvider
     {
         [field: SerializeField] public int VisionRange { get; private set; } = 50;
-        [field: SerializeField] public DirectionalSpriteSet SpriteSet { get; private set; }
      
         [field: Range(0,360)]
-        [field: SerializeField] public float VisionAngle { get; private set; } = 45;
+        [field: SerializeField] public float VisionAngle { get; private set; } = 90;
+        
+        [field: SerializeField] public DirectionalSpriteSet SpriteSet { get; private set; }
         
         public Inventory Inventory { get; private set; }
         public HealthManager Health { get; private set; }
@@ -145,7 +146,7 @@ namespace DonBigo
         protected void RefreshVisibleTiles(Tile newTile, Vector2Int newDirection)
         {
             var oldVisible = VisibleTiles;
-            VisibleTiles = ShadowCasting.Cast(newTile.ParentGrid, newTile.Pos, newDirection, VisionRange);
+            VisibleTiles = ShadowCasting.Cast(newTile.ParentGrid, newTile.Pos, newDirection, VisionRange, VisionAngle);
             UpdateView(oldVisible, VisibleTiles);    
         }
         protected virtual void UpdateView(HashSet<Vector2Int> oldVisible, HashSet<Vector2Int> newVisible)
