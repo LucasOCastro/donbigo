@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DonBigo.Actions;
 using DonBigo.Rooms;
@@ -10,8 +9,6 @@ namespace DonBigo
 {
     public class Tile : ITileGiver
     {
-        
-        
         public Vector2Int Pos { get; }
         public TileType Type { get; }
         public GameGrid ParentGrid { get; }

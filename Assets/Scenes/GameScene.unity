@@ -385,6 +385,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 2981320274252326040, guid: d7c747f0fc187404dbcf32c45744d03e, type: 3}
+      propertyPath: jumpSeconds
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2981320274252326042, guid: d7c747f0fc187404dbcf32c45744d03e, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -501,6 +505,10 @@ PrefabInstance:
     - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
       propertyPath: genData.startingRoom
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
+      propertyPath: genData.doorTrapChance
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 4871445199822071230, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
       propertyPath: m_Name
