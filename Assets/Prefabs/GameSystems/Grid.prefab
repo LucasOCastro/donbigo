@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 4871445200121710345}
+  hiddenOverlayColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
 --- !u!1 &4871445199822071230
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,12 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e98db63b6b4cf19ef34d209a108dcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: 75
-  normalizedGenStart: {x: 0.5, y: 0.5}
   tilemap: {fileID: 4871445200121710345}
-  startingRoom: {fileID: 11400000, guid: cb58afac8819d0e458f2e4a0f2589ebf, type: 2}
-  fillerTile: {fileID: 11400000, guid: a2bddda293f87614aab76fb27ec9cb61, type: 2}
-  fillerMat: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
   genData:
     mapSize: 75
     normalizedGenStart: {x: 0.5, y: 0.5}
@@ -121,8 +117,6 @@ MonoBehaviour:
     fillerMat: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
     doorTrapChance: 0.02
     doorTrap: {fileID: 11400000, guid: 4301c384d53aaa84da9424935b8dabdf, type: 2}
-  doorTrapChance: 0
-  doorTrap: {fileID: 0}
   seed: -1
   DEBUG_TEST_ROOM: {fileID: 0}
   DEBUG_Item: {fileID: 11400000, guid: 3154651d6db92154f9984a622ee3884e, type: 2}

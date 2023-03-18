@@ -12,7 +12,11 @@ namespace DonBigo
                 return baseColor;
             }
 
-            return FieldOfViewRenderer.IsVisible(position) ? baseColor : new Color(0, 0, 0, 0);
+            if (FieldOfViewRenderer.Origin == null || FieldOfViewRenderer.IsVisible(position)) return baseColor;
+
+    
+            var bounds = FieldOfViewRenderer.Origin.Tile.Room.Bounds;
+            return bounds.Contains(position) ? FieldOfViewRenderer.HiddenOverlayColor : new Color(0, 0, 0, 0);
         }
     }
 }

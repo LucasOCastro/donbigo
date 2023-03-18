@@ -43,8 +43,8 @@ namespace DonBigo
                 baseColor.a = 0;
                 return baseColor;
             }
-            //baseColor.a = 0;
-            return Color.black;
+
+            return FieldOfViewRenderer.HiddenOverlayColor;
         }
         
         [SerializeField] private Sprite[] randomSprites;

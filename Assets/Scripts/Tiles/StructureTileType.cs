@@ -40,13 +40,19 @@ namespace DonBigo
             {
                 tileData.sprite = randomSprites[RandIndex(position, randomSprites.Length)];
             }
+
+            if (!FieldOfViewRenderer.DEBUG_drawVis || FieldOfViewRenderer.IsVisible((Vector2Int)position)) return;
+            if (GridManager.Instance == null || GridManager.Instance.Grid == null) return;
             
-            if (FieldOfViewRenderer.DEBUG_drawVis && !FieldOfViewRenderer.IsVisible((Vector2Int)position))
+            if (GridManager.Instance.Grid[(Vector2Int)position].Room == FieldOfViewRenderer.Origin.Tile.Room)
             {
-                Color color = tileData.color;
-                color.a = 0;
-                tileData.color = color;
+                tileData.color = FieldOfViewRenderer.HiddenOverlayColor;
+                return;
             }
+
+            Color color = tileData.color;
+            color.a = 0;
+            tileData.color = color;
         }
 
         public virtual StructureInstance GetInstance(Tile tile, int elevation)
