@@ -132,7 +132,7 @@ namespace DonBigo
                 return new UseItemAction(this, heldItem, tile);
             }
 
-            if (tile == null || tile.Type is WallTileType and not DoorTileType || !VisibleTiles.Contains(mousePos))
+            if (tile == null || tile.Type is WallTileType and not DoorTileType || !Tile.Room.Bounds.Contains(tile.Pos))
             {
                 tile = CastFromShadows(mousePos);
                 if (tile == null) return null;
@@ -142,6 +142,11 @@ namespace DonBigo
             //Clique esquerdo
             if (Input.GetMouseButtonDown(0))
             {
+                if (!VisibleTiles.Contains(tile.Pos))
+                {
+                    return new TurnAction(this, (tile.Pos - Tile.Pos).Sign());
+                }
+                
                 //Se a tile tem uma ação de interação, retorna ela.
                 var interactAction = GenInteractAction(tile);
                 if (interactAction != null)
