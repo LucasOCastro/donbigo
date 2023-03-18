@@ -109,10 +109,9 @@ namespace DonBigo
                 
                 //Caso contrário, move pra tile final e atualiza o FoV.
                 transform.position = TileWorldPos(_tile);
-                var oldVisible = VisibleTiles;
-                VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, LookDirection, VisionRange);
-                    
-                UpdateView(oldVisible, VisibleTiles);
+                
+                
+                RefreshVisibleTiles(_tile, _lookDirection);
                     
                 if (_tile.Entity != this)
                 {
@@ -136,9 +135,19 @@ namespace DonBigo
                 }
                 _lookDirection = value.Sign();
                 Renderer.sprite = SpriteSet.GetDirectionalSprite(_lookDirection);
+                if (Tile != null)
+                {
+                    RefreshVisibleTiles(Tile, _lookDirection);
+                }
             }
         }
 
+        protected void RefreshVisibleTiles(Tile newTile, Vector2Int newDirection)
+        {
+            var oldVisible = VisibleTiles;
+            VisibleTiles = ShadowCasting.Cast(newTile.ParentGrid, newTile.Pos, newDirection, VisionRange);
+            UpdateView(oldVisible, VisibleTiles);    
+        }
         protected virtual void UpdateView(HashSet<Vector2Int> oldVisible, HashSet<Vector2Int> newVisible)
         {
             OnUpdateViewEvent?.Invoke(oldVisible, newVisible);
