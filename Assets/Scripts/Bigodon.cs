@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using DonBigo.Actions;
 using DonBigo.UI;
 using UnityEngine;
@@ -100,7 +98,7 @@ namespace DonBigo
             TileHighlighter.Highlight(null);
             
             //Quando aperta espaço, pula um turno.
-            if (_currentTargetPath == null && Input.GetKeyDown(KeyCode.Space))
+            if (_currentTargetPath == null && Input.GetKey(KeyCode.Space))//GetKeyDown(KeyCode.Space))
             {
                 return new IdleAction(this);
             }

@@ -22,6 +22,7 @@ namespace DonBigo
             Max = max;
         }
 
+        /// <returns>Random inclusivo de Min a Max</returns>
         public float Random() => UnityEngine.Random.Range(Min, Max);
         public float Average => (Min + Max) * .5f;
 

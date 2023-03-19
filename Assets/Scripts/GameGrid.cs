@@ -2,15 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using DonBigo.Rooms;
 using UnityEngine.Tilemaps;
+using DonBigo.Rooms.MapGeneration;
 
 namespace DonBigo
 {
     public class GameGrid
     {
         public const float WorldElevationOffsetMultiplier = 0.2714285f;
-        private Tilemap _tilemap;
-        private Tile[,] _tiles;
-        private List<RoomInstance> _rooms;
+        private readonly Tilemap _tilemap;
+        private readonly Tile[,] _tiles;
+        private readonly List<RoomInstance> _rooms;
         
         public int Size { get; }
         public RectInt Bounds => new RectInt(Vector2Int.zero, Vector2Int.one  * Size);
@@ -130,25 +131,25 @@ namespace DonBigo
             }
         }
 
-        public GameGrid(Tilemap tilemap, MapGenData genData)
+        public GameGrid(MapGenData genData)
         {
             Size = genData.mapSize;
-            _tilemap = tilemap;
+            _tilemap = genData.tilemap;
             _tiles = new Tile[Size, Size];
-            _rooms = MapGen.Gen(this, tilemap, genData);
+            _rooms = MapGen.Gen(this, genData);
         }
 
         public void RefreshTile(Tile tile)
         {
             for (int i = 0; i < _tilemap.size.z; i++)
             {
-                _tilemap.RefreshTile(new Vector3Int(tile.Pos.x, tile.Pos.y, i));    
+                Vector3Int tilePos = new Vector3Int(tile.Pos.x, tile.Pos.y, i);
+                _tilemap.RefreshTile(tilePos);
             }
         }
 
         public void ClearMap()
         {
-            Debug.Log("Map cleared");
             _tilemap.ClearAllTiles();
             AllVents?.Clear();
             AllRooms?.Clear();

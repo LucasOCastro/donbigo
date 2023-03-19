@@ -76,7 +76,7 @@ namespace DonBigo
             }
         }
 
-        void RefreshAllTiles()
+        private void RefreshAllTiles()
         {
             var grid = GridManager.Instance.Grid;
             for (int x = 0; x < grid.Size; x++)
@@ -89,6 +89,7 @@ namespace DonBigo
                     for (int z = 0; z < tilemap.size.z; z++)
                     {
                         tilemap.RefreshTile(new Vector3Int(x,y,z));
+                        
                     }
                 }
             }
