@@ -122,7 +122,7 @@ namespace DonBigo
                 entity.Memory.RememberLocation(doer, source);
             }
             
-            if (doer is not Bigodon)
+            if (doer is not Bigodon && !CharacterManager.DonBigo.VisibleTiles.Contains(doer.Tile.Pos))
             {
                 //FindObjectOfType é o exemplo mais classico de codigo porco no unity mas fazeroque
                 //Ou é isso ou um singleton
