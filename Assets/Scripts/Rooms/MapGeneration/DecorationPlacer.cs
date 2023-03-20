@@ -30,12 +30,12 @@ namespace DonBigo.Rooms.MapGeneration
                 case WallTileType:
                 {
                     //flip = tile.Pos.y == tile.Room.Bounds.max.y - 1;
-                    flip = grid[tile.Pos + Vector2Int.left]?.Type is not WallTileType &&
-                           grid[tile.Pos + Vector2Int.right]?.Type is not WallTileType;
+                    flip = grid[tile.Pos + Vector2Int.up]?.Type is not WallTileType &&
+                           grid[tile.Pos + Vector2Int.down]?.Type is not WallTileType;
                     
                     //As paredes de cantos nao sao visiveis entao nao precisa de decoração
-                    bool inaccessible = grid[tile.Pos + Vector2Int.down]?.Type is WallTileType &&
-                                        grid[tile.Pos + Vector2Int.left]?.Type is WallTileType;
+                    Vector2Int neighbor = tile.Pos + (flip ? Vector2Int.down : Vector2Int.left);
+                    bool inaccessible = grid[neighbor]?.Type is WallTileType;
                     return inaccessible ? null : data.wallDecorationData;
                 }
                 default:
