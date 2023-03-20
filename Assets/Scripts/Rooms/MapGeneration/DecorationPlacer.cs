@@ -31,7 +31,9 @@ namespace DonBigo.Rooms.MapGeneration
             {
                 case WallTileType:
                 {
-                    flip = tile.Pos.y == tile.Room.Bounds.max.y - 1;
+                    //flip = tile.Pos.y == tile.Room.Bounds.max.y - 1;
+                    flip = grid[tile.Pos + Vector2Int.left]?.Type is not WallTileType &&
+                           grid[tile.Pos + Vector2Int.right]?.Type is not WallTileType;
                     
                     //As paredes de cantos nao sao visiveis entao nao precisa de decoração
                     bool inaccessible = grid[tile.Pos + Vector2Int.down]?.Type is WallTileType &&

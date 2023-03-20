@@ -514,7 +514,7 @@ PrefabInstance:
     - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
       propertyPath: genData.startingRoom
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: fc4b7955c9dd8e74895035af019a5582, type: 2}
     - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
       propertyPath: genData.doorTrapChance
       value: 0.08
