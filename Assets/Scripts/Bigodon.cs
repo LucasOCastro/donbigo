@@ -140,7 +140,7 @@ namespace DonBigo
             //Clique esquerdo
             if (Input.GetMouseButtonDown(0))
             {
-                if (!VisibleTiles.Contains(tile.Pos))
+                if (Vector2.Angle(tile.Pos - Tile.Pos, LookDirection) > VisionAngle*.5f)
                 {
                     return new TurnAction(this, (tile.Pos - Tile.Pos).Sign());
                 }
