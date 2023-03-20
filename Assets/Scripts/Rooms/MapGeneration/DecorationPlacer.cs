@@ -44,7 +44,10 @@ namespace DonBigo.Rooms.MapGeneration
 
                     bool isCorner = grid[tile.Pos + Vector2Int.up]?.Type is WallTileType &&
                                     grid[tile.Pos + Vector2Int.right]?.Type is WallTileType;
-                    return isCorner ? data.cornerDecorationData : data.floorDecorationData;
+                    if (isCorner) return data.cornerDecorationData;
+
+                    if (tile.Structures.Count > 0 || tile.Item != null) return null;
+                    return data.floorDecorationData;
                 }
             }
         }

@@ -514,7 +514,7 @@ PrefabInstance:
     - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
       propertyPath: genData.startingRoom
       value: 
-      objectReference: {fileID: 11400000, guid: fc4b7955c9dd8e74895035af019a5582, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
       propertyPath: genData.doorTrapChance
       value: 0.08
@@ -705,7 +705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4871445200121710344, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
       propertyPath: m_ChunkCullingBounds.y
-      value: 0.3714285
+      value: 0.55428565
       objectReference: {fileID: 0}
     - target: {fileID: 4871445200121710345, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
       propertyPath: m_Tiles.Array.size
