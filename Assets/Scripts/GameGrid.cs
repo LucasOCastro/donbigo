@@ -22,7 +22,6 @@ namespace DonBigo
             {
                 if (!InBounds(x,y))
                 {
-                    Debug.LogError("Tentou acessar grid fora das bounds do mapa.");
                     return null;
                 }
                 return _tiles[x,y];
@@ -32,7 +31,7 @@ namespace DonBigo
             {
                 if (!InBounds(x,y))
                 {
-                    Debug.LogError("Tentou acessar grid fora das bounds do mapa.");
+                    Debug.LogError("Tentou settar grid fora das bounds do mapa.");
                     return;
                 }
                 _tiles[x, y] = value;

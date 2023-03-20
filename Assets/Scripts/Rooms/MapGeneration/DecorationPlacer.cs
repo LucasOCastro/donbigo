@@ -8,11 +8,9 @@ namespace DonBigo.Rooms.MapGeneration
         private static void PlaceDecoration(Vector3Int pos, MapGenData.DecorationData decData, Tilemap tm, bool flipX)
         {
             var decType = decData.decorations.Random();
-            if (decType == null) Debug.Log("huh null type???");
             if (decType == null) return;
 
             pos.z = Random.Range(decData.elevationRange.x, decData.elevationRange.y);
-            if (tm.GetTile(pos) != null) Debug.Log("would place but "+tm.GetTile(pos));
             if (tm.GetTile(pos) != null) return;
                 
             tm.SetTile(pos, decType);
