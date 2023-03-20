@@ -8,6 +8,10 @@ namespace DonBigo
     public abstract class Entity : TileObject, IVisibleTilesProvider
     {
         [field: SerializeField] public int VisionRange { get; private set; } = 50;
+     
+        [field: Range(0,360)]
+        [field: SerializeField] public float VisionAngle { get; private set; } = 90;
+        
         [field: SerializeField] public DirectionalSpriteSet SpriteSet { get; private set; }
         
         public Inventory Inventory { get; private set; }
@@ -67,6 +71,7 @@ namespace DonBigo
             worldPos.z = 2.5f;
             return worldPos;
         }
+        
         private Tile _tile;
         public override Tile Tile
         {
@@ -75,27 +80,39 @@ namespace DonBigo
             {
                 if (_tile == value) return;
                 
+                //Tira a entidade da tile atual
                 if (_tile != null)
                 {
                     _tile.Entity = null;
                 }
 
-                Renderer.sprite = SpriteSet.GetDirectionalSprite(_tile, value);
                 
+                //Atualizar a direção da entidade
+                if (_tile != null && value != null)
+                {
+                    LookDirection = (value.Pos - _tile.Pos).Sign();
+                }
+                else
+                {
+                    LookDirection = _defaultLookDirection;
+                }
+                
+                //Atualiza o valor
                 _tile = value;
+                
+                //Se settou a tile pra nulo, desativa o renderer porque está fora da grid.
                 if (_tile == null)
                 {
                     SetRenderVisibility(false);
                     VisibleTiles.Clear();
                     return;
                 }
+                
+                //Caso contrário, move pra tile final e atualiza o FoV.
                 transform.position = TileWorldPos(_tile);
-                //_currentMoveCoroutine = StartCoroutine(MoveTransformCoroutine(worldPos));
-
-                var oldVisible = VisibleTiles;
-                VisibleTiles = ShadowCasting.Cast(_tile.ParentGrid, _tile.Pos, VisionRange);
-                    
-                UpdateView(oldVisible, VisibleTiles);
+                
+                
+                RefreshVisibleTiles(_tile, _lookDirection);
                     
                 if (_tile.Entity != this)
                 {
@@ -105,13 +122,38 @@ namespace DonBigo
             }
         }
 
+        private static Vector2Int _defaultLookDirection = -Vector2Int.one;
+        private Vector2Int _lookDirection;
+        public Vector2Int LookDirection
+        {
+            get => _lookDirection;
+            set
+            {
+                if (value == Vector2Int.zero)
+                {
+                    Debug.LogError("Settou direção de entidade pra vetor nulo.");
+                    value = _defaultLookDirection;
+                }
+                _lookDirection = value.Sign();
+                Renderer.sprite = SpriteSet.GetDirectionalSprite(_lookDirection);
+                if (Tile != null)
+                {
+                    RefreshVisibleTiles(Tile, _lookDirection);
+                }
+            }
+        }
+
+        protected void RefreshVisibleTiles(Tile newTile, Vector2Int newDirection)
+        {
+            var oldVisible = VisibleTiles;
+            VisibleTiles = ShadowCasting.Cast(newTile.ParentGrid, newTile.Pos, newDirection, VisionRange, VisionAngle);
+            UpdateView(oldVisible, VisibleTiles);    
+        }
         protected virtual void UpdateView(HashSet<Vector2Int> oldVisible, HashSet<Vector2Int> newVisible)
         {
             OnUpdateViewEvent?.Invoke(oldVisible, newVisible);
             UpdateRenderVisibility();
         }
-
-        public void SetLookDirection(Vector2Int dir) => Renderer.sprite = SpriteSet.GetDirectionalSprite(dir);
 
         private Coroutine _currentMoveCoroutine;
         public void TranslateToTile(Tile tile, float time)
@@ -127,7 +169,7 @@ namespace DonBigo
 
         private IEnumerator MoveTransformCoroutine(Tile targetTile, float time)
         {
-            Renderer.sprite = SpriteSet.GetDirectionalSprite(Tile, targetTile);
+            LookDirection = (targetTile.Pos - Tile.Pos).Sign();
             Vector3 targetPos = TileWorldPos(targetTile);
 
             float distance = (targetPos - transform.position).magnitude;

@@ -2,15 +2,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using DonBigo.Rooms;
 using UnityEngine.Tilemaps;
+using DonBigo.Rooms.MapGeneration;
 
 namespace DonBigo
 {
     public class GameGrid
     {
         public const float WorldElevationOffsetMultiplier = 0.2714285f;
-        private Tilemap _tilemap;
-        private Tile[,] _tiles;
-        private List<RoomInstance> _rooms;
+        private readonly Tilemap _tilemap;
+        private readonly Tile[,] _tiles;
+        private readonly List<RoomInstance> _rooms;
         
         public int Size { get; }
         public RectInt Bounds => new RectInt(Vector2Int.zero, Vector2Int.one  * Size);
@@ -21,7 +22,6 @@ namespace DonBigo
             {
                 if (!InBounds(x,y))
                 {
-                    Debug.LogError("Tentou acessar grid fora das bounds do mapa.");
                     return null;
                 }
                 return _tiles[x,y];
@@ -31,7 +31,7 @@ namespace DonBigo
             {
                 if (!InBounds(x,y))
                 {
-                    Debug.LogError("Tentou acessar grid fora das bounds do mapa.");
+                    Debug.LogError("Tentou settar grid fora das bounds do mapa.");
                     return;
                 }
                 _tiles[x, y] = value;
@@ -121,27 +121,34 @@ namespace DonBigo
             {
                 entity.Memory.RememberLocation(doer, source);
             }
+            
+            if (doer is not Bigodon && !CharacterManager.DonBigo.VisibleTiles.Contains(doer.Tile.Pos))
+            {
+                //FindObjectOfType é o exemplo mais classico de codigo porco no unity mas fazeroque
+                //Ou é isso ou um singleton
+                Object.FindObjectOfType<PlayerCamera>().Jump(doer);
+            }
         }
 
-        public GameGrid(Tilemap tilemap, MapGenData genData)
+        public GameGrid(MapGenData genData)
         {
             Size = genData.mapSize;
-            _tilemap = tilemap;
+            _tilemap = genData.tilemap;
             _tiles = new Tile[Size, Size];
-            _rooms = MapGen.Gen(this, tilemap, genData);
+            _rooms = MapGen.Gen(this, genData);
         }
 
         public void RefreshTile(Tile tile)
         {
             for (int i = 0; i < _tilemap.size.z; i++)
             {
-                _tilemap.RefreshTile(new Vector3Int(tile.Pos.x, tile.Pos.y, i));    
+                Vector3Int tilePos = new Vector3Int(tile.Pos.x, tile.Pos.y, i);
+                _tilemap.RefreshTile(tilePos);
             }
         }
 
         public void ClearMap()
         {
-            Debug.Log("Map cleared");
             _tilemap.ClearAllTiles();
             AllVents?.Clear();
             AllRooms?.Clear();

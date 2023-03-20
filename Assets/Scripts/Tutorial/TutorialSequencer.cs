@@ -26,11 +26,11 @@ namespace DonBigo.Tutorial
 
             phantonettePos += room.Bounds.min;
             phantonette.Tile = grid[phantonettePos];
-            phantonette.SetLookDirection(phantonetteDir);
+            phantonette.LookDirection = phantonetteDir;
 
             donbigoPos += room.Bounds.min;
             donbigo.Tile = grid[donbigoPos];
-            donbigo.SetLookDirection(donbigoDir);
+            donbigo.LookDirection = donbigoDir;
         }
 
         private IEnumerator TutorialCoroutine()

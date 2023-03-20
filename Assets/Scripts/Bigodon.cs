@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using DonBigo.Actions;
 using DonBigo.UI;
 using UnityEngine;
@@ -15,8 +13,9 @@ namespace DonBigo
         //Pra evitar cliques em portas não sendo considerados, clicar fora duma sala tenta achar algo interativel perto do player
         private Tile CastFromShadows(Vector2Int tile)
         {
-            const int maxDistance = 25;
-            const int sweepRange = 1;
+            const int maxDistance = 30;
+            const int forwardSweepRange = 1;
+            const int sideSweepRange = 3;
 
             var grid = Tile.ParentGrid;
             var room = Tile.Room;
@@ -26,16 +25,16 @@ namespace DonBigo
                 return null;
             }
 
-            if (room.Bounds.Contains(tile)) return Tile.ParentGrid[tile];
+            //if (room.Bounds.Contains(tile)) return Tile.ParentGrid[tile];
 
-            for (int i = 0; i <= sweepRange; i++)
+            for (int i = 0; i <= forwardSweepRange; i++)
             {
-                for (int j = -sweepRange; j <= sweepRange; j++)
+                for (int j = -sideSweepRange; j <= sideSweepRange; j++)
                 {
                     Vector2Int offset = (tile.x >= bounds.max.x) ? new Vector2Int(i, j) : new Vector2Int(j, i);
                     Vector2Int checkTile = Tile.Pos + offset;
                     int distance = checkTile.ManhattanDistance(tile);
-                    if (grid[checkTile] == null || !grid.InBounds(checkTile) || !VisibleTiles.Contains(checkTile) ||
+                    if (!grid.InBounds(checkTile) || grid[checkTile] == null || !VisibleTiles.Contains(checkTile) ||
                         distance > maxDistance)
                     {
                         continue;
@@ -99,7 +98,7 @@ namespace DonBigo
             TileHighlighter.Highlight(null);
             
             //Quando aperta espaço, pula um turno.
-            if (_currentTargetPath == null && Input.GetKeyDown(KeyCode.Space))
+            if (_currentTargetPath == null && Input.GetKey(KeyCode.Space))//GetKeyDown(KeyCode.Space))
             {
                 return new IdleAction(this);
             }
@@ -131,7 +130,7 @@ namespace DonBigo
                 return new UseItemAction(this, heldItem, tile);
             }
 
-            if (tile == null || !VisibleTiles.Contains(mousePos))
+            if (tile == null || tile.Type is WallTileType and not DoorTileType || !Tile.Room.Bounds.Contains(tile.Pos))
             {
                 tile = CastFromShadows(mousePos);
                 if (tile == null) return null;
@@ -141,8 +140,11 @@ namespace DonBigo
             //Clique esquerdo
             if (Input.GetMouseButtonDown(0))
             {
+                if (Vector2.Angle(tile.Pos - Tile.Pos, LookDirection) > VisionAngle*.5f)
+                {
+                    return new TurnAction(this, (tile.Pos - Tile.Pos).Sign());
+                }
                 
-            
                 //Se a tile tem uma ação de interação, retorna ela.
                 var interactAction = GenInteractAction(tile);
                 if (interactAction != null)

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using DonBigo.Rooms;
+using DonBigo.Rooms.MapGeneration;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace DonBigo
 {
@@ -12,7 +11,6 @@ namespace DonBigo
         
         public GameGrid Grid { get; private set; }
         
-        [SerializeField] private Tilemap tilemap;
         [SerializeField] private MapGenData genData;
 
         [SerializeField] private int seed = -1;
@@ -32,7 +30,7 @@ namespace DonBigo
             }
 
             Instance = this;
-            Grid = new GameGrid(tilemap, genData);
+            Grid = new GameGrid(genData);
             Grid.SpreadTraps(genData.doorTrap, genData.doorTrapChance);
         }
 
@@ -46,13 +44,14 @@ namespace DonBigo
             if (tile == null) return;
             if (Input.GetKeyDown(KeyCode.I) && tile.Item == null)
             {
-                DEBUG_Item.Instantiate(Grid.MouseOverTile());
+                var i = DEBUG_Item.Instantiate(Grid.MouseOverTile());
+                if (i is TrapItem trap) trap.State = TrapItem.ArmState.Armed;
             }
             if (Input.GetMouseButtonDown(1))
             {
                 Debug.Log($"{tile.Pos} - {tile.Type.name} - e={tile.Entity} - i={tile.Item}");
             }
-            if (Input.GetKeyDown(KeyCode.R)) tilemap.RefreshAllTiles();
+            if (Input.GetKeyDown(KeyCode.R)) genData.tilemap.RefreshAllTiles();
         }
     }
 }

@@ -5,11 +5,16 @@ namespace DonBigo.AI
 {
     public class WanderState : AIState
     {
+        private const float IdleTurnsChance = .3f;
+        private static RangeInt IdleTurnsCountRange = new(1, 4);
+        private static RangeInt IdleTurnsTimeRange = new(1, 5);
+
         private static bool ShouldBeAlerted(Entity entity)
-        {
-            //Mais outros gatilhos
-            return entity.SeesPlayer;
-        }
+            => entity.SeesPlayer;
+        
+
+        private static bool KnowsAboutItem(Entity entity, Item item) 
+            => entity.VisibleTiles.Contains(item.Tile.Pos) || entity.Memory.LastSeenTile(item) == item.Tile;
         
         private static Item FindItemToPickup(Entity entity, out Inventory.Handedness handedness)
         {
@@ -17,10 +22,13 @@ namespace DonBigo.AI
             Item minPowerItem = entity.Inventory.GetHand(handedness);
             int minPower = (minPowerItem != null) ? minPowerItem.Type.CombatPower : -1;
 
+            var roomBounds = entity.Tile.Room.Bounds;
+            var knownItems = entity.Tile.ParentGrid.TilesInBounds(roomBounds)
+                .Where(t => t.Item != null && KnowsAboutItem(entity, t.Item))
+                .Select(t => t.Item);
             Item strongestVisibleItem = null;
-            foreach (var tile in entity.VisibleTiles)
+            foreach (var item in knownItems)
             {
-                var item = entity.Tile.ParentGrid[tile].Item;
                 if (item == null || !item.CanBePickedUp) continue;
                 
                 int power = item.Type.CombatPower; 
@@ -48,6 +56,12 @@ namespace DonBigo.AI
             {
                 //TODO honestamente só mudar o CurrentObjective diretamente faz mais sentido.
                 objective = CurrentObjective;
+                return null;
+            }
+
+            if (Random.value < IdleTurnsChance)
+            {
+                objective = new LookAroundObjective(worker, IdleTurnsCountRange, IdleTurnsTimeRange);
                 return null;
             }
 

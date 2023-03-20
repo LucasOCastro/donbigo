@@ -1,36 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
-namespace DonBigo.Rooms
+namespace DonBigo.Rooms.MapGeneration
 {
-    [System.Serializable]
-    public struct MapGenData
-    {
-        public int mapSize;
-        public Vector2 normalizedGenStart;
-        public Room startingRoom;
-        public ItemType[] necessaryItems;
-        
-        [Header("Fillers")]
-        public TileType fillerTile;
-        public EntranceMarkerTile fillerMat;
-
-        [Header("Traps")]
-        [Range(0f,1f)] public float doorTrapChance;  
-        public ItemType doorTrap;
-    }
-    
     public static class MapGen
     {
-        private static void PlaceRoom(GameGrid grid, Tilemap tilemap, RoomInstance roomInstance, Dictionary<ItemType, bool> itemChanceChecklist)
+        private static void PlaceRoom(GameGrid grid, MapGenData data, RoomInstance roomInstance, Dictionary<ItemType, bool> itemChanceChecklist)
         {
             Room room = roomInstance.Room;
             Vector2Int min = roomInstance.Bounds.min;
-            room.FillTilemap(tilemap, min);
+            room.FillTilemap(data.tilemap, min);
             for (int x = 0; x < room.Size.x; x++)
             {
                 for (int y = 0; y < room.Size.y; y++)
@@ -70,7 +52,7 @@ namespace DonBigo.Rooms
             for (int i = 0; i < vents.Count; i++)
             {
                 if (i == ventIndex) continue;
-                tilemap.SetTile(vents[i].pos + (Vector3Int)min, null);
+                data.tilemap.SetTile(vents[i].pos + (Vector3Int)min, null);
             }
 
             foreach (var itemChance in room.GenItemsToSpawn())
@@ -84,6 +66,8 @@ namespace DonBigo.Rooms
                     itemChanceChecklist[itemChance] = true;
                 }
             }
+
+            DecorationPlacer.PlaceDecorations(roomInstance, grid, data);
         }
 
         //Nem um pouco eficiente. Acho que RoomExit deveria ter sido uma classe desde o começo.
@@ -178,13 +162,13 @@ namespace DonBigo.Rooms
 
         private const int MaxSafetyRegenCount = 10;
         private static int _safetyRegenCount = 0;
-        public static List<RoomInstance> Gen(GameGrid grid, Tilemap tilemap, MapGenData data)
+        public static List<RoomInstance> Gen(GameGrid grid, MapGenData data)
         {
             if (GridManager.Instance.DEBUG_TEST_ROOM != null)
             {
                 RoomInstance inst = new RoomInstance(GridManager.Instance.DEBUG_TEST_ROOM, Vector2Int.one);
                 List<RoomInstance> res = new List<RoomInstance>() { inst };
-                PlaceRoom(grid, tilemap, inst, null);
+                PlaceRoom(grid, data, inst, null);
                 return res;
             }
 
@@ -203,7 +187,7 @@ namespace DonBigo.Rooms
                 (int)(grid.Bounds.size.y * data.normalizedGenStart.y + grid.Bounds.min.y)
             );
             RoomInstance roomInstance = new RoomInstance(randRoom, genStart);
-            PlaceRoom(grid, tilemap, roomInstance, necessaryItemChecklist);
+            PlaceRoom(grid, data, roomInstance, necessaryItemChecklist);
             rooms.Add(roomInstance);
             foreach (var door in roomInstance.Doors)
             {
@@ -226,7 +210,7 @@ namespace DonBigo.Rooms
                 //Ajustamos a posição em que a sala será colocada com base na posição da porta que será conectada.
                 Vector2Int newRoomMin = (possibleDoor.Position + possibleDoor.DirectionVector) - chosenDoor.Position;
                 roomInstance = new RoomInstance(randRoom, newRoomMin);
-                PlaceRoom(grid, tilemap, roomInstance, necessaryItemChecklist);
+                PlaceRoom(grid, data, roomInstance, necessaryItemChecklist);
                 rooms.Add(roomInstance);
 
                 foreach (var exit in roomInstance.Doors)
@@ -243,7 +227,7 @@ namespace DonBigo.Rooms
                 Debug.Log("Map Regen");
                 _safetyRegenCount++;
                 grid.ClearMap();
-                return Gen(grid, tilemap, data);
+                return Gen(grid, data);
             }
 
             if (_safetyRegenCount >= MaxSafetyRegenCount)
@@ -252,11 +236,11 @@ namespace DonBigo.Rooms
 
             if (data.fillerTile != null && data.fillerTile != null)
             {
-                FillInternal(grid, tilemap, badExits, rooms, data.fillerTile, data.fillerMat);
+                FillInternal(grid, data.tilemap, badExits, rooms, data.fillerTile, data.fillerMat);
             }
 
 
-            tilemap.CompressBounds();
+            data.tilemap.CompressBounds();
             return rooms;
         }
     }

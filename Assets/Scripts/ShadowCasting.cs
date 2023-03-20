@@ -95,7 +95,7 @@ namespace DonBigo
         }
 
         private static void CastOctant(GameGrid grid, Vector2Int source, RoomInstance sourceRoom, Octant octant,
-            int range, 
+            int range, Vector2Int direction, float angle,
             HashSet<Vector2Int> visibleTiles)
         {
             List<Obstacle> obstacles = new List<Obstacle>();
@@ -130,10 +130,10 @@ namespace DonBigo
                         });
                     }
 
-                    //Operações com Linq não são tão performantes mas são práticas.
-                    //Isso é um possível ponto de otimização.
+
+                    float trueAngle = Vector2.Angle(tile - source, direction);
                     Vector2Int difVec = (tile - source).Abs();
-                    bool blocked =  difVec.x > range || difVec.y > range ||
+                    bool blocked =  difVec.x > range || difVec.y > range || trueAngle > angle * .5f||
                         //(tile.ManhattanDistance(source) > range) ||
                                    IsBlocked(grid, tile, tileAngles, obstacles,
                                        obstacles.Count - lineObstacleCount,
@@ -151,13 +151,13 @@ namespace DonBigo
             }
         }
     
-        public static HashSet<Vector2Int> Cast(GameGrid grid, Vector2Int source, int range)
+        public static HashSet<Vector2Int> Cast(GameGrid grid, Vector2Int source, Vector2Int direction, int range, float angle)
         {
             HashSet<Vector2Int> visibleTiles = new HashSet<Vector2Int> { source };
             RoomInstance sourceRoom = grid[source].Room;
             foreach (var octant in _octants)
             {
-                CastOctant(grid, source, sourceRoom, octant, range, visibleTiles);
+                CastOctant(grid, source, sourceRoom, octant, range, direction, angle, visibleTiles);
             }
             return visibleTiles;
         }
