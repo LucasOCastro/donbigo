@@ -9,6 +9,9 @@ namespace DonBigo
     public class Bigodon : Entity
     {
         private Path _currentTargetPath;
+        private bool _seesPhantonette;
+        private Action _pathEndAction;
+        private Tile _pathEndTile;
 
         //Pra evitar cliques em portas não sendo considerados, clicar fora duma sala tenta achar algo interativel perto do player
         private Tile CastFromShadows(Vector2Int tile)
@@ -51,16 +54,6 @@ namespace DonBigo
 
             return null;
         }
-        
-        private Action GenInteractAction(Tile tile)
-        {
-            if (!this.Tile.Pos.AdjacentTo(tile.Pos))
-            {
-                return null;
-            }
-
-            return tile.GenInteractAction(this);
-        }
 
         private void Update()
         {
@@ -77,7 +70,7 @@ namespace DonBigo
             }
         }
 
-        private bool _seesPhantonette;
+        
         protected override void UpdateView(HashSet<Vector2Int> oldVisible, HashSet<Vector2Int> newVisible)
         {
             base.UpdateView(oldVisible, newVisible);
@@ -93,6 +86,12 @@ namespace DonBigo
             _seesPhantonette = sees;
         }
 
+        private void MakePathTo(Tile tile)
+        {
+            Path path = new Path(this.Tile, tile, this, allowShorterPath: true);
+            _currentTargetPath = (path.Valid && !path.Finished) ? path : null; 
+        }
+
         public override Action GetAction()
         {
             TileHighlighter.Highlight(null);
@@ -102,7 +101,7 @@ namespace DonBigo
             {
                 return new IdleAction(this);
             }
-        
+            
             //Se já tem um caminho, segue ele.
             if (_currentTargetPath != null && _currentTargetPath.Valid && !_currentTargetPath.Finished)
             {
@@ -112,6 +111,17 @@ namespace DonBigo
                     return new MoveAction(this, advance);
                 }
                 _currentTargetPath = null;
+            }
+
+            //Se temos uma ação encaminhada para o fim do caminho e chegamos, retorna a ação.
+            //Caso não chegamos, o caminho foi cancelado e podemos descartar.
+            if (_pathEndAction != null)
+            {
+                bool adjacent = _pathEndTile.Pos.AdjacentTo(Tile.Pos);
+                var action = _pathEndAction;
+                _pathEndAction = null;
+                _pathEndTile = null;
+                if (adjacent) return action;
             }
 
             //Se apertou Q e ta segurando item, droppa.
@@ -145,13 +155,19 @@ namespace DonBigo
                     return new TurnAction(this, (tile.Pos - Tile.Pos).Sign());
                 }
                 
-                //Se a tile tem uma ação de interação, retorna ela.
-                var interactAction = GenInteractAction(tile);
+                //Gera uma ação de interação na tile
+                var interactAction = tile.GenInteractAction(this);
                 if (interactAction != null)
                 {
-                    return interactAction;
+                    //Se existe e estamos adjacentes, retorna a interação.
+                    if (tile.Pos.AdjacentTo(Tile.Pos)) return interactAction;
+                    //Caso contrário, cria um caminho e agenda a interação.
+                    MakePathTo(tile);
+                    _pathEndAction = interactAction;
+                    _pathEndTile = tile;
+                    return null;
                 }
-
+                
                 //Se clicou em si mesmo, espera um turno.
                 if (tile.Entity == this)
                 {
@@ -159,11 +175,7 @@ namespace DonBigo
                 }
                 
                 //Se nenhuma outra ação foi criada, então cria um caminho pra seguir.
-                if (tile.Entity == null && tile.Walkable)
-                {
-                    Path path = new Path(this.Tile, tile, this, allowShorterPath: false);
-                    _currentTargetPath = (path.Valid && !path.Finished) ? path : null;    
-                }
+                MakePathTo(tile);
             }
             
             return null;

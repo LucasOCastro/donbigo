@@ -98,11 +98,6 @@ namespace DonBigo
                 return new ToggleVentAction(doer, vent);
             }
 
-            if (Entity != null)
-            {
-                //Do something
-            }
-
             if (Item != null && Item.CanBePickedUp)
             {
                 return new PickupAction(doer, Item);
