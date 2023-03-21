@@ -148,7 +148,7 @@ namespace DonBigo.Rooms.MapGeneration
                     continue;
                 }
 
-                RoomInstance roomInstance = new RoomInstance();
+                RoomInstance roomInstance = new RoomInstance(garden: true);
                 foreach (Vector2Int tile in internalTiles)
                 {
                     goodSet.Add(tile);
@@ -156,6 +156,7 @@ namespace DonBigo.Rooms.MapGeneration
                     tilemap.SetTile((Vector3Int)tile, filler);
                 }
                 CreateDoor(exit);
+                rooms.Add(roomInstance);
             }
         }
 
