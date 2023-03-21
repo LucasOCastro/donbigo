@@ -133,8 +133,8 @@ namespace DonBigo
 
                     float trueAngle = Vector2.Angle(tile - source, direction);
                     Vector2Int difVec = (tile - source).Abs();
-                    bool blocked =  difVec.x > range || difVec.y > range || trueAngle > angle * .5f||
-                        //(tile.ManhattanDistance(source) > range) ||
+                    bool blocked =  grid[tile] == null || difVec.x > range || difVec.y > range || 
+                                    trueAngle > angle * .5f || grid[tile].Room != grid[source].Room ||
                                    IsBlocked(grid, tile, tileAngles, obstacles,
                                        obstacles.Count - lineObstacleCount,
                                        sourceRoom, source);

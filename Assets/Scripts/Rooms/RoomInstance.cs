@@ -7,6 +7,8 @@ namespace DonBigo.Rooms
 {
     public class RoomInstance
     {
+        public bool IsGarden { get; }
+        
         public Room Room { get; }
         public RectInt Bounds { get; }
 
@@ -51,8 +53,9 @@ namespace DonBigo.Rooms
             return useRandom ? exits.RandomElementByWeight(scoreFunc) : exits.Best(IsBetter);
         }
 
-        public RoomInstance()
+        public RoomInstance(bool garden = false)
         {
+            IsGarden = garden;
         }
 
         public bool IsOuterWall(Tile tile)

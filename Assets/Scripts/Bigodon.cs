@@ -140,7 +140,7 @@ namespace DonBigo
                 return new UseItemAction(this, heldItem, tile);
             }
 
-            if (tile == null || tile.Type is WallTileType and not DoorTileType || !Tile.Room.Bounds.Contains(tile.Pos))
+            if (tile == null || tile.Type is WallTileType and not DoorTileType || tile.Room != Tile.Room)
             {
                 tile = CastFromShadows(mousePos);
                 if (tile == null) return null;
