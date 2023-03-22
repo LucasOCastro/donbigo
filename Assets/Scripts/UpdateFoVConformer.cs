@@ -22,6 +22,8 @@ namespace DonBigo
         
         private void Update()
         {
+            if (!FieldOfViewRenderer.DEBUG_drawVis) return;
+        
             if (_renderer)
                 _renderer.enabled = ShouldBeEnabled();
         }
