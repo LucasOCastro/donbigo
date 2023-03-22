@@ -18,7 +18,7 @@ namespace DonBigo
         {
             const int maxDistance = 30;
             const int forwardSweepRange = 1;
-            const int sideSweepRange = 3;
+            const int sideSweepRange = 1;
 
             var grid = Tile.ParentGrid;
             var room = Tile.Room;
@@ -27,32 +27,36 @@ namespace DonBigo
             {
                 return null;
             }
-
-            //if (room.Bounds.Contains(tile)) return Tile.ParentGrid[tile];
-
-            for (int i = 0; i <= forwardSweepRange; i++)
+            
+            IEnumerable<Tile> CastTiles()
             {
-                for (int j = -sideSweepRange; j <= sideSweepRange; j++)
+                for (int i = 0; i <= forwardSweepRange; i++)
                 {
-                    Vector2Int offset = (tile.x >= bounds.max.x) ? new Vector2Int(i, j) : new Vector2Int(j, i);
-                    Vector2Int checkTile = Tile.Pos + offset;
-                    int distance = checkTile.ManhattanDistance(tile);
-                    if (!grid.InBounds(checkTile) || grid[checkTile] == null || !VisibleTiles.Contains(checkTile) ||
-                        distance > maxDistance)
+                    for (int j = -sideSweepRange; j <= sideSweepRange; j++)
                     {
-                        continue;
-                    }
+                        Vector2Int offset = (tile.x >= bounds.max.x) ? new Vector2Int(i, j) : new Vector2Int(j, i);
+                        Vector2Int checkTilePos = Tile.Pos + offset;
+                        int distance = checkTilePos.ManhattanDistance(tile);
+                        if (grid[checkTilePos] == null || distance > maxDistance || !VisibleTiles.Contains(checkTilePos))
+                        {
+                            continue;
+                        }
 
-                    if (grid[checkTile].Type is DoorTileType ||
-                        grid[checkTile].Structures.Exists(s => s is Vent || s.Type is EntranceMarkerTile))
-                    {
-                        return grid[checkTile];
+                        var checkTile = grid[checkTilePos];
+                        if (checkTile.Type is DoorTileType
+                            || checkTile.Structures.Exists(s => s is Vent || s.Type is EntranceMarkerTile)
+                            || checkTile.Item)
+                        {
+                            yield return checkTile;    
+                        }
                     }
                 }
             }
-            
 
-            return null;
+            var chosenTile = CastTiles().Best(
+                (t1, t2) => t1.Pos.ManhattanDistance(tile) < t2.Pos.ManhattanDistance(tile)
+                );
+            return chosenTile;
         }
 
         private void Update()
