@@ -45,7 +45,7 @@ namespace DonBigo
                         var checkTile = grid[checkTilePos];
                         if (checkTile.Type is DoorTileType
                             || checkTile.Structures.Exists(s => s is Vent || s.Type is EntranceMarkerTile)
-                            || checkTile.Item)
+                            || (checkTile.Item && checkTile.Item.CanBePickedUp))
                         {
                             yield return checkTile;    
                         }
