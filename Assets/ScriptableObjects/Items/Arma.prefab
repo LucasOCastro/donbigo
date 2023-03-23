@@ -104,7 +104,7 @@ MonoBehaviour:
   useAudio: {fileID: 8300000, guid: a640836ce92554144b36be26d294c60c, type: 3}
   range: 200
   accuracyBonus: 0
-  distanceAccuracyPenalty: 10
+  distanceAccuracyPenalty: 7
   isPointBlankGuaranteed: 1
   damage:
     lethal: 1

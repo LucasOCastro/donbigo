@@ -21,7 +21,7 @@ namespace DonBigo
             Owner = owner;
         }
 
-        public void Kill(Sprite icon = null)
+        public void Kill()
         {
             if (Dead) return;
 
@@ -31,7 +31,7 @@ namespace DonBigo
             }
             _statusList.Clear();
             
-            AddStatus(new DeadStatus(), icon);
+            AddStatus(new DeadStatus());
             OnDeathEvent?.Invoke();
             Owner.Tile = null;
             Dead = true;
@@ -68,7 +68,7 @@ namespace DonBigo
             return null;
         }
 
-        public void AddStatus(HealthStatus status, Sprite icon = null, GameObject overlayPrefab = null)
+        public void AddStatus(HealthStatus status, UpdateFoVConformer overlayPrefab = null)
         {
             //Não deixo stackar HealthStatus. Acabo o existente e substituo.
             int existingIndex = _statusList.FindIndex(s => s.GetType() == status.GetType());
@@ -80,14 +80,11 @@ namespace DonBigo
             
             _statusList.Add(status);
             status.Start(this);
-            if (icon != null)
-            {
-                StatusIconManager.Instance.MakeIcon(this, status, icon);
-            }
 
             if (overlayPrefab != null)
             {
-                GameObject overlay = Object.Instantiate(overlayPrefab, Owner.transform);
+                var overlay = Object.Instantiate(overlayPrefab, Owner.transform);
+                overlay.AssignedTileGiver = Owner;
                 status.OnEndEvent += () => Object.Destroy(overlay);
             }
         }

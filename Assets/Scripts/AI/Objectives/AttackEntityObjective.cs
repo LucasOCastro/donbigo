@@ -21,7 +21,7 @@ namespace DonBigo.AI
             {
                 WeaponUseType.Ranged => 2,
                 WeaponUseType.Melee => 1,
-                WeaponUseType.Lethal => _targetHealth.HasStatusOfType<StunStatus>() ? 10 : 0,
+                WeaponUseType.Lethal => _targetHealth.HasStatusOfType<StunStatus>() ? 20 : 0,
                 _ => 0
             });
         }
@@ -33,8 +33,9 @@ namespace DonBigo.AI
             var possibleHandednesses =
                 Inventory.AllHandednesses
                     .Where(h => inventory.GetHand(h) != null
+                                && !inventory.GetHand(h).IsInCooldown
                                 && inventory.GetHand(h).Type.WeaponType.HasFlag(WeaponUseType.Offensive)
-                                && inventory.GetHand(h).GetAttackTile(Doer, _target) != null);
+                    );
                                 
                 
             if (!possibleHandednesses.Any()) return null;

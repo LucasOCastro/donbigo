@@ -17,6 +17,8 @@ namespace DonBigo
 
         public override bool Tick(HealthManager health)
         {
+            _timer.AssignedTileGiver = health.Owner;
+            
             TurnProgress++;
 
             _timer.transform.parent = health.Owner.transform;

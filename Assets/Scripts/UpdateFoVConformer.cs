@@ -10,11 +10,22 @@ namespace DonBigo
         {
             _renderer = GetComponent<SpriteRenderer>();
         }
+        
+        public ITileGiver AssignedTileGiver { get; set; }
 
+        private bool ShouldBeEnabled()
+        {
+            if (AssignedTileGiver == null) return true;
+            Vector2Int tile = AssignedTileGiver.Tile.Pos;
+            return FieldOfViewRenderer.IsVisible(tile);
+        }
+        
         private void Update()
         {
-            Vector2Int tile = GridManager.Instance.Grid.WorldToTilePos(transform.position);
-            _renderer.enabled = FieldOfViewRenderer.IsVisible(tile);
+            if (!FieldOfViewRenderer.DEBUG_drawVis) return;
+        
+            if (_renderer)
+                _renderer.enabled = ShouldBeEnabled();
         }
     }
 }

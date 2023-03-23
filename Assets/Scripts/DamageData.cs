@@ -1,7 +1,4 @@
 ﻿using System;
-using Unity.VisualScripting;
-using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace DonBigo
 {
@@ -10,8 +7,7 @@ namespace DonBigo
     {
         public bool lethal;
         public int stunTurns;
-        public Sprite stunIcon;
-        public GameObject stunOverlayPrefab;
+        public UpdateFoVConformer stunOverlayPrefab;
 
         public void Apply(HealthManager health)
         {
@@ -22,7 +18,7 @@ namespace DonBigo
             else if (stunTurns > 0)
             {
                 var stun = new StunStatus(stunTurns);
-                health.AddStatus(stun, stunIcon, stunOverlayPrefab);
+                health.AddStatus(stun, stunOverlayPrefab);
             }
         }
     }

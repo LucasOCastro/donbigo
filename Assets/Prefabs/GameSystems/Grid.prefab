@@ -105,8 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e98db63b6b4cf19ef34d209a108dcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 4871445200121710345}
   genData:
+    tilemap: {fileID: 4871445200121710345}
     mapSize: 75
     normalizedGenStart: {x: 0.5, y: 0.5}
     startingRoom: {fileID: 0}
@@ -117,6 +117,18 @@ MonoBehaviour:
     fillerMat: {fileID: 11400000, guid: 83f6d696222fed343bd29713e2294c32, type: 2}
     doorTrapChance: 0.02
     doorTrap: {fileID: 11400000, guid: 4301c384d53aaa84da9424935b8dabdf, type: 2}
+    floorDecorationData:
+      chance: 0
+      elevationRange: {x: 0, y: 0}
+      decorations: []
+    wallDecorationData:
+      chance: 0
+      elevationRange: {x: 0, y: 0}
+      decorations: []
+    cornerDecorationData:
+      chance: 0
+      elevationRange: {x: 0, y: 0}
+      decorations: []
   seed: -1
   DEBUG_TEST_ROOM: {fileID: 0}
   DEBUG_Item: {fileID: 11400000, guid: 3154651d6db92154f9984a622ee3884e, type: 2}

@@ -9,13 +9,16 @@ namespace DonBigo
     public class Bigodon : Entity
     {
         private Path _currentTargetPath;
+        private bool _seesPhantonette;
+        private Action _pathEndAction;
+        private Tile _pathEndTile;
 
         //Pra evitar cliques em portas não sendo considerados, clicar fora duma sala tenta achar algo interativel perto do player
         private Tile CastFromShadows(Vector2Int tile)
         {
             const int maxDistance = 30;
             const int forwardSweepRange = 1;
-            const int sideSweepRange = 3;
+            const int sideSweepRange = 1;
 
             var grid = Tile.ParentGrid;
             var room = Tile.Room;
@@ -24,42 +27,36 @@ namespace DonBigo
             {
                 return null;
             }
-
-            //if (room.Bounds.Contains(tile)) return Tile.ParentGrid[tile];
-
-            for (int i = 0; i <= forwardSweepRange; i++)
+            
+            IEnumerable<Tile> CastTiles()
             {
-                for (int j = -sideSweepRange; j <= sideSweepRange; j++)
+                for (int i = 0; i <= forwardSweepRange; i++)
                 {
-                    Vector2Int offset = (tile.x >= bounds.max.x) ? new Vector2Int(i, j) : new Vector2Int(j, i);
-                    Vector2Int checkTile = Tile.Pos + offset;
-                    int distance = checkTile.ManhattanDistance(tile);
-                    if (!grid.InBounds(checkTile) || grid[checkTile] == null || !VisibleTiles.Contains(checkTile) ||
-                        distance > maxDistance)
+                    for (int j = -sideSweepRange; j <= sideSweepRange; j++)
                     {
-                        continue;
-                    }
+                        Vector2Int offset = (tile.x >= bounds.max.x) ? new Vector2Int(i, j) : new Vector2Int(j, i);
+                        Vector2Int checkTilePos = Tile.Pos + offset;
+                        int distance = checkTilePos.ManhattanDistance(tile);
+                        if (grid[checkTilePos] == null || distance > maxDistance || !VisibleTiles.Contains(checkTilePos))
+                        {
+                            continue;
+                        }
 
-                    if (grid[checkTile].Type is DoorTileType ||
-                        grid[checkTile].Structures.Exists(s => s is Vent || s.Type is EntranceMarkerTile))
-                    {
-                        return grid[checkTile];
+                        var checkTile = grid[checkTilePos];
+                        if (checkTile.Type is DoorTileType
+                            || checkTile.Structures.Exists(s => s is Vent || s.Type is EntranceMarkerTile)
+                            || (checkTile.Item && checkTile.Item.CanBePickedUp))
+                        {
+                            yield return checkTile;    
+                        }
                     }
                 }
             }
-            
 
-            return null;
-        }
-        
-        private Action GenInteractAction(Tile tile)
-        {
-            if (!this.Tile.Pos.AdjacentTo(tile.Pos))
-            {
-                return null;
-            }
-
-            return tile.GenInteractAction(this);
+            var chosenTile = CastTiles().Best(
+                (t1, t2) => t1.Pos.ManhattanDistance(tile) < t2.Pos.ManhattanDistance(tile)
+                );
+            return chosenTile;
         }
 
         private void Update()
@@ -77,7 +74,7 @@ namespace DonBigo
             }
         }
 
-        private bool _seesPhantonette;
+        
         protected override void UpdateView(HashSet<Vector2Int> oldVisible, HashSet<Vector2Int> newVisible)
         {
             base.UpdateView(oldVisible, newVisible);
@@ -93,6 +90,12 @@ namespace DonBigo
             _seesPhantonette = sees;
         }
 
+        private void MakePathTo(Tile tile)
+        {
+            Path path = new Path(this.Tile, tile, this, allowShorterPath: true);
+            _currentTargetPath = (path.Valid && !path.Finished) ? path : null; 
+        }
+
         public override Action GetAction()
         {
             TileHighlighter.Highlight(null);
@@ -102,7 +105,7 @@ namespace DonBigo
             {
                 return new IdleAction(this);
             }
-        
+            
             //Se já tem um caminho, segue ele.
             if (_currentTargetPath != null && _currentTargetPath.Valid && !_currentTargetPath.Finished)
             {
@@ -112,6 +115,17 @@ namespace DonBigo
                     return new MoveAction(this, advance);
                 }
                 _currentTargetPath = null;
+            }
+
+            //Se temos uma ação encaminhada para o fim do caminho e chegamos, retorna a ação.
+            //Caso não chegamos, o caminho foi cancelado e podemos descartar.
+            if (_pathEndAction != null)
+            {
+                bool adjacent = _pathEndTile.Pos.AdjacentTo(Tile.Pos);
+                var action = _pathEndAction;
+                _pathEndAction = null;
+                _pathEndTile = null;
+                if (adjacent) return action;
             }
 
             //Se apertou Q e ta segurando item, droppa.
@@ -130,7 +144,7 @@ namespace DonBigo
                 return new UseItemAction(this, heldItem, tile);
             }
 
-            if (tile == null || tile.Type is WallTileType and not DoorTileType || !Tile.Room.Bounds.Contains(tile.Pos))
+            if (tile == null || tile.Type is WallTileType and not DoorTileType || tile.Room != Tile.Room)
             {
                 tile = CastFromShadows(mousePos);
                 if (tile == null) return null;
@@ -145,13 +159,19 @@ namespace DonBigo
                     return new TurnAction(this, (tile.Pos - Tile.Pos).Sign());
                 }
                 
-                //Se a tile tem uma ação de interação, retorna ela.
-                var interactAction = GenInteractAction(tile);
+                //Gera uma ação de interação na tile
+                var interactAction = tile.GenInteractAction(this);
                 if (interactAction != null)
                 {
-                    return interactAction;
+                    //Se existe e estamos adjacentes, retorna a interação.
+                    if (tile.Pos.AdjacentTo(Tile.Pos)) return interactAction;
+                    //Caso contrário, cria um caminho e agenda a interação.
+                    MakePathTo(tile);
+                    _pathEndAction = interactAction;
+                    _pathEndTile = tile;
+                    return null;
                 }
-
+                
                 //Se clicou em si mesmo, espera um turno.
                 if (tile.Entity == this)
                 {
@@ -159,11 +179,7 @@ namespace DonBigo
                 }
                 
                 //Se nenhuma outra ação foi criada, então cria um caminho pra seguir.
-                if (tile.Entity == null && tile.Walkable)
-                {
-                    Path path = new Path(this.Tile, tile, this, allowShorterPath: false);
-                    _currentTargetPath = (path.Valid && !path.Finished) ? path : null;    
-                }
+                MakePathTo(tile);
             }
             
             return null;

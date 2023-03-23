@@ -104,13 +104,12 @@ MonoBehaviour:
   useAudio: {fileID: 8300000, guid: 01b3aaf04db558e4f904d6b93e34485e, type: 3}
   range: 200
   accuracyBonus: 0
-  distanceAccuracyPenalty: 10
+  distanceAccuracyPenalty: 7
   isPointBlankGuaranteed: 1
   damage:
     lethal: 0
     stunTurns: 20
-    stunIcon: {fileID: 0}
-    stunOverlayPrefab: {fileID: 600834482167252232, guid: 8be65c9cbdae6124dbdb327c08dd6d90, type: 3}
+    stunOverlayPrefab: {fileID: 7032413841171476422, guid: 8be65c9cbdae6124dbdb327c08dd6d90, type: 3}
 --- !u!82 &-7426877412678428741
 AudioSource:
   m_ObjectHideFlags: 0

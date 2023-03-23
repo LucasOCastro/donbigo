@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,18 +8,17 @@ namespace DonBigo
 {
     public class Spawner
     {
+        private static RoomInstance GetSpawnRoom(Entity character, IEnumerable<RoomInstance> rooms)
+            => character switch
+            {
+                Bigodon => rooms.First(),
+                Phantonette => rooms.Last(r => !r.IsGarden),
+                _ => throw new NotImplementedException()
+            };
+        
         public void Spawn(GameGrid grid, Entity character)
         {
-            Vector2 center = new Vector2(0,0);
-            // Tile spawnPoint;
-            if (character is Bigodon)
-            {
-                center = GridManager.Instance.Grid.AllRooms[0].Bounds.center;
-            }
-            else if(character is Phantonette)
-            { 
-                center = GridManager.Instance.Grid.AllRooms.Last().Bounds.center;
-            }
+            Vector2 center = GetSpawnRoom(character, grid.AllRooms).Bounds.center;
              
             while(!grid[(int) center.x, (int) center.y].Walkable || grid[(int)center.x, (int)center.y].Entity != null)
             {

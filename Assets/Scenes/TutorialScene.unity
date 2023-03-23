@@ -1194,6 +1194,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5445930677007729882, guid: 39ea5d433fe905f43a0e8996b2725237, type: 3}
+      propertyPath: donbigoPrefab
+      value: 
+      objectReference: {fileID: 3503781842679011381, guid: 16b2b2a4ec84c7f4e82160f41701e7c7, type: 3}
+    - target: {fileID: 5445930677007729882, guid: 39ea5d433fe905f43a0e8996b2725237, type: 3}
+      propertyPath: phantonettePrefab
+      value: 
+      objectReference: {fileID: 3468815628044475289, guid: 505bc2f7301ba8047a0c75427dc10de4, type: 3}
     - target: {fileID: 5445930677007729883, guid: 39ea5d433fe905f43a0e8996b2725237, type: 3}
       propertyPath: m_Name
       value: Character

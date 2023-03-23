@@ -1349,42 +1349,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 470765056}
     m_Modifications:
-    - target: {fileID: 126359576934979224, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 126359576934979224, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 126359576934979224, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 126359576934979224, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 126359576934979225, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1690500386}
-    - target: {fileID: 126359577242975314, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 126359577242975314, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 126359577242975314, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 126359577242975314, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 126359577242975315, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1392,10 +1360,6 @@ PrefabInstance:
     - target: {fileID: 126359577546676182, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
       propertyPath: m_Name
       value: TutorialSelectorMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 126359577546676182, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 126359577546676183, guid: d6670acfcf8aa954a91727f8074ee1b9, type: 3}
       propertyPath: m_Pivot.x
