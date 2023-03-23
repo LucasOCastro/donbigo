@@ -12,6 +12,8 @@ namespace DonBigo
         [field: Range(0,360)]
         [field: SerializeField] public float VisionAngle { get; private set; } = 90;
         
+        [field: SerializeField] public float AimAccuracyBonus { get; private set; }
+        
         [field: SerializeField] public DirectionalSpriteSet SpriteSet { get; private set; }
         
         public Inventory Inventory { get; private set; }

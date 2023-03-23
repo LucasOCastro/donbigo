@@ -9,11 +9,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2829565199981592889, guid: 258b80b2601992f4abb44a9e9e38b127, type: 3}
       propertyPath: m_Name
-      value: TutorialPlayer
+      value: TutorialPlayer Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6028357747039801066, guid: 258b80b2601992f4abb44a9e9e38b127, type: 3}
       propertyPath: <VisionAngle>k__BackingField
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 6028357747039801066, guid: 258b80b2601992f4abb44a9e9e38b127, type: 3}
+      propertyPath: <AimAccuracyBonus>k__BackingField
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6932397553678320171, guid: 258b80b2601992f4abb44a9e9e38b127, type: 3}
       propertyPath: m_RootOrder

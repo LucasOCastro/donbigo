@@ -38,11 +38,11 @@ namespace DonBigo
             return true;
         }
 
-        private bool ShouldHit(Tile from, Tile target)
+        private bool ShouldHit(Tile from, Tile target, float aimBonus)
         {
             if (isPointBlankGuaranteed && from.Pos.AdjacentTo(target.Pos)) return true;
             float distance = from.Pos.ManhattanDistance(target.Pos) * 0.1f;
-            float chanceToHit = 100 - (distance * distanceAccuracyPenalty) + accuracyBonus;
+            float chanceToHit = 100 - (distance * distanceAccuracyPenalty) + accuracyBonus + aimBonus;
             float random = Random.Range(0f, 100f);
             
             Debug.Log($"{chanceToHit} = 100 - ({distance} * {distanceAccuracyPenalty}) + {accuracyBonus}");
@@ -52,7 +52,7 @@ namespace DonBigo
         
         protected override void UseAction(Entity doer, Tile target)
         {
-            if (ShouldHit(doer.Tile, target))
+            if (ShouldHit(doer.Tile, target, doer.AimAccuracyBonus))
             {
                 damage.Apply(target.Entity.Health);    
             }
