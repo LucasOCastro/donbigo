@@ -71,14 +71,19 @@ namespace DonBigo
 
             //Sempre mostra as paredes externas da sala
             bool isWall = grid[tile].Type is WallTileType;
-            if (isWall && sourceRoom.IsOuterWall(grid[tile]))
+            if (isWall && (sourceRoom != null && sourceRoom.IsOuterWall(grid[tile])))
             {
                 return false;
             }
+            
+            //Tile de outra sala nao é visivel
+            if (grid[tile].Room != sourceRoom)
+            {
+                return true;
+            }
 
             //Nao quero mostrar a parede das salas de baixo, nem as paredes internas que obstruem a visão
-            if (isWall && 
-            (grid.RoomAt(tile) != sourceRoom || (tile.x < source.x && tile.y < source.y)))
+            if (isWall && tile.x < source.x && tile.y < source.y)
             {
                 return true;
             }
@@ -90,11 +95,11 @@ namespace DonBigo
         }
 
         private static void CastOctant(GameGrid grid, Vector2Int source, RoomInstance sourceRoom, Octant octant,
-            int range, 
+            int range, Vector2Int direction, float angle,
             HashSet<Vector2Int> visibleTiles)
         {
             List<Obstacle> obstacles = new List<Obstacle>();
-            for (int e1 = 1; e1 <= range; e1++)
+            for (int e1 = 1; e1 <= Mathf.Ceil(range/10f); e1++)
             {
                 // O correto é usar 1f/e1. Com e1-1, as vezes da até infinito, mas por alguma razão
                 // as vezes os melhores resultados vieram com esse valor.
@@ -125,11 +130,14 @@ namespace DonBigo
                         });
                     }
 
-                    //Operações com Linq não são tão performantes mas são práticas.
-                    //Isso é um possível ponto de otimização.
-                    bool blocked = IsBlocked(grid, tile, tileAngles, obstacles, 
-                        obstacles.Count - lineObstacleCount,
-                        sourceRoom, source);
+
+                    float trueAngle = Vector2.Angle(tile - source, direction);
+                    Vector2Int difVec = (tile - source).Abs();
+                    bool blocked =  grid[tile] == null || difVec.x > range || difVec.y > range || 
+                                    trueAngle > angle * .5f || grid[tile].Room != grid[source].Room ||
+                                   IsBlocked(grid, tile, tileAngles, obstacles,
+                                       obstacles.Count - lineObstacleCount,
+                                       sourceRoom, source);
                     
                     if (blocked)
                     {
@@ -143,13 +151,13 @@ namespace DonBigo
             }
         }
     
-        public static HashSet<Vector2Int> Cast(GameGrid grid, Vector2Int source, int range)
+        public static HashSet<Vector2Int> Cast(GameGrid grid, Vector2Int source, Vector2Int direction, int range, float angle)
         {
             HashSet<Vector2Int> visibleTiles = new HashSet<Vector2Int> { source };
-            RoomInstance sourceRoom = grid.RoomAt(source);
+            RoomInstance sourceRoom = grid[source].Room;
             foreach (var octant in _octants)
             {
-                CastOctant(grid, source, sourceRoom, octant, range, visibleTiles);
+                CastOctant(grid, source, sourceRoom, octant, range, direction, angle, visibleTiles);
             }
             return visibleTiles;
         }

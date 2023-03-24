@@ -12,7 +12,7 @@ namespace DonBigo
         
         [field: SerializeField] public bool Walkable { get; private set; } = true;
 
-        protected virtual Color GetColor(Vector2Int position, Color baseColor)
+        protected virtual Color GetColor(Vector2Int position, Color baseColor, ITilemap tilemap)
         {
             if (GridManager.DEBUG_start != null && GridManager.DEBUG_start.Pos == position)
             {
@@ -31,22 +31,44 @@ namespace DonBigo
             //DEBUG
             if (!FieldOfViewRenderer.DEBUG_drawVis) return baseColor;
 
+            if (GridManager.Instance == null || GridManager.Instance.Grid == null) return baseColor;
+
+            var grid = GridManager.Instance.Grid;
+            if (FieldOfViewRenderer.Origin != null && grid[position].Room == FieldOfViewRenderer.Origin.Tile.Room)
+            {
+                var wallAbove = tilemap.GetTile<WallTileType>(new Vector3Int(position.x, position.y, WallHeight));
+                if (wallAbove != null && wallAbove.HideToNotObstructView(position))
+                {
+                    return Color.black;
+                }
+            }
+
             if (FieldOfViewRenderer.IsVisible(position))
             {
                 return baseColor;
             }
-
-            var grid = GridManager.Instance.Grid;
+            
             if (FieldOfViewRenderer.Origin != null &&
-                grid.RoomAt(position) != grid.RoomAt(FieldOfViewRenderer.Origin.Tile.Pos))
+                grid[position].Room != FieldOfViewRenderer.Origin.Tile.Room)
             {
                 baseColor.a = 0;
                 return baseColor;
             }
-            //baseColor.a = 0;
-            return Color.black;
-        }
 
+            return FieldOfViewRenderer.HiddenOverlayColor;
+        }
+        
+        [SerializeField] private Sprite[] randomSprites;
+
+        private static int RandIndex(Vector3Int pos, int mod)
+        {
+            int val = (pos.x * pos.y) % 17 + 
+                      (pos.y * pos.y * pos.x) % 2 + 
+                      (pos.x * pos.x * pos.y) % 5 +
+                      (pos.z) % 13;
+            return val % mod;
+        }
+        
         public override void GetTileData(Vector3Int position, ITilemap tilemap, ref TileData tileData)
         {
             base.GetTileData(position, tilemap, ref tileData);
@@ -54,8 +76,13 @@ namespace DonBigo
             {
                 return;
             }
+            
+            if (randomSprites != null && randomSprites.Length > 0)
+            {
+                tileData.sprite = randomSprites[RandIndex(position, randomSprites.Length)];
+            }
 
-            tileData.color = GetColor((Vector2Int)position, tileData.color);
+            tileData.color = GetColor((Vector2Int)position, tileData.color, tilemap);
         }
 
         //Informações sobre som de pegada, etc

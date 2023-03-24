@@ -10,7 +10,7 @@ namespace DonBigo
         public void SetInactive(GameGrid grid, Tilemap tilemap, Vector2Int pos)
         {
             tilemap.SetTile(new Vector3Int(pos.x, pos.y, WallHeight), inactiveSubstitute);
-            grid[pos] = new Tile(pos, inactiveSubstitute, grid);
+            grid[pos] = (inactiveSubstitute != null) ? new Tile(pos, inactiveSubstitute, grid, grid[pos].Room) : null;
         }
     }
 }

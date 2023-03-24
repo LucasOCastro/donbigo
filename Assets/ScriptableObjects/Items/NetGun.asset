@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24ac2c8838dc494b978302b0eb36587c, type: 3}
+  m_Name: NetGun
+  m_EditorClassIdentifier: 
+  itemName: Arma de Redes
+  inventoryIcon: {fileID: 21300000, guid: f72abc257c1268d429dbe96453457e57, type: 3}
+  combatPower: 40
+  weaponType: 7
+  prefab: {fileID: 1007813666994556125, guid: f0a8ffdaeda4e0642ad9aa362b331165, type: 3}

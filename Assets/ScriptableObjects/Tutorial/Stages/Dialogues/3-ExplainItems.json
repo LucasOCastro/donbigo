@@ -1,0 +1,9 @@
+{
+    "br": [
+        "<sprite name=netgun> disparadores de rede deixam o atingido paralisado por um tempo também, e podem acertar alvos distantes, entretanto alvos próximos têm maior probabilidade de serem atingidos.",
+        "Já os <sprite name=knife> facões e as <sprite name=gun> armas de fogo são letais, com as <sprite name=gun> armas de fogo acertando alvos distantes também.",
+        "Mas não deixe de pegar <sprite name=pantufa> pantufas na falta de algo melhor, pois além de quentinhas e estilosas, ter um par em mãos te salva de ser paralisado por uma <sprite name=trap> armadilha de urso caso pise em alguma.",
+        "Experimente pegar a pantufa com <sprite name=lclick>"
+    ],
+    "en": []
+}

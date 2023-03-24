@@ -1,23 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DonBigo.Actions;
+using DonBigo.Rooms;
 using UnityEngine;
 using Action = DonBigo.Actions.Action;
 
 namespace DonBigo
 {
-    public class Tile
+    public class Tile : ITileGiver
     {
         public Vector2Int Pos { get; }
         public TileType Type { get; }
         public GameGrid ParentGrid { get; }
+        public RoomInstance Room { get; }
     
-        public Tile(Vector2Int pos, TileType tileType, GameGrid grid)
+        public Tile(Vector2Int pos, TileType tileType, GameGrid grid, RoomInstance room)
         {
             Pos = pos;
             Type = tileType;
             ParentGrid = grid;
+            Room = room;
         }
 
         public IEnumerable<Tile> Neighbors
@@ -60,6 +62,7 @@ namespace DonBigo
         }
 
         private Item _item;
+        private ITileGiver _tileGiverImplementation;
 
         public Item Item
         {
@@ -84,15 +87,15 @@ namespace DonBigo
             if (Type is IRoomEntranceMarker || Structures.Any(s => s.Type is IRoomEntranceMarker))
             {
                 //TODO isso é horroroso
-                var room = ParentGrid.RoomAt(Pos);
-                var doorIndex = room.Doors.FindIndex(d => d.Position == Pos);
+                var doorIndex = Room.Doors.FindIndex(d => d.Position == Pos);
                 if (doorIndex < 0) return null;
-                return new UseDoorAction(doer, room.Doors[doorIndex]);
+                return new UseDoorAction(doer, Room.Doors[doorIndex]);
             }
 
-            if (Entity != null)
+            Vent vent = Structures.FindOfType<StructureInstance, Vent>();
+            if (vent != null)
             {
-                //Do something
+                return new ToggleVentAction(doer, vent);
             }
 
             if (Item != null && Item.CanBePickedUp)
@@ -111,5 +114,7 @@ namespace DonBigo
             }
             return !Structures.Any(s => s.BlocksView);
         }
+
+        Tile ITileGiver.Tile => this;
     }
 }

@@ -1,37 +1,27 @@
 using DonBigo.Actions;
-using UnityEngine;
+using DonBigo.AI;
 
 namespace DonBigo
 {
     public class Phantonette : Entity
     {
-        private Path _targetPath;
-        public override Action GetAction()
+        private AIWorker _aiWorker;
+
+        protected override void Awake()
         {
-            if (_targetPath != null && _targetPath.Valid && !_targetPath.Finished)
-            {
-                return new MoveAction(this, _targetPath.Advance());
-            }
-            
-            return new IdleAction(this);
+            base.Awake();
+            _aiWorker = new AIWorker(this);
         }
 
-        private void Update() 
+        public override Action GetAction()
         {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                Tile tile = GridManager.Instance.Grid.MouseOverTile();
-                if (tile == null) {
-                    Debug.Log("NULL");
-                }
-                else {
-                    Debug.Log($"{tile.Pos} ({tile.Type})");
-                }
-                if (tile != null && tile.Entity == null)
-                {
-                    _targetPath = new Path(Tile, tile);
-                }
-            }
+            return _aiWorker.GetAction() ?? new IdleAction(this);
+        }
+
+        public override void EnterVent(Vent vent)
+        {
+            base.EnterVent(vent);
+            _aiWorker.EnterVentState(vent);
         }
     }
 }

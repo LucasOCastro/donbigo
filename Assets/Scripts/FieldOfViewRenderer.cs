@@ -11,9 +11,12 @@ namespace DonBigo
     {
         //No sistema final, o tilemap sera atrelado a grid atual.
         [SerializeField] private Tilemap tilemap;
+        [SerializeField] private Color hiddenOverlayColor = Color.gray;
         
         public static FieldOfViewRenderer Instance { get; private set; }
 
+        public static Color HiddenOverlayColor => Instance.hiddenOverlayColor;
+        
         private static IVisibleTilesProvider _origin;
         public static IVisibleTilesProvider Origin
         {
@@ -73,7 +76,7 @@ namespace DonBigo
             }
         }
 
-        void RefreshAllTiles()
+        private void RefreshAllTiles()
         {
             var grid = GridManager.Instance.Grid;
             for (int x = 0; x < grid.Size; x++)
@@ -86,6 +89,7 @@ namespace DonBigo
                     for (int z = 0; z < tilemap.size.z; z++)
                     {
                         tilemap.RefreshTile(new Vector3Int(x,y,z));
+                        
                     }
                 }
             }

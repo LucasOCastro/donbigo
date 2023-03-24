@@ -5,7 +5,7 @@ namespace DonBigo.Actions
 {
     public abstract class Action
     {
-        protected Entity Doer { get; }
+        public Entity Doer { get; }
         public Action(Entity doer)
         {
             if (doer == null)

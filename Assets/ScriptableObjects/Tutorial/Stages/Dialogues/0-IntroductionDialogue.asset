@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a56e110e09e8495181cadcfa840001b6, type: 3}
+  m_Name: 0-IntroductionDialogue
+  m_EditorClassIdentifier: 
+  dialogueAsset:
+    asset: {fileID: 4900000, guid: 9e112aec8342bd74289b401d8890893b, type: 3}
+    br:
+    - "Ol\xE1 sr. Emanuel Begault, ou como prefere ser chamado, Don Big\xF4.\nN\xE3o
+      se assuste, sou eu, a sua assistente, a Franchella.\n\nUse <sprite name=enter>
+      para continuar.\n"
+    - "Eu vim te preparar para sua pr\xF3xima miss\xE3o.\n<i>... n\xE3o que um grande
+      investigador como voc\xEA precise de muito preparo ...</i>\nBasicamente, voc\xEA
+      vai entrar numa mans\xE3o abandonada em busca de uma criminosa mort\xEDfera,
+      a Phantonette."
+    - "Eu me fantasiei como ela para voc\xEA saber quando a vir.\n<i>... n\xE3o que
+      fosse muito dif\xEDcil, de qualquer forma ...</i>\n<i>... ela tem um visual
+      t\xE3o chamativo, extravagante ... um senso de moda afiado ...</i>\nAh, foi
+      mal, me distra\xED."
+    - "Quando estiver l\xE1, vai ter que <sprite name=lclick> clicar no tile para
+      onde quiser ir.\nExperimente andar at\xE9 os azulejos azuis."
+    en:
+    - "Hello Mr. Emanuel Begault, or as you prefer to be called, Don Big\xF4.\nDon't
+      be alarmed, it's me, your assistant, Franchella.\n\nPlease use <sprite name=enter>
+      to continue."
+    - 'I came to prepare you for your next mission.
+
+      <i>... not that a great
+      investigator like you needs much preparation ...</i>
+
+      Basically, you
+      will enter an abandoned mansion in search of a deadly criminal, the Phantonette.'
+    - 'I dressed up as her so you would know when you see her.
+
+      <i>... not
+      that it would be very difficult anyways ...</i>
+
+      <i>... she has such
+      a striking, extravagant look ... a sharp sense of fashion ...</i>
+
+      Oh,
+      sorry, I got distracted.'
+    - 'When you''re there, you''ll have to <sprite name=lclick> click on the tile
+      where you want to go.
+
+      Try walking to the blue tiles.'

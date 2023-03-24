@@ -41,10 +41,7 @@ public class RoomEditor : Editor
             nameProp.stringValue = newName;
             serializedObject.ApplyModifiedProperties();
         }
-
-        var itemsProp = serializedObject.FindProperty(PossibleItemsName);
-        EditorGUILayout.PropertyField(itemsProp, includeChildren: true);
-        serializedObject.ApplyModifiedProperties();
+        
 
         bool alreadyFilled = serializedObject.FindProperty(TilesBlockName).arraySize > 0;
         
@@ -59,9 +56,9 @@ public class RoomEditor : Editor
             }
 
             //Informações de visualização do tilemap armazenado no comodo
-            EditorGUI.BeginDisabledGroup(true);
+            //EditorGUI.BeginDisabledGroup(true);
             base.OnInspectorGUI();
-            EditorGUI.EndDisabledGroup();
+            //EditorGUI.EndDisabledGroup();
         }
         
         if (tm == null) return;
@@ -79,7 +76,7 @@ public class RoomEditor : Editor
         AssetDatabase.SaveAssetIfDirty(target);
     }
 
-    private static Tilemap SpawnRoom(Room room)
+    public static Tilemap SpawnRoom(Room room)
     {
         if (room == null)
         {
@@ -105,13 +102,16 @@ public class RoomEditor : Editor
     }
 
     [MenuItem("Assets/Update All Rooms")]
-    private static void UpdateRooms()
+    public static void UpdateRooms() => UpdateRooms(null);
+    public static void UpdateRooms(System.Action<Tilemap> updateAction)
     {
         var rooms = Resources.FindObjectsOfTypeAll<Room>();
         foreach (var room in rooms)
         {
             SerializedObject obj = new SerializedObject(room);
             Tilemap tm = SpawnRoom(room);
+            if (tm == null) return;
+            updateAction?.Invoke(tm);
             UpdateValues(obj, tm);
             obj.ApplyModifiedProperties();
             AssetDatabase.SaveAssetIfDirty(room);
@@ -119,7 +119,7 @@ public class RoomEditor : Editor
         }
     }
 
-    private static void UpdateValues(SerializedObject obj, Tilemap tm)
+    public static void UpdateValues(SerializedObject obj, Tilemap tm)
     {
         tm.CompressBounds();
         var bounds = tm.cellBounds;

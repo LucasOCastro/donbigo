@@ -9,6 +9,7 @@ namespace DonBigo.Actions
     public class MoveAction : Action
     {
         private Tile _target;
+        public Tile Target => _target;
         public MoveAction(Entity doer, Tile target) : base(doer)
         {
             if (target == null)
@@ -20,7 +21,8 @@ namespace DonBigo.Actions
 
         public override void Execute()
         {
-            Doer.Tile = _target;
+            //Doer.Tile = _target;
+            Doer.TranslateToTile(_target, TurnManager.Instance.TurnDuration);
         }
     }
 }
