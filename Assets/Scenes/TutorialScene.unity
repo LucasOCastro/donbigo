@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1087823180909104427, guid: d7c747f0fc187404dbcf32c45744d03e, type: 3}
+      propertyPath: sceneIndex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2981320274252325989, guid: d7c747f0fc187404dbcf32c45744d03e, type: 3}
       propertyPath: m_HDR
       value: 1
