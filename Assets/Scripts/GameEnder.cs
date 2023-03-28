@@ -17,6 +17,8 @@ namespace DonBigo
         [SerializeField] private Animator victoryAnimator;
         [SerializeField] private Animator defeatAnimator;
         [SerializeField] private int menuSceneIndex;
+        Camera mainCamera;
+        private AudioSource source;
         
         public static GameEnder Instance { get; private set; }
 
@@ -28,13 +30,17 @@ namespace DonBigo
                 return;
             }
             Instance = this;
+            mainCamera = Camera.main;
+            source = null;
         }
 
-        private static IEnumerator PlayAnimationAndEndCoroutine(Animator animator, int scene)
+        // Toca animação de fim de jogo com respectiva música
+        private static IEnumerator PlayAnimationAndEndCoroutine(Animator animator, AudioSource source, int scene)
         {
-            if (animator != null)
+            if (animator != null && source != null)
             {
                 animator.gameObject.SetActive(true);
+                source.Play();
                 yield return new WaitWhile(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1);
 
                 yield return new WaitUntil(() => Input.anyKeyDown);
@@ -54,7 +60,20 @@ namespace DonBigo
                 Condition.Exit => null,
                 _ => null
             };
-            StartCoroutine(PlayAnimationAndEndCoroutine(animator, menuSceneIndex));
+            
+            // Separa o emissor, para a música anterior, encerra o loop e escolhe música de fim de jogo
+            source = mainCamera.GetComponent<AudioSource>();
+            source.Stop();
+            source.loop = false;
+            source.clip = condition switch
+            {
+                Condition.Victory => Resources.Load<AudioClip>("BGMusics/BGM_vitoria"),
+                Condition.Defeat => Resources.Load<AudioClip>("BGMusics/BGM_derrota"),
+                Condition.Exit => null,
+                _ => null
+            };
+
+            StartCoroutine(PlayAnimationAndEndCoroutine(animator, source, menuSceneIndex));
         }
     }
 }
