@@ -11,6 +11,7 @@ namespace DonBigo.UI
         [SerializeField] private Button exitButton;
         [SerializeField] private KeyCode menuKey = KeyCode.Escape;
         [SerializeField] private UnityEvent<bool> onToggle;
+        private AudioSource _source;
 
         public bool Open
         {
@@ -30,6 +31,7 @@ namespace DonBigo.UI
         {
             exitButton.onClick.AddListener(() => GameEnder.Instance.EndGame(GameEnder.Condition.Exit));
             Open = false;
+            _source = this.GetComponent<AudioSource>();
         }
 
         private void Update()
@@ -38,6 +40,10 @@ namespace DonBigo.UI
             {
                 Open = !Open;
             }
+
+            if (Settings.MuteSfx) _source.mute = true;
+            else _source.mute = false;
+
         }
     }
 }

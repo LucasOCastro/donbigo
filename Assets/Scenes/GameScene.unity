@@ -328,6 +328,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f39624189a51d2a49a7e0fca5cafacde, type: 3}
+--- !u!1 &1499601578 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2981320274252325990, guid: d7c747f0fc187404dbcf32c45744d03e, type: 3}
+  m_PrefabInstance: {fileID: 2981320274622766106}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1839735485 &1575720173 stripped
 Tilemap:
   m_CorrespondingSourceObject: {fileID: 4871445200121710345, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
@@ -1324,6 +1329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameEnder
       objectReference: {fileID: 0}
+    - target: {fileID: 7243536380231747871, guid: 63aba1231b4c07d4d9e2900d8eadac30, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 1499601578}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63aba1231b4c07d4d9e2900d8eadac30, type: 3}
 --- !u!1001 &8432459653677585077
