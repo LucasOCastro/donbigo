@@ -7,15 +7,19 @@ namespace DonBigo
 {    
     public class BackgroundMusicManager : MonoBehaviour
     {
-        private Scene currentScene;
-        private AudioSource source;
-
         [SerializeField] int sceneIndex;
+        private AudioSource _source;
         
         // Toca música on Awake da cena
         private void Awake()
         {
             SetMusic(ChooseAudio(sceneIndex));   
+        }
+
+        private void Update()
+        {
+            if (Settings.MuteMusic) _source.mute = true;
+            else _source.mute = false;
         }
 
         // Escolhe um clipe baseado na cena atual
@@ -38,9 +42,9 @@ namespace DonBigo
         // Seta o clipe escolhido no emissor de audio e bota pra rodar
         private void SetMusic(AudioClip chosenMusic)
         {
-            source = GetComponent<AudioSource>();
-            source.clip = chosenMusic;
-            source.Play();
+            _source = GetComponent<AudioSource>();
+            _source.clip = chosenMusic;
+            _source.Play();
         }
     }
 }

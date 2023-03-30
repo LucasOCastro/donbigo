@@ -18,6 +18,12 @@ namespace DonBigo
             _entity = GetComponent<Entity>();
         }
         
+        private void Update()
+        {
+            if (Settings.MuteSfx) _source.mute = true;
+            else _source.mute = false;
+        }
+
         private void ProcessAction(Action action)
         {
             var clip = action switch

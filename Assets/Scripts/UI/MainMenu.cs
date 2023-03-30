@@ -18,11 +18,19 @@ namespace DonBigo.UI
         [SerializeField] private string creditsCloseAnimationName;
 
         private Animator _animator;
+        private AudioSource _source;
         private void Awake()
         {
             _animator = GetComponent<Animator>();
+            _source = GetComponent<AudioSource>();
             playButton.onClick.AddListener(() => StartCoroutine(PlayCoroutine()));
             creditsButton.onClick.AddListener((() => StartCoroutine(CreditsCoroutine())));
+        }
+        
+        private void Update()
+        {
+            if (Settings.MuteSfx) _source.mute = true;
+            else _source.mute = false;
         }
 
         private bool AnimationPlaying(string anim)
