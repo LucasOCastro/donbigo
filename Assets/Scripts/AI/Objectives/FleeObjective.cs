@@ -104,7 +104,7 @@ namespace DonBigo.AI
                 return _targetExit.GenAction(Doer);
             }
 
-            if (Random.value < _fightBackChance)
+            if (RandomUtility.Chance(_fightBackChance))
             {
                 Action fightBackAction = GetDefensiveFleeAction();
                 if (fightBackAction != null) return fightBackAction;

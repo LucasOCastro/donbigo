@@ -6,17 +6,35 @@ namespace DonBigo
 {
     public static class CollectionUtility
     {
-        public static int RandomIndex<T>(this IList<T> col, bool throwOnEmpty = false)
+        public static int RangeExcluding(int minInclusive, int maxExclusive, int excluding)
+        {
+            int[] range = new int[maxExclusive - minInclusive - 1];
+            int index = 0;
+            for (int x = minInclusive; x < maxExclusive; x++)
+            {
+                if (x == excluding) continue;
+                range[index] = x;
+                index++;
+            }
+            return range.Random();
+            //return UnityEngine.Random.Range(excluding + 1, maxExclusive + (maxExclusive - minInclusive))  % maxExclusive + minInclusive;
+        }
+        
+        public static int RandomIndex<T>(this IList<T> col, int excluding = -1, bool throwOnEmpty = false)
         {
             int count = col.Count;
             if (count == 0)
             {
                 return !throwOnEmpty ? default : throw new InvalidOperationException("Sequence was empty");
             }
-            return UnityEngine.Random.Range(0, count);
+
+            return excluding >= 0 
+                ? RangeExcluding(0, count, excluding) 
+                : UnityEngine.Random.Range(0, count);
         }
 
-        public static T Random<T>(this IList<T> col, bool throwOnEmpty = false) => col[col.RandomIndex(throwOnEmpty)];
+        public static T Random<T>(this IList<T> col, int excluding = -1, bool throwOnEmpty = false) =>
+            col[col.RandomIndex(excluding, throwOnEmpty)];
 
         //https://stackoverflow.com/a/648240
         public static T Random<T>(this IEnumerable<T> col, bool throwOnEmpty = false)

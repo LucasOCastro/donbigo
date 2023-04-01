@@ -66,7 +66,7 @@ namespace DonBigo.Rooms
             
             foreach (var itemChance in possibleItems)
             {
-                if (Random.value < itemChance.chance)
+                if (RandomUtility.Chance(itemChance.chance))
                 {
                     yield return itemChance.item;
                 }

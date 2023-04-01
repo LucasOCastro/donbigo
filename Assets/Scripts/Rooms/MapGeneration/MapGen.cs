@@ -37,7 +37,7 @@ namespace DonBigo.Rooms.MapGeneration
 
 
             int ventIndex = -1;
-            if (vents.Count > 0 && Random.value < room.VentChance)
+            if (vents.Count > 0 && RandomUtility.Chance(room.VentChance))
             {
                 ventIndex = vents.RandomIndex();
                 var ventPosition = vents[ventIndex];
