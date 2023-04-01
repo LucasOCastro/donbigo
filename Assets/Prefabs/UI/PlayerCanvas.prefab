@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 8432459652762032956}
   - component: {fileID: 8432459652762032958}
   - component: {fileID: 8432459652762032959}
+  - component: {fileID: 2752422347472120410}
   m_Layer: 5
   m_Name: LeftHandBox
   m_TagString: Untagged
@@ -181,6 +182,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2752422347472120410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8432459652762032957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8432459654542696391}
+          m_TargetAssemblyTypeName: DonBigo.UI.InventoryUI, Assembly-CSharp
+          m_MethodName: ClickToggle
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
 --- !u!1 &8432459652993350232
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,6 +729,7 @@ GameObject:
   - component: {fileID: 8432459654542210618}
   - component: {fileID: 8432459654542210596}
   - component: {fileID: 8432459654542210597}
+  - component: {fileID: 6909937487565953310}
   m_Layer: 5
   m_Name: RightHandBox
   m_TagString: Untagged
@@ -767,6 +798,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6909937487565953310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8432459654542210619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8432459654542696391}
+          m_TargetAssemblyTypeName: DonBigo.UI.InventoryUI, Assembly-CSharp
+          m_MethodName: ClickToggle
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &8432459654542696408
 GameObject:
   m_ObjectHideFlags: 0

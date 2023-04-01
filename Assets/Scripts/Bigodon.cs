@@ -78,10 +78,10 @@ namespace DonBigo
         protected override void UpdateView(HashSet<Vector2Int> oldVisible, HashSet<Vector2Int> newVisible)
         {
             base.UpdateView(oldVisible, newVisible);
-
-
+            
             if (CharacterManager.Phantonette == null || CharacterManager.Phantonette.Tile == null) return;
             
+            //Anula o caminho se dá de cara com a phantonette enquanto anda
             bool sees = newVisible.Contains(CharacterManager.Phantonette.Tile.Pos);
             if (sees != _seesPhantonette)
             {
@@ -133,6 +133,8 @@ namespace DonBigo
             {
                 return new DropAction(this, Tile);
             }
+
+            if (ClickManager.Blocked()) return null;
 
             var mousePos = GridManager.Instance.Grid.MouseOverPos();
             var tile =  GridManager.Instance.Grid.MouseOverTile();

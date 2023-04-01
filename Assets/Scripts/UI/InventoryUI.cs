@@ -50,9 +50,11 @@ namespace DonBigo.UI
             right.Update(selectedHandedness == Inventory.Handedness.Right, inventory.RightHand);
         }
 
-        public void DoCooldown(Inventory.Handedness hand)
+        public void ClickToggle(bool leftHand)
         {
-            
+            if (CharacterManager.DonBigo == null) return;
+            var inventory = CharacterManager.DonBigo.Inventory;
+            inventory.CurrentHandedness = leftHand ? Inventory.Handedness.Left : Inventory.Handedness.Right;
         }
     }
 }
