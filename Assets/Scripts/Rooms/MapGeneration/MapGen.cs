@@ -161,7 +161,7 @@ namespace DonBigo.Rooms.MapGeneration
         }
 
 
-        private const int MaxSafetyRegenCount = 10;
+        private const int MaxSafetyRegenCount = 25;
         private static int _safetyRegenCount = 0;
         public static List<RoomInstance> Gen(GameGrid grid, MapGenData data)
         {
