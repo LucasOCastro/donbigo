@@ -36,8 +36,10 @@ namespace DonBigo.UI
             // Isso deveria ser um observer pattern? Deveria. Porém, encontramos o problema grave de preguiça.
 
             Entity player = CharacterManager.DonBigo;
-
+            
+#if UNITY_EDITOR
             if (PlayerCamera.DEBUG_PHANTONETTE) player = CharacterManager.Phantonette;
+#endif
             
             if (player == null) return;
             

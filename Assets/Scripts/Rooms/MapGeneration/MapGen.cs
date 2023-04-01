@@ -165,14 +165,6 @@ namespace DonBigo.Rooms.MapGeneration
         private static int _safetyRegenCount = 0;
         public static List<RoomInstance> Gen(GameGrid grid, MapGenData data)
         {
-            if (GridManager.Instance.DEBUG_TEST_ROOM != null)
-            {
-                RoomInstance inst = new RoomInstance(GridManager.Instance.DEBUG_TEST_ROOM, Vector2Int.one);
-                List<RoomInstance> res = new List<RoomInstance>() { inst };
-                PlaceRoom(grid, data, inst, null);
-                return res;
-            }
-
             //Usar uma Lista e acessar saidas aleatorias ao inves da Queue talvez dê um resultado mais devidamente aleatório.
             List<RoomInstance> rooms = new();
             Queue<RoomExit> possibleDoors = new();

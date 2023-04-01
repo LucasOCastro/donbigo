@@ -12,8 +12,10 @@ namespace DonBigo
 
         [SerializeField] private float jumpSeconds = 1.5f;
 
+#if UNITY_EDITOR
         [SerializeField] private bool DEBUG_followPhantonette;
         public static bool DEBUG_PHANTONETTE;
+#endif
         
         private Vector3 ToWorldPos(Vector2 pos) => new Vector3(pos.x, pos.y, -10) + (Vector3)offset;
 
@@ -29,13 +31,14 @@ namespace DonBigo
         {
             if (_jump) return;
             
-            DEBUG_PHANTONETTE = DEBUG_followPhantonette;
-            FieldOfViewRenderer.Origin = DEBUG_PHANTONETTE ? CharacterManager.Phantonette : CharacterManager.DonBigo;
-            
             Entity player = CharacterManager.DonBigo;
-
-            if (DEBUG_followPhantonette) player = CharacterManager.Phantonette;
             
+#if UNITY_EDITOR
+            DEBUG_PHANTONETTE = DEBUG_followPhantonette;
+            if (DEBUG_PHANTONETTE) player = CharacterManager.Phantonette;
+#endif
+
+            FieldOfViewRenderer.Origin = player;
             if (player == null) return;
 
             transform.position = ToWorldPos(player.transform.position);

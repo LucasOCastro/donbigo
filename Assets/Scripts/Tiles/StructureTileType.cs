@@ -40,7 +40,11 @@ namespace DonBigo
                 tileData.sprite = randomSprites[RandIndex(position, randomSprites.Length)];
             }
 
-            if (!FieldOfViewRenderer.DEBUG_drawVis || FieldOfViewRenderer.IsVisible((Vector2Int)position)) return;
+#if UNITY_EDITOR
+            if (!FieldOfViewRenderer.DEBUG_drawVis) return;
+#endif
+            
+            if (FieldOfViewRenderer.IsVisible((Vector2Int)position)) return;
             if (GridManager.Instance == null || GridManager.Instance.Grid == null) return;
             
             if (GridManager.Instance.Grid[(Vector2Int)position].Room == FieldOfViewRenderer.Origin.Tile.Room)

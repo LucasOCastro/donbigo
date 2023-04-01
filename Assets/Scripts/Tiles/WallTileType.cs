@@ -21,10 +21,12 @@ namespace DonBigo
         
         protected override Color GetColor(Vector2Int position, Color baseColor, ITilemap tilemap)
         {
+#if UNITY_EDITOR
             if (!FieldOfViewRenderer.DEBUG_drawVis)
             {
                 return baseColor;
             }
+#endif
 
             if (FieldOfViewRenderer.Origin == null) return baseColor;
 

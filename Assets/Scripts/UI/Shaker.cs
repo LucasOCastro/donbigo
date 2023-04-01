@@ -17,8 +17,8 @@ namespace DonBigo.UI
         public Vector2 ShakeOffset { get; private set; }
 
         private float _cooldownTimer;
-        private bool LockX => lockX || _cooldownTimer < cooldown;//|| (!allowSimultaneous && lockY);
-        private bool LockY => lockY || _cooldownTimer < cooldown;//|| (!allowSimultaneous && lockX);
+        private bool LockX => lockX || _cooldownTimer < cooldown;
+        private bool LockY => lockY || _cooldownTimer < cooldown;
 
         private Vector2 _timer;
         private void LateUpdate()
