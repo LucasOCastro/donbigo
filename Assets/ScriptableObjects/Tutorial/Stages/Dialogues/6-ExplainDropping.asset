@@ -21,4 +21,12 @@ MonoBehaviour:
     - "Quando voc\xEA n\xE3o precisar mais de algum item, voc\xEA pode usar <sprite
       name=qkey> para solt\xE1-lo no ch\xE3o.\nTente soltar alguma pantufa para pegar
       a arma de redes."
-    en: []
+    en:
+    - 'Great. Without air ducts, Phantonette will be severely affected...
+
+      <i>...
+      But maybe it''s worth leaving some open if you feel confident...</i>'
+    - 'When you no longer need an item, you can use <sprite name=qkey> to drop it
+      on the floor.
+
+      Try dropping a slipper to pick up the net gun.'

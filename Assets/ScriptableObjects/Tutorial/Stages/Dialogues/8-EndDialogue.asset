@@ -21,4 +21,10 @@ MonoBehaviour:
     - "Certo, agora voc\xEA est\xE1 pronto para enfrentar a verdadeira Phantonette.\n<i>...
       N\xE3o se preocupe comigo, eu dou um jeito ...</i>"
     en:
-    - 
+    - '<i>Gyaah!</i>
+
+      Ah, it''s okay, I just got a little scared...'
+    - 'Alright, now you''re ready to face the real Phantonette.
+
+      <i>... Don''t
+      worry about me, I''ll manage...</i>'
