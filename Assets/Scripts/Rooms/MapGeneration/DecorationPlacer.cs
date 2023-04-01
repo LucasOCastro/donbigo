@@ -40,7 +40,7 @@ namespace DonBigo.Rooms.MapGeneration
                 }
                 default:
                 {
-                    flip = Random.value < .5f;
+                    flip = RandomUtility.Chance(.5f);
 
                     bool isCorner = grid[tile.Pos + Vector2Int.up]?.Type is WallTileType &&
                                     grid[tile.Pos + Vector2Int.right]?.Type is WallTileType;
@@ -59,7 +59,7 @@ namespace DonBigo.Rooms.MapGeneration
                 var decData = GetData(tile, data, out bool flip);
                 if (decData == null) continue;
 
-                if (Random.value < decData.Value.chance)
+                if (RandomUtility.Chance(decData.Value.chance))
                 {
                     Vector3Int tmPos = (Vector3Int)tile.Pos;
                     PlaceDecoration(tmPos, decData.Value, data.tilemap, flip);    

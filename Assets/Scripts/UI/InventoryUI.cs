@@ -36,8 +36,10 @@ namespace DonBigo.UI
             // Isso deveria ser um observer pattern? Deveria. Porém, encontramos o problema grave de preguiça.
 
             Entity player = CharacterManager.DonBigo;
-
+            
+#if UNITY_EDITOR
             if (PlayerCamera.DEBUG_PHANTONETTE) player = CharacterManager.Phantonette;
+#endif
             
             if (player == null) return;
             
@@ -48,9 +50,11 @@ namespace DonBigo.UI
             right.Update(selectedHandedness == Inventory.Handedness.Right, inventory.RightHand);
         }
 
-        public void DoCooldown(Inventory.Handedness hand)
+        public void ClickToggle(bool leftHand)
         {
-            
+            if (CharacterManager.DonBigo == null) return;
+            var inventory = CharacterManager.DonBigo.Inventory;
+            inventory.CurrentHandedness = leftHand ? Inventory.Handedness.Left : Inventory.Handedness.Right;
         }
     }
 }

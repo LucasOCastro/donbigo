@@ -1,7 +1,18 @@
 {
     "br": [
-        "Agora, você tem duas mãos, não tem?\r\nPois bem, você pode segurar um item em cada uma.",
+
+        "Agora, você tem duas mãos, não tem?\nPois bem, você pode segurar um item em cada uma.",
+
         "Aperte <sprite name=ekey> para mudar a mão ativa.\nMude para a mão vazia e pegue a outra pantufa com <sprite name=lclick>"
+
     ],
-    "en": []
+
+    "en": [
+
+        "Now, you have two hands, right?\nWell, you can hold one item in each hand.",
+
+        "Press <sprite name=ekey> to change the active hand.\nSwitch to the empty hand and pick up the other slipper with <sprite name=lclick>."
+
+    ]
+
 }

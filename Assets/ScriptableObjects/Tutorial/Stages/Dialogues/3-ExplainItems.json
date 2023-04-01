@@ -1,9 +1,26 @@
 {
     "br": [
+
         "<sprite name=netgun> disparadores de rede deixam o atingido paralisado por um tempo também, e podem acertar alvos distantes, entretanto alvos próximos têm maior probabilidade de serem atingidos.",
+
         "Já os <sprite name=knife> facões e as <sprite name=gun> armas de fogo são letais, com as <sprite name=gun> armas de fogo acertando alvos distantes também.",
+
         "Mas não deixe de pegar <sprite name=pantufa> pantufas na falta de algo melhor, pois além de quentinhas e estilosas, ter um par em mãos te salva de ser paralisado por uma <sprite name=trap> armadilha de urso caso pise em alguma.",
+
         "Experimente pegar a pantufa com <sprite name=lclick>"
+
     ],
-    "en": []
+
+    "en": [
+
+        "<sprite name=netgun> Net shooters also paralyze the target for a while, and can hit distant targets, but nearby targets are more likely to be hit.",
+
+        "On the other hand, <sprite name=knife> machetes and <sprite name=gun> firearms are lethal, with <sprite name=gun> firearms also hitting distant targets.",
+
+        "But don't forget to pick up <sprite name=pantufa> slippers if nothing else is available, as besides being warm and stylish, having a pair at hand saves you from being paralyzed by a <sprite name=trap> bear trap if you step on one.",
+
+        "Try picking up the slipper with <sprite name=lclick>."
+
+    ]
+
 }

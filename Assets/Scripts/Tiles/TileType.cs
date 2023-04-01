@@ -14,6 +14,7 @@ namespace DonBigo
 
         protected virtual Color GetColor(Vector2Int position, Color baseColor, ITilemap tilemap)
         {
+#if UNITY_EDITOR
             if (GridManager.DEBUG_start != null && GridManager.DEBUG_start.Pos == position)
             {
                 return Color.green;
@@ -26,11 +27,10 @@ namespace DonBigo
             {
                 return Color.black;
             }
-            
-            
-            //DEBUG
-            if (!FieldOfViewRenderer.DEBUG_drawVis) return baseColor;
 
+            if (!FieldOfViewRenderer.DEBUG_drawVis) return baseColor;
+#endif
+            
             if (GridManager.Instance == null || GridManager.Instance.Grid == null) return baseColor;
 
             var grid = GridManager.Instance.Grid;
@@ -84,7 +84,5 @@ namespace DonBigo
 
             tileData.color = GetColor((Vector2Int)position, tileData.color, tilemap);
         }
-
-        //Informações sobre som de pegada, etc
     }
 }

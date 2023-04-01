@@ -1,7 +1,18 @@
 {
     "br": [
+
         "Tome cuidado, <sprite name=trap> armadilhas de urso são praticamente invisíveis naquele lugar tão mal iluminado, aquele que cair nelas fica paralisado por um tempo.",
+
         "Coloque ela no chão com <sprite name=rclick>.\nExperimente pisar em cima ... Não se preocupe, essa é de borracha."
+
     ],
-    "en": []
+
+    "en": [
+
+        "Be careful, <sprite name=trap> bear traps are practically invisible in that poorly lit place, and whoever falls into them is paralyzed for a while.",
+
+        "Place it on the ground with <sprite name=rclick>.\nTry stepping on it... Don't worry, this one is made of rubber."
+
+    ]
+
 }

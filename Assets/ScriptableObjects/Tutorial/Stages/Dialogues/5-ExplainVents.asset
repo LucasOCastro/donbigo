@@ -21,4 +21,16 @@ MonoBehaviour:
       bem ...\nEla pode viajar entre c\xF4modos usando o sistema de ventila\xE7\xE3o."
     - "Para evitar ser pego de surpresa, voc\xEA pode fechar entradas de ar que voc\xEA
       encontrar pela casa.\nExperimente usar <sprite name=lclick> na entrada de ar."
-    en: []
+    en:
+    - 'In addition to walking and picking up items, <sprite name=lclick> is also
+      used to go through doors and close air ducts.
+
+      Air ducts, you ask?'
+    - 'Phantonette is very agile, and she knows the mansion very well...
+
+      She
+      can travel between rooms using the ventilation system.'
+    - 'To avoid being caught off guard, you can close air ducts that you find around
+      the house.
+
+      Try using <sprite name=lclick> on the air duct.'

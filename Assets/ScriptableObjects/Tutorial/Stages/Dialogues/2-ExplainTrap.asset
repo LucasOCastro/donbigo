@@ -20,4 +20,10 @@ MonoBehaviour:
       um tempo."
     - "Coloque ela no ch\xE3o com <sprite name=rclick>.\nExperimente pisar em cima
       ... N\xE3o se preocupe, essa \xE9 de borracha."
-    en: []
+    en:
+    - Be careful, <sprite name=trap> bear traps are practically invisible in that
+      poorly lit place, and whoever falls into them is paralyzed for a while.
+    - 'Place it on the ground with <sprite name=rclick>.
+
+      Try stepping on it...
+      Don''t worry, this one is made of rubber.'

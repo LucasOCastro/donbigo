@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using DonBigo.UI;
 using UnityEngine;
 
 namespace DonBigo
@@ -10,27 +12,37 @@ namespace DonBigo
 
         [SerializeField] private float jumpSeconds = 1.5f;
 
+#if UNITY_EDITOR
         [SerializeField] private bool DEBUG_followPhantonette;
         public static bool DEBUG_PHANTONETTE;
+#endif
         
         private Vector3 ToWorldPos(Vector2 pos) => new Vector3(pos.x, pos.y, -10) + (Vector3)offset;
 
         private bool _jump;
-        
+
+        private Shaker _shaker;
+        private void Awake()
+        {
+            _shaker = GetComponent<Shaker>();
+        }
+
         private void LateUpdate()
         {
             if (_jump) return;
             
-            DEBUG_PHANTONETTE = DEBUG_followPhantonette;
-            FieldOfViewRenderer.Origin = DEBUG_PHANTONETTE ? CharacterManager.Phantonette : CharacterManager.DonBigo;
-            
             Entity player = CharacterManager.DonBigo;
+            
+#if UNITY_EDITOR
+            DEBUG_PHANTONETTE = DEBUG_followPhantonette;
+            if (DEBUG_PHANTONETTE) player = CharacterManager.Phantonette;
+#endif
 
-            if (DEBUG_followPhantonette) player = CharacterManager.Phantonette;
-            
+            FieldOfViewRenderer.Origin = player;
             if (player == null) return;
-            
+
             transform.position = ToWorldPos(player.transform.position);
+            if (_shaker) transform.position += (Vector3)_shaker.ShakeOffset;
         }
 
         public void Jump(IVisibleTilesProvider origin) 

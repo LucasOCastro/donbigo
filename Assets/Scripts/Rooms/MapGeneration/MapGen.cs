@@ -37,7 +37,7 @@ namespace DonBigo.Rooms.MapGeneration
 
 
             int ventIndex = -1;
-            if (vents.Count > 0 && Random.value < room.VentChance)
+            if (vents.Count > 0 && RandomUtility.Chance(room.VentChance))
             {
                 ventIndex = vents.RandomIndex();
                 var ventPosition = vents[ventIndex];
@@ -161,18 +161,10 @@ namespace DonBigo.Rooms.MapGeneration
         }
 
 
-        private const int MaxSafetyRegenCount = 10;
+        private const int MaxSafetyRegenCount = 25;
         private static int _safetyRegenCount = 0;
         public static List<RoomInstance> Gen(GameGrid grid, MapGenData data)
         {
-            if (GridManager.Instance.DEBUG_TEST_ROOM != null)
-            {
-                RoomInstance inst = new RoomInstance(GridManager.Instance.DEBUG_TEST_ROOM, Vector2Int.one);
-                List<RoomInstance> res = new List<RoomInstance>() { inst };
-                PlaceRoom(grid, data, inst, null);
-                return res;
-            }
-
             //Usar uma Lista e acessar saidas aleatorias ao inves da Queue talvez dê um resultado mais devidamente aleatório.
             List<RoomInstance> rooms = new();
             Queue<RoomExit> possibleDoors = new();

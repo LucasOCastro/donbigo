@@ -22,8 +22,14 @@ namespace DonBigo
         
         private void Update()
         {
-            if (!FieldOfViewRenderer.DEBUG_drawVis) return;
-        
+#if UNITY_EDITOR
+            if (!FieldOfViewRenderer.DEBUG_drawVis)
+            {
+                _renderer.enabled = true;
+                return;
+            }
+#endif
+            
             if (_renderer)
                 _renderer.enabled = ShouldBeEnabled();
         }

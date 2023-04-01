@@ -59,7 +59,7 @@ namespace DonBigo.AI
                 return null;
             }
 
-            if (Random.value < IdleTurnsChance)
+            if (RandomUtility.Chance(IdleTurnsChance))
             {
                 objective = new LookAroundObjective(worker, IdleTurnsCountRange, IdleTurnsTimeRange);
                 return null;

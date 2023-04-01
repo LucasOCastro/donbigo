@@ -15,7 +15,6 @@ namespace DonBigo
 
         [SerializeField] private int seed = -1;
         
-        public DonBigo.Rooms.Room DEBUG_TEST_ROOM;
         private void Awake()
         {
             if (Instance != null)
@@ -34,6 +33,7 @@ namespace DonBigo
             Grid.SpreadTraps(genData.doorTrap, genData.doorTrapChance);
         }
 
+#if UNITY_EDITOR
         public static Tile DEBUG_start, DEBUG_end;
         public static HashSet<Vector2Int> DEBUG_pathTiles = new HashSet<Vector2Int>();
 
@@ -53,5 +53,6 @@ namespace DonBigo
             }
             if (Input.GetKeyDown(KeyCode.R)) genData.tilemap.RefreshAllTiles();
         }
+#endif
     }
 }

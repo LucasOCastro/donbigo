@@ -39,17 +39,7 @@ namespace DonBigo
         }
 
         public static bool IsVisible(Vector2Int tile) => (Origin != null) && Origin.IsVisible(tile);
-
-        public static bool DEBUG_drawVis = true;
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.K))
-            {
-                DEBUG_drawVis = !DEBUG_drawVis;
-                tilemap.RefreshAllTiles();
-            }
-        }
-
+        
         private void Awake()
         {
             if (Instance != null)
@@ -60,7 +50,7 @@ namespace DonBigo
             Instance = this;
         }
 
-        private void UpdateTiles(HashSet<Vector2Int> tiles)
+        private void UpdateTiles(IEnumerable<Vector2Int> tiles)
         {
             foreach (var tilePos in tiles)
             {
@@ -108,5 +98,17 @@ namespace DonBigo
             }*/
             RefreshAllTiles();
         }
+        
+#if UNITY_EDITOR
+        public static bool DEBUG_drawVis = true;
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                DEBUG_drawVis = !DEBUG_drawVis;
+                tilemap.RefreshAllTiles();
+            }
+        }
+#endif
     }
 }

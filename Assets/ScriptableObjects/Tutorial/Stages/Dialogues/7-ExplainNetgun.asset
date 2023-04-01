@@ -17,4 +17,10 @@ MonoBehaviour:
     br:
     - "Perfeito! Que tal testar essa arma de redes?\nUse <sprite name=rclick> em
       mim.\n<i>... N\xE3o se preocupe, estou preparada ...</i>"
-    en: []
+    en:
+    - 'Perfect! How about testing that net gun?
+
+      Use <sprite name=rclick> on
+      me.
+
+      <i>... Don''t worry, I''m prepared...</i>'

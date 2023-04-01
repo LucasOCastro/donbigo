@@ -12,6 +12,7 @@ namespace DonBigo.Tutorial
 
         private void Start()
         {
+            Debug.Log("Starting tutorial");
             StartCoroutine(TutorialCoroutine());
         }
 
@@ -35,6 +36,7 @@ namespace DonBigo.Tutorial
 
         private IEnumerator TutorialCoroutine()
         {
+            yield return null;
             AdjustEntitiesPositions();
             
             foreach (var stage in stages)
