@@ -31,6 +31,8 @@ namespace DonBigo.UI
         {
             if (Settings.MuteSfx) _source.mute = true;
             else _source.mute = false;
+            
+            if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
         }
 
         private bool AnimationPlaying(string anim)
