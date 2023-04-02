@@ -1,5 +1,7 @@
 {
     "br": [
+        
+        "Um outro jeito de usar itens é segurar <sprite name=lclick> em cima da mão desejada até que ela fique destacada em verde. Em seguida, você pode usar o item com <sprite name=lclick>.\nSe estiver no celular, é assim que você usa seus itens!",
 
         "Além de andar e pegar itens, <sprite name=lclick> serve para atravessar portas e fechar entradas de ar.\nEntradas de ar, você pergunta?",
 
@@ -10,6 +12,8 @@
     ],
 
     "en": [
+        
+        "Another way to use items is to hold <sprite name=lclick> over the desired hand until it is highlighted in green. Then you can use the item with <sprite name=lclick>.\nIf you are on mobile, this is how you use your items!",
 
         "In addition to walking and picking up items, <sprite name=lclick> is also used to go through doors and close air ducts.\nAir ducts, you ask?",
 

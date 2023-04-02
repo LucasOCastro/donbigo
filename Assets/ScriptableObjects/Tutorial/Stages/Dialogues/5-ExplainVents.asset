@@ -15,6 +15,10 @@ MonoBehaviour:
   dialogueAsset:
     asset: {fileID: 4900000, guid: 358471199561cfd4ca485ed2a2c8a786, type: 3}
     br:
+    - "Um outro jeito de usar itens \xE9 segurar <sprite name=lclick> em cima da
+      m\xE3o desejada at\xE9 que ela fique destacada em verde. Em seguida, voc\xEA
+      pode usar o item com <sprite name=lclick>.\nSe estiver no celular, \xE9 assim
+      que voc\xEA usa seus itens!"
     - "Al\xE9m de andar e pegar itens, <sprite name=lclick> serve para atravessar
       portas e fechar entradas de ar.\nEntradas de ar, voc\xEA pergunta?"
     - "A phantonette \xE9 bem \xE1gil, e ela conhece a pr\xF3pria mans\xE3o muito
@@ -22,6 +26,11 @@ MonoBehaviour:
     - "Para evitar ser pego de surpresa, voc\xEA pode fechar entradas de ar que voc\xEA
       encontrar pela casa.\nExperimente usar <sprite name=lclick> na entrada de ar."
     en:
+    - 'Another way to use items is to hold <sprite name=lclick> over the desired
+      hand until it is highlighted in green. Then you can use the item with <sprite
+      name=lclick>.
+
+      If you are on mobile, this is how you use your items!'
     - 'In addition to walking and picking up items, <sprite name=lclick> is also
       used to go through doors and close air ducts.
 
