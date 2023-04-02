@@ -140,9 +140,11 @@ namespace DonBigo
             var tile =  GridManager.Instance.Grid.MouseOverTile();
             
             //Se tem um item na mao e aperta o botão direito, tenta usar o item.
-            Item heldItem = Inventory.CurrentHand; 
-            if (tile != null && VisibleTiles.Contains(mousePos) && heldItem != null && Input.GetMouseButtonDown(1) && heldItem.CanBeUsed(this, tile))
+            Item heldItem = Inventory.CurrentHand;
+            if (tile != null && VisibleTiles.Contains(mousePos) && heldItem && heldItem.CanBeUsed(this, tile) &&
+                (Input.GetMouseButtonDown(1) || (ScheduledItemInteractAction && Input.GetMouseButtonDown(0))))
             {
+                CancelScheduledItemAction();   
                 return new UseItemAction(this, heldItem, tile);
             }
 
@@ -156,6 +158,7 @@ namespace DonBigo
             //Clique esquerdo
             if (Input.GetMouseButtonDown(0))
             {
+                CancelScheduledItemAction();
                 if (Vector2.Angle(tile.Pos - Tile.Pos, LookDirection) > VisionAngle*.5f)
                 {
                     return new TurnAction(this, (tile.Pos - Tile.Pos).Sign());
@@ -185,6 +188,16 @@ namespace DonBigo
             }
             
             return null;
+        }
+
+        public bool ScheduledItemInteractAction { get; private set; }
+        public void CancelScheduledItemAction() => ScheduledItemInteractAction = false;
+        public void ScheduleUseItemAction()
+        {
+            if (Inventory.CurrentHand)
+            {
+                ScheduledItemInteractAction = true;
+            }
         }
     }
 }
