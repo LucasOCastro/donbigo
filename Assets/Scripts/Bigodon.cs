@@ -27,21 +27,51 @@ namespace DonBigo
             {
                 return null;
             }
+
+            //Vai da tile do clique até o eixo do player pra achar onde começar a procurar interação
+            Tile originTile = null;
+            bool xAxis = tile.x >= bounds.xMax - 1;
+            int tileAxis = xAxis ? tile.x : tile.y;
+            int baseAxis = xAxis ? Tile.Pos.x : Tile.Pos.y;
+            for (int off = tileAxis; off >= baseAxis; off--)
+            {
+                Vector2Int offTile = xAxis ? new Vector2Int(off, tile.y) : new Vector2Int(tile.x, off);
+                Debug.DrawLine(grid.TileToWorld(Tile), grid.TileToWorld(offTile), Color.yellow);
+                if (grid[offTile] == null) continue;
+                
+                //Depois de achar a primeira tile não nula, voltar forwardSweepRange em preparo pro sweep depois
+                originTile = grid[offTile];
+                tileAxis = xAxis ? offTile.x : offTile.y;
+                baseAxis = tileAxis - forwardSweepRange;
+                for (off = tileAxis; off >= baseAxis; off--)
+                {
+                    offTile = xAxis ? new Vector2Int(off, tile.y) : new Vector2Int(tile.x, off);
+                    Debug.DrawLine(Tile.ParentGrid.TileToWorld(Tile), Tile.ParentGrid.TileToWorld(offTile), Color.blue);
+                    if (grid[offTile] == null) break;
+                    originTile = grid[offTile];
+                }
+                break;
+            }
+
+            if (originTile == null) return null;
+            Debug.DrawLine(Tile.ParentGrid.TileToWorld(Tile), Tile.ParentGrid.TileToWorld(originTile), Color.red);
             
+            //Varre as tiles na frente e pros lados da originTile
             IEnumerable<Tile> CastTiles()
             {
                 for (int i = 0; i <= forwardSweepRange; i++)
                 {
                     for (int j = -sideSweepRange; j <= sideSweepRange; j++)
                     {
-                        Vector2Int offset = (tile.x >= bounds.max.x) ? new Vector2Int(i, j) : new Vector2Int(j, i);
-                        Vector2Int checkTilePos = Tile.Pos + offset;
+                        Vector2Int offset = xAxis ? new Vector2Int(i, j) : new Vector2Int(j, i);
+                        Vector2Int checkTilePos = originTile.Pos + offset;
                         int distance = checkTilePos.ManhattanDistance(tile);
                         if (grid[checkTilePos] == null || distance > maxDistance || !VisibleTiles.Contains(checkTilePos))
                         {
                             continue;
                         }
 
+                        //Debug.DrawLine(Tile.ParentGrid.TileToWorld(Tile), Tile.ParentGrid.TileToWorld(checkTilePos), Color.green);
                         var checkTile = grid[checkTilePos];
                         if (checkTile.Type is DoorTileType
                             || checkTile.Structures.Exists(s => s is Vent || s.Type is EntranceMarkerTile)
