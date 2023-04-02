@@ -45,6 +45,7 @@ namespace DonBigo
             AllEntities = new Entity[] { DonBigo, Phantonette };
         }
 
+#if UNITY_EDITOR
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.T))
@@ -54,5 +55,6 @@ namespace DonBigo
                 DonBigo.Tile = tile;
             }
         }
+#endif
     }
 }
