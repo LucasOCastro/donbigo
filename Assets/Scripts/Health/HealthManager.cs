@@ -85,7 +85,7 @@ namespace DonBigo
             {
                 var overlay = Object.Instantiate(overlayPrefab, Owner.transform);
                 overlay.AssignedTileGiver = Owner;
-                status.OnEndEvent += () => Object.Destroy(overlay);
+                status.OnEndEvent += () => Object.Destroy(overlay.gameObject);
             }
         }
 

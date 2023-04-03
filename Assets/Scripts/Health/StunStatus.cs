@@ -7,10 +7,6 @@ namespace DonBigo
         public StunStatus(int stunTurns) : base(stunTurns)
         {
         }
-        
-        protected override void OnStart(HealthManager health)
-        {
-        }
 
         protected override void OnEnd(HealthManager health)
         {

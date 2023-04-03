@@ -11,14 +11,17 @@ namespace DonBigo
         public TurnLimitHealthStatus(int maxTurns)
         {
             MaxTurns = maxTurns;
+        }
+
+        protected override void OnStart(HealthManager health)
+        {
             _timer = CooldownTimer.GetInstance(ui: false);
+            _timer.AssignedTileGiver = health.Owner;
             OnEndEvent += () => Object.Destroy(_timer.gameObject);
         }
 
         public override bool Tick(HealthManager health)
         {
-            _timer.AssignedTileGiver = health.Owner;
-            
             TurnProgress++;
 
             _timer.transform.parent = health.Owner.transform;
