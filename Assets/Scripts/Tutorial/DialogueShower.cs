@@ -17,7 +17,20 @@ namespace DonBigo.Tutorial
         public static DialogueShower Instance { get; private set; }
 
         public bool Shown => dialogueContainer.activeSelf;
-        
+
+        private bool _forceSkip;
+        private bool ShouldSkip()
+        {
+            if (_forceSkip)
+            {
+                _forceSkip = false;
+                return true;
+            }
+            return Input.GetKeyUp(skipKey);
+        }
+        public void ForceSkipDialogue() => _forceSkip = true; 
+
+            
         private void Awake()
         {
             if (Instance != null)
@@ -47,7 +60,7 @@ namespace DonBigo.Tutorial
             foreach (var dialogue in dialogues)
             {
                 yield return DisplayCoroutine(dialogue);
-                yield return new WaitUntil(() => Input.GetKeyDown(skipKey));
+                yield return new WaitUntil(ShouldSkip);
                 yield return null;
             }
             SetShown(false);
@@ -86,7 +99,7 @@ namespace DonBigo.Tutorial
                 text.text += dialogue[i];
                 
                 bool interrupt = false;
-                yield return WaitOrInterrupt(secondsBetweenLetters, () => interrupt = Input.GetKeyDown(skipKey));
+                yield return WaitOrInterrupt(secondsBetweenLetters, () => interrupt = ShouldSkip());
                 if (interrupt)
                 {
                     text.text = dialogue;
