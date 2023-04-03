@@ -172,7 +172,7 @@ namespace DonBigo
             //Se tem um item na mao e aperta o botão direito, tenta usar o item.
             Item heldItem = Inventory.CurrentHand;
             if (tile != null && VisibleTiles.Contains(mousePos) && heldItem && heldItem.CanBeUsed(this, tile) &&
-                (Input.GetMouseButtonUp(1) || (ScheduledItemInteractAction && Input.GetMouseButtonUp(0))))
+                (Input.GetMouseButtonUp(1) || (ScheduledItemInteractAction && Input.GetMouseButtonUp(0) && tile != Tile)))
             {
                 CancelScheduledItemAction();   
                 return new UseItemAction(this, heldItem, tile);
@@ -188,6 +188,11 @@ namespace DonBigo
             //Clique esquerdo
             if (Input.GetMouseButtonUp(0))
             {
+                if (ScheduledItemInteractAction && Inventory.CurrentHand && Tile.SupportsItem && tile == Tile)
+                {
+                    return new DropAction(this, Tile);
+                }
+
                 CancelScheduledItemAction();
                 if (Vector2.Angle(tile.Pos - Tile.Pos, LookDirection) > VisionAngle*.5f)
                 {
