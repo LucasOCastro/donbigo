@@ -25,7 +25,7 @@ MonoBehaviour:
       melhor, pois al\xE9m de quentinhas e estilosas, ter um par em m\xE3os te salva
       de ser paralisado por uma <sprite name=trap> armadilha de urso caso pise em
       alguma."
-    - Depois de se soltar da armadilha, experimente pegar a pantufa com <sprite name=lclick>
+    - Depois de se soltar da armadilha, experimente pegar a pantufa.
     en:
     - <sprite name=netgun> Net shooters also paralyze the target for a while, and
       can hit distant targets, but nearby targets are more likely to be hit.
@@ -34,5 +34,6 @@ MonoBehaviour:
     - But don't forget to pick up <sprite name=pantufa> slippers if nothing else
       is available, as besides being warm and stylish, having a pair at hand saves
       you from being paralyzed by a <sprite name=trap> bear trap if you step on one.
-    - After freeing yourself from the trap, try picking up the slipper with <sprite
-      name=lclick>.
+    - After freeing yourself from the trap, try picking up the slipper.
+    br_mo: []
+    en_mo: []

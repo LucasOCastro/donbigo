@@ -24,3 +24,13 @@ MonoBehaviour:
       me.
 
       <i>... Don''t worry, I''m prepared...</i>'
+    br_mo:
+    - "Perfeito! Que tal testar essa arma de redes?\nAtive a m\xE3o e aperte em mim.\n<i>...
+      N\xE3o se preocupe, estou preparada ...</i>"
+    en_mo:
+    - 'Perfect! How about testing that net gun?
+
+      Use <sprite name=rclick> on
+      me.
+
+      <i>... Don''t worry, I''m prepared...</i>'

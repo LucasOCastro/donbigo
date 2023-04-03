@@ -618,6 +618,7 @@ MonoBehaviour:
   phantonetteDir: {x: -1, y: -1}
   donbigoPos: {x: 3, y: 3}
   donbigoDir: {x: 1, y: 1}
+  forceMobileText: 0
 --- !u!4 &1403818638
 Transform:
   m_ObjectHideFlags: 0

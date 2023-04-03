@@ -1,14 +1,18 @@
 {
     "br": [
-
         "Perfeito! Que tal testar essa arma de redes?\nUse <sprite name=rclick> em mim.\n<i>... Não se preocupe, estou preparada ...</i>"
-
+    ],
+    
+    "br_mo": [
+        "Perfeito! Que tal testar essa arma de redes?\nAtive a mão e aperte em mim.\n<i>... Não se preocupe, estou preparada ...</i>"
     ],
 
     "en": [
-
         "Perfect! How about testing that net gun?\nUse <sprite name=rclick> on me.\n<i>... Don't worry, I'm prepared...</i>"
+    ],
 
+    "en_mo": [
+        "Perfect! How about testing that net gun?\nUse <sprite name=rclick> on me.\n<i>... Don't worry, I'm prepared...</i>"
     ]
 
 }

@@ -9,9 +9,14 @@ namespace DonBigo.Tutorial
         [SerializeField] private TutorialStage[] stages;
         [SerializeField] private Vector2Int phantonettePos,phantonetteDir;
         [SerializeField] private Vector2Int donbigoPos, donbigoDir;
+        [SerializeField] private bool forceMobileText;
+        
+        public static bool ForceMobile { get; private set; }
+
 
         private void Start()
         {
+            ForceMobile = forceMobileText;
             Debug.Log("Starting tutorial");
             StartCoroutine(TutorialCoroutine());
         }

@@ -1,18 +1,30 @@
 {
     "br": [
-
         "Tome cuidado, <sprite name=trap> armadilhas de urso são praticamente invisíveis naquele lugar tão mal iluminado, aquele que cair nelas fica paralisado por um tempo.",
 
         "Coloque ela no chão com <sprite name=rclick>.\nExperimente pisar em cima ... Não se preocupe, essa é de borracha."
+    ],
 
+    "br_mo": [
+        "Tome cuidado, <sprite name=trap> armadilhas de urso são praticamente invisíveis naquele lugar tão mal iluminado, aquele que cair nelas fica paralisado por um tempo.",
+
+        "Para usar um item, segure a mão que você quer usar até ela ficar destacada em verde. Então, aperte na tile alvo.",
+        
+        "Coloque a armadilha em uma tile adjacente.\nExperimente pisar em cima ... Não se preocupe, essa é de borracha."
     ],
 
     "en": [
-
         "Be careful, <sprite name=trap> bear traps are practically invisible in that poorly lit place, and whoever falls into them is paralyzed for a while.",
 
         "Place it on the ground with <sprite name=rclick>.\nTry stepping on it... Don't worry, this one is made of rubber."
+    ],
 
+    "en_mo": [
+        "Be careful, <sprite name=trap> bear traps are practically invisible in that poorly lit place, and whoever falls into them is paralyzed for a while.",
+
+        "To use an item, hold the hand you want to use until it is highlighted in green. Then, press on the target tile.",
+        
+        "Place the trap on an adjacent tile.\nTry stepping on it... Don't worry, this one is made of rubber."
     ]
-
+    
 }

@@ -28,3 +28,17 @@ MonoBehaviour:
 
       Switch to the empty
       hand and pick up the other slipper with <sprite name=lclick>.'
+    br_mo:
+    - "Agora, voc\xEA tem duas m\xE3os, n\xE3o tem?\nPois bem, voc\xEA pode segurar
+      um item em cada uma."
+    - "Aperte na m\xE3o que voc\xEA quer ativar.\nMude para a m\xE3o vazia e pegue
+      a outra pantufa."
+    en_mo:
+    - 'Now, you have two hands, right?
+
+      Well, you can hold one item in each
+      hand.'
+    - 'Press on the hand you wish to make active.
+
+      Switch to the empty hand
+      and pick up the other slipper.'

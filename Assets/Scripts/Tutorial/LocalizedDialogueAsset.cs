@@ -10,7 +10,8 @@ namespace DonBigo.Tutorial
 
         public void OnValidate()
         {
-            if (asset != null) JsonUtility.FromJsonOverwrite(asset.text, this);
+            if (asset != null) 
+                JsonUtility.FromJsonOverwrite(asset.text, this);
         }
         
         [TextArea(2,5)]
@@ -19,6 +20,27 @@ namespace DonBigo.Tutorial
         [TextArea(2,5)]
         public string[] en;
 
-        public string[] Get(bool english) => english ? en : br;
+        [Header("Mobile")]
+        [TextArea(2,5)]
+        public string[] br_mo;
+        
+        [TextArea(2,5)]
+        public string[] en_mo;
+
+        
+        public string[] Get(bool english, bool mobile)
+        {
+            var desk = english ? en : br;
+            var mob = english ? en_mo : br_mo;
+            return mobile && mob is { Length: > 0 } ? mob : desk;
+
+            /*if (!Application.isMobilePlatform) return english ? en : br;
+            return english switch
+            {
+                false when br_mo is { Length: > 0 } => br_mo,
+                true when en_mo is { Length: > 0 } => en_mo,
+                _ => english ? en : br
+            };*/
+        }
     }
 }

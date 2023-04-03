@@ -27,3 +27,20 @@ MonoBehaviour:
 
       Try stepping on it...
       Don''t worry, this one is made of rubber.'
+    br_mo:
+    - "Tome cuidado, <sprite name=trap> armadilhas de urso s\xE3o praticamente invis\xEDveis
+      naquele lugar t\xE3o mal iluminado, aquele que cair nelas fica paralisado por
+      um tempo."
+    - "Para usar um item, segure a m\xE3o que voc\xEA quer usar at\xE9 ela ficar
+      destacada em verde. Ent\xE3o, aperte na tile alvo."
+    - "Coloque a armadilha em uma tile adjacente.\nExperimente pisar em cima ...
+      N\xE3o se preocupe, essa \xE9 de borracha."
+    en_mo:
+    - Be careful, <sprite name=trap> bear traps are practically invisible in that
+      poorly lit place, and whoever falls into them is paralyzed for a while.
+    - To use an item, hold the hand you want to use until it is highlighted in green.
+      Then, press on the target tile.
+    - 'Place the trap on an adjacent tile.
+
+      Try stepping on it... Don''t worry,
+      this one is made of rubber.'

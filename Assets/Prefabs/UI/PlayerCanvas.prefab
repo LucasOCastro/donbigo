@@ -1065,7 +1065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6252375ef043fc86154cf8b87191a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holdScheduleTime: 1
+  holdScheduleTime: 0.8
   left:
     image: {fileID: 8432459653135606917}
     itemImage: {fileID: 8432459653909734825}

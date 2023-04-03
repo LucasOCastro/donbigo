@@ -1,18 +1,25 @@
 {
     "br": [
-
         "Ótimo. Sem entradas de ar, a Phantonette ficará bem prejudicada ...\n<i>... Mas talvez valha a pena deixar algumas abertas se você se sentir confiante ... </i>",
 
         "Quando você não precisar mais de algum item, você pode usar <sprite name=qkey> para soltá-lo no chão.\nTente soltar alguma pantufa para pegar a arma de redes."
+    ],
 
+    "br_mo": [
+        "Ótimo. Sem entradas de ar, a Phantonette ficará bem prejudicada ...\n<i>... Mas talvez valha a pena deixar algumas abertas se você se sentir confiante ... </i>",
+
+        "Quando você não precisar mais de algum item, você pode segurar na mão e apertar em si mesmo para soltá-lo no chão.\nTente soltar alguma pantufa para pegar a arma de redes."
     ],
 
     "en": [
-
         "Great. Without air ducts, Phantonette will be severely affected...\n<i>... But maybe it's worth leaving some open if you feel confident...</i>",
 
         "When you no longer need an item, you can use <sprite name=qkey> to drop it on the floor.\nTry dropping a slipper to pick up the net gun."
+    ],
 
+    "en_mo": [
+        "Great. Without air ducts, Phantonette will be severely affected...\n<i>... But maybe it's worth leaving some open if you feel confident...</i>",
+
+        "When you no longer need an item, you can hold on the hand and press on yourself to drop it on the floor.\nTry dropping a slipper to pick up the net gun."
     ]
-
 }

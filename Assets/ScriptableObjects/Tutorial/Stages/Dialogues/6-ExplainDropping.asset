@@ -30,3 +30,19 @@ MonoBehaviour:
       on the floor.
 
       Try dropping a slipper to pick up the net gun.'
+    br_mo:
+    - "\xD3timo. Sem entradas de ar, a Phantonette ficar\xE1 bem prejudicada ...\n<i>...
+      Mas talvez valha a pena deixar algumas abertas se voc\xEA se sentir confiante
+      ... </i>"
+    - "Quando voc\xEA n\xE3o precisar mais de algum item, voc\xEA pode segurar na
+      m\xE3o e apertar em si mesmo para solt\xE1-lo no ch\xE3o.\nTente soltar alguma
+      pantufa para pegar a arma de redes."
+    en_mo:
+    - 'Great. Without air ducts, Phantonette will be severely affected...
+
+      <i>...
+      But maybe it''s worth leaving some open if you feel confident...</i>'
+    - 'When you no longer need an item, you can hold on the hand and press on yourself
+      to drop it on the floor.
+
+      Try dropping a slipper to pick up the net gun.'

@@ -7,7 +7,7 @@
 
         "Mas não deixe de pegar <sprite name=pantufa> pantufas na falta de algo melhor, pois além de quentinhas e estilosas, ter um par em mãos te salva de ser paralisado por uma <sprite name=trap> armadilha de urso caso pise em alguma.",
 
-        "Depois de se soltar da armadilha, experimente pegar a pantufa com <sprite name=lclick>"
+        "Depois de se soltar da armadilha, experimente pegar a pantufa."
 
     ],
 
@@ -19,7 +19,7 @@
 
         "But don't forget to pick up <sprite name=pantufa> slippers if nothing else is available, as besides being warm and stylish, having a pair at hand saves you from being paralyzed by a <sprite name=trap> bear trap if you step on one.",
 
-        "After freeing yourself from the trap, try picking up the slipper with <sprite name=lclick>."
+        "After freeing yourself from the trap, try picking up the slipper."
 
     ]
 

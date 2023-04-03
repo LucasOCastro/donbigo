@@ -31,7 +31,8 @@ namespace DonBigo.Tutorial.Stages
 
         public override IEnumerator UpdateCoroutine()
         {
-            yield return WaitForDialogue(dialogueAsset.Get(Settings.English));
+            var dialogue = dialogueAsset.Get(Settings.English, Application.isMobilePlatform || TutorialSequencer.ForceMobile);
+            yield return WaitForDialogue(dialogue);
         }
     }
 }

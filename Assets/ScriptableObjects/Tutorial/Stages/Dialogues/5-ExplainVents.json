@@ -1,26 +1,34 @@
 {
     "br": [
-        
-        "Um outro jeito de usar itens é segurar <sprite name=lclick> em cima da mão desejada até que ela fique destacada em verde. Em seguida, você pode usar o item com <sprite name=lclick>.\nSe estiver no celular, é assim que você usa seus itens!",
-
         "Além de andar e pegar itens, <sprite name=lclick> serve para atravessar portas e fechar entradas de ar.\nEntradas de ar, você pergunta?",
 
         "A phantonette é bem ágil, e ela conhece a própria mansão muito bem ...\nEla pode viajar entre cômodos usando o sistema de ventilação.",
 
         "Para evitar ser pego de surpresa, você pode fechar entradas de ar que você encontrar pela casa.\nExperimente usar <sprite name=lclick> na entrada de ar."
+    ],
 
+    "br_mo": [
+        "Além de andar e pegar itens, apertando você pode atravessar portas e fechar entradas de ar.\nEntradas de ar, você pergunta?",
+
+        "A phantonette é bem ágil, e ela conhece a própria mansão muito bem ...\nEla pode viajar entre cômodos usando o sistema de ventilação.",
+
+        "Para evitar ser pego de surpresa, você pode fechar entradas de ar que você encontrar pela casa.\nExperimente apertar na entrada de ar."
     ],
 
     "en": [
-        
-        "Another way to use items is to hold <sprite name=lclick> over the desired hand until it is highlighted in green. Then you can use the item with <sprite name=lclick>.\nIf you are on mobile, this is how you use your items!",
-
         "In addition to walking and picking up items, <sprite name=lclick> is also used to go through doors and close air ducts.\nAir ducts, you ask?",
 
         "Phantonette is very agile, and she knows the mansion very well...\nShe can travel between rooms using the ventilation system.",
 
         "To avoid being caught off guard, you can close air ducts that you find around the house.\nTry using <sprite name=lclick> on the air duct."
+    ],
+    
+    "en_mo": [
+        "In addition to walking and picking up items, you can touch to go through doors and close air ducts.\nAir ducts, you ask?",
 
+        "Phantonette is very agile, and she knows the mansion very well...\nShe can travel between rooms using the ventilation system.",
+
+        "To avoid being caught off guard, you can close air ducts that you find around the house.\nTry pressing on the air duct."
     ]
 
 }

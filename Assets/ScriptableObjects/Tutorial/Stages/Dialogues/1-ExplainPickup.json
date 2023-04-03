@@ -1,20 +1,26 @@
 {
     "br": [
-
         "Se mudar de ideia enquanto anda até algum lugar, apertar <sprite name=space> cancela o seu movimento atual.",
 
-        "Também <sprite name=lclick> clicando, você recolhe e utiliza itens espalhados pela mansão.\nIncluindo <sprite name=trap> armadilhas de urso, <sprite name=knife> facões, <sprite name=netgun> disparadores de rede, <sprite name=gun> armas de fogo ...\n<i>... e <sprite name=pantufa> pantufas ...</i>",
+        "Também <sprite name=lclick> clicando, você recolhe itens espalhados pela mansão.\nIncluindo <sprite name=trap> armadilhas de urso, <sprite name=knife> facões, <sprite name=netgun> disparadores de rede, <sprite name=gun> armas de fogo ...\n<i>... e <sprite name=pantufa> pantufas ...</i>",
 
         "Tente pegar a armadilha que colocarei em cima da estante."
-
+    ],
+    "br_mo": [
+        "Também apertando, você recolhe e utiliza itens espalhados pela mansão.\nIncluindo <sprite name=trap> armadilhas de urso, <sprite name=knife> facões, <sprite name=netgun> disparadores de rede, <sprite name=gun> armas de fogo ...\n<i>... e <sprite name=pantufa> pantufas ...</i>",
+        
+        "Tente pegar a armadilha que colocarei em cima da estante."
     ],
     "en": [
-
         "If you change your mind while walking somewhere, pressing <sprite name=space> cancels your current movement.",
 
-        "Also, by <sprite name=lclick> clicking, you collect and use items scattered throughout the mansion, including <sprite name=trap> bear traps, <sprite name=knife> machetes, <sprite name=netgun> net shooters, <sprite name=gun> firearms...\n<i>... and <sprite name=pantufa> slippers...</i>",
+        "Also, by <sprite name=lclick> clicking, you collect items scattered throughout the mansion, including <sprite name=trap> bear traps, <sprite name=knife> machetes, <sprite name=netgun> net shooters, <sprite name=gun> firearms...\n<i>... and <sprite name=pantufa> slippers...</i>",
 
         "Try to pick up the trap I'll place on top of the shelf."
+    ],
+    "en_mo": [
+        "Also, by pressing, you collect and use items scattered throughout the mansion, including <sprite name=trap> bear traps, <sprite name=knife> machetes, <sprite name=netgun> net shooters, <sprite name=gun> firearms...\n<i>... and <sprite name=pantufa> slippers...</i>",
 
+        "Try to pick up the trap I'll place on top of the shelf."
     ]
 }

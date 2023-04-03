@@ -5,10 +5,22 @@
         "Eu me fantasiei como ela para você saber quando a vir.\n<i>... não que fosse muito difícil, de qualquer forma ...</i>\n<i>... ela tem um visual tão chamativo, extravagante ... um senso de moda afiado ...</i>\nAh, foi mal, me distraí.",
         "Quando estiver lá, vai ter que <sprite name=lclick> clicar no tile para onde quiser ir.\nExperimente andar até os azulejos azuis."
     ],
+    "br_mo": [
+        "Olá sr. Emanuel Begault, ou como prefere ser chamado, Don Bigô.\nNão se assuste, sou eu, a sua assistente, a Franchella.\n\nAperte no diálogo para continuar.\n",
+        "Eu vim te preparar para sua próxima missão.\n<i>... não que um grande investigador como você precise de muito preparo ...</i>\nBasicamente, você vai entrar numa mansão abandonada em busca de uma criminosa mortífera, a Phantonette.",
+        "Eu me fantasiei como ela para você saber quando a vir.\n<i>... não que fosse muito difícil, de qualquer forma ...</i>\n<i>... ela tem um visual tão chamativo, extravagante ... um senso de moda afiado ...</i>\nAh, foi mal, me distraí.",
+        "Quando estiver lá, vai ter que apertar no tile para onde quiser ir.\nExperimente andar até os azulejos azuis."
+    ],
     "en": [
-        "Hello Mr. Emanuel Begault, or as you prefer to be called, Don Bigô.\nDon't be alarmed, it's me, your assistant, Franchella.\n\nPlease use <sprite name=enter> to continue.",
+        "Hello Mr. Emanuel Begault, or as you prefer to be called, Don Bigô.\nDon't be alarmed, it's me, your assistant, Franchella.\n\nUse <sprite name=enter> to continue.",
         "I came to prepare you for your next mission.\n<i>... not that a great investigator like you needs much preparation ...</i>\nBasically, you will enter an abandoned mansion in search of a deadly criminal, the Phantonette.",
         "I dressed up as her so you would know when you see her.\n<i>... not that it would be very difficult anyways ...</i>\n<i>... she has such a striking, extravagant look ... a sharp sense of fashion ...</i>\nOh, sorry, I got distracted.",
         "When you're there, you'll have to <sprite name=lclick> click on the tile where you want to go.\nTry walking to the blue tiles."
+    ],
+    "en_mo": [
+        "Hello Mr. Emanuel Begault, or as you prefer to be called, Don Bigô.\nDon't be alarmed, it's me, your assistant, Franchella.\n\nPress on the dialogue to continue.",
+        "I came to prepare you for your next mission.\n<i>... not that a great investigator like you needs much preparation ...</i>\nBasically, you will enter an abandoned mansion in search of a deadly criminal, the Phantonette.",
+        "I dressed up as her so you would know when you see her.\n<i>... not that it would be very difficult anyways ...</i>\n<i>... she has such a striking, extravagant look ... a sharp sense of fashion ...</i>\nOh, sorry, I got distracted.",
+        "When you're there, you'll have to press on the tile where you want to go.\nTry walking to the blue tiles."
     ]
 }
