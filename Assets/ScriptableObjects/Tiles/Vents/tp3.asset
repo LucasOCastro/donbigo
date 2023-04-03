@@ -36,7 +36,7 @@ MonoBehaviour:
   m_ColliderType: 1
   <ViewBlockHeight>k__BackingField: -1
   <BlocksMovement>k__BackingField: 0
-  <SurfaceHeight>k__BackingField: 0
+  <SurfaceHeight>k__BackingField: -1
   randomSprites: []
   closedSprite: {fileID: 21300000, guid: bc7ace1da4267b64a860bb6ddf2d067f, type: 3}
   openSprite: {fileID: 21300000, guid: d819fde3a421ed442aa5b359e69cd2fb, type: 3}
