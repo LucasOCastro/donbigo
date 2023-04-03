@@ -36,7 +36,7 @@ namespace DonBigo.UI
 
         private void Update()
         {
-            if (Input.GetKeyDown(menuKey))
+            if (Input.GetKeyUp(menuKey))
             {
                 Open = !Open;
             }

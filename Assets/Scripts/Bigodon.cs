@@ -159,7 +159,7 @@ namespace DonBigo
             }
 
             //Se apertou Q e ta segurando item, droppa.
-            if (Inventory.CurrentHand != null && Tile.SupportsItem && Input.GetKeyDown(KeyCode.Q))
+            if (Inventory.CurrentHand != null && Tile.SupportsItem && Input.GetKeyUp(KeyCode.Q))
             {
                 return new DropAction(this, Tile);
             }
@@ -172,7 +172,7 @@ namespace DonBigo
             //Se tem um item na mao e aperta o botão direito, tenta usar o item.
             Item heldItem = Inventory.CurrentHand;
             if (tile != null && VisibleTiles.Contains(mousePos) && heldItem && heldItem.CanBeUsed(this, tile) &&
-                (Input.GetMouseButtonDown(1) || (ScheduledItemInteractAction && Input.GetMouseButtonDown(0))))
+                (Input.GetMouseButtonUp(1) || (ScheduledItemInteractAction && Input.GetMouseButtonUp(0))))
             {
                 CancelScheduledItemAction();   
                 return new UseItemAction(this, heldItem, tile);
@@ -186,7 +186,7 @@ namespace DonBigo
             TileHighlighter.Highlight(tile);
             
             //Clique esquerdo
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonUp(0))
             {
                 CancelScheduledItemAction();
                 if (Vector2.Angle(tile.Pos - Tile.Pos, LookDirection) > VisionAngle*.5f)

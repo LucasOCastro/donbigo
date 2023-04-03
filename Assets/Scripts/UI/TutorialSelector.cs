@@ -20,7 +20,7 @@ namespace DonBigo.UI
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) gameObject.SetActive(false);
+            if (Input.GetKeyUp(KeyCode.Escape)) gameObject.SetActive(false);
         }
 
         public void StartTutorial(bool english)
