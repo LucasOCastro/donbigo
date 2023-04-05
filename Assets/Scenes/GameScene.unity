@@ -198,42 +198,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 317388312, guid: f39624189a51d2a49a7e0fca5cafacde, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 317388312, guid: f39624189a51d2a49a7e0fca5cafacde, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 317388312, guid: f39624189a51d2a49a7e0fca5cafacde, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 317388312, guid: f39624189a51d2a49a7e0fca5cafacde, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 502367493, guid: f39624189a51d2a49a7e0fca5cafacde, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1109708308, guid: f39624189a51d2a49a7e0fca5cafacde, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1109708308, guid: f39624189a51d2a49a7e0fca5cafacde, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1109708308, guid: f39624189a51d2a49a7e0fca5cafacde, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1109708308, guid: f39624189a51d2a49a7e0fca5cafacde, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7412418653045753395, guid: f39624189a51d2a49a7e0fca5cafacde, type: 3}
       propertyPath: m_Name
       value: PauseCanvas
@@ -320,10 +284,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7412418653045753422, guid: f39624189a51d2a49a7e0fca5cafacde, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7412418653747609136, guid: f39624189a51d2a49a7e0fca5cafacde, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -703,7 +663,7 @@ PrefabInstance:
     - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
       propertyPath: DEBUG_Item
       value: 
-      objectReference: {fileID: 11400000, guid: 3154651d6db92154f9984a622ee3884e, type: 2}
+      objectReference: {fileID: 11400000, guid: 07d80df6e8637794c99d6ae486ec9ef1, type: 2}
     - target: {fileID: 4871445199822071217, guid: c19589502a19b5b4ca950c5572b6a5f1, type: 3}
       propertyPath: startingRoom
       value: 

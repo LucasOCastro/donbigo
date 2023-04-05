@@ -27,6 +27,8 @@ namespace DonBigo.UI
             }
         }
 
+        public void ToggleOpen() => Open = !Open;
+
         private void Awake()
         {
             exitButton.onClick.AddListener(() => GameEnder.Instance.EndGame(GameEnder.Condition.Exit));
@@ -38,12 +40,11 @@ namespace DonBigo.UI
         {
             if (Input.GetKeyUp(menuKey))
             {
-                Open = !Open;
+                ToggleOpen();
             }
 
             if (Settings.MuteSfx) _source.mute = true;
             else _source.mute = false;
-
         }
     }
 }
