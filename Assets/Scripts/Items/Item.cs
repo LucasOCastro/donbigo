@@ -12,7 +12,11 @@ namespace DonBigo
         public int CooldownTurns => cooldownTurns;
         
         [SerializeField] private AudioSource audioSource;
-        protected void PlayAudio(AudioClip clip) => audioSource.PlayOneShot(clip);
+        protected void PlayAudio(AudioClip clip)
+        {
+            if (Settings.MuteSfx) return;
+            audioSource.PlayOneShot(clip);
+        }
 
         [SerializeField] private AudioClip useAudio;
 

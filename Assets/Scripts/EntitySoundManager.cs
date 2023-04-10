@@ -17,15 +17,11 @@ namespace DonBigo
             _source = GetComponent<AudioSource>();
             _entity = GetComponent<Entity>();
         }
-        
-        private void Update()
-        {
-            if (Settings.MuteSfx) _source.mute = true;
-            else _source.mute = false;
-        }
 
         private void ProcessAction(Action action)
         {
+            if (Settings.MuteSfx) return;
+            
             var clip = action switch
             {
                 UseDoorAction => doorSound,
