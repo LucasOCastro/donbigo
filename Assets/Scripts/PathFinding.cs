@@ -23,30 +23,20 @@ namespace DonBigo
                 cCost = nodeCCost;
                 gCost = distanceToTarget;
             }
-            
         }
 
-        private static Node PopBest(List<Vector2Int> set, Dictionary<Vector2Int, Node> nodes)
+        private static Node PopBest(HashSet<Vector2Int> set, Dictionary<Vector2Int, Node> nodes)
         {
-            int bestI = 0;
-            for (int i = 1; i < set.Count; i++)
-            {
-                if (nodes[set[i]].fCost < nodes[set[bestI]].fCost)
-                {
-                    bestI = i;
-                }
-            }
-
-            Node node = nodes[set[bestI]];
-            set.RemoveAt(bestI);
-            return node;
+            Vector2Int best = set.Best((n1, n2) => nodes[n1].fCost < nodes[n2].fCost);
+            set.Remove(best);    
+            return nodes[best];
         }
 
         public delegate int CostFunc(Tile from, Tile to);
 
         private static int TransitionCost(Tile from, Tile to, Entity pather, CostFunc costBonusFunc)
         {
-            if (!to.Walkable || to.Entity != null)
+            if (!to.Walkable || to.Entity != null || to.Room != from.Room)
             {
                 return -1;
             }
@@ -77,8 +67,8 @@ namespace DonBigo
             
             var grid = source.ParentGrid;
             // Uma priority queue aqui seria mais apropriada
-            List<Vector2Int> openSet = new List<Vector2Int>();
             Dictionary<Vector2Int, Node> nodes = new Dictionary<Vector2Int, Node>();
+            HashSet<Vector2Int> openSet = new HashSet<Vector2Int>();
             HashSet<Vector2Int> closedSet = new HashSet<Vector2Int>();
 
             openSet.Add(source.Pos);
@@ -118,12 +108,7 @@ namespace DonBigo
                         Node neighborNode = new Node(node.tile, neighbor.Pos, possibleCCost, neighbor.Pos.ManhattanDistance(target.Pos));
                         nodes.Add(neighbor.Pos, neighborNode);
                     }
-
-                    // Contain em lista é feio :(
-                    if (!openSet.Contains(neighbor.Pos))
-                    {
-                        openSet.Add(neighbor.Pos);    
-                    }
+                    openSet.Add(neighbor.Pos);    
                 }
             }
 
