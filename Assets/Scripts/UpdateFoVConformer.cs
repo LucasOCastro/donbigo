@@ -2,7 +2,6 @@
 
 namespace DonBigo
 {
-    //O certo seria conectar isso a um ITileGiver mas taok
     public class UpdateFoVConformer : MonoBehaviour
     {
         private SpriteRenderer _renderer;

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace DonBigo
 {
-    public class CooldownTimer : UpdateFoVConformer
+    public class CooldownTimer : MonoBehaviour
     {
         private const string UIPrefabPath = "cooldownTimerUIPrefab";
         private const string SpritePrefabPath = "cooldownTimerSpritePrefab";

@@ -16,7 +16,7 @@ namespace DonBigo
         protected override void OnStart(HealthManager health)
         {
             _timer = CooldownTimer.GetInstance(ui: false);
-            _timer.AssignedTileGiver = health.Owner;
+            _timer.GetComponent<UpdateFoVConformer>().AssignedTileGiver = health.Owner;
             OnEndEvent += () => Object.Destroy(_timer.gameObject);
         }
 
